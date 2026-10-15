@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Item hover text</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;family=Spectral:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#FFAA00}a:hover{color:#FFFF55}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="width: 1200px; height: 760px; box-sizing: border-box; padding: 40px 48px; background: #2B2B2B; font-family: VT323, monospace; color: #FFFFFF; display: flex; flex-direction: column; gap: 28px">
+
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px">
+<h1 style="margin: 0; font-family: Spectral, serif; font-weight: 600; font-size: 26px; color: #F2E8D5">What you see when you hover an item</h1>
+<div style="display: flex; gap: 18px; font-size: 24px">
+<span style="color: #FFAA00">Prime</span>
+<span style="color: #FFFFFF">Good</span>
+<span style="color: #AAAAAA">Common</span>
+<span style="color: #FF5555">Poor</span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; align-items: start">
+<sc-for list="{{tips}}" as="tip" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Spectral, serif; font-size: 14px; color: #BDB3A2">{{tip.caption}}</span>
+<div style="align-self: flex-start; background: rgba(16,0,16,0.94); padding: 3px; border-radius: 2px">
+<div style="border: 2px solid #3A0F7A; border-top-color: #5000FF; border-bottom-color: #28007F; padding: 8px 12px 10px; display: flex; flex-direction: column; gap: 2px; font-size: 26px; line-height: 1.05">
+<span style="{{tip.nameStyle}}">{{tip.name}}</span>
+<sc-for list="{{tip.lines}}" as="l" hint-placeholder-count="3">
+<span style="{{l.style}}">{{l.text}}</span>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+
+<p style="margin: 0; font-family: Spectral, serif; font-size: 15px; color: #BDB3A2; max-width: 900px">Colours are Minecraft's own text colours, so this is how they'll actually look in game. The item icon stays the normal wheat or beef; only the text changes. Grey lines are information, red lines are warnings, yellow lines tie the item to a contract.</p>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+class Component extends DCLogic {
+  renderVals() {
+    const C = { gold: '#FFAA00', white: '#FFFFFF', gray: '#AAAAAA', red: '#FF5555', yellow: '#FFFF55', dgray: '#7A7A7A', green: '#55FF55' };
+    const shadow = (hex) => 'color: ' + hex + '; text-shadow: 2px 2px 0 rgba(0,0,0,0.55)';
+    const L = (text, c) => ({ text, style: shadow(C[c]) });
+    const tip = (caption, name, grade, lines) => ({ caption, name, nameStyle: shadow(C[grade]), lines });
+    return {
+      tips: [
+        tip('Your own estate, best batch', 'Prime Varenian Wheat', 'gold', [
+          L('From your estate at Varenia', 'gray'),
+          L('Harvested: Kalends of October', 'gray'),
+          L('Keeps well for about 60 days', 'gray')
+        ]),
+        tip('Bought at market', 'Good Wheat', 'white', [
+          L('Bought from Gnaeus Fulvius, Ostia', 'gray'),
+          L('Harvested: Ides of September', 'gray'),
+          L('Keeps well for about 45 days', 'gray')
+        ]),
+        tip('Cheap, and slipping', 'Common Wheat', 'gray', [
+          L('Bought from Rufus, Ostia', 'gray'),
+          L('Harvested: Nones of August', 'gray'),
+          L('Starting to go stale', 'red')
+        ]),
+        tip('Someone cheated you', 'Poor Wheat', 'red', [
+          L('Bought from Rufus, Ostia', 'gray'),
+          L('Weevils in it', 'red'),
+          L('Spoils within 10 days', 'red')
+        ]),
+        tip('Fresh meat, needs selling fast', 'Good Beef', 'white', [
+          L('Bought from Lucius the butcher, Ostia', 'gray'),
+          L('Fresh: spoils in 4 days', 'red'),
+          L('Salt it to keep it for months', 'gray')
+        ]),
+        tip('Famous origin, owed on a contract', 'Prime Epirote Beef', 'gold', [
+          L('Famous cattle of the Epirote hills', 'gray'),
+          L('Salted: keeps for months', 'gray'),
+          L('Owed to Varro · contract XLII', 'yellow')
+        ])
+      ]
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

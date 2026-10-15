@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home — your counting room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#120C08}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#F3D27E}a:hover{color:#FFF0C0}
+.mapimg{background-image:url(assets/9f5158a39938dfbadce3acb1871c8938.jpg);background-size:100% 100%}
+.backdrop{background-image:url(assets/9f5158a39938dfbadce3acb1871c8938.jpg);background-size:cover;background-position:center}
+.glass{background:rgba(28,19,12,0.5);-webkit-backdrop-filter:blur(18px) saturate(1.25);backdrop-filter:blur(18px) saturate(1.25);border:1px solid rgba(255,236,200,0.16);box-shadow:0 1px 0 rgba(255,240,210,0.08) inset, 0 24px 60px rgba(0,0,0,0.5)}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-3px) rotate(3deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(226,96,72,0.6)}50%{box-shadow:0 0 0 12px rgba(226,96,72,0)}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="position: relative; min-height: 100vh; overflow: hidden; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<!-- blurred world behind everything -->
+<div class="backdrop" aria-hidden="true" style="position: absolute; inset: -60px; filter: blur(28px) saturate(1.1) brightness(0.75); transform: scale(1.05)"></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,9,6,0.55) 0%, rgba(14,9,6,0.35) 30%, rgba(14,9,6,0.7) 75%, rgba(14,9,6,0.92) 100%)"></div>
+
+<div style="position: relative">
+<!-- TOP BAR -->
+<header class="glass" style="margin: 18px auto 0; max-width: 1376px; box-sizing: border-box; padding: 10px 18px 10px 24px; border-radius: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.16em; color: #E9C982">AQUEA · IDES OF OCTOBER</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
+<a href="#" style="{{n.style}}">{{n.label}}<sc-if value="{{n.hasBadge}}" hint-placeholder-val="{{ false }}"><span aria-label="unread" style="margin-left: 6px; width: 7px; height: 7px; border-radius: 50%; background: #E2735E; display: inline-block; transform: translateY(-6px)"></span></sc-if></a>
+</sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #F3D27E; padding: 6px 14px; border-radius: 999px; background: rgba(243,210,126,0.1); border: 1px solid rgba(243,210,126,0.25)">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 28px 32px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 56px">
+
+<!-- THE MAP -->
+<div style="position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 0 rgba(255,240,210,0.1) inset, 0 50px 100px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,236,200,0.14)">
+<div style="position: relative; width: 100%; aspect-ratio: 2.2; overflow: hidden">
+<div class="mapimg" role="img" aria-label="Map of the continent showing your three ships, a pirate warning, fighting on the Ostoronian border, and your home in Aquea" style="position: absolute; left: 0; top: -26.1%; width: 100%; aspect-ratio: 1.6">
+<sc-for list="{{markers}}" as="m" hint-placeholder-count="5">
+<div title="{{m.label}}" style="{{m.pos}}">
+<div style="{{m.iconWrap}}">
+<sc-if value="{{m.isShip}}" hint-placeholder-val="{{ true }}">
+<svg width="30" height="26" viewBox="0 0 30 26" aria-hidden="true"><path d="M3 17h24l-4 6H7z" style="{{m.hull}}"></path><path d="M15 2v15" style="stroke: #2A1A0E; stroke-width: 1.6px"></path><path d="M15 3c6 2 8 6 8 11H15z" style="{{m.sail}}"></path><path d="M15 5c-4 2-6 5-6 9h6z" style="{{m.sail}}"></path></svg>
+</sc-if>
+<sc-if value="{{m.isHome}}" hint-placeholder-val="{{ false }}">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z M10 20v-5h4v5" style="fill: #EFE3C8; stroke: #2A1A0E; stroke-width: 1.6px; stroke-linejoin: round"></path></svg>
+</sc-if>
+<sc-if value="{{m.isWar}}" hint-placeholder-val="{{ false }}">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14 M19 5L5 19 M3 8l5-5 M16 3l5 5 M3 16l5 5 M21 16l-5 5" style="fill: none; stroke: #FFF6E4; stroke-width: 2px; stroke-linecap: round"></path></svg>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+<!-- soft vignette so the glass note reads -->
+<div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(10,6,4,0.45) 0%, rgba(10,6,4,0) 40%), linear-gradient(0deg, rgba(10,6,4,0.35) 0%, rgba(10,6,4,0) 30%)"></div>
+
+<!-- STEWARD'S NOTE, frosted glass over the map -->
+<div class="glass" style="position: absolute; left: 28px; top: 28px; width: 360px; padding: 22px 24px; border-radius: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="flex: none; padding: 3px; border-radius: 8px; background: rgba(239,227,200,0.9)"><img src="assets/68c827b5e74ae6bac441631cd7975afd.png" alt="" style="display: block; width: 34px; height: 34px; border-radius: 5px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column; line-height: 1.25">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #F3D27E">FROM FELIX</span>
+<span style="font-size: 14px; color: #D9CCB2">your steward · this morning</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #FFF6E4">The Fortuna made port and your agents closed three deals. Less good: the Ferum road is cut by the fighting, and there is talk about the Pisella bankers.</p>
+<a href="#" style="font-size: 15px">Read the full report →</a>
+</div>
+</div>
+</div>
+
+<!-- THE BRIEFING: your people read everything and boil it down -->
+<section aria-label="Morning briefing" style="display: flex; flex-direction: column; gap: 14px; margin-top: -24px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px">
+<h2 style="margin: 0; font-family: Cinzel, serif; font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: #FFF6E4">The morning briefing</h2>
+<span style="font-size: 15px; color: #D9CCB2">{{briefNote}}</span>
+</div>
+<div class="glass" style="border-radius: 16px; padding: 6px 20px">
+<sc-for list="{{brief}}" as="br" hint-placeholder-count="5">
+<div style="{{br.row}}">
+<img src="{{br.face}}" alt="" style="width: 44px; height: 44px; image-rendering: pixelated; border-radius: 4px; box-shadow: 0 0 0 2px rgba(239,227,200,0.85)">
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span style="font-size: 13px; color: #CDBFA6"><span style="font-weight: 600; color: #F3D27E">{{br.who}}</span> · {{br.area}}</span>
+<span style="font-size: 16px; line-height: 1.4; color: #FFF6E4">{{br.says}}</span>
+<sc-if value="{{br.done}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #B8D8A8">{{br.outcome}}</span></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; align-items: stretch">
+<sc-if value="{{br.open}}" hint-placeholder-val="{{ true }}"><div style="display: flex; gap: 6px"><button onClick="{{br.yes}}" style="flex: 1; min-height: 40px; padding: 4px 12px; background: #9A6418; color: #FFF6E4; border: none; border-radius: 10px; font-family: Spectral, serif; font-size: 14px; font-weight: 600; cursor: pointer">{{br.act}}</button><button onClick="{{br.no}}" style="min-height: 40px; padding: 4px 12px; background: rgba(255,240,210,0.08); color: #E6DAC2; border: 1px solid rgba(255,236,200,0.25); border-radius: 10px; font-family: Spectral, serif; font-size: 14px; cursor: pointer">Not now</button></div></sc-if>
+<button onClick="{{br.auto}}" style="{{br.autoStyle}}">{{br.autoLabel}}</button>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- NEWS FROM ABROAD: arrives physically, with a source and an age -->
+<section aria-label="News from abroad" style="display: flex; flex-direction: column; gap: 16px; margin-top: -24px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px">
+<h2 style="margin: 0; font-family: Cinzel, serif; font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: #FFF6E4">News that reached Aquea</h2>
+<span style="font-size: 15px; color: #D9CCB2">Everything here is days old. It happened somewhere else first.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px">
+<sc-for list="{{news}}" as="nw" hint-placeholder-count="5">
+<a href="#" class="glass" style="{{nw.card}}">
+<span style="{{nw.tagStyle}}">{{nw.tag}}</span>
+<span style="font-size: 17px; font-weight: 600; line-height: 1.3; color: #FFF6E4">{{nw.title}}</span>
+<span style="font-size: 14px; line-height: 1.45; color: #E6DAC2">{{nw.body}}</span>
+<span style="margin-top: auto; padding-top: 8px; border-top: 1px solid rgba(255,236,200,0.14); font-size: 12px; color: #CDBFA6">{{nw.src}}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<!-- AWAITING YOUR SEAL -->
+<section style="display: flex; flex-direction: column; gap: 44px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px">
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.1em; color: #FFF6E4">Awaiting your seal</h1>
+<span style="font-size: 16px; color: #D9CCB2">Three matters. Everything else is in hand.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 64px 32px">
+<sc-for list="{{notices}}" as="n" hint-placeholder-count="3">
+<article class="glass" style="{{n.cardStyle}}">
+<div aria-hidden="true" style="{{n.glow}}"></div>
+<img src="{{n.seal}}" alt="" style="position: absolute; left: 50%; top: -48px; width: 96px; height: 96px; transform: translateX(-50%) rotate(-8deg); filter: drop-shadow(0 10px 14px rgba(0,0,0,0.55))">
+<span style="{{n.kindStyle}}">{{n.kind}}</span>
+<h2 style="margin: 0; font-family: Spectral, serif; font-size: 24px; font-weight: 600; line-height: 1.3; color: #FFF6E4; text-align: center">{{n.title}}</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #E6DAC2; text-align: center">{{n.body}}</p>
+<span style="font-size: 14px; color: #CDBFA6; text-align: center; padding: 4px 12px; border-radius: 999px; background: rgba(255,240,210,0.07)">{{n.when}}</span>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 8px; width: 100%">
+<button style="{{n.btnStyle}}">{{n.primary}}</button>
+<a href="#" style="font-size: 15px; color: #D9CCB2">{{n.secondary}}</a>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+</main>
+</div>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+var BRIEF = [
+  ['felix', 'Felix, your steward', 'Your estates', 'All working. About 3,400 from the harvest at month\u2019s end. The tavern\u2019s books look wrong.', 'Send Aelia to check them', 'Aelia goes through the tavern books tonight.', 'Felix sorts out estate matters himself'],
+  ['nikias', 'Nikias, your secretary', 'Markets', 'Timber is cheap in Durona and dear in Sabino, and two agents confirm it. The famine rumour is false.', 'Buy 40 loads through Philon', 'Philon buys 40 loads of timber in Durona. Sosia will sell them in Sabino.', 'Nikias makes trades two agents confirm'],
+  ['dion', 'Dion, the tutor', 'Politics', 'Nothing needs you. The grain dole will pass and push grain up a little.', 'Hold your grain a month', 'Your grain stays in the warehouse until the dole starts.', 'Dion handles small gifts at court'],
+  ['thrand', 'Thrand, your bodyguard', 'The war', 'The legion is hungry. If it starves, it takes food from farms like yours.', 'Sell it half a season of grain', 'You sign for 10,000 modii. The legion is fed for now, and your farms are safe.', 'Thrand handles guards and call-up payments'],
+  ['bato', 'Bato, at the door', 'Visitors', 'Fulvius\u2019s man came asking where the Aurora is sailing. I told him nothing.', 'Have Thrand follow him', 'Thrand follows him to the Red Anchor, where he meets Myrto, your maid.', 'Bato turns away anyone suspicious']
+];
+var BFACE = { felix: 'assets/68c827b5e74ae6bac441631cd7975afd.png', nikias: 'assets/a3dc5c3de123ac381ccfb225966f5604.png', dion: 'assets/926821d1ee198f2fb0402917484cc902.png', thrand: 'assets/b6fd79bc84c6d5a4de009b01ee840203.png', bato: 'assets/225761544304c6952429089c94176922.png' };
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {}, bdone = st.bdone || {}, bauto = st.bauto || {};
+    var bput = function (k, key, v) { var m = Object.assign({}, (self.state || {})[k] || {}); m[key] = v; var o = {}; o[k] = m; self.setState(Object.assign({}, self.state || {}, o)); };
+    var brief = BRIEF.map(function (b, i) { var d = bdone[b[0]], au = !!bauto[b[0]];
+      return { face: BFACE[b[0]], who: b[1], area: b[2], says: b[3], act: b[4], open: d === undefined && !au, done: d === 'yes', outcome: b[5],
+        yes: function () { bput('bdone', b[0], 'yes'); }, no: function () { bput('bdone', b[0], 'no'); },
+        auto: function () { bput('bauto', b[0], !(((self.state || {}).bauto || {})[b[0]])); },
+        autoLabel: au ? '\u2713 ' + b[6] : 'Let them decide this kind of thing',
+        autoStyle: 'min-height: 32px; padding: 2px 10px; background: transparent; border: none; font-family: Spectral, serif; font-size: 13px; text-align: right; cursor: pointer; ' + (au ? 'color: #B8D8A8' : 'color: #CDBFA6; text-decoration: underline'),
+        row: 'display: grid; grid-template-columns: 48px 1fr 290px; gap: 16px; align-items: center; padding: 14px 0; ' + (i ? 'border-top: 1px solid rgba(255,236,200,0.12); ' : '') + (d === 'no' ? 'opacity: 0.55' : '') }; });
+    var left = BRIEF.filter(function (b) { return bdone[b[0]] === undefined && !bauto[b[0]]; }).length;
+    var navItem = function (label, active, badge) {
+      return { label: label, hasBadge: !!badge,
+        style: 'display: inline-flex; align-items: center; min-height: 38px; padding: 6px 14px; border-radius: 999px; text-decoration: none; font-size: 16px; ' +
+          (active ? 'background: rgba(243,210,126,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(243,210,126,0.35)' : 'color: #E6DAC2') };
+    };
+    var mk = function (o) {
+      var pirate = o.kind === 'pirate', ship = o.kind === 'ship' || pirate;
+      return {
+        label: o.label, isShip: ship, isHome: o.kind === 'home', isWar: o.kind === 'war',
+        pos: 'position: absolute; left: ' + (o.x / 16) + '%; top: ' + (o.y / 10) + '%; transform: translate(-50%, -50%); cursor: default',
+        iconWrap: 'display: flex; padding: 4px; border-radius: 50%; ' +
+          (pirate || o.kind === 'war' ? 'background: rgba(176,52,34,0.92); animation: pulse 2s ease-out infinite' :
+           ship ? 'filter: drop-shadow(0 4px 4px rgba(0,0,0,0.45)); animation: bob ' + (2.8 + (o.x % 7) / 10) + 's ease-in-out infinite' :
+           'background: #5A3A22; box-shadow: 0 4px 10px rgba(0,0,0,0.5)'),
+        hull: 'fill: ' + (pirate ? '#1A0E0A' : '#6E4426') + '; stroke: #1A0E0A; stroke-width: 1.2px',
+        sail: 'fill: ' + (pirate ? '#2A1A14' : '#F6EEDD') + '; stroke: #2A1A0E; stroke-width: 1.1px'
+      };
+    };
+    var notice = function (o) {
+      return Object.assign(o, {
+        cardStyle: 'position: relative; padding: 64px 32px 30px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; overflow: visible',
+        glow: 'position: absolute; inset: 0; border-radius: 20px; pointer-events: none; background: radial-gradient(ellipse at 50% 0%, ' + o.glowC + ' 0%, rgba(0,0,0,0) 60%)',
+        kindStyle: 'font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: ' + o.ink,
+        btnStyle: 'min-height: 48px; width: 100%; max-width: 280px; padding: 10px 22px; background: ' + o.btn + '; color: #FFF6E4; border: none; border-radius: 12px; font-family: Spectral, serif; font-size: 17px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)'
+      });
+    };
+    return {
+      brief: brief, briefNote: left ? left + ' things your people would like a word about. The rest they handled.' : 'Nothing left. Your people have it in hand.',
+      nav: __NAV.top('Home', navItem), subnav: __NAV.sub('Home'), hasSub: __NAV.sub('Home').length > 0,
+      news: [
+        ['WAR', '#F09A88', 'Ostoronian raiders cut the Ferum road', 'Durona goods now go by sea. Your timber yard there can\u2019t ship by land.', 'A courier from Durona \u00b7 3 days old'],
+        ['STORM', '#9CC4E4', 'The Kallisto went down off Galorae', 'Demetrios\u2019s wine for Coria is gone. Coria wine will rise.', 'A fisherman \u00b7 6 days old \u00b7 not confirmed'],
+        ['BANKS', '#F3C46A', 'Talk of a run on the Pisella bankers', 'Two sources say they lent too much. You have nothing with them. Demetrios does.', 'Tavern talk \u00b7 10 days old'],
+        ['LAW', '#B8D8A8', 'The Caleonian senate votes on a salt tax in 7 days', 'Fulvius\u2019s salt would get dearer at the border.', 'Your client in the senate \u00b7 2 days old'],
+        ['LEVY', '#E6B8A8', 'Vararia calls up one man in five this spring', 'Your farm and quarry will lose workers. Wages will rise.', 'Posted in the forum \u00b7 today']
+      ].map(function (n) { return { tag: n[0], title: n[2], body: n[3], src: n[4],
+        card: 'display: flex; flex-direction: column; gap: 6px; padding: 16px 16px 12px; border-radius: 14px; text-decoration: none; border-top: 3px solid ' + n[1],
+        tagStyle: 'font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; color: ' + n[1] }; }),
+      markers: [
+        mk({ kind: 'ship', x: 1298, y: 210, label: 'Fortuna · in port at Coria' }),
+        mk({ kind: 'ship', x: 1056, y: 236, label: 'Aurora · to Durona, 2 days' }),
+        mk({ kind: 'ship', x: 978, y: 846, label: 'Celeritas · to Sabino, 4 days' }),
+        mk({ kind: 'pirate', x: 667, y: 250, label: 'Pirates sighted near Casinica' }),
+        mk({ kind: 'home', x: 758, y: 714, label: 'You are in Aquea' }),
+        mk({ kind: 'war', x: 1000, y: 330, label: 'Fighting on the Ostoronian border \u00b7 Ferum road cut' })
+      ],
+      notices: [
+        notice({ seal: 'assets/f9c6da5d3c8008db0652383c8e1dde51.png', kind: 'A COUNTEROFFER', ink: '#F3C46A', btn: '#9A6418', glowC: 'rgba(243,196,106,0.16)',
+          title: 'Varro will take 12 a jar', body: 'But he wants your promise to avoid Rufus for twenty days.',
+          when: 'He expects an answer by tomorrow', primary: 'Return to the haggle', secondary: 'Let it wait' }),
+        notice({ seal: 'assets/eb15c5618e574cd16eaa21c996a6c5ba.png', kind: 'A DELIVERY DUE', ink: '#F09A88', btn: '#9C3220', glowC: 'rgba(240,120,100,0.16)',
+          title: '32 salted beef for Varro', body: 'Deposit it in Minecraft, or have your agent buy it at market.',
+          when: 'Due in 2 days', primary: 'Deliver in game', secondary: 'Have it bought for about 290 ' }),
+        notice({ seal: 'assets/f166f6158f9f68823017f99c2fa7626e.png', kind: 'A SHIP IN PORT', ink: '#9CC4E4', btn: '#2E5878', glowC: 'rgba(120,170,220,0.16)',
+          title: 'The Fortuna awaits orders', body: 'Grain sells high in Coria today, but pirates watch the northern lane.',
+          when: 'Waiting at Coria', primary: 'Give orders', secondary: 'Let the captain decide' })
+      ]
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World map — sample continent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#C9CDBE}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#7E2A1A}a:hover{color:#5A1C10}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.35), 0 5px 10px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.42) !important}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #C9CDBE; font-family: Spectral, Georgia, serif; color: #2A2119">
+
+<svg width="1440" height="900" role="img" aria-label="Interactive parchment map of a sample continent with five countries, their towns, roads and trade routes" style="{{svgStyle}}" onWheel="{{onWheel}}" onPointerDown="{{onDown}}" onPointerMove="{{onMove}}" onPointerUp="{{onUp}}" onPointerLeave="{{onUp}}">
+<g transform="{{view}}">
+<image href="assets/9f5158a39938dfbadce3acb1871c8938.jpg"x="0" y="0" width="1600" height="1000"></image>
+
+<g style="{{layer.countries}}">
+<sc-for list="{{countries}}" as="c" hint-placeholder-count="5">
+<path d="{{c.d}}" style="{{c.style}}" onMouseEnter="{{c.enter}}" onMouseLeave="{{leave}}"></path>
+</sc-for>
+</g>
+
+<g style="{{layer.roads}}">
+<sc-for list="{{roads}}" as="r" hint-placeholder-count="60">
+<path d="{{r.d}}" style="{{r.style}}"></path>
+</sc-for>
+</g>
+
+<g>
+<sc-for list="{{trade}}" as="t" hint-placeholder-count="5">
+<path d="{{t.d}}" style="{{t.style}}"></path>
+<path d="{{t.d}}" style="{{t.hitStyle}}" onMouseEnter="{{t.enter}}" onMouseLeave="{{leave}}"></path>
+</sc-for>
+</g>
+
+<g style="{{layer.countryLabels}}">
+<sc-for list="{{countries}}" as="c" hint-placeholder-count="5">
+<text x="{{c.lx}}" y="{{c.ly}}" style="{{c.labelStyle}}">{{c.upper}}</text>
+</sc-for>
+</g>
+
+<sc-for list="{{places}}" as="p" hint-placeholder-count="72">
+<g transform="{{p.tf}}" style="cursor: pointer" onMouseEnter="{{p.enter}}" onMouseLeave="{{leave}}" onClick="{{p.pin}}">
+<circle r="{{p.hitR}}" style="fill: transparent"></circle>
+<circle r="{{p.ringR}}" style="{{p.ringStyle}}"></circle>
+<circle r="{{p.r}}" style="{{p.dotStyle}}"></circle>
+<text x="{{p.tx}}" y="{{p.ty}}" style="{{p.labelStyle}}">{{p.name}}</text>
+</g>
+</sc-for>
+</g>
+</svg>
+
+<!-- TITLE CARTOUCHE -->
+<div class="paper" style="position: absolute; left: 28px; top: 28px; width: 330px; padding: 16px 20px; box-shadow: 0 10px 24px rgba(40,28,16,0.35); display: flex; flex-direction: column; gap: 4px; pointer-events: none">
+<span style="font-family: Cinzel, serif; font-size: 22px; font-weight: 700; letter-spacing: 0.08em; color: #3A2516">THE CONTINENT</span>
+<span style="font-size: 14px; color: #4A3C30">A made-up sample world: five countries, 72 settlements. Your real map will be drawn from your seed picture.</span>
+<span style="font-size: 13px; color: #6B5A48; padding-top: 4px; border-top: 1px solid rgba(90,58,34,0.25)">Drag to move · zoom in to see cities, then towns, then villages · hover a town to see its trade routes · click to pin it</span>
+</div>
+
+<!-- CONTROLS -->
+<div style="position: absolute; right: 28px; top: 28px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px">
+<div class="paper" style="display: flex; flex-direction: column; box-shadow: 0 8px 18px rgba(40,28,16,0.35)">
+<button aria-label="Zoom in" onClick="{{zoomIn}}" style="width: 44px; height: 44px; border: none; border-bottom: 1px solid rgba(90,58,34,0.3); background: transparent; font-family: Cinzel, serif; font-size: 22px; color: #3A2516; cursor: pointer">+</button>
+<button aria-label="Zoom out" onClick="{{zoomOut}}" style="width: 44px; height: 44px; border: none; border-bottom: 1px solid rgba(90,58,34,0.3); background: transparent; font-family: Cinzel, serif; font-size: 22px; color: #3A2516; cursor: pointer">−</button>
+<button aria-label="Show the whole map" onClick="{{reset}}" style="width: 44px; height: 44px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#3A2516" stroke-width="1.8" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg>
+</button>
+</div>
+<div class="paper" style="padding: 10px 12px; box-shadow: 0 8px 18px rgba(40,28,16,0.35); display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #5A3A22">SHOW</span>
+<sc-for list="{{toggles}}" as="tg" hint-placeholder-count="4">
+<button onClick="{{tg.flip}}" style="{{tg.style}}"><span style="{{tg.box}}"></span>{{tg.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<!-- LEGEND -->
+<div class="paper" style="position: absolute; left: 28px; bottom: 28px; padding: 12px 16px; box-shadow: 0 8px 18px rgba(40,28,16,0.35); display: grid; grid-template-columns: repeat(2, minmax(0, auto)); gap: 6px 22px; font-size: 14px; pointer-events: none">
+<span style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7.5" style="fill: none; stroke: #7E2A1A; stroke-width: 1.5px"></circle><circle cx="9" cy="9" r="4.5" style="fill: #7E2A1A; stroke: #F3E9D2; stroke-width: 1.2px"></circle></svg>Capital</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="26" height="10" aria-hidden="true"><path d="M1 5 H25" style="stroke: #5A3E26; stroke-width: 1.6px; stroke-dasharray: 6 4"></path></svg>Road</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="4.5" style="fill: #3A2516; stroke: #F3E9D2; stroke-width: 1.2px"></circle></svg>City</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="26" height="10" aria-hidden="true"><path d="M1 5 H25" style="stroke: #5A3E26; stroke-width: 1.1px; stroke-dasharray: 2 4; opacity: 0.7"></path></svg>Track</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="3.2" style="fill: #3A2516; stroke: #F3E9D2; stroke-width: 1px"></circle></svg>Town</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="26" height="10" aria-hidden="true"><path d="M2 5 H25" style="stroke: #2E4E60; stroke-width: 2px; stroke-dasharray: 1 6; stroke-linecap: round"></path></svg>Sea lane</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="2.4" style="fill: #F3E9D2; stroke: #3A2516; stroke-width: 1.2px"></circle></svg>Village</span>
+<span style="display: flex; align-items: center; gap: 8px"><svg width="26" height="10" aria-hidden="true"><path d="M1 5 H25" style="stroke: #7A1E3A; stroke-width: 3px; stroke-dasharray: 10 5"></path></svg>Trade route</span>
+</div>
+
+<!-- HOVER CARD -->
+<sc-if value="{{hasTip}}" hint-placeholder-val="{{ false }}">
+<div class="paper" style="{{tip.style}}">
+<div style="{{tip.bar}}"></div>
+<span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; letter-spacing: 0.04em; color: #2A1A0E">{{tip.title}}</span>
+<span style="font-size: 14px; color: #5E5042; margin-top: -2px">{{tip.sub}}</span>
+<div style="display: flex; flex-direction: column; gap: 3px; padding-top: 6px; border-top: 1px solid rgba(90,58,34,0.25)">
+<sc-for list="{{tip.rows}}" as="row" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px"><span style="color: #6B5A48">{{row.k}}</span><span style="color: #1F1710; text-align: right">{{row.v}}</span></div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- PINNED TOWN -->
+<sc-if value="{{hasPin}}" hint-placeholder-val="{{ false }}">
+<div class="paper" style="position: absolute; right: 28px; bottom: 28px; width: 300px; padding: 16px 18px; box-shadow: 0 14px 30px rgba(40,28,16,0.45); display: flex; flex-direction: column; gap: 6px">
+<div style="{{pin.bar}}"></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 20px; font-weight: 700; color: #2A1A0E">{{pin.title}}</span>
+<button aria-label="Close" onClick="{{unpin}}" style="width: 44px; height: 44px; margin: -10px -10px -10px 0; border: none; background: transparent; font-size: 22px; color: #5E5042; cursor: pointer">×</button>
+</div>
+<span style="font-size: 14px; color: #5E5042; margin-top: -6px">{{pin.sub}}</span>
+<div style="display: flex; flex-direction: column; gap: 3px; padding-top: 6px; border-top: 1px solid rgba(90,58,34,0.25)">
+<sc-for list="{{pin.rows}}" as="row" hint-placeholder-count="4">
+<div style="display: flex; justify-content: space-between; gap: 14px; font-size: 15px"><span style="color: #6B5A48">{{row.k}}</span><span style="color: #1F1710; text-align: right">{{row.v}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 8px; padding-top: 6px">
+<button style="flex: 1; min-height: 44px; background: #5A3A22; color: #FFF6E4; border: none; border-radius: 2px; font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer">Visit the market</button>
+<button style="flex: 1; min-height: 44px; background: transparent; color: #3A2516; border: 1px solid #5A3A22; border-radius: 2px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Send a letter</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var MAPDATA = {"countries":[{"id":0,"name":"Helerensia","color":"#B5652E","ruler":"King Servius Cornelius","character":"mining highlands","d":"M1298,911 L1277,910 L1250,877 L1238,878 L1226,888 L1206,881 L1194,882 L1182,866 L1146,847 L1147,826 L1138,813 L1126,805 L1110,802 L1094,816 L1059,814 L1061,806 L1076,786 L1106,760 L1115,746 L1112,730 L1115,690 L1111,674 L1097,654 L1096,642 L1106,633 L1134,632 L1151,622 L1174,594 L1234,536 L1250,516 L1278,495 L1290,474 L1342,429 L1370,416 L1422,414 L1431,394 L1429,382 L1440,350 L1441,330 L1456,302 L1451,274 L1462,261 L1486,261 L1495,270 L1505,294 L1518,310 L1516,318 L1500,334 L1501,350 L1511,370 L1513,402 L1526,426 L1540,434 L1548,450 L1547,482 L1529,498 L1528,546 L1512,586 L1512,662 L1506,682 L1516,706 L1512,718 L1516,730 L1511,750 L1514,762 L1489,790 L1487,810 L1463,842 L1463,858 L1450,875 L1434,883 L1418,885 L1406,897 L1383,874 L1374,873 L1350,887 L1318,893 L1307,906 L1298,911Z","lx":1324,"ly":696,"capital":"Sabino","towns":16},{"id":1,"name":"Caleonia","color":"#6F7E3A","ruler":"The Senate under consul Decimus Sempronius","character":"trading coast","d":"M138,623 L115,622 L118,606 L108,590 L112,570 L105,558 L100,534 L132,498 L137,482 L150,468 L170,467 L183,458 L183,446 L169,430 L166,406 L153,402 L144,390 L155,362 L158,341 L174,330 L190,313 L214,307 L222,309 L234,297 L246,293 L262,297 L298,289 L308,302 L306,323 L314,329 L326,330 L334,338 L342,339 L349,330 L352,314 L367,310 L389,290 L386,266 L377,266 L368,286 L358,296 L350,299 L335,282 L326,277 L310,273 L298,281 L294,279 L301,258 L338,246 L362,257 L367,254 L374,232 L370,228 L354,227 L351,222 L353,218 L366,215 L382,219 L402,201 L422,203 L434,191 L454,211 L491,222 L498,243 L531,262 L559,322 L554,346 L518,353 L494,371 L482,374 L474,383 L454,385 L438,395 L422,393 L402,415 L362,429 L298,496 L278,493 L272,498 L259,526 L245,538 L242,559 L198,612 L186,618 L150,616 L138,623Z M203,362 L207,358 L206,350 L186,340 L185,346 L193,358 L203,362Z","lx":272,"ly":400,"capital":"Fidanum","towns":7},{"id":2,"name":"Vararia","color":"#3F6C86","ruler":"Queen Cornelia","character":"grain basket","d":"M1058,810 L1050,810 L1047,786 L1029,774 L1019,758 L986,756 L978,752 L971,714 L947,694 L906,674 L902,675 L894,691 L870,697 L864,690 L863,670 L858,664 L846,668 L830,691 L806,707 L754,717 L749,722 L746,737 L722,725 L682,744 L662,729 L654,728 L630,739 L598,737 L578,740 L562,752 L542,737 L534,737 L526,743 L508,706 L515,694 L512,522 L518,494 L750,492 L774,508 L862,591 L910,604 L1086,609 L1091,614 L1092,638 L1097,654 L1111,674 L1115,690 L1112,730 L1116,742 L1108,758 L1076,786 L1058,810Z M530,766 L524,762 L526,746 L536,758 L530,766Z","lx":632,"ly":608,"capital":"Aquea","towns":21},{"id":3,"name":"Ostoronia","color":"#8A4A6E","ruler":"Tyrant Quintus Fabius","character":"timber and pasture","d":"M1102,635 L1094,637 L1091,614 L1082,608 L978,608 L962,604 L910,604 L862,591 L774,508 L750,492 L514,491 L492,470 L488,458 L477,446 L475,426 L461,406 L461,390 L518,353 L554,346 L562,322 L570,320 L598,324 L618,321 L634,330 L645,318 L650,318 L674,339 L706,345 L726,368 L742,353 L774,352 L782,358 L782,374 L790,375 L826,349 L834,348 L854,356 L862,374 L866,375 L878,359 L890,368 L906,367 L926,355 L933,334 L942,325 L950,325 L958,332 L982,335 L997,318 L1042,284 L1061,262 L1098,260 L1118,251 L1128,234 L1162,205 L1210,196 L1238,206 L1246,188 L1274,176 L1286,177 L1292,182 L1297,198 L1313,218 L1330,218 L1334,221 L1347,238 L1358,263 L1370,263 L1382,255 L1391,262 L1391,278 L1394,279 L1402,269 L1418,264 L1450,278 L1456,302 L1441,330 L1440,350 L1429,382 L1431,394 L1422,414 L1370,416 L1342,429 L1290,474 L1278,495 L1250,516 L1234,536 L1174,594 L1151,622 L1138,631 L1102,635Z","lx":1104,"ly":436,"capital":"Durona","towns":17},{"id":4,"name":"Peruaria","color":"#B08A2A","ruler":"Council of elders, led by Quintus Sulpicius","character":"vineyards and olive groves","d":"M178,795 L162,792 L152,770 L151,750 L170,726 L161,710 L169,690 L150,680 L130,659 L129,650 L134,638 L124,626 L150,616 L186,618 L195,614 L235,570 L243,558 L245,538 L259,526 L274,496 L282,493 L298,496 L358,432 L402,415 L422,393 L438,395 L454,386 L458,387 L461,406 L475,426 L477,446 L516,498 L512,522 L515,694 L508,706 L524,742 L522,766 L506,768 L494,763 L474,761 L466,775 L454,779 L438,775 L426,783 L414,784 L406,778 L406,770 L403,766 L390,772 L370,773 L361,766 L354,746 L346,745 L334,755 L318,756 L310,751 L306,739 L302,738 L286,748 L250,745 L241,754 L238,767 L222,783 L210,788 L190,789 L178,795Z","lx":372,"ly":608,"capital":"Pisella","towns":11}],"places":[{"id":0,"name":"Sabino","tier":"capital","x":1418,"y":882,"country":0,"produces":["grain","fish","cloth"],"needs":["timber","wine"],"port":true,"pop":92500},{"id":1,"name":"Fidanum","tier":"capital","x":170,"y":406,"country":1,"produces":["salt","olive oil","fish"],"needs":["grain","iron ore"],"port":true,"pop":102750},{"id":2,"name":"Aquea","tier":"capital","x":758,"y":714,"country":2,"produces":["timber","grain","fish"],"needs":["wine","salt"],"port":true,"pop":44500},{"id":3,"name":"Durona","tier":"capital","x":870,"y":378,"country":3,"produces":["timber","grain","fish"],"needs":["iron ore","wine"],"port":true,"pop":63100},{"id":4,"name":"Pisella","tier":"capital","x":298,"y":738,"country":4,"produces":["timber","fish","cloth"],"needs":["wine","iron ore"],"port":true,"pop":119150},{"id":5,"name":"Coria","tier":"city","x":1298,"y":202,"country":3,"produces":["timber","fish","cloth"],"needs":["salt","grain"],"port":true,"pop":12750},{"id":6,"name":"Melulona","tier":"city","x":1118,"y":278,"country":3,"produces":["salt","grain","fish"],"needs":["wine","iron ore"],"port":true,"pop":16950},{"id":7,"name":"Lareanum","tier":"city","x":958,"y":702,"country":2,"produces":["salt","timber","grain"],"needs":["iron ore","wine"],"port":true,"pop":22450},{"id":8,"name":"Sabium","tier":"city","x":518,"y":258,"country":1,"produces":["fish","glass"],"needs":["iron ore","grain"],"port":true,"pop":16650},{"id":9,"name":"Seroentum","tier":"town","x":1502,"y":678,"country":0,"produces":["wine","fish"],"needs":["timber","grain"],"port":true,"pop":6250},{"id":10,"name":"Cluona","tier":"town","x":638,"y":734,"country":2,"produces":["timber","grain","fish"],"needs":["salt","wine"],"port":true,"pop":5250},{"id":11,"name":"Ferum","tier":"town","x":858,"y":662,"country":2,"produces":["grain","fish"],"needs":["salt","iron ore"],"port":true,"pop":4900},{"id":12,"name":"Casinica","tier":"town","x":426,"y":206,"country":1,"produces":["salt","fish"],"needs":["grain","timber"],"port":true,"pop":7300},{"id":13,"name":"Galorae","tier":"town","x":1234,"y":874,"country":0,"produces":["grain","fish"],"needs":["timber","salt"],"port":true,"pop":4850},{"id":14,"name":"Nebaella","tier":"town","x":138,"y":630,"country":4,"produces":["salt","fish"],"needs":["iron ore","wine"],"port":true,"pop":6350},{"id":15,"name":"Sorae","tier":"town","x":342,"y":342,"country":1,"produces":["iron ore","stone","fish"],"needs":["salt","wine"],"port":true,"pop":7550},{"id":16,"name":"Seriona","tier":"town","x":146,"y":510,"country":1,"produces":["grain"],"needs":["salt","timber"],"port":false,"pop":3800},{"id":17,"name":"Lavica","tier":"town","x":1014,"y":306,"country":3,"produces":["fish"],"needs":["salt","iron ore"],"port":true,"pop":2400},{"id":18,"name":"Casora","tier":"town","x":1454,"y":774,"country":0,"produces":["grain"],"needs":["iron ore","timber"],"port":false,"pop":2500},{"id":19,"name":"Galorulum","tier":"town","x":530,"y":694,"country":2,"produces":["olive oil","timber","grain"],"needs":["salt","iron ore"],"port":false,"pop":4750},{"id":20,"name":"Soriula","tier":"town","x":442,"y":530,"country":4,"produces":["olive oil","grain"],"needs":["timber","iron ore"],"port":false,"pop":5550},{"id":21,"name":"Falorona","tier":"town","x":602,"y":510,"country":2,"produces":["grain"],"needs":["iron ore","wine"],"port":false,"pop":5050},{"id":22,"name":"Briulum","tier":"town","x":1242,"y":490,"country":3,"produces":["olive oil"],"needs":["iron ore","timber"],"port":false,"pop":2350},{"id":23,"name":"Aquanentum","tier":"town","x":1298,"y":790,"country":0,"produces":["timber","grain"],"needs":["iron ore","wine"],"port":false,"pop":5600},{"id":24,"name":"Cesulum","tier":"village","x":810,"y":702,"country":2,"produces":["grain","fish"],"needs":["timber","wine"],"port":false,"pop":550},{"id":25,"name":"Cameum","tier":"village","x":782,"y":378,"country":3,"produces":["salt","timber","grain"],"needs":["iron ore","wine"],"port":false,"pop":350},{"id":26,"name":"Venanum","tier":"village","x":354,"y":738,"country":4,"produces":["salt","olive oil","timber"],"needs":["grain","iron ore"],"port":false,"pop":750},{"id":27,"name":"Sorino","tier":"village","x":1358,"y":266,"country":3,"produces":["salt","iron ore","silver"],"needs":["timber","grain"],"port":false,"pop":200},{"id":28,"name":"Veraentum","tier":"village","x":1322,"y":890,"country":0,"produces":["salt","fish"],"needs":["wine","timber"],"port":false,"pop":750},{"id":29,"name":"Nebara","tier":"village","x":910,"y":670,"country":2,"produces":["grain","fish"],"needs":["iron ore","salt"],"port":false,"pop":250},{"id":30,"name":"Celanona","tier":"village","x":1018,"y":754,"country":2,"produces":["salt","iron ore","stone"],"needs":["wine","timber"],"port":false,"pop":800},{"id":31,"name":"Pisonara","tier":"village","x":586,"y":738,"country":2,"produces":["salt","timber","grain"],"needs":["wine","iron ore"],"port":false,"pop":250},{"id":32,"name":"Larenula","tier":"village","x":922,"y":374,"country":3,"produces":["timber","grain"],"needs":["wine","iron ore"],"port":false,"pop":800},{"id":33,"name":"Delaia","tier":"village","x":806,"y":670,"country":2,"produces":["timber","grain"],"needs":["wine","salt"],"port":false,"pop":400},{"id":34,"name":"Ravacum","tier":"village","x":1198,"y":834,"country":0,"produces":["wine","grain"],"needs":["salt","timber"],"port":false,"pop":500},{"id":35,"name":"Balona","tier":"village","x":370,"y":710,"country":4,"produces":["timber","grain"],"needs":["wine","iron ore"],"port":false,"pop":400},{"id":36,"name":"Antino","tier":"village","x":1322,"y":274,"country":3,"produces":["grain"],"needs":["timber","wine"],"port":false,"pop":800},{"id":37,"name":"Lariula","tier":"village","x":930,"y":638,"country":2,"produces":["timber","grain"],"needs":["iron ore","wine"],"port":false,"pop":450},{"id":38,"name":"Lariulum","tier":"village","x":1314,"y":846,"country":0,"produces":["grain"],"needs":["salt","wine"],"port":false,"pop":750},{"id":39,"name":"Fidera","tier":"village","x":898,"y":622,"country":2,"produces":["timber","grain"],"needs":["salt","wine"],"port":false,"pop":650},{"id":40,"name":"Verona","tier":"village","x":958,"y":390,"country":3,"produces":["olive oil","timber"],"needs":["wine","salt"],"port":false,"pop":150},{"id":41,"name":"Venania","tier":"village","x":1406,"y":806,"country":0,"produces":["grain"],"needs":["salt","timber"],"port":false,"pop":400},{"id":42,"name":"Deloanum","tier":"village","x":718,"y":622,"country":2,"produces":["wine","timber","grain"],"needs":["iron ore","salt"],"port":false,"pop":500},{"id":43,"name":"Salulia","tier":"village","x":442,"y":670,"country":4,"produces":["wine","timber"],"needs":["grain","iron ore"],"port":false,"pop":450},{"id":44,"name":"Tareara","tier":"village","x":738,"y":646,"country":2,"produces":["timber","grain"],"needs":["iron ore","salt"],"port":false,"pop":200},{"id":45,"name":"Ureaona","tier":"village","x":474,"y":690,"country":4,"produces":["wine","timber","grain"],"needs":["salt","iron ore"],"port":false,"pop":300},{"id":46,"name":"Tibonula","tier":"village","x":558,"y":638,"country":2,"produces":["timber","grain"],"needs":["iron ore","salt"],"port":false,"pop":300},{"id":47,"name":"Arvino","tier":"village","x":1386,"y":746,"country":0,"produces":["cattle"],"needs":["wine","salt"],"port":false,"pop":750},{"id":48,"name":"Arverula","tier":"village","x":1134,"y":370,"country":3,"produces":["cattle"],"needs":["iron ore","salt"],"port":false,"pop":600},{"id":49,"name":"Tusonella","tier":"village","x":530,"y":606,"country":2,"produces":["grain"],"needs":["iron ore","salt"],"port":false,"pop":750},{"id":50,"name":"Palia","tier":"village","x":494,"y":622,"country":4,"produces":["olive oil"],"needs":["wine","salt"],"port":false,"pop":800},{"id":51,"name":"Vinuanum","tier":"village","x":690,"y":602,"country":2,"produces":["wine","timber","grain"],"needs":["iron ore","salt"],"port":false,"pop":650},{"id":52,"name":"Saliara","tier":"village","x":458,"y":594,"country":4,"produces":["olive oil","grain"],"needs":["timber","wine"],"port":false,"pop":150},{"id":53,"name":"Novulum","tier":"village","x":1350,"y":674,"country":0,"produces":["grain"],"needs":["wine","timber"],"port":false,"pop":400},{"id":54,"name":"Laronanum","tier":"village","x":198,"y":618,"country":4,"produces":["timber","grain"],"needs":["wine","iron ore"],"port":false,"pop":300},{"id":55,"name":"Cluoracum","tier":"village","x":1174,"y":398,"country":3,"produces":["olive oil","grain"],"needs":["timber","iron ore"],"port":false,"pop":800},{"id":56,"name":"Celorium","tier":"village","x":1290,"y":302,"country":3,"produces":["cattle"],"needs":["salt","iron ore"],"port":false,"pop":500},{"id":57,"name":"Tarella","tier":"village","x":994,"y":646,"country":2,"produces":["olive oil","grain"],"needs":["iron ore","salt"],"port":false,"pop":600},{"id":58,"name":"Arvania","tier":"village","x":414,"y":638,"country":4,"produces":["grain"],"needs":["wine","salt"],"port":false,"pop":700},{"id":59,"name":"Narae","tier":"village","x":1354,"y":622,"country":0,"produces":["wine","grain"],"needs":["timber","iron ore"],"port":false,"pop":850},{"id":60,"name":"Laruella","tier":"village","x":1378,"y":694,"country":0,"produces":["cattle"],"needs":["wine","timber"],"port":false,"pop":400},{"id":61,"name":"Saboia","tier":"village","x":1134,"y":422,"country":3,"produces":["cattle"],"needs":["grain","iron ore"],"port":false,"pop":150},{"id":62,"name":"Veriula","tier":"village","x":1206,"y":782,"country":0,"produces":["cattle"],"needs":["iron ore","timber"],"port":false,"pop":550},{"id":63,"name":"Durinulum","tier":"village","x":954,"y":610,"country":2,"produces":["wine","timber","grain"],"needs":["salt","iron ore"],"port":false,"pop":450},{"id":64,"name":"Aquona","tier":"village","x":1066,"y":398,"country":3,"produces":["cattle"],"needs":["wine","grain"],"port":false,"pop":400},{"id":65,"name":"Deleracum","tier":"village","x":446,"y":274,"country":1,"produces":["cattle"],"needs":["salt","grain"],"port":false,"pop":850},{"id":66,"name":"Helenanum","tier":"village","x":1478,"y":262,"country":0,"produces":["salt","iron ore","stone"],"needs":["grain","timber"],"port":false,"pop":300},{"id":67,"name":"Arderentum","tier":"village","x":990,"y":478,"country":3,"produces":["iron ore","silver","timber"],"needs":["salt","grain"],"port":false,"pop":200},{"id":68,"name":"Caluica","tier":"village","x":1078,"y":750,"country":2,"produces":["iron ore","stone"],"needs":["grain","salt"],"port":false,"pop":850},{"id":69,"name":"Naria","tier":"village","x":510,"y":338,"country":1,"produces":["iron ore","stone"],"needs":["wine","salt"],"port":false,"pop":700},{"id":70,"name":"Lisorula","tier":"village","x":1066,"y":510,"country":3,"produces":["iron ore","stone"],"needs":["wine","grain"],"port":false,"pop":400},{"id":71,"name":"Ardarulum","tier":"village","x":1486,"y":342,"country":0,"produces":["iron ore","silver"],"needs":["salt","grain"],"port":false,"pop":450}],"roads":[{"d":"M1234,874 Q1266,832 1298,790","kind":"road"},{"d":"M518,258 Q472,233 426,206","kind":"road"},{"d":"M1502,678 Q1477,725 1454,774","kind":"road"},{"d":"M1118,278 Q1066,292 1014,306","kind":"road"},{"d":"M758,714 Q799,672 858,662","kind":"road"},{"d":"M1418,882 Q1433,827 1454,774","kind":"road"},{"d":"M638,734 Q583,716 530,694","kind":"road"},{"d":"M138,630 Q140,570 146,510","kind":"road"},{"d":"M1418,882 Q1360,833 1298,790","kind":"road"},{"d":"M442,530 Q523,524 602,510","kind":"road"},{"d":"M170,406 Q254,369 342,342","kind":"road"},{"d":"M530,694 Q487,612 442,530","kind":"road"},{"d":"M298,738 Q219,683 138,630","kind":"road"},{"d":"M518,258 Q424,288 342,342","kind":"road"},{"d":"M1298,202 Q1206,235 1118,278","kind":"road"},{"d":"M758,714 Q643,710 530,694","kind":"road"},{"d":"M298,738 Q410,697 530,694","kind":"road"},{"d":"M1118,278 Q1177,386 1242,490","kind":"road"},{"d":"M342,342 Q247,429 146,510","kind":"road"},{"d":"M870,378 Q1002,347 1118,278","kind":"road"},{"d":"M870,378 Q869,520 858,662","kind":"road"},{"d":"M1242,490 Q1262,642 1298,790","kind":"road"},{"d":"M870,378 Q923,538 958,702","kind":"road"},{"d":"M810,702 Q807,686 806,670","kind":"track"},{"d":"M782,378 Q826,377 870,378","kind":"track"},{"d":"M354,738 Q362,724 370,710","kind":"track"},{"d":"M1358,266 Q1340,269 1322,274","kind":"track"},{"d":"M1322,890 Q1318,868 1314,846","kind":"track"},{"d":"M910,670 Q919,654 930,638","kind":"track"},{"d":"M1018,754 Q1048,752 1078,750","kind":"track"},{"d":"M586,738 Q612,732 638,734","kind":"track"},{"d":"M922,374 Q940,382 958,390","kind":"track"},{"d":"M1198,834 Q1201,808 1206,782","kind":"track"},{"d":"M930,638 Q914,630 898,622","kind":"track"},{"d":"M1406,806 Q1430,791 1454,774","kind":"track"},{"d":"M718,622 Q728,634 738,646","kind":"track"},{"d":"M442,670 Q458,680 474,690","kind":"track"},{"d":"M558,638 Q545,621 530,606","kind":"track"},{"d":"M1386,746 Q1381,720 1378,694","kind":"track"},{"d":"M1134,370 Q1154,385 1174,398","kind":"track"},{"d":"M530,606 Q512,613 494,622","kind":"track"},{"d":"M690,602 Q704,613 718,622","kind":"track"},{"d":"M458,594 Q476,608 494,622","kind":"track"},{"d":"M1350,674 Q1364,683 1378,694","kind":"track"},{"d":"M198,618 Q168,626 138,630","kind":"track"},{"d":"M1174,398 Q1154,410 1134,422","kind":"track"},{"d":"M1290,302 Q1305,287 1322,274","kind":"track"},{"d":"M994,646 Q974,628 954,610","kind":"track"},{"d":"M414,638 Q429,653 442,670","kind":"track"},{"d":"M1354,622 Q1351,648 1350,674","kind":"track"},{"d":"M954,610 Q942,624 930,638","kind":"track"},{"d":"M1066,398 Q1101,408 1134,422","kind":"track"},{"d":"M446,274 Q435,240 426,206","kind":"track"},{"d":"M990,478 Q975,434 958,390","kind":"track"},{"d":"M510,338 Q512,298 518,258","kind":"track"},{"d":"M1066,510 Q1101,467 1134,422","kind":"track"},{"d":"M758,714 Q861,752 958,702","kind":"sea"},{"d":"M870,378 Q926,310 1014,306","kind":"sea"},{"d":"M298,738 Q469,845 638,734","kind":"sea"},{"d":"M1298,202 Q1028,153 870,378","kind":"sea"},{"d":"M958,702 Q805,788 638,734","kind":"sea"},{"d":"M426,206 Q686,194 870,378","kind":"sea"},{"d":"M1234,874 Q999,851 858,662","kind":"sea"},{"d":"M1234,874 Q961,899 758,714","kind":"sea"}],"trade":[{"name":"The Grain Road","goods":"grain","from":"Ferum","to":"Coria","days":11,"via":"road and sea","color":"#9A6A12","d":"M858,662 Q869,520 870,378 Q1028,153 1298,202"},{"name":"The Iron Way","goods":"iron ore","from":"Sorae","to":"Durona","days":11,"via":"road and sea","color":"#3E4A52","d":"M342,342 Q424,288 518,258 Q472,233 426,206 Q686,194 870,378"},{"name":"The Wine Lane","goods":"wine","from":"Seroentum","to":"Melulona","days":21,"via":"road","color":"#7A1E3A","d":"M1502,678 Q1477,725 1454,774 Q1433,827 1418,882 Q1360,833 1298,790 Q1262,642 1242,490 Q1177,386 1118,278"},{"name":"The Salt Road","goods":"salt","from":"Lareanum","to":"Coria","days":12,"via":"road and sea","color":"#2E5E78","d":"M958,702 Q923,538 870,378 Q1028,153 1298,202"},{"name":"The Timber Run","goods":"timber","from":"Aquea","to":"Sabino","days":10,"via":"sea and road","color":"#5A3E1E","d":"M758,714 Q961,899 1234,874 Q1266,832 1298,790 Q1360,833 1418,882"}]};
+
+class Component extends DCLogic {
+  view() {
+    var s = this.state || {};
+    return { k: s.k || 0.9, tx: s.tx || 0, ty: s.ty || 0 };
+  }
+  clampView(k, tx, ty) {
+    k = Math.max(0.9, Math.min(5, k));
+    tx = Math.min(0, Math.max(1440 - 1600 * k, tx));
+    ty = Math.min(0, Math.max(900 - 1000 * k, ty));
+    return { k: k, tx: tx, ty: ty };
+  }
+  zoomAt(f, mx, my) {
+    var v = this.view();
+    var nk = Math.max(0.9, Math.min(5, v.k * f));
+    var r = nk / v.k;
+    this.setState(this.clampView(nk, mx - (mx - v.tx) * r, my - (my - v.ty) * r));
+  }
+  local(e) {
+    var el = e.currentTarget.ownerSVGElement || e.currentTarget;
+    var rect = el.getBoundingClientRect();
+    return { x: (e.clientX - rect.left) * (1440 / rect.width), y: (e.clientY - rect.top) * (900 / rect.height), sx: 1440 / rect.width };
+  }
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var v = this.view();
+    var k = v.k;
+    var layers = Object.assign({ countries: true, trade: false, roads: true, labels: true }, s.layers || {});
+    var hover = s.hover || null;
+    var pinId = (s.pin === undefined || s.pin === null) ? null : s.pin;
+    var D = MAPDATA;
+    var shrink = Math.pow(k, 0.6);
+    var fmt = function (n) { return n.toLocaleString('en-US'); };
+    var cap = function (t) { return t.charAt(0).toUpperCase() + t.slice(1); };
+    var countryOf = function (i) { return D.countries[i]; };
+    var leave = function () { self.setState({ hover: null }); };
+
+    // what shows at each zoom: country names far out, then cities, towns, villages
+    var showRegionNames = k < 1.9;
+    var regionOpacity = k < 1.3 ? 0.85 : 0.4;
+    var focusName = null;
+    if (hover && hover.type === 'place') focusName = D.places[hover.id].name;
+    else if (pinId !== null) focusName = D.places[pinId].name;
+
+    var countries = D.countries.map(function (c) {
+      var hot = hover && hover.type === 'country' && hover.id === c.id;
+      return {
+        d: c.d, lx: c.lx, ly: c.ly, upper: c.name.toUpperCase(),
+        style: 'fill: ' + c.color + '; fill-opacity: ' + (hot ? 0.34 : 0.2) + '; stroke: ' + c.color + '; stroke-width: ' + (hot ? 2.6 : 1.8) + 'px; stroke-dasharray: 8 4; stroke-opacity: 0.85; vector-effect: non-scaling-stroke',
+        labelStyle: (showRegionNames ? '' : 'display: none; ') + 'font-family: Cinzel, serif; font-weight: 700; font-size: ' + (34 / shrink) + 'px; letter-spacing: ' + (9 / shrink) + 'px; text-anchor: middle; fill: ' + c.color + '; fill-opacity: ' + regionOpacity + '; paint-order: stroke; stroke: #F3E9D2; stroke-width: ' + (4 / shrink) + 'px; stroke-opacity: 0.7; pointer-events: none',
+        enter: function (e) { var q = self.local(e); self.setState({ hover: { type: 'country', id: c.id }, px: q.x, py: q.y }); }
+      };
+    });
+
+    var roadStyle = {
+      road: 'fill: none; stroke: #5A3E26; stroke-width: 1.7px; stroke-dasharray: 6 4; stroke-opacity: 0.8; vector-effect: non-scaling-stroke',
+      track: 'fill: none; stroke: #5A3E26; stroke-width: 1.1px; stroke-dasharray: 2 4; stroke-opacity: 0.6; vector-effect: non-scaling-stroke',
+      sea: 'fill: none; stroke: #2E4E60; stroke-width: 2px; stroke-dasharray: 1 6; stroke-linecap: round; stroke-opacity: 0.75; vector-effect: non-scaling-stroke'
+    };
+    var roads = D.roads.map(function (r) {
+      return { d: r.d, style: (r.kind === 'track' && k < 1.9 ? 'display: none; ' : '') + roadStyle[r.kind] };
+    });
+
+    var trade = D.trade.map(function (t, i) {
+      var hot = hover && hover.type === 'route' && hover.id === i;
+      var linked = focusName && (t.from === focusName || t.to === focusName);
+      var visible = layers.trade || linked || hot;
+      return {
+        d: t.d,
+        hitStyle: (visible ? '' : 'display: none; ') + 'fill: none; stroke: transparent; stroke-width: 16px; pointer-events: stroke; cursor: pointer; vector-effect: non-scaling-stroke',
+        style: (visible ? '' : 'display: none; ') + 'fill: none; stroke: ' + t.color + '; stroke-width: ' + (hot ? 6 : 3.4) + 'px; stroke-dasharray: 12 6; stroke-linecap: round; stroke-opacity: ' + (hot ? 1 : 0.85) + '; vector-effect: non-scaling-stroke',
+        enter: function (e) { var q = self.local(e); self.setState({ hover: { type: 'route', id: i }, px: q.x, py: q.y }); }
+      };
+    });
+
+    var tierSize = { capital: 5.2, city: 4.4, town: 3.2, village: 2.3 };
+    var tierFont = { capital: 17, city: 14.5, town: 12.5, village: 10.5 };
+    var places = D.places.map(function (p) {
+      var hot = (hover && hover.type === 'place' && hover.id === p.id) || pinId === p.id;
+      var r = tierSize[p.tier] / shrink * (hot ? 1.35 : 1);
+      var fs = tierFont[p.tier] / shrink;
+      var labelAt = { capital: 1.25, city: 1.25, town: 1.9, village: 2.8 }[p.tier];
+      var dotAt = { capital: 0, city: 0, town: 1.25, village: 1.9 }[p.tier];
+      var showLabel = layers.labels && (k >= labelAt || hot);
+      var showDot = k >= dotAt || hot;
+      var village = p.tier === 'village';
+      return {
+        name: p.name,
+        tf: 'translate(' + p.x + ' ' + p.y + ')' + (showDot ? '' : ' scale(0)'),
+        r: r, hitR: Math.max(r * 2.2, 9 / shrink), ringR: p.tier === 'capital' ? r * 1.75 : 0,
+        ringStyle: 'fill: none; stroke: #7E2A1A; stroke-width: ' + (1.6 / shrink) + 'px',
+        dotStyle: village
+          ? 'fill: #F3E9D2; stroke: #3A2516; stroke-width: ' + (1.3 / shrink) + 'px'
+          : 'fill: ' + (p.tier === 'capital' ? '#7E2A1A' : '#3A2516') + '; stroke: #F3E9D2; stroke-width: ' + (1.3 / shrink) + 'px',
+        tx: (p.tier === 'capital' ? r * 2.3 : r * 1.8), ty: fs * 0.35,
+        labelStyle: (showLabel ? '' : 'display: none; ') + 'font-family: ' + (p.tier === 'village' ? 'Spectral, serif' : 'Cinzel, serif') + '; font-weight: ' + (p.tier === 'capital' || p.tier === 'city' ? 700 : 500) + '; font-size: ' + fs + 'px; fill: ' + (hot ? '#7E2A1A' : '#2A1A0E') + '; paint-order: stroke; stroke: #F3E9D2; stroke-width: ' + (3.2 / shrink) + 'px; stroke-linejoin: round; pointer-events: none',
+        enter: function (e) { var q = self.local(e); self.setState({ hover: { type: 'place', id: p.id }, px: q.x, py: q.y }); },
+        pin: function () { self.setState({ pin: p.id }); }
+      };
+    });
+
+    var tierName = { capital: 'Capital', city: 'City', town: 'Town', village: 'Village' };
+    var placeCard = function (p) {
+      var c = countryOf(p.country);
+      var rows = [
+        { k: 'Country', v: c.name },
+        { k: 'People', v: 'about ' + fmt(p.pop) },
+        { k: 'Produces', v: p.produces.join(', ') },
+        { k: 'Wants', v: p.needs.join(', ') }
+      ];
+      if (p.port) rows.push({ k: 'Harbour', v: 'yes, ships call here' });
+      return { title: p.name, sub: tierName[p.tier] + (p.tier === 'capital' ? ' of ' + c.name : ''), rows: rows, color: c.color };
+    };
+    var tipData = null;
+    if (hover) {
+      if (hover.type === 'place') tipData = placeCard(D.places[hover.id]);
+      if (hover.type === 'country') {
+        var c = D.countries[hover.id];
+        tipData = { title: c.name, sub: cap(c.character), color: c.color, rows: [
+          { k: 'Ruled by', v: c.ruler }, { k: 'Capital', v: c.capital }, { k: 'Settlements', v: String(c.towns) }] };
+      }
+      if (hover.type === 'route') {
+        var t = D.trade[hover.id];
+        tipData = { title: t.name, sub: cap(t.goods) + ' from ' + t.from + ' to ' + t.to, color: t.color, rows: [
+          { k: 'Carries', v: t.goods }, { k: 'Journey', v: 'about ' + t.days + ' days, by ' + t.via }] };
+      }
+    }
+    var px = s.px || 0, py = s.py || 0;
+    var tip = { title: '', sub: '', rows: [], style: 'display: none', bar: '' };
+    if (tipData) {
+      var left = px + 18, top = py + 18;
+      if (left > 1440 - 320) left = px - 318;
+      if (top > 900 - 220) top = py - 200;
+      tip = {
+        title: tipData.title, sub: tipData.sub, rows: tipData.rows,
+        style: 'position: absolute; left: ' + left + 'px; top: ' + top + 'px; width: 300px; box-sizing: border-box; padding: 12px 16px 14px; box-shadow: 0 12px 26px rgba(40,28,16,0.45); display: flex; flex-direction: column; gap: 4px; pointer-events: none; overflow: hidden',
+        bar: 'height: 5px; margin: -12px -16px 6px; background: ' + tipData.color
+      };
+    }
+    var pin = { title: '', sub: '', rows: [], bar: '' };
+    if (pinId !== null) {
+      var pc = placeCard(D.places[pinId]);
+      pin = { title: pc.title, sub: pc.sub, rows: pc.rows, bar: 'height: 5px; margin: -16px -18px 8px; background: ' + pc.color };
+    }
+
+    var toggleDefs = [['countries', 'Countries'], ['trade', 'All trade routes'], ['roads', 'Roads & sea lanes'], ['labels', 'Town names']];
+    var toggles = toggleDefs.map(function (td) {
+      var on = layers[td[0]];
+      return {
+        label: td[1],
+        style: 'display: flex; align-items: center; gap: 8px; min-height: 32px; padding: 2px 4px; border: none; background: transparent; font-family: Spectral, serif; font-size: 15px; color: #2A1A0E; cursor: pointer; text-align: left',
+        box: 'width: 14px; height: 14px; border: 1.5px solid #5A3A22; border-radius: 2px; background: ' + (on ? '#5A3A22' : 'transparent') + '; box-shadow: inset 0 0 0 2px #EFE3C8',
+        flip: function () { var nl = Object.assign({}, layers); nl[td[0]] = !on; self.setState({ layers: nl }); }
+      };
+    });
+    var show = function (b) { return b ? '' : 'display: none'; };
+
+    return {
+      view: 'translate(' + v.tx + ' ' + v.ty + ') scale(' + k + ')',
+      svgStyle: 'display: block; touch-action: none; cursor: ' + (s.dragging ? 'grabbing' : 'grab'),
+      layer: { countries: show(layers.countries), countryLabels: show(layers.countries && layers.labels), trade: show(layers.trade), roads: show(layers.roads) },
+      countries: countries, roads: roads, trade: trade, places: places,
+      toggles: toggles, leave: leave,
+      hasTip: !!tipData && !s.dragging, tip: tip,
+      hasPin: pinId !== null, pin: pin,
+      unpin: function () { self.setState({ pin: null }); },
+      zoomIn: function () { self.zoomAt(1.4, 720, 450); },
+      zoomOut: function () { self.zoomAt(1 / 1.4, 720, 450); },
+      reset: function () { self.setState({ k: 0.9, tx: 0, ty: 0 }); },
+      onWheel: function (e) {
+        var p = self.local(e);
+        self.zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, p.x, p.y);
+      },
+      onDown: function (e) {
+        var p = self.local(e); var vv = self.view();
+        self.drag = { x: p.x, y: p.y, tx: vv.tx, ty: vv.ty, active: false, id: e.pointerId, el: e.currentTarget };
+      },
+      onMove: function (e) {
+        var p = self.local(e);
+        var d = self.drag;
+        if (d) {
+          var dx = p.x - d.x, dy = p.y - d.y;
+          if (!d.active && dx * dx + dy * dy > 25) {
+            d.active = true;
+            try { d.el.setPointerCapture(d.id); } catch (err) {}
+          }
+          if (d.active) {
+            var vv = self.view();
+            var nv = self.clampView(vv.k, d.tx + dx, d.ty + dy);
+            nv.dragging = true; nv.px = p.x; nv.py = p.y;
+            self.setState(nv);
+            return;
+          }
+        }
+        if (self.state && self.state.hover) self.setState({ px: p.x, py: p.y });
+      },
+      onUp: function (e) {
+        var d = self.drag;
+        self.drag = null;
+        if (d && d.active) {
+          try { d.el.releasePointerCapture(d.id); } catch (err) {}
+          self.setState({ dragging: false });
+        }
+      }
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

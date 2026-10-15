@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>War — the northern border</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#1E140D}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.tent{background-color:#4A3424;background-image:radial-gradient(ellipse at 50% 0%, rgba(255,200,130,0.10) 0%, rgba(0,0,0,0) 50%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%), url(assets/9b4ddf4206831b0cf4ba2a9f3eda605d.jpg);background-size:auto, auto, 768px 768px}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 22px 44px rgba(0,0,0,0.5)}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#7E2A1A}
+@keyframes march{to{stroke-dashoffset:-56}}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div class="tent" style="min-height: 100vh; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">VARARIA AT WAR · DAY 41 OF THE CAMPAIGN</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<!-- YOUR PERSON READS THIS PAGE FOR YOU -->
+<section aria-label="Summary" style="display: grid; grid-template-columns: 1fr 360px; gap: 22px; padding: 16px 20px; background: #EFE3C8; color: #2A2119; border-radius: 3px; box-shadow: 0 14px 30px rgba(0,0,0,0.45); border-left: 6px solid #9A6A12">
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<img src="{{aide.face}}" alt="" style="flex: none; width: 56px; height: 56px; image-rendering: pixelated; box-shadow: 0 0 0 3px #F6EAD0, 0 4px 10px rgba(0,0,0,0.3)">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{aide.head}}</span>
+<sc-for list="{{aide.says}}" as="ai" hint-placeholder-count="3"><span style="{{ai.style}}">{{ai.t}}</span></sc-for>
+<span style="font-size: 13px; color: #6B5A48">{{aide.foot}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-left: 20px; border-left: 1px solid rgba(58,37,22,0.2)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">{{aide.askLabel}}</span>
+<div role="radiogroup" aria-label="{{aide.askLabel}}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px">
+<sc-for list="{{aide.levels}}" as="al" hint-placeholder-count="3"><button role="radio" aria-checked="{{al.on}}" onClick="{{al.click}}" style="{{al.style}}">{{al.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; line-height: 1.4; color: #1F1710">{{aide.will}}</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #E6B8A8">VARARIA AGAINST OSTORONIA</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">The war, and your part in it</h1>
+</div>
+<p style="margin: 0; max-width: 560px; font-size: 16px; color: #E6D8BC">You don’t fight it. But armies eat, roads close, workers get called up, and when a city falls, everything in it is sold.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 400px; gap: 24px; align-items: start">
+<!-- the campaign map, pinned to the tent wall -->
+<div class="paper" style="padding: 16px 16px 12px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.3deg)">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><span class="kicker">THE FRONT, AS OF 4 DAYS AGO</span><span style="font-size: 13px; color: #6B5A48">From Captain Titus’s dispatches. The front may have moved since.</span></div>
+<svg width="100%" viewBox="440 200 820 520" role="img" aria-label="Campaign map: the front line runs along the Vararia and Ostoronia border, the Ferum to Durona road is cut, and your timber yard in Durona and your quartz mine at Lisorula are near the fighting" style="display: block; box-shadow: 0 0 0 1px rgba(58,37,22,0.3)">
+<image href="assets/9f5158a39938dfbadce3acb1871c8938.jpg" x="0" y="0" width="1600" height="1000"></image>
+<rect x="0" y="0" width="1600" height="1000" style="fill: rgba(246,236,212,0.22)"></rect>
+<!-- Ostoronian-held ground south of the border -->
+<path d="M760,505 Q800,560 860,575 Q920,590 960,570 Q930,540 880,535 Q820,520 760,505Z" style="fill: rgba(142,36,24,0.25); stroke: none"></path>
+<!-- the front line -->
+<path d="M514,496 L640,494 L750,500 Q800,560 860,575 Q920,590 960,570 L1010,600 L1088,608" style="fill: none; stroke: #8E2418; stroke-width: 9px; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 2 14"></path>
+<path d="M514,496 L640,494 L750,500 Q800,560 860,575 Q920,590 960,570 L1010,600 L1088,608" style="fill: none; stroke: #8E2418; stroke-width: 3px; opacity: 0.8"></path>
+<!-- supply lines -->
+<sc-for list="{{supply}}" as="su" hint-placeholder-count="3"><path d="{{su.d}}" style="{{su.style}}"></path></sc-for>
+<!-- cut road -->
+<g transform="translate(866,560)"><circle r="22" style="fill: #F6EAD0; stroke: #8E2418; stroke-width: 4px"></circle><path d="M-10,-10 L10,10 M10,-10 L-10,10" style="stroke: #8E2418; stroke-width: 5px; stroke-linecap: round"></path></g>
+<text x="896" y="552" style="font-family: 'IM Fell English', serif; font-size: 22px; fill: #8E2418; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 5px">Ferum road cut</text>
+<!-- armies -->
+<sc-for list="{{armies}}" as="ar" hint-placeholder-count="2">
+<g transform="{{ar.at}}">
+<rect x="-46" y="-20" width="92" height="40" rx="3" style="{{ar.box}}"></rect>
+<path d="M-30,-8 L-14,8 M-14,-8 L-30,8" style="stroke: #FFF6E4; stroke-width: 3px; stroke-linecap: round"></path>
+<text x="6" y="7" style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; fill: #FFF6E4">{{ar.short}}</text>
+<text x="0" y="44" style="font-family: 'IM Fell English', serif; font-size: 20px; fill: #1F1710; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 5px">{{ar.label}}</text>
+</g>
+</sc-for>
+<!-- your property and towns -->
+<sc-for list="{{pins}}" as="pn" hint-placeholder-count="5">
+<g transform="{{pn.at}}">
+<circle r="{{pn.r}}" style="{{pn.dot}}"></circle>
+<text x="0" y="{{pn.ty}}" style="{{pn.text}}">{{pn.name}}</text>
+</g>
+</sc-for>
+</svg>
+<div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: #3A2516">
+<span><span style="display: inline-block; width: 22px; height: 3px; background: #8E2418; vertical-align: middle; margin-right: 6px"></span>the front</span>
+<span><span style="display: inline-block; width: 22px; border-top: 3px dashed #2E5878; vertical-align: middle; margin-right: 6px"></span>Vararian supply</span>
+<span><span style="display: inline-block; width: 22px; border-top: 3px dashed #6E3A5A; vertical-align: middle; margin-right: 6px"></span>Ostoronian supply</span>
+<span><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #C9962A; border: 2px solid #3A2516; vertical-align: middle; margin-right: 6px"></span>yours</span>
+<span><span style="display: inline-block; width: 30px; height: 10px; background: rgba(142,36,24,0.25); vertical-align: middle; margin-right: 6px"></span>Ostoronian raids</span>
+</div>
+</div>
+
+<!-- who's winning, and the armies' stomachs -->
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 10px; transform: rotate(0.5deg)">
+<span class="kicker">WHO’S WINNING</span>
+<div style="display: flex; height: 18px; border-radius: 3px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(58,37,22,0.3)"><span style="{{odds.a}}"></span><span style="{{odds.b}}"></span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px; color: #3A2516"><span>Vararia {{odds.va}}</span><span>Ostoronia {{odds.os}}</span></div>
+<span style="font-size: 15px; color: #1F1710">{{odds.text}}</span>
+</div>
+<sc-for list="{{armyCards}}" as="ac" hint-placeholder-count="2">
+<div class="paper" style="{{ac.card}}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; color: #2A1A0E">{{ac.name}}</span><span style="font-size: 13px; color: #6B5A48">{{ac.men}}</span></div>
+<span style="font-size: 14px; color: #3A2516">{{ac.who}}</span>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #6B5A48">Food left</span><span style="{{ac.foodStyle}}">{{ac.food}}</span></span>
+<span style="display: block; height: 8px; border-radius: 4px; background: rgba(58,37,22,0.14)"><span style="{{ac.foodBar}}"></span></span>
+</div>
+<span style="font-size: 13px; color: #4A3C30">{{ac.eats}}</span>
+<span style="font-size: 14px; font-weight: 600; color: #8E2418">{{ac.ifHungry}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start">
+<!-- supply contracts -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.4deg); border-top: 4px solid #2E5878">
+<span class="kicker" style="color: #2E5878">WHAT THE ARMY WILL BUY</span>
+<span style="font-size: 13px; color: #6B5A48; margin-top: -4px">The quartermaster pays well. He pays late.</span>
+<sc-for list="{{buys}}" as="b" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 8px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<span style="font-size: 15px; font-weight: 600; color: #1F1710">{{b.good}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #1F1710">{{b.price}}</span>
+<span style="font-size: 13px; color: #4A3C30">{{b.note}}</span><span style="{{b.vsStyle}}">{{b.vs}}</span>
+</div>
+</sc-for>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 8px; border-top: 1px solid rgba(58,37,22,0.2)">
+<span style="font-size: 14px; color: #1F1710">Sign a season’s grain contract with the Third Legion?</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px"><sc-for list="{{contract.acts}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="{{a.style}}"><span style="font-size: 13px; font-weight: 600">{{a.label}}</span><span style="font-size: 11px; opacity: 0.8">{{a.hint}}</span></button></sc-for></div>
+<sc-if value="{{contract.done}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #1F3A30; padding: 6px 10px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">{{contract.outcome}}</span></sc-if>
+</div>
+</div>
+
+<!-- call-up -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(0.3deg); border-top: 4px solid #9A6A12">
+<span class="kicker" style="color: #9A6A12">THE SPRING CALL-UP</span>
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4; color: #1F1710">“By order of the queen: one able man in five, from every estate in Vararia, to report at Ferum by the Kalends of March.”</span>
+<sc-for list="{{levy}}" as="lv" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12); font-size: 14px">
+<span style="color: #1F1710">{{lv.place}}</span><span style="{{lv.style}}">{{lv.loss}}</span>
+</div>
+</sc-for>
+<span style="font-size: 13px; color: #6B5A48">Estates in Peruaria and Helerensia aren’t affected. Claudia already paid for Gaius.</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px"><sc-for list="{{levyActs}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="{{a.style}}"><span style="font-size: 13px; font-weight: 600">{{a.label}}</span><span style="font-size: 11px; opacity: 0.8">{{a.hint}}</span></button></sc-for></div>
+<sc-if value="{{levyDone}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #1F3A30; padding: 6px 10px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">{{levyOutcome}}</span></sc-if>
+</div>
+
+<!-- private troops -->
+<div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; background: #2A211B; color: #E8DCC4; box-shadow: 0 10px 24px rgba(0,0,0,0.5); border: 1px solid rgba(232,220,196,0.2); transform: rotate(-0.2deg)">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8">YOUR OWN MEN</span>
+<span style="font-size: 13px; color: #C9BBA0; margin-top: -4px">Guards are legal. An army is not, unless the queen asks for one.</span>
+<sc-for list="{{troops}}" as="tr" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 36px 1fr auto; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid rgba(232,220,196,0.14)">
+<img src="{{tr.face}}" alt="" style="width: 32px; height: 32px; image-rendering: pixelated; box-shadow: 0 0 0 2px #3A3026">
+<span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">{{tr.name}}</span><span style="font-size: 12px; color: #C9BBA0">{{tr.job}}</span></span>
+<button onClick="{{tr.click}}" style="{{tr.btn}}">{{tr.label}}</button>
+</div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid rgba(232,220,196,0.2); font-size: 14px"><span>{{troopSum.men}}</span><span style="font-family: 'IBM Plex Mono', monospace; color: #F3D27E">{{troopSum.cost}}</span></div>
+<span style="font-size: 13px; color: #E6B8A8">{{troopSum.note}}</span>
+</div>
+</div>
+
+<!-- under the spear: what a fallen city sells -->
+<div class="paper" style="padding: 22px 26px; color: #2A2119; display: flex; flex-direction: column; gap: 12px; border-top: 4px solid #3A2516">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap"><span class="kicker" style="color: #3A2516">IF A CITY FALLS, EVERYTHING IN IT GOES UNDER THE SPEAR</span><span style="font-size: 13px; color: #6B5A48">Conquered property is sold at auction by the winning side. Set your agent to bid ahead of time.</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px">
+<sc-for list="{{spoils}}" as="sp" hint-placeholder-count="3">
+<div style="{{sp.card}}">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700; color: #2A1A0E">{{sp.city}}</span><span style="{{sp.oddsStyle}}">{{sp.odds}}</span></span>
+<span style="font-size: 14px; color: #3A2516">{{sp.what}}</span>
+<span style="{{sp.warnStyle}}">{{sp.warn}}</span>
+<button onClick="{{sp.click}}" style="{{sp.btn}}">{{sp.label}}</button>
+</div>
+</sc-for>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var FACE = { iberian: 'assets/dfb126d8e60c5d5542788c39fc298726.png', germanic: 'assets/cd8821c266aa1a8fe03490ab7954af9d.png', celt: 'assets/afa888f5d662c1e9b9a5dbbcf63ec6d1.png', captain: 'assets/4b348a319e394291dcda8ed147cca6d3.png', north: 'assets/922c4158fe8df19c08f394fd3c9df5e7.png' };
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+
+var __AIDE = function (self, A) {
+  var st = self.state || {}, lv = st.aideLv === undefined ? A.def : st.aideLv;
+  var tone = { good: '#1F3A30', warn: '#8E2418', info: '#1F1710' };
+  return { face: A.face, head: A.short.toUpperCase() + ', ' + A.role.toUpperCase() + ' · THE SHORT VERSION', foot: 'The full page is below, if you want it.',
+    says: A.says.map(function (s) { return { t: '• ' + s[1], style: 'font-size: 16px; line-height: 1.4; color: ' + tone[s[0]] + (s[0] === 'warn' ? '; font-weight: 600' : '') }; }),
+    askLabel: 'HOW MUCH CAN ' + A.short.toUpperCase() + ' DECIDE?', will: A.will[lv],
+    levels: ['Ask me first', 'Small things', 'Handle it'].map(function (l, k) { var on = lv === k;
+      return { label: l, on: on ? 'true' : 'false', click: function () { self.setState(Object.assign({}, self.state || {}, { aideLv: k })); },
+        style: 'min-height: 40px; padding: 4px 6px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516; font-weight: 600' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)') }; }) };
+};
+var AIDE = {"face": "assets/b6fd79bc84c6d5a4de009b01ee840203.png", "role": "your bodyguard, an old soldier", "short": "Thrand", "says": [["warn", "The legion has 9 days of food. If it runs out, soldiers take grain from farms like yours."], ["info", "The one thing of yours at real risk is the timber yard in Durona."], ["info", "The spring call-up takes 11 of your workers."]], "will": ["He reports. Every contract and every hire is your call.", "He pays exemptions for your best workers and keeps guards on the quarry.", "He signs army contracts when the price is good and hires guards when the roads get dangerous."], "def": 0};
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var hired = st.hired || { quarry: true }, deal = st.deal, levyPick = st.levy, watch = st.watch || {};
+    // the contract changes the legion's food, which changes who's winning
+    var food = deal === 0 ? 34 : deal === 1 ? 20 : 9;
+    var va = Math.min(70, 42 + (food - 9) * 0.8 + (hired.lend ? 4 : 0));
+    var supply = [
+      { d: 'M758,714 Q800,690 858,662 Q880,640 898,622', style: 'fill: none; stroke: #2E5878; stroke-width: 6px; stroke-dasharray: 16 12; animation: march 2.5s linear infinite' },
+      { d: 'M870,378 Q940,420 990,478', style: 'fill: none; stroke: #6E3A5A; stroke-width: 6px; stroke-dasharray: 16 12; animation: march 2.5s linear infinite' },
+      { d: 'M1014,306 Q1010,400 990,478', style: 'fill: none; stroke: #6E3A5A; stroke-width: 5px; stroke-dasharray: 10 12; opacity: 0.7' }
+    ];
+    var armies = [
+      { at: 'translate(898,622)', short: 'III', label: 'Third Legion', box: 'fill: #2E5878; stroke: #F6EAD0; stroke-width: 3px' },
+      { at: 'translate(990,478)', short: 'OST', label: 'Fabius’s host', box: 'fill: #6E3A5A; stroke: #F6EAD0; stroke-width: 3px' }
+    ];
+    var pin = function (name, x, y, kind) {
+      var mine = kind === 'mine', big = kind === 'city';
+      return { at: 'translate(' + x + ',' + y + ')', name: name, r: mine ? 13 : big ? 10 : 7, ty: mine ? -22 : -16,
+        dot: mine ? 'fill: #C9962A; stroke: #3A2516; stroke-width: 4px' : 'fill: #F6EAD0; stroke: #3A2516; stroke-width: 3px',
+        text: 'font-family: ' + (mine ? 'Cinzel, serif; font-weight: 700; font-size: 20px; fill: #3A2516' : "'IM Fell English', serif; font-size: 22px; fill: #1F1710") + '; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 5px' };
+    };
+    var pins = [pin('Aquea', 758, 714, 'city'), pin('Ferum', 858, 662, 'town'), pin('Durona', 870, 378, 'city'), pin('Your timber yard', 900, 350, 'mine'), pin('Your quartz mine', 1066, 510, 'mine'), pin('Lavica', 1014, 306, 'town'), pin('Falorona', 602, 510, 'town')];
+    var bar = function (pct, c) { return 'display: block; height: 8px; border-radius: 4px; width: ' + pct + '%; background: ' + c; };
+    var armyCards = [
+      { name: 'The Third Legion', men: '4,800 men', who: 'Vararia. Camped at Fidera, south of the line. Fed from Aquea, by road through Ferum.',
+        food: food + ' days', foodPct: Math.min(100, food / 40 * 100), eats: 'Eats 600 modii of grain a day. Wears out 300 pairs of boots a week.',
+        ifHungry: food < 12 ? 'Under 10 days, it stops advancing. Under 5, men desert and start taking food from farms, yours included.' : 'Well fed. It can push north.' },
+      { name: 'Fabius’s host', men: 'About 6,000', who: 'Ostoronia. At Arderentum. Fed from Durona and Lavica, through the hills.',
+        food: 'About 25 days', foodPct: 62, eats: 'Lives off the land when it can. That’s why it raids south of the border.',
+        ifHungry: 'If Durona’s granaries ran low, he would have to pull back.' }
+    ].map(function (a, i) { var c = a.foodPct < 30 ? '#B23A24' : a.foodPct < 55 ? '#C9962A' : '#3E8A5A';
+      return Object.assign(a, { foodBar: bar(Math.round(a.foodPct), c), foodStyle: 'font-weight: 700; color: ' + c,
+        card: 'padding: 18px 20px; color: #2A2119; display: flex; flex-direction: column; gap: 6px; transform: rotate(' + (i ? 0.4 : -0.4) + 'deg); border-left: 5px solid ' + (i ? '#6E3A5A' : '#2E5878') }); });
+    var odds = { va: Math.round(va) + '%', os: (100 - Math.round(va)) + '%', a: 'display: block; width: ' + va + '%; background: #2E5878', b: 'display: block; flex: 1; background: #6E3A5A',
+      text: va >= 55 ? 'With full bellies, the legion pushes north. Durona could be under siege by spring.' : va >= 46 ? 'Neither side can move. The road stays cut until someone has more grain.' : 'The legion is hungry. Fabius may push for Ferum before winter.' };
+    var buys = [['Grain', '0.55 a modius', 'Twice their need. Paid in 60 days.', '+62% vs Aquea'], ['Boots', '9 a pair', 'Any leather. Your tannery partners could make them.', '+40%'], ['Iron bars', '17 a bar', 'For spearheads. They want it now.', '+42%'], ['Sour wine', '6 an amphora', 'Soldiers’ ration. Your worst vintage would do.', '+20%']]
+      .map(function (b) { return { good: b[0], price: b[1] + ' ', note: b[2], vs: b[3], vsStyle: 'font-size: 12px; font-weight: 700; color: #2C5F50; text-align: right' }; });
+    var C = [['Full contract', '20,000 modii', 'You sign for 20,000 modii at 0.55. The legion’s food rises to 34 days. If the war goes badly, the crown may pay you in land instead of coin.'], ['Half', '10,000 modii', 'You sign for 10,000 modii. The legion has 20 days of food. Enough to hold the line, not to attack.'], ['Don’t sign', 'Keep your grain', 'You keep your grain. Fulvius signs instead, and gets the crown’s gratitude.']];
+    var cbtn = function (on) { return 'display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-height: 50px; padding: 6px 10px; border-radius: 2px; font-family: Spectral, serif; text-align: left; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)'); };
+    var contract = { done: deal !== undefined, outcome: deal !== undefined ? C[deal][2] : '',
+      acts: C.map(function (c, k) { return { label: c[0], hint: c[1], style: cbtn(deal === k), click: function () { put({ deal: k }); } }; }) };
+    var levy = [['Deloanum vineyard · 12 workers', '− 2'], ['Tusonella farm · 18 workers', '− 4'], ['Celanona marble quarry · 20 workers', '− 4'], ['Tavern, bakery, warehouse · 9', '− 1']]
+      .map(function (l) { return { place: l[0], loss: levyPick === 1 ? 'none' : l[1], style: 'font-family: \'IBM Plex Mono\', monospace; font-weight: 600; color: ' + (levyPick === 1 ? '#2C5F50' : '#8E2418') }; });
+    var LV = [['Let them go', 'Lose 11 workers', 'Eleven men march to Ferum. The harvest will be slower, and you’ll pay more for day labour. The queen notes you gave without complaint.'], ['Pay their exemptions', '440 ', 'You pay 40 each. Nobody leaves. The levy officer remembers you as a man who pays.'], ['Hire replacements', '~25 a month each', 'Iberian and Germanic labourers fill the gaps. Slower at first, and they don’t speak Varan.']];
+    var levyActs = LV.map(function (c, k) { return { label: c[0], hint: c[1], style: cbtn(levyPick === k), click: function () { put({ levy: k }); } }; });
+    var T = [['quarry', 'Six Iberian guards', 'At the marble quarry. Quintus hired them.', 6, 90, FACE.iberian], ['caravan', 'Caravan guards', 'Ride with your carts on the roads near the front.', 10, 150, FACE.celt], ['marines', 'Marines for the Aurora', 'Ten spearmen aboard. Pirates pick other ships.', 10, 120, FACE.captain], ['lend', 'A company of 50, for the queen', 'Raised, armed and lent to the Third Legion. A huge favour at court.', 50, 900, FACE.germanic]];
+    var men = 0, cost = 0;
+    var troops = T.map(function (t) { var on = !!hired[t[0]]; if (on) { men += t[3]; cost += t[4]; }
+      return { name: t[1], job: t[2] + ' ' + t[4] + ' a month.', face: t[5], label: on ? 'Dismiss' : 'Hire',
+        click: function () { var m = Object.assign({}, (self.state || {}).hired || {}); m[t[0]] = !m[t[0]]; put({ hired: m }); },
+        btn: 'min-height: 34px; min-width: 76px; padding: 2px 10px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: rgba(255,255,255,0.06); color: #E8DCC4; border: 1px solid rgba(232,220,196,0.35)' : 'background: #E6B8A8; color: #1E1612; border: none; font-weight: 600') }; });
+    var troopSum = { men: men + ' men under your name', cost: cost + '  a month',
+      note: hired.lend ? 'The queen hears of it. Your standing at court rises, and Fabius now counts you as an enemy.' : men > 20 ? 'Enough to worry your neighbours. Fulvius has started hiring too.' : 'A household guard. Nobody minds.' };
+    var S = [['Durona', 'durona', 'If the legion takes it', 'The Ostoronian capital. Fabius’s friends’ houses, the temple treasury’s vaults, three tanneries, a shipyard.', 'Your timber yard is here. If Durona falls, your half could be seized too, unless the queen recognises you as a loyal Vararian. Keep her happy.', va >= 55 ? 'Possible by spring' : 'Not soon'],
+      ['Ferum', 'ferum', 'If Fabius takes it', 'A Vararian town on the border. Grain stores, a mill, two inns, the Licinii villa.', 'If Ferum falls, Fabius sells Vararian property to Ostoronians. Prices would be low, and buying would be treason.', va < 46 ? 'Real risk' : 'Unlikely'],
+      ['Lavica', 'lavica', 'If the legion takes it', 'The salt town. The salt company you hold shares in, Fulvius’s warehouses, his agent’s house.', 'Your shares would be seized with the rest. Fulvius loses his salt too. You could buy it all back from the crown, cheap.', va >= 60 ? 'Possible' : 'Unlikely']];
+    var spoils = S.map(function (x) { var on = !!watch[x[1]];
+      return { city: x[0] + ' · ' + x[2].toLowerCase(), what: x[3], warn: x[4], odds: x[5],
+        oddsStyle: 'font-size: 12px; font-weight: 700; white-space: nowrap; color: ' + (/Real|Possible by/.test(x[5]) ? '#8E2418' : '#6B5A48'),
+        warnStyle: 'font-size: 13px; color: ' + (x[1] === 'durona' ? '#8E2418' : '#2E5878'),
+        label: on ? '✓ Philon will bid for you' : 'Tell Philon to bid if it happens',
+        click: function () { var m = Object.assign({}, (self.state || {}).watch || {}); m[x[1]] = !m[x[1]]; put({ watch: m }); },
+        btn: 'margin-top: auto; min-height: 40px; border-radius: 2px; font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (on ? 'background: #2C5F50; color: #FFF6E4; border: none; font-weight: 600' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.35)'),
+        card: 'display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; background: rgba(255,250,238,0.45); border: 1px solid rgba(58,37,22,0.22); border-radius: 2px' }; });
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E6B8A8' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#E6D8BC') };
+    };
+    return {
+      aide: __AIDE(this, AIDE), nav: __NAV.top('War', navItem), subnav: __NAV.sub('War'), hasSub: true,
+      supply: supply, armies: armies, pins: pins, armyCards: armyCards, odds: odds, buys: buys, contract: contract,
+      levy: levy, levyActs: levyActs, levyDone: levyPick !== undefined, levyOutcome: levyPick !== undefined ? LV[levyPick][2] : '',
+      troops: troops, troopSum: troopSum, spoils: spoils
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

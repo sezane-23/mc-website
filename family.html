@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family — the house</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#141311}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 22px 44px rgba(0,0,0,0.55)}
+.atrium{background-color:#181715;background-image:radial-gradient(ellipse at 50% 28%, rgba(255,214,150,0.12) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%), url(assets/9a50afed199bc317a9d04567a822725a.jpg);background-size:auto, auto, cover;background-position:center}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#3A2516}
+.gold{font-family:Cinzel,serif;font-weight:700;letter-spacing:0.16em;color:#D9B26A;text-shadow:0 1px 2px rgba(0,0,0,0.8)}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes flicker{0%,100%{opacity:0.9}45%{opacity:1}60%{opacity:0.82}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #141311; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · YEAR 2, AUTUMN</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #D9B26A">THE HOUSE OF AELIUS</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Your family</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4"><span style="{{c.style}}">{{c.text}}</span></sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div class="atrium" style="width: 1376px; box-sizing: border-box; padding: 30px; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.65), inset 0 0 0 2px #22201C; display: flex; flex-direction: column; gap: 26px">
+
+<!-- FAMILY TREE -->
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="gold" style="font-size: 14px">THE FAMILY TREE</span>
+<div style="position: relative; width: 1316px; height: 500px">
+<svg width="1316" height="500" aria-hidden="true" style="position: absolute; left: 0; top: 0">
+<sc-for list="{{links}}" as="ln" hint-placeholder-count="8"><path d="{{ln.d}}" style="{{ln.style}}"></path></sc-for>
+</svg>
+<sc-for list="{{people}}" as="p" hint-placeholder-count="8">
+<button onClick="{{p.pick}}" aria-label="{{p.aria}}" style="{{p.style}}">
+<div style="{{p.frame}}"><img src="{{p.face}}" alt="" style="{{p.img}}"></div>
+<div style="display: flex; flex-direction: column; min-width: 0; text-align: left">
+<span style="display: flex; align-items: center; gap: 6px"><span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700; color: #2A1A0E">{{p.name}}</span><sc-if value="{{p.isHeir}}" hint-placeholder-val="{{ false }}"><span title="Your heir" style="font-size: 11px; font-weight: 700; padding: 0 6px; border-radius: 8px; background: #C9962A; color: #2A1A0E">HEIR</span></sc-if></span>
+<span style="font-size: 13px; color: #6B5A48">{{p.sub}}</span>
+<span style="{{p.flagStyle}}">{{p.flag}}</span>
+</div>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 420px; gap: 26px; align-items: start">
+
+<!-- SELECTED PERSON -->
+<div class="paper" style="padding: 24px 28px; color: #2A2119; display: flex; flex-direction: column; gap: 14px; animation: fadein 0.35s ease-out both">
+<div style="display: flex; gap: 20px; align-items: flex-start">
+<div style="flex: none; padding: 6px; background: #F6EAD0; box-shadow: 0 4px 12px rgba(0,0,0,0.3)"><img src="{{sel.face}}" alt="" style="display: block; width: 96px; height: 96px; image-rendering: pixelated"></div>
+<div style="flex: 1; display: flex; flex-direction: column; min-width: 0">
+<span class="kicker" style="color: #8E2418">{{sel.kicker}}</span>
+<span style="font-family: Cinzel, serif; font-size: 28px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{sel.name}}</span>
+<span style="font-size: 16px; color: #3A2516">{{sel.role}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px">
+<sc-for list="{{sel.traits}}" as="t" hint-placeholder-count="3"><span style="{{t.style}}">{{t.label}}</span></sc-for>
+</div>
+</div>
+</div>
+<span style="font-family: 'IM Fell English', serif; font-size: 18px; line-height: 1.45; color: #1F1710">{{sel.quote}}</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px; padding: 12px 0; border-top: 1px solid rgba(58,37,22,0.18); border-bottom: 1px solid rgba(58,37,22,0.18)">
+<sc-for list="{{sel.skills}}" as="sk" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: center">
+<span style="font-size: 14px; color: #6B5A48">{{sk.k}}</span>
+<span style="display: flex; gap: 4px" aria-label="{{sk.aria}}"><sc-for list="{{sk.pips}}" as="pp" hint-placeholder-count="5"><span style="{{pp.style}}"></span></sc-for></span>
+</div>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px">
+<sc-for list="{{sel.facts}}" as="f" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">{{f.k}}</span><span style="font-size: 15px; color: #1F1710">{{f.v}}</span></div>
+</sc-for>
+</div>
+<sc-if value="{{sel.hasAuth}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; background: rgba(58,37,22,0.06); border: 1px solid rgba(58,37,22,0.2); border-radius: 3px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap"><span class="kicker">HOW FREE A HAND</span><span style="font-size: 13px; color: #6B5A48">They act on their own, up to this line.</span></div>
+<div role="radiogroup" aria-label="Authority" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px">
+<sc-for list="{{sel.auth}}" as="au" hint-placeholder-count="4"><button role="radio" aria-checked="{{au.on}}" onClick="{{au.click}}" style="{{au.style}}"><span style="font-size: 14px; font-weight: 600">{{au.label}}</span><span style="font-size: 12px; opacity: 0.8">{{au.hint}}</span></button></sc-for>
+</div>
+<span style="font-size: 13px; color: #3A2516">{{sel.authNote}}</span>
+<div style="display: flex; flex-direction: column; gap: 4px; padding-top: 8px; border-top: 1px solid rgba(58,37,22,0.15)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">WHAT {{sel.upper}} DID WITHOUT ASKING</span>
+<sc-for list="{{sel.acted}}" as="ac" hint-placeholder-count="2"><div style="display: grid; grid-template-columns: 70px 1fr; gap: 8px; font-size: 14px"><span style="font-size: 12px; color: #6B5A48">{{ac.when}}</span><span style="{{ac.style}}">{{ac.text}}</span></div></sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{sel.hasCard}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; background: rgba(255,250,238,0.55); border: 1px solid rgba(58,37,22,0.25); border-top: 4px solid #8E2418; border-radius: 3px">
+<span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; color: #2A1A0E">{{sel.cardTitle}}</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">{{sel.cardText}}</span>
+<sc-if value="{{sel.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px">
+<sc-for list="{{sel.choices}}" as="ch" hint-placeholder-count="3">
+<button onClick="{{ch.click}}" style="display: flex; flex-direction: column; gap: 2px; min-height: 64px; padding: 8px 12px; background: rgba(255,250,238,0.7); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{ch.label}}</span><span style="font-size: 13px; color: #6B5A48">{{ch.hint}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A3A22">{{ch.cost}}</span></button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{sel.done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">
+<span style="font-size: 15px; color: #1F1710">{{sel.outcome}}</span>
+<button onClick="{{sel.undo}}" style="align-self: flex-start; min-height: 30px; padding: 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Choose again</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</div>
+
+<!-- SUCCESSION -->
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div class="paper" style="padding: 22px 24px; color: #2A2119; transform: rotate(0.4deg); display: flex; flex-direction: column; gap: 10px">
+<span class="kicker">WHO CARRIES ON THE HOUSE</span>
+<span style="font-size: 14px; line-height: 1.45; color: #3A2516">When you die, you play on as your heir. Their skills, friends and enemies come with them; so does everything you own.</span>
+<sc-for list="{{heirs}}" as="h" hint-placeholder-count="4">
+<button onClick="{{h.click}}" style="{{h.style}}">
+<img src="{{h.face}}" alt="" style="width: 36px; height: 36px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0">
+<span style="flex: 1; display: flex; flex-direction: column; text-align: left"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{h.name}}</span><span style="font-size: 13px; color: #6B5A48">{{h.note}}</span></span>
+<span style="{{h.radio}}"></span>
+</button>
+</sc-for>
+<div style="display: flex; flex-direction: column; gap: 3px; padding-top: 6px; border-top: 1px solid rgba(58,37,22,0.15)">
+<span style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #6B5A48">Your health, at 41</span><span style="color: #2C5F50; font-weight: 600">Good</span></span>
+<div style="height: 8px; border-radius: 4px; background: rgba(58,37,22,0.15)"><div style="height: 8px; width: 78%; border-radius: 4px; background: #2C5F50"></div></div>
+<span style="font-size: 13px; color: #6B5A48">One year of the world is about six real weeks. You age, slowly.</span>
+</div>
+</div>
+
+<div class="paper" style="padding: 20px 24px; color: #2A2119; transform: rotate(-0.5deg); display: flex; flex-direction: column; gap: 8px">
+<span class="kicker">YOUR WILL</span>
+<sc-for list="{{will}}" as="w" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)"><span style="font-size: 15px; color: #1F1710">{{w.what}}</span><span style="font-size: 15px; color: #3A2516; text-align: right">{{w.who}}</span></div>
+</sc-for>
+<span style="font-size: 13px; color: #6B5A48">Sealed by the Vestals. A will can be challenged in court by anyone left out.</span>
+</div>
+</div>
+</div>
+
+<!-- MARRIAGE OFFERS -->
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap"><span class="gold" style="font-size: 14px">OFFERS OF MARRIAGE FOR GAIUS</span><span style="font-size: 15px; color: #CFC6B4">A marriage is an alliance. Choose the house, and you choose your friends and enemies for a generation.</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start">
+<sc-for list="{{offers}}" as="o" hint-placeholder-count="3">
+<div class="paper" style="{{o.style}}">
+<div style="display: flex; gap: 14px; align-items: center">
+<div style="flex: none; padding: 4px; background: #F6EAD0; box-shadow: 0 3px 8px rgba(0,0,0,0.3)"><img src="{{o.face}}" alt="" style="display: block; width: 52px; height: 52px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column"><span style="font-family: Cinzel, serif; font-size: 19px; font-weight: 700; color: #2A1A0E">{{o.name}}</span><span style="font-size: 14px; color: #6B5A48">{{o.house}}</span></div>
+</div>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">{{o.text}}</span>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<sc-for list="{{o.pros}}" as="pr" hint-placeholder-count="2"><span style="font-size: 14px; color: #2C5F50">+ {{pr}}</span></sc-for>
+<sc-for list="{{o.cons}}" as="cn" hint-placeholder-count="2"><span style="font-size: 14px; color: #8E2418">− {{cn}}</span></sc-for>
+</div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #3A2516">{{o.dowry}}</span>
+<button onClick="{{o.click}}" style="{{o.btn}}">{{o.label}}</button>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- ANCESTORS -->
+<div style="display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: center; padding: 20px 24px; background: rgba(10,9,8,0.72); border: 1px solid rgba(217,178,106,0.3); border-radius: 4px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span class="gold" style="font-size: 14px">THE ANCESTORS' SHRINE</span>
+<span style="font-size: 14px; line-height: 1.45; color: #CFC6B4">Every head of the house gets a mask here when they die, with what they did. Your house’s story, kept for as long as the server runs.</span>
+</div>
+<div style="display: flex; gap: 22px; align-items: center; flex-wrap: wrap">
+<sc-for list="{{masks}}" as="m" hint-placeholder-count="2">
+<div style="display: flex; gap: 14px; align-items: center; max-width: 470px">
+<div style="{{m.frame}}"><img src="{{m.face}}" alt="" style="{{m.img}}"></div>
+<div style="display: flex; flex-direction: column"><span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700; color: #F2E8D5">{{m.name}}</span><span style="font-size: 14px; color: #CFC6B4">{{m.text}}</span></div>
+</div>
+</sc-for>
+<div aria-hidden="true" style="width: 14px; height: 22px; border-radius: 50% 50% 40% 40%; background: radial-gradient(circle at 50% 70%, #FFE7A8 0%, #F0A040 45%, rgba(200,90,30,0) 75%); animation: flicker 1.6s ease-in-out infinite"></div>
+</div>
+</div>
+
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var F = {
+  you: 'assets/009faa795ce967e9ad726e9f5012f930.png', wife: 'assets/2d90c49514b34779f53a03b69dfbe43e.png', son: 'assets/bc84fc5153b2f760930dc4789e6dfd51.png',
+  daughter: 'assets/a6d6538e5b5bc088097dd36f4020019c.png', child: 'assets/0acb239e6a758b8cf7127bf3df6f1289.png', mother: 'assets/7f807918c2994c576b71f4b766042260.png',
+  brother: 'assets/fd9e00e369e125fde7b27626e4001af5.png', father: 'assets/0e10e97c9c68c3d3bca6f43d14b768eb.png', greek: 'assets/22256dc7286c53996bfc77db26923b71.png',
+  fulvia: 'assets/855eca022e875fbb8a86fe2427378690.png', german: 'assets/0b9d4d284c85a081e15feacac723ceb7.png'
+};
+var P = {
+  father: { name: 'Gnaeus', sub: 'Your father. Died in Year 0', x: 420, y: 10, dead: true, kicker: 'YOUR FATHER · IN THE SHRINE', role: 'Founded the house with one olive grove and a mule.',
+    traits: [['Thrifty', 'yes'], ['Stubborn', 'yes']], skills: [2, 1, 3, 2], quote: 'His mask watches over the atrium. People still say he never paid full price for anything.',
+    facts: [['Died', 'Year 0, of a fever'], ['Left you', 'The olive grove at Palia'], ['Remembered for', 'Honest oil'], ['Enemies', 'Old Fannius, still bitter']] },
+  mother: { name: 'Aemilia', sub: 'Your mother, 66', x: 690, y: 10, kicker: 'YOUR MOTHER', role: 'Knows every old family in Aquea, and their secrets.',
+    traits: [['Well-connected', 'yes'], ['Pious', 'yes'], ['Proud', 'yes']], skills: [1, 3, 0, 4], quote: '“Your father would have wanted a shrine at the vineyard. I will see to it, if you pay.”',
+    facts: [['Health', 'Frail'], ['Helps with', 'Marriages and politics'], ['Thinks of you', 'Proud, mostly'], ['Wants', 'A shrine for Gnaeus']],
+    card: { id: 'm1', title: 'A shrine for your father', text: 'Aemilia wants a small shrine to Gnaeus at the vineyard, with his name carved in marble from your own quarry.',
+      choices: [['Build it', 'Mother is delighted. The old families approve.', '300 ', 'The shrine goes up. Aemilia visits it every week and tells everyone who built it.'], ['A smaller one', 'A plaque, not a shrine.', '80 ', 'She accepts it. She also mentions it to her friends, in a certain tone.'], ['Not now', 'Money is tight.', '', 'Aemilia says nothing. For a month.']] } },
+  brother: { name: 'Quintus', sub: 'Your brother, 38', x: 130, y: 175, kicker: 'YOUR BROTHER', role: 'Charming, idle and always short of money.',
+    traits: [['Charming', 'yes'], ['Gambler', 'yes'], ['Loyal', '?']], skills: [1, 3, 2, 4], quote: '“It was a sure thing, brother. The dice were loaded. Just not the way I thought.”',
+    facts: [['Owes', '600  at the Red Anchor'], ['Good at', 'Talking to anyone'], ['Could be', 'A great envoy, if sober'], ['Thinks of you', 'Envious, fond']],
+    card: { id: 'q1', title: 'Quintus’s dice debts', text: 'He owes 600  to the men who run the dice at the Red Anchor. They have started asking at your door.',
+      choices: [['Pay it', 'Again.', '600 ', 'Paid. Quintus swears it was the last time. It wasn’t the first time he swore it.'], ['Pay, and put him to work', 'He goes to Caleonia as your envoy.', '600 ', 'Quintus is your envoy in Caleonia. Sober, he’s brilliant. Mostly sober.'], ['Let him face them', 'A hard lesson.', '', 'Quintus turns up with a broken hand. Mother doesn’t speak to you.']] } },
+  you: { name: 'Lucius', sub: 'You. 41, head of the house', x: 500, y: 175, kicker: 'HEAD OF THE HOUSE', role: 'Merchant of Aquea. Five estates, three town businesses, three ships.',
+    traits: [['Shrewd', 'yes'], ['Patient', 'yes'], ['Proud', '?']], skills: [4, 2, 2, 3], quote: 'Everything you own, everyone you know, and every enemy you’ve made passes to your heir one day.',
+    facts: [['Rank', 'Citizen, wealthy'], ['Speaks', 'Latin and Greek'], ['Reputation', 'Honest, hard'], ['Enemies', 'House Fulvius']] },
+  wife: { name: 'Claudia', sub: 'Your wife, 37', x: 800, y: 175, kicker: 'YOUR WIFE · OF THE CLAUDII', role: 'Runs the household, and more of the business than people realise.',
+    traits: [['Clever', 'yes'], ['Ambitious', 'yes'], ['Loyal', 'yes']], skills: [3, 3, 0, 3], quote: '“A seat on the city council, Lucius. You have the money. Now get the name.”',
+    facts: [['Can run', 'One business while you travel'], ['Brought', 'The Claudii as allies'], ['Thinks of you', 'Loyal, impatient'], ['Wants', 'You on the council']],
+    card: { id: 'w1', title: 'Claudia wants you on the council', text: 'Her cousin can put your name forward for the city council, if you fund the games next spring.',
+      choices: [['Fund the games', 'A seat, and a lot of attention.', '1,500 ', 'The games are a triumph. You take your council seat in spring.'], ['Fund half', 'Maybe a seat. Maybe not.', '700 ', 'Your name goes forward. The vote will be close.'], ['Not yet', 'Claudia is not pleased.', '', 'Claudia smiles thinly. The subject will come back.']] } },
+  son: { name: 'Gaius', sub: 'Your son, 16', x: 290, y: 345, kicker: 'YOUR SON', role: 'Quick, restless and bored by ledgers.',
+    traits: [['Quick', 'yes'], ['Brave', '?'], ['Lazy', '?']], skills: [2, 1, 3, 2], quote: '“Why count grain when you could sail to Aurelia?”',
+    facts: [['Learning', 'Nothing much, at the moment'], ['Good at', 'Riding, fighting, trouble'], ['Thinks of you', 'Respects you, avoids you'], ['Marriage', 'Three offers below']],
+    card: { id: 's1', title: 'What should Gaius learn?', text: 'He’s old enough to be shaped. Whatever he learns now is what you’ll have to work with when he inherits.',
+      choices: [['Rhetoric school in Caleonia', 'Two years. Speaks Greek, argues well.', '1,200 ', 'Gaius sails for Caleonia. Letters from him arrive every month, full of complaints and philosophy.'], ['Apprentice at the counting desk', 'Learns the trade from you.', '', 'Gaius sits beside you every morning. He is bored, and learning fast.'], ['An officer in the legion', 'Needs a patron. Comes back hard, or not at all.', '1 favour', 'Gaius joins the Third Legion on the border. Your mother cries for a week.']] } },
+  daughter: { name: 'Aelia', sub: 'Your daughter, 15', x: 560, y: 345, kicker: 'YOUR DAUGHTER', role: 'Clever, stubborn, and better with numbers than her brother.',
+    traits: [['Clever', 'yes'], ['Stubborn', 'yes'], ['Honest', 'yes']], skills: [4, 2, 0, 2], quote: '“Let me run the bakery. I could beat Fulvius in a month.”',
+    facts: [['Learning', 'Reads your ledgers when you’re out'], ['Good at', 'Numbers, people'], ['Thinks of you', 'Adores you, argues with you'], ['Could', 'Run a business, or marry well']],
+    card: { id: 'd1', title: 'Aelia wants the bakery', text: 'She asks to run Pomponia’s bakery, with Pomponia, and fight Fulvius’s price war herself.',
+      choices: [['Let her', 'A real test. People will talk.', '', 'Aelia and Pomponia run the bakery together. Within a season the queue is back.'], ['Let her watch Lucia first', 'A year at the olive grove.', '', 'Aelia goes to Palia to learn from Lucia. She writes that Lucia is a genius.'], ['Not yet', 'She’s fifteen.', '', 'Aelia slams a door. She reads your ledgers anyway.']] } },
+  child: { name: 'Titus', sub: 'Your son, 5', x: 830, y: 345, kicker: 'YOUR YOUNGEST', role: 'Too young for anything but trouble.',
+    traits: [['Curious', 'yes'], ['?', '?']], skills: [0, 0, 0, 1], quote: 'He has started following the stonecutters around when you visit the quarry.',
+    facts: [['Learning', 'To read'], ['Loves', 'The quarry, the ships'], ['Thinks of you', 'You are a hero'], ['In 10 years', 'Could be anything']] }
+};
+var AUTH = [['Nothing', 'Asks you first'], ['Small things', 'Up to 200 '], ['Their own patch', 'Runs it as they see fit'], ['Speaks for the house', 'Signs in your name']];
+// default authority, and what they did on their own; tone: good / bad / mixed
+var ACTED = {
+  mother: [1, [['3 days ago', 'Invited the Claudii and the Fannii to dinner, at your expense. Old Fannius was almost polite.', 'mixed']]],
+  brother: [2, [['Last week', 'Hired six Iberian guards for the quarry after the levy took your workers. Your own private troops now, and they cost 90  a month.', 'mixed'], ['This month', 'Borrowed 200  from the quarry\u2019s takings. He says it was a loan.', 'bad']]],
+  wife: [3, [['5 days ago', 'Paid the levy officer 400  so Gaius is not called up this spring.', 'mixed'], ['Last month', 'Agreed a year\u2019s grain sale to the Claudii at a fair price, in your name.', 'good']]],
+  son: [0, [['Yesterday', 'Lost a horse race to young Fulvius, and 50 . Everyone saw.', 'bad']]],
+  daughter: [1, [['Last week', 'Spotted that the tavern\u2019s wine bills don\u2019t add up. Tertius may be skimming.', 'good']]]
+};
+var ORDER = ['father', 'mother', 'brother', 'you', 'wife', 'son', 'daughter', 'child'];
+var SKILLS = ['Trade', 'Speaking', 'Arms', 'Charm'];
+var OFFERS = [
+  { id: 'fulvia', name: 'Fulvia', house: 'Daughter of House Fulvius', face: 'fulvia', text: 'Fulvius himself proposes it. Peace between your houses, sealed with his favourite daughter.',
+    pros: ['Ends the price wars and the rivalry', 'Fulvius’s friends in the senate'], cons: ['Fulvius will have eyes inside your house', 'Your allies who hate him will feel betrayed'], dowry: 'Dowry: 4,000 ' },
+  { id: 'theano', name: 'Theano', house: 'Of a trading family in Fidanum, Caleonia', face: 'greek', text: 'Her father owns half the warehouses in Fidanum. She speaks four languages.',
+    pros: ['Your trade in Caleonia opens up', 'Your grandchildren grow up speaking Greek'], cons: ['Old Roman families sneer at a Greek bride'], dowry: 'Dowry: 2,500  and a warehouse' },
+  { id: 'hilde', name: 'Hilde', house: 'Daughter of an Ostoronian chieftain', face: 'german', text: 'Her father commands the hills around your quartz mine, and the tyrant fears him.',
+    pros: ['No more “protection fees” at the mine', 'Two hundred spears if you ever need them'], cons: ['The tyrant may take it as a threat', 'Aquea society will not invite her anywhere'], dowry: 'Dowry: 40 horses and 800 ' }
+];
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var selId = st.sel || 'son', heir = st.heir || 'son', chosen = st.chosen || {}, match = st.match;
+    var traitStyle = function (v) {
+      var c = v === 'yes' ? ['#2C5F50', 'rgba(44,95,80,0.12)'] : v === 'no' ? ['#8E2418', 'rgba(142,36,24,0.1)'] : ['#6B5A48', 'rgba(107,90,72,0.1)'];
+      return 'font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 12px; color: ' + c[0] + '; background: ' + c[1] + '; border: 1px solid ' + c[0];
+    };
+    var people = ORDER.map(function (id) {
+      var p = P[id], on = id === selId, open = p.card && chosen[p.card.id] === undefined;
+      var flag = p.dead ? 'In the shrine' : id === 'son' && match ? 'Betrothed to ' + OFFERS.filter(function (o) { return o.id === match; })[0].name : open ? 'Needs you' : '';
+      return { name: p.name, sub: p.sub, face: F[id], isHeir: id === heir, aria: 'Open ' + p.name, flag: flag,
+        flagStyle: 'font-size: 12px; font-weight: 600; color: ' + (open ? '#8E2418' : p.dead ? '#6B5A48' : '#2C5F50'),
+        pick: function () { put({ sel: id }); },
+        frame: 'flex: none; padding: 3px; background: ' + (p.dead ? '#D8D0BC' : '#F6EAD0') + '; box-shadow: 0 2px 6px rgba(0,0,0,0.35)',
+        img: 'display: block; width: 52px; height: 52px; image-rendering: pixelated' + (p.dead ? '; filter: grayscale(1) sepia(0.4) brightness(1.05)' : ''),
+        style: 'position: absolute; left: ' + p.x + 'px; top: ' + p.y + 'px; width: 230px; min-height: 92px; box-sizing: border-box; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border: none; border-radius: 3px; cursor: pointer; font-family: Spectral, serif; ' +
+          'background: ' + (p.dead ? 'rgba(226,218,198,0.92)' : '#EFE3C8') + '; ' +
+          (on ? 'box-shadow: 0 0 0 3px #D9B26A, 0 16px 30px rgba(0,0,0,0.6); transform: translateY(-3px)' : 'box-shadow: 0 6px 14px rgba(0,0,0,0.45)') };
+    });
+    var mid = function (a, b) { return [(P[a].x + P[b].x) / 2 + 115, P[a].y + 46]; };
+    var ln = function (d, kind) { return { d: d, style: 'fill: none; stroke: ' + (kind === 'marry' ? '#D9B26A' : 'rgba(217,178,106,0.75)') + '; stroke-width: ' + (kind === 'marry' ? 3 : 2) + 'px' + (kind === 'marry' ? '; stroke-dasharray: 2 5; stroke-linecap: round' : '') }; };
+    var pm = mid('father', 'mother'), cm = mid('you', 'wife');
+    var down = function (from, to) { var t = P[to]; return 'M' + from[0] + ',' + from[1] + ' L' + from[0] + ',' + (t.y - 22) + ' L' + (t.x + 115) + ',' + (t.y - 22) + ' L' + (t.x + 115) + ',' + t.y; };
+    var links = [
+      ln('M' + (P.father.x + 230) + ',' + pm[1] + ' L' + P.mother.x + ',' + pm[1], 'marry'),
+      ln('M' + (P.you.x + 230) + ',' + cm[1] + ' L' + P.wife.x + ',' + cm[1], 'marry'),
+      ln(down(pm, 'brother')), ln(down(pm, 'you')),
+      ln(down(cm, 'son')), ln(down(cm, 'daughter')), ln(down(cm, 'child'))
+    ];
+    var S = P[selId], pick = S.card ? chosen[S.card.id] : undefined;
+    var sel = { face: F[selId], name: S.name, kicker: S.kicker, role: S.role, quote: S.quote,
+      traits: S.traits.map(function (t) { return { label: t[0] === '?' ? 'Not yet known' : t[0] + (t[1] === 'yes' ? ' ✓' : t[1] === 'no' ? ' ✗' : ' ?'), style: traitStyle(t[1]) }; }),
+      skills: SKILLS.map(function (k, i) { var n = S.skills[i]; return { k: k, aria: k + ': ' + n + ' of 5', pips: [0, 1, 2, 3, 4].map(function (j) { return { style: 'width: 22px; height: 10px; border-radius: 2px; ' + (j < n ? 'background: #5A3A22' : 'background: rgba(58,37,22,0.12); box-shadow: inset 0 0 0 1px rgba(58,37,22,0.25)') }; }) }; }),
+      facts: S.facts.map(function (f) { return { k: f[0], v: f[1] }; }),
+      hasAuth: !!ACTED[selId], upper: S.name.toUpperCase(),
+      auth: AUTH.map(function (a, k) { var lv = ((self.state || {}).auth || {})[selId], cur = lv === undefined && ACTED[selId] ? ACTED[selId][0] : lv, on = cur === k;
+        return { label: a[0], hint: a[1], on: on ? 'true' : 'false', click: function () { var m = Object.assign({}, (self.state || {}).auth || {}); m[selId] = k; put({ auth: m }); },
+          style: 'display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-height: 52px; padding: 6px 10px; border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516' : 'background: rgba(255,250,238,0.55); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)') }; }),
+      authNote: (function () { if (!ACTED[selId]) return ''; var lv = ((self.state || {}).auth || {})[selId]; if (lv === undefined) lv = ACTED[selId][0];
+        return [S.name + ' will bring everything to you. Safe, and slow: letters wait while you\u2019re away.', S.name + ' can settle small matters while you\u2019re away. Mistakes stay small.', S.name + ' runs their own part of the house. Expect surprises, good and bad.', 'Anyone who deals with ' + S.name + ' is dealing with you. Their debts are your debts.'][lv]; })(),
+      acted: ACTED[selId] ? ACTED[selId][1].map(function (a) { return { when: a[0], text: a[1], style: 'color: ' + (a[2] === 'good' ? '#1F3A30' : a[2] === 'bad' ? '#8E2418' : '#1F1710') }; }) : [],
+      hasCard: !!S.card, cardTitle: S.card ? S.card.title : '', cardText: S.card ? S.card.text : '', open: pick === undefined, done: pick !== undefined,
+      outcome: pick !== undefined ? S.card.choices[pick][3] : '',
+      undo: function () { var m = Object.assign({}, (self.state || {}).chosen || {}); delete m[S.card.id]; put({ chosen: m }); },
+      choices: S.card ? S.card.choices.map(function (c, k) { return { label: c[0], hint: c[1], cost: c[2], click: function () { var m = Object.assign({}, (self.state || {}).chosen || {}); m[S.card.id] = k; put({ chosen: m }); } }; }) : [] };
+    var heirs = [['son', 'Gaius, your son', 'The usual choice. Young and untested.'], ['daughter', 'Aelia, your daughter', 'Cleverer with money. Some families will refuse to deal with her.'], ['brother', 'Quintus, your brother', 'Charming. Also in debt.'], ['adopt', 'Adopt a grown man', 'A Roman custom: pick a capable heir from another family.']].map(function (h) {
+      var on = heir === h[0];
+      return { name: h[1], note: h[2], face: h[0] === 'adopt' ? F.father : F[h[0]], click: function () { put({ heir: h[0] }); },
+        radio: 'flex: none; width: 20px; height: 20px; border-radius: 50%; box-sizing: border-box; border: 2px solid #5A3A22; ' + (on ? 'background: radial-gradient(circle, #5A3A22 0%, #5A3A22 40%, transparent 45%)' : 'background: transparent'),
+        style: 'display: flex; gap: 12px; align-items: center; min-height: 54px; padding: 6px 10px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' + (on ? 'background: rgba(201,150,42,0.18); border: 2px solid #9A6A12' : 'background: rgba(255,250,238,0.4); border: 1px solid rgba(58,37,22,0.22)') };
+    });
+    var heirName = { son: 'Gaius', daughter: 'Aelia', brother: 'Quintus', adopt: 'your adopted heir' }[heir];
+    var will = [
+      { what: 'The house, the estates and the businesses', who: heirName },
+      { what: 'A dowry or a start in business', who: heir === 'daughter' ? 'Gaius: 3,000 ' : 'Aelia: 3,000 ' },
+      { what: 'An allowance, if he stays sober', who: heir === 'brother' ? 'Gaius: 1,000 ' : 'Quintus: 40  a month' },
+      { what: 'The house in Aquea, for life', who: 'Claudia' }
+    ];
+    var offers = OFFERS.map(function (o, i) {
+      var on = match === o.id;
+      return { name: o.name, house: o.house, face: F[o.face], text: o.text, pros: o.pros, cons: o.cons, dowry: o.dowry,
+        label: on ? 'Betrothed ✓ (click to break it off)' : match ? 'Choose her instead' : 'Accept for Gaius',
+        click: function () { put({ match: (self.state || {}).match === o.id ? null : o.id }); },
+        btn: 'min-height: 46px; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'background: #2C5F50; color: #FFF6E4; border: none' : 'background: #3A2516; color: #FFF6E4; border: none'),
+        style: 'padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 10px; transform: rotate(' + [-0.5, 0.3, -0.2][i] + 'deg); ' + (on ? 'box-shadow: 0 0 0 3px #2C5F50, 0 18px 34px rgba(0,0,0,0.55)' : (match ? 'opacity: 0.72' : '')) };
+    });
+    var masks = [
+      { name: 'Gnaeus Aelius', text: 'Year 0. Founded the house with one olive grove and a mule.', face: F.father, frame: 'flex: none; padding: 4px; background: #CFC4AC; box-shadow: 0 0 18px rgba(255,200,120,0.25)', img: 'display: block; width: 48px; height: 48px; image-rendering: pixelated; filter: grayscale(1) sepia(0.5) brightness(1.1)' },
+      { name: 'Lucius Aelius', text: 'Your mask will hang here, with whatever you did.', face: F.you, frame: 'flex: none; padding: 4px; background: rgba(207,196,172,0.25); border: 1px dashed rgba(217,178,106,0.6)', img: 'display: block; width: 48px; height: 48px; image-rendering: pixelated; opacity: 0.35; filter: grayscale(1)' }
+    ];
+    var open = ORDER.filter(function (id) { return P[id].card && chosen[P[id].card.id] === undefined; }).length;
+    var chip = function (text, kind) {
+      var c = { plain: ['rgba(242,232,213,0.1)', '#F2E8D5', 'rgba(242,232,213,0.25)'], gold: ['rgba(217,178,106,0.16)', '#F0D49A', 'rgba(217,178,106,0.45)'], bad: ['rgba(226,96,72,0.18)', '#F6B4A6', 'rgba(226,96,72,0.45)'] }[kind];
+      return { text: text, style: 'font-size: 15px; padding: 6px 14px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + '; border: 1px solid ' + c[2] };
+    };
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 11px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#D9B26A' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9D2C4') };
+    };
+    return {
+      nav: __NAV.top('Family', navItem), subnav: __NAV.sub('Family'), hasSub: __NAV.sub('Family').length > 0,
+      chips: [chip('7 living, 1 in the shrine', 'plain'), chip('Heir: ' + heirName, 'gold'), chip(open + (open === 1 ? ' family matter' : ' family matters'), open ? 'bad' : 'plain')],
+      people: people, links: links, sel: sel, heirs: heirs, will: will, offers: offers, masks: masks
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

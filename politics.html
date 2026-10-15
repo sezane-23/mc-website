@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politics — the table of power</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#0E0905}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#F3D27E}a:hover{color:#FFF0C0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px}
+.wood{background-color:#2A1B10;background-image:url(assets/f8781ae71473f5b064757900db65402c.jpg);background-size:512px 512px}
+@keyframes flicker{0%,100%{opacity:1}22%{opacity:0.86}40%{opacity:0.97}63%{opacity:0.82}80%{opacity:0.95}}
+@keyframes flame{0%,100%{transform:scale(1,1) rotate(-1.5deg)}30%{transform:scale(0.95,1.05) rotate(1.5deg)}60%{transform:scale(1.03,0.96) rotate(-0.5deg)}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: radial-gradient(ellipse at 40% 80%, #22160D 0%, #0E0905 70%); color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<!-- TOP BAR -->
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · IDES OF OCTOBER · NIGHT</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
+<a href="#" style="{{n.style}}">{{n.label}}</a>
+</sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+<!-- YOUR PERSON READS THIS PAGE FOR YOU -->
+<section aria-label="Summary" style="display: grid; grid-template-columns: 1fr 360px; gap: 22px; padding: 16px 20px; background: #EFE3C8; color: #2A2119; border-radius: 3px; box-shadow: 0 14px 30px rgba(0,0,0,0.45); border-left: 6px solid #9A6A12">
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<img src="{{aide.face}}" alt="" style="flex: none; width: 56px; height: 56px; image-rendering: pixelated; box-shadow: 0 0 0 3px #F6EAD0, 0 4px 10px rgba(0,0,0,0.3)">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{aide.head}}</span>
+<sc-for list="{{aide.says}}" as="ai" hint-placeholder-count="3"><span style="{{ai.style}}">{{ai.t}}</span></sc-for>
+<span style="font-size: 13px; color: #6B5A48">{{aide.foot}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-left: 20px; border-left: 1px solid rgba(58,37,22,0.2)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">{{aide.askLabel}}</span>
+<div role="radiogroup" aria-label="{{aide.askLabel}}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px">
+<sc-for list="{{aide.levels}}" as="al" hint-placeholder-count="3"><button role="radio" aria-checked="{{al.on}}" onClick="{{al.click}}" style="{{al.style}}">{{al.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; line-height: 1.4; color: #1F1710">{{aide.will}}</span>
+</div>
+</section>
+
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #C9A86A">THE KINGDOM OF VARARIA</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Who holds power, by your lamplight</h1>
+</div>
+<p style="margin: 0; max-width: 520px; font-size: 16px; color: #E6D8BC">Your lamp lights only as far as your standing reaches. Rise, and you will see further up the table. Click anyone to open what you know of them.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+
+<!-- THE TABLE -->
+<div style="flex: none; width: 1000px; max-width: 100%; overflow-x: auto">
+<div class="wood" style="position: relative; width: 1000px; height: 1000px; overflow: hidden; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 0 0 2px #3A2616">
+
+<!-- threads -->
+<svg width="1000" height="1000" aria-hidden="true" style="position: absolute; left: 0; top: 0">
+<sc-for list="{{threads}}" as="t" hint-placeholder-count="12">
+<path d="{{t.d}}" style="{{t.style}}"></path>
+<text x="{{t.lx}}" y="{{t.ly}}" style="{{t.labelStyle}}">{{t.label}}</text>
+</sc-for>
+</svg>
+
+<!-- pinned notes -->
+<sc-for list="{{notes}}" as="nt" hint-placeholder-count="2">
+<div class="paper" style="{{nt.style}}">
+<span style="display: block; width: 10px; height: 10px; margin: -14px auto 6px; border-radius: 50%; background: #8E2C1C; box-shadow: 0 2px 3px rgba(0,0,0,0.5)"></span>
+<span style="font-family: Cinzel, serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{nt.head}}</span>
+<span style="display: block; font-size: 13px; line-height: 1.35; color: #1F1710">{{nt.text}}</span>
+</div>
+</sc-for>
+
+<!-- people -->
+<sc-for list="{{people}}" as="p" hint-placeholder-count="14">
+<button class="paper" onClick="{{p.pick}}" aria-label="{{p.aria}}" style="{{p.style}}">
+<div style="padding: 3px; background: #EFE3C8; box-shadow: 0 3px 8px rgba(0,0,0,0.35)">
+<sc-if value="{{p.known}}" hint-placeholder-val="{{ true }}">
+<img src="{{p.face}}" alt="" style="display: block; width: 52px; height: 52px; image-rendering: pixelated">
+</sc-if>
+<sc-if value="{{p.hidden}}" hint-placeholder-val="{{ false }}">
+<svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" style="fill: #2A1E14"></rect><circle cx="24" cy="18" r="9" style="fill: #5A4A3A"></circle><path d="M8 48c2-11 9-16 16-16s14 5 16 16z" style="fill: #5A4A3A"></path></svg>
+</sc-if>
+</div>
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; line-height: 1.2; color: #2A1A0E; text-align: center">{{p.name}}</span>
+<span style="font-size: 12px; line-height: 1.25; color: #5E5042; text-align: center">{{p.role}}</span>
+</button>
+</sc-for>
+
+<!-- letters lying on the table -->
+<sc-for list="{{letters}}" as="lt" hint-placeholder-count="2">
+<button onClick="{{lt.pick}}" aria-label="{{lt.aria}}" class="paper" style="{{lt.style}}">
+<img src="{{lt.seal}}" alt="" style="position: absolute; left: 50%; top: 50%; width: 38px; height: 38px; transform: translate(-50%, -50%) rotate(-10deg); filter: drop-shadow(0 2px 3px rgba(30,10,5,0.5))">
+<svg width="100" height="62" viewBox="0 0 100 62" aria-hidden="true" style="position: absolute; left: 0; top: 0"><path d="M2 2 L50 34 L98 2" style="fill: none; stroke: rgba(90,58,34,0.45); stroke-width: 1.2px"></path></svg>
+</button>
+</sc-for>
+
+<!-- the lamp -->
+<div style="position: absolute; left: 480px; top: 757px; width: 170px; height: 170px; pointer-events: none">
+<div style="position: absolute; left: 22px; top: 140px; width: 120px; height: 26px; border-radius: 50%; background: rgba(0,0,0,0.5); filter: blur(6px)"></div>
+<img src="assets/a0564ea984b87e60be2f55ea6e9d104c.png" alt="" style="position: absolute; left: 0; top: 0; width: 170px; height: 170px; transform-origin: 74.6% 61.7%; animation: flame 1.7s ease-in-out infinite">
+<img src="assets/ece2bf18c9720b7bf9dad4908fbdffc9.png" alt="" style="position: absolute; left: 0; top: 0; width: 170px; height: 170px">
+</div>
+
+<!-- darkness beyond your reach, and the lamp's glow -->
+<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 606px 838px, rgba(6,4,2,0) 0px, rgba(6,4,2,0) 250px, rgba(6,4,2,0.32) 400px, rgba(6,4,2,0.66) 590px, rgba(6,4,2,0.86) 800px, rgba(6,4,2,0.9) 1000px)"></div>
+<div style="position: absolute; inset: 0; pointer-events: none; animation: flicker 3.4s ease-in-out infinite; background: radial-gradient(circle at 606px 838px, rgba(255,166,72,0.26) 0px, rgba(255,166,72,0.1) 220px, rgba(255,166,72,0) 460px)"></div>
+
+<div style="position: absolute; left: 24px; top: 22px; display: flex; flex-direction: column; gap: 2px; pointer-events: none">
+<span style="font-family: Cinzel, serif; font-size: 12px; letter-spacing: 0.16em; color: rgba(233,201,130,0.55)">THE CROWN</span>
+</div>
+<div style="position: absolute; right: 24px; bottom: 18px; pointer-events: none; font-size: 13px; color: rgba(242,232,213,0.75)">Your reach: <span style="color: #F3D27E">respected</span>, the town and its harbour</div>
+</div>
+</div>
+
+<!-- THE DOSSIER -->
+<aside class="paper" style="flex: 1 1 320px; max-width: 380px; align-self: stretch; min-height: 1000px; box-sizing: border-box; padding: 26px 26px 30px; color: #2A2119; box-shadow: 0 24px 50px rgba(0,0,0,0.65); display: flex; flex-direction: column; gap: 16px">
+
+<sc-if value="{{d.isPerson}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; gap: 14px; align-items: center">
+<div style="flex: none; padding: 4px; background: #EFE3C8; box-shadow: 0 4px 10px rgba(0,0,0,0.35); transform: rotate(-3deg)">
+<sc-if value="{{d.known}}" hint-placeholder-val="{{ true }}"><img src="{{d.face}}" alt="" style="display: block; width: 64px; height: 64px; image-rendering: pixelated"></sc-if>
+<sc-if value="{{d.hidden}}" hint-placeholder-val="{{ false }}"><svg width="64" height="64" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" style="fill: #2A1E14"></rect><circle cx="24" cy="18" r="9" style="fill: #5A4A3A"></circle><path d="M8 48c2-11 9-16 16-16s14 5 16 16z" style="fill: #5A4A3A"></path></svg></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #6B5A48">{{d.role}}</span>
+<span style="font-family: Cinzel, serif; font-size: 21px; font-weight: 700; line-height: 1.2; color: #2A1A0E">{{d.name}}</span>
+<span style="{{d.tagStyle}}">{{d.tag}}</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">WHAT THEY WANT</span>
+<p style="margin: 0; font-size: 17px; color: #1F1710">{{d.want}}</p>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">WHAT YOU KNOW</span>
+<sc-for list="{{d.know}}" as="k" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; padding-left: 10px; border-left: 3px solid rgba(90,58,34,0.3)">
+<span style="font-size: 16px; color: #1F1710">{{k.text}}</span>
+<span style="font-size: 13px; color: #6B5A48">{{k.src}} · <span style="{{k.sureStyle}}">{{k.sure}}</span></span>
+</div>
+</sc-for>
+<sc-if value="{{d.knowsNothing}}" hint-placeholder-val="{{ false }}"><span style="font-size: 16px; color: #6B5A48">Nothing. Not even a name.</span></sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">WAYS TO MOVE</span>
+<sc-for list="{{d.ways}}" as="w" hint-placeholder-count="3">
+<button style="text-align: left; display: flex; flex-direction: column; gap: 2px; min-height: 44px; padding: 10px 12px; background: rgba(255,250,238,0.5); border: 1px solid rgba(90,58,34,0.35); border-radius: 2px; font-family: Spectral, serif; cursor: pointer">
+<span style="font-size: 16px; font-weight: 600; color: #1F1710">{{w.act}}</span>
+<span style="font-size: 14px; color: #5E5042">{{w.then}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{d.isLetter}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; gap: 14px; align-items: center">
+<img src="{{d.seal}}" alt="" style="width: 64px; height: 64px; transform: rotate(-10deg); filter: drop-shadow(0 4px 6px rgba(30,10,5,0.45))">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #6B5A48">A LETTER FROM</span>
+<span style="font-family: Cinzel, serif; font-size: 20px; font-weight: 700; line-height: 1.2; color: #2A1A0E">{{d.name}}</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #1F1710">{{d.text}}</p>
+<span style="font-size: 15px; color: #7E2A1A">{{d.deadline}}</span>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{d.paths}}" as="pa" hint-placeholder-count="3">
+<button style="{{pa.style}}">
+<span style="font-size: 17px; font-weight: 600; color: #1F1710">{{pa.title}}</span>
+<span style="font-size: 14px; color: #2C5F50">{{pa.gain}}</span>
+<span style="font-size: 14px; color: #8E2C1C">{{pa.cost}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{d.isYou}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #6B5A48">YOU</span>
+<span style="font-family: Cinzel, serif; font-size: 21px; font-weight: 700; color: #2A1A0E">A respected merchant of Aquea</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{ranks}}" as="k" hint-placeholder-count="6">
+<div style="display: flex; align-items: center; gap: 10px"><span style="{{k.dot}}"></span><span style="{{k.style}}">{{k.name}}</span><span style="font-size: 13px; color: #6B5A48; margin-left: auto">{{k.opens}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 1px solid rgba(90,58,34,0.25)">
+<span style="font-size: 14px; color: #6B5A48">To be honoured, any two of:</span>
+<span style="font-size: 15px; color: #4A3C30">○ Wealth of 25,000  (about 17,000 now)</span>
+<span style="font-size: 15px; color: #4A3C30">○ A public work funded in Aquea</span>
+<span style="font-size: 15px; color: #2C5F50">✓ A friend on the royal council</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px solid rgba(90,58,34,0.25)">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">THE WEIGHT OF YOUR PURSE</span>
+<span style="font-size: 15px; color: #1F1710">Envy you draw: <strong>low</strong>. Staying small keeps you safe and ignored. Growing opens doors, and fills your table with people who want things.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px solid rgba(90,58,34,0.25)">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">TONGUES</span>
+<span style="font-size: 15px; color: #1F1710">Varan, and a little Caleonian. In Ostoronia you would need a translator, or miss what is said behind your back.</span>
+</div>
+</div>
+</sc-if>
+</aside>
+</div>
+<!-- THE FIVE COUNTRIES: run by their own rulers, with or without you -->
+<section aria-label="The five countries" style="display: flex; flex-direction: column; gap: 18px; margin-top: 26px; padding-top: 26px; border-top: 1px solid rgba(233,201,130,0.2)">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #C9A86A">FIVE COUNTRIES, FIVE WAYS TO RULE</span>
+<h2 style="margin: 0; font-family: Cinzel, serif; font-size: 28px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">The rulers play without you</h2>
+</div>
+<p style="margin: 0; max-width: 560px; font-size: 16px; color: #E6D8BC">Offices, votes and laws all happen on their own. You only need to know what’s coming. If you want, you can lean on it.</p>
+</div>
+<div role="tablist" aria-label="Country" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px">
+<sc-for list="{{lands}}" as="la" hint-placeholder-count="5"><button role="tab" onClick="{{la.click}}" style="{{la.style}}"><span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700">{{la.name}}</span><span style="font-size: 13px; opacity: 0.85">{{la.type}}</span><span style="{{la.flagStyle}}">{{la.flag}}</span></button></sc-for>
+</div>
+
+<div class="paper" style="padding: 26px 28px; color: #2A2119; box-shadow: 0 24px 50px rgba(0,0,0,0.6); display: grid; grid-template-columns: 330px 1fr 1fr; gap: 28px; align-items: start">
+<!-- how power works -->
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 12px; align-items: center"><img src="{{land.face}}" alt="" style="width: 56px; height: 56px; image-rendering: pixelated; box-shadow: 0 0 0 3px #F6EAD0, 0 4px 10px rgba(0,0,0,0.3)"><span style="display: flex; flex-direction: column"><span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{land.typeUpper}}</span><span style="font-family: Cinzel, serif; font-size: 20px; font-weight: 700; line-height: 1.2; color: #2A1A0E">{{land.ruler}}</span></span></div>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #1F1710">{{land.how}}</p>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px solid rgba(90,58,34,0.25)">
+<span style="display: flex; gap: 8px; font-size: 14px"><span style="flex: none; width: 104px; color: #6B5A48">Laws come from</span><span style="color: #1F1710">{{land.laws}}</span></span>
+<span style="display: flex; gap: 8px; font-size: 14px"><span style="flex: none; width: 104px; color: #6B5A48">Good for trade</span><span style="color: #2C5F50">{{land.good}}</span></span>
+<span style="display: flex; gap: 8px; font-size: 14px"><span style="flex: none; width: 104px; color: #6B5A48">Danger</span><span style="color: #8E2C1C">{{land.danger}}</span></span>
+<span style="display: flex; gap: 8px; font-size: 14px"><span style="flex: none; width: 104px; color: #6B5A48">What you own here</span><span style="color: #1F1710">{{land.yours}}</span></span>
+</div>
+</div>
+<!-- blocs and offices -->
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">{{land.blocTitle}}</span>
+<sc-for list="{{land.blocs}}" as="bl" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; justify-content: space-between; gap: 8px; font-size: 15px"><span style="font-weight: 600; color: #1F1710">{{bl.name}}</span><span style="{{bl.moodStyle}}">{{bl.mood}}</span></span>
+<span style="display: block; height: 8px; border-radius: 4px; background: rgba(58,37,22,0.14)"><span style="{{bl.bar}}"></span></span>
+<span style="font-size: 13px; color: #4A3C30">{{bl.wants}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 1px solid rgba(90,58,34,0.25)">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">OFFICES THAT TOUCH YOUR TRADE</span>
+<sc-for list="{{land.offices}}" as="of" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 6px 0; border-top: 1px solid rgba(90,58,34,0.12)">
+<span style="font-size: 15px; font-weight: 600; color: #1F1710">{{of.title}}</span><span style="font-size: 13px; color: #6B5A48; text-align: right">{{of.holder}}</span>
+<span style="grid-column: 1 / -1; font-size: 13px; color: #4A3C30">{{of.power}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<!-- coming up, and leaning on it -->
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">COMING UP</span>
+<sc-for list="{{land.coming}}" as="cm" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; background: rgba(255,250,238,0.5); border: 1px solid rgba(90,58,34,0.25); border-radius: 2px">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #6B5A48">{{cm.when}}</span><span style="{{cm.oddsStyle}}">{{cm.odds}}</span></span>
+<span style="font-size: 16px; font-weight: 600; color: #1F1710">{{cm.what}}</span>
+<span style="font-size: 14px; color: #2E5878">{{cm.effect}}</span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{cm.acts}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="{{a.style}}">{{a.label}}</button></sc-for></div>
+<sc-if value="{{cm.picked}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #1F3A30; padding: 6px 10px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50">{{cm.outcome}}</span></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+var LANDS = [
+  { id: 'vararia', name: 'Vararia', type: 'Queen and court', ruler: 'Queen Cornelia', face: 'assets/825d687ad982397231b83bbd7a9f3b55.png', flag: 'You live here',
+    how: 'The queen decides, but only hears what reaches her. Whoever has her ear at court has the power. Favour rises and falls like a price.',
+    laws: 'Royal decree, after the court whispers', good: 'Steady. Contracts are honoured.', danger: 'Falling out of favour. Then every inspector finds a problem.', yours: 'Home, vineyard, grain farm, marble quarry, tavern, bakery, warehouse',
+    blocTitle: 'FACTIONS AT COURT', blocs: [['The old families', 40, 'Friendly', 'Keep newcomers like you in their place. Your mother knows them all.'], ['The army men', 30, 'Neutral', 'Want the war won, and grain for it, cheap.'], ['The queen\u2019s Greeks', 20, 'Cool', 'Her secretaries and doctors. They decide who gets an audience.'], ['The priests', 10, 'Friendly', 'Want temples rebuilt. Like anyone who pays for one.']],
+    offices: [['Governor of Aquea', 'Valerius \u00b7 bot', 'Grants building permits, settles disputes, picks who gets army contracts.'], ['Harbour master', 'Gnaeus Licinius \u00b7 bot', 'Sets port fees and decides which cargoes get inspected.'], ['Grain commissioner', 'Vacant \u00b7 filled in 12 days', 'Buys for the dole. Whoever gets it decides who sells grain to the city.']],
+    coming: [['Next month', 'A free grain dole for Aquea\u2019s poor', 'Grain demand up a tenth. Prices up.', 'Likely', [['Stay out', 'It happens without you. Grain rises a little.'], ['Offer grain to the commissioner', 'You sell 3,000 modii to the dole at a fair price. Small profit, and the court notices you.'], ['Quietly oppose it', 'Costs 400. The old families like you for it; the poor don\u2019t.']]],
+      ['In 12 days', 'A new grain commissioner is chosen', 'Two names: a Claudius (your wife\u2019s cousin) or Fulvius\u2019s brother-in-law.', 'Close', [['Stay out', 'The court picks. 50\u201350.'], ['Back the Claudius', '800  in gifts. Better odds, and he will owe you.'], ['Back Fulvius\u2019s man', 'Odd choice. Fulvius would be confused, and grateful.']]]] },
+  { id: 'caleonia', name: 'Caleonia', type: 'Senate republic', ruler: 'The Senate, under consul Decimus Sempronius', face: 'assets/872bbd3ce5a5d5156ee9f28906de862d.png', flag: 'Votes in 7 days',
+    how: 'Three hundred senators vote on everything. Nobody controls a majority, so every law is a deal between blocs. Slow, noisy, and very hard to bribe all at once.',
+    laws: 'A vote of the Senate', good: 'Courts work. Foreigners can sue.', danger: 'Laws change every season, sometimes overnight.', yours: 'A share in the glassworks',
+    blocTitle: 'HOW THE SENATE SPLITS', blocs: [['Landowners', 38, 'Neutral', 'Low taxes on land, high taxes on imports.'], ['Merchants', 27, 'Friendly', 'Open ports, low tariffs. Your natural friends.'], ['The people\u2019s men', 22, 'Neutral', 'Cheap bread. Will tax anyone rich who isn\u2019t Caleonian.'], ['Generals\u2019 friends', 13, 'Cool', 'More soldiers. Will vote with whoever pays for them.']],
+    offices: [['Consul', 'Decimus Sempronius \u00b7 bot', 'Runs the government for a year. Can stop a law once.'], ['Aedile of the markets', 'Sextus Varus \u00b7 bot', 'Checks weights, fines cheats, licenses stalls.'], ['Censor', 'Old Appius \u00b7 bot', 'Decides who counts as a senator, and taxes their wealth.']],
+    coming: [['In 7 days', 'A tax on salt imports', 'Landowners and the people\u2019s men for, merchants against. Bad for Fulvius\u2019s salt.', 'Close', [['Stay out', 'It passes, just. Salt dearer inside Caleonia.'], ['Buy salt inside Caleonia first', 'You hold salt behind the new wall. If it passes, you profit.'], ['Fund the merchants\u2019 side', '600 . Odds swing; Fulvius learns you helped him, by accident.']]]] },
+  { id: 'helerensia', name: 'Helerensia', type: 'Hereditary king', ruler: 'King Servius Cornelius', face: 'assets/922c4158fe8df19c08f394fd3c9df5e7.png', flag: 'Old king, no clear heir',
+    how: 'The crown passes father to son, and the nobles hold the land. The king is old and his sons hate each other. When he dies, the nobles pick sides.',
+    laws: 'The king, with his nobles\u2019 consent', good: 'Iron, silver and marble from the highlands. Old trade rights never change.', danger: 'A succession war. Everything stops until it\u2019s over.', yours: 'Nothing yet',
+    blocTitle: 'THE GREAT LORDS', blocs: [['For the elder son', 45, 'Neutral', 'A soldier. Would close the borders to foreign merchants.'], ['For the younger son', 40, 'Neutral', 'A spender. Borrows from anyone, pays back sometimes.'], ['Waiting to see', 15, 'Cool', 'Will join whoever is winning.']],
+    offices: [['The king\u2019s steward', 'Lord Osric \u00b7 bot', 'Decides which foreign merchants may trade, and at which ports.'], ['Master of the mines', 'Lady Gunna \u00b7 bot', 'Sells mining rights in the highlands. Hates being rushed.']],
+    coming: [['Any season now', 'The old king dies', 'Sabino is the capital, where Sosia works. If the elder son wins, foreign merchants lose their rights. If the younger, he needs loans.', 'Likely within a year', [['Stay out', 'You wait and see who wins.'], ['Lend to the younger son', '2,000  now. If he wins, you get mining rights. If not, it\u2019s gone.'], ['Buy iron before it happens', 'Fill your warehouse while it\u2019s cheap. War would make it dear.']]]] },
+  { id: 'ostoronia', name: 'Ostoronia', type: 'Tyranny', ruler: 'Quintus Fabius, the tyrant', face: 'assets/6b12bb77800455b9ce97f32e18cb0f93.png', flag: 'At war',
+    how: 'One man took power with the army behind him. There are no laws, only his moods. He needs money for the war, and takes it from whoever is easiest.',
+    laws: 'Whatever the tyrant says, today', good: 'Quartz, iron and silver, cheap. If you can get them out.', danger: 'Seizure. Foreigners are easiest to rob.', yours: 'The quartz mine, half the Durona timber yard, salt shares in Lavica',
+    blocTitle: 'WHO KEEPS HIM IN POWER', blocs: [['The army', 60, 'Cool', 'Paid on time, or he falls.'], ['Hill chieftains', 25, 'Neutral', 'Hate him, fear him. Hilde\u2019s father is one.'], ['Town merchants', 15, 'Friendly', 'Pay him, and pray.']],
+    offices: [['Master of the mines', 'Fabius\u2019s nephew \u00b7 bot', 'Can take any mine \u201cfor the war\u201d.'], ['Collector of war taxes', 'A former bandit \u00b7 bot', 'Visits foreign estates. Leaves with what he likes.']],
+    coming: [['Rumoured', 'Seizing foreign-owned mines', 'Your quartz mine is foreign-owned.', 'Rumoured', [['Stay out', 'One chance in three they take it this year.'], ['Pay the nephew', '500  a season. Your mine is \u201cforgotten\u201d.'], ['Marry Gaius to Hilde', 'Her father\u2019s spears guard the mine. See Family.']]]] },
+  { id: 'peruaria', name: 'Peruaria', type: 'Council of elders', ruler: 'The Twelve, led by Quintus Sulpicius', face: 'assets/0e10e97c9c68c3d3bca6f43d14b768eb.png', flag: 'Calm',
+    how: 'Twelve old men from the oldest families. They decide only when all twelve agree, which is almost never. Nothing changes, and that\u2019s the point.',
+    laws: 'All twelve elders agreeing', good: 'The safest place to own land. Rules never change.', danger: 'Its banks. The Pisella bankers are Peruarian.', yours: 'The olive grove at Palia',
+    blocTitle: 'THE TWELVE', blocs: [['Bankers\u2019 families', 5, 'Neutral', 'Five seats. Worried, lately.'], ['Old landowners', 5, 'Friendly', 'Like quiet neighbours who pay on time.'], ['Temple families', 2, 'Friendly', 'Want nothing to change, ever.']],
+    offices: [['Keeper of weights', 'Elder Marcus \u00b7 bot', 'Sets the official measures. Rarely checks them.']],
+    coming: [['This winter', 'Nothing. They never act in winter.', 'Calm. Good for the olive grove.', 'Certain', []],
+      ['If the Pisella bank fails', 'The elders may guarantee its debts, or not', 'If they don\u2019t, half of Peruaria is suddenly selling.', 'Unknown', [['Stay out', 'You watch.'], ['Ask your mother to sound them out', 'She knows two of the twelve. You learn what they\u2019ll do, a week early.']]]] }
+];
+var __AIDE = function (self, A) {
+  var st = self.state || {}, lv = st.aideLv === undefined ? A.def : st.aideLv;
+  var tone = { good: '#1F3A30', warn: '#8E2418', info: '#1F1710' };
+  return { face: A.face, head: A.short.toUpperCase() + ', ' + A.role.toUpperCase() + ' · THE SHORT VERSION', foot: 'The full page is below, if you want it.',
+    says: A.says.map(function (s) { return { t: '• ' + s[1], style: 'font-size: 16px; line-height: 1.4; color: ' + tone[s[0]] + (s[0] === 'warn' ? '; font-weight: 600' : '') }; }),
+    askLabel: 'HOW MUCH CAN ' + A.short.toUpperCase() + ' DECIDE?', will: A.will[lv],
+    levels: ['Ask me first', 'Small things', 'Handle it'].map(function (l, k) { var on = lv === k;
+      return { label: l, on: on ? 'true' : 'false', click: function () { self.setState(Object.assign({}, self.state || {}, { aideLv: k })); },
+        style: 'min-height: 40px; padding: 4px 6px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516; font-weight: 600' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)') }; }) };
+};
+var AIDE = {"face": "assets/926821d1ee198f2fb0402917484cc902.png", "role": "your children’s tutor, who follows politics", "short": "Dion", "says": [["good", "Nothing here needs you this month."], ["info", "The grain dole in Aquea will pass. Grain goes up a tenth. Good for your farm."], ["info", "Caleonia’s salt tax is close. It hurts Fulvius, not you."]], "will": ["He reports. You decide whether to lean on anything.", "He sends small gifts to keep friendly factions friendly, under 200 a season.", "He backs whatever is good for your trade, up to 1,000 a season, never in your name."], "def": 0};
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var sel = s.sel || { kind: 'p', id: 'gn' };
+
+    var navItem = function (label, active) {
+      return { label: label,
+        style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E9C982' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#E6D8BC') };
+    };
+    var F = {
+      senator: 'assets/872bbd3ce5a5d5156ee9f28906de862d.png', gov: 'assets/6b12bb77800455b9ce97f32e18cb0f93.png', tax: 'assets/0826644edfdf42a585c7e8d8765821bb.png',
+      rufus: 'assets/390e63fe4dd357ccba93a5e47e0acae4.png', captain: 'assets/4b348a319e394291dcda8ed147cca6d3.png', client: 'assets/054107f26dcd34ab67e0139fe33c08b3.png',
+      varro: 'assets/c1e421a40d1298e1f79fcc61708ffbb6.png', you: 'assets/009faa795ce967e9ad726e9f5012f930.png', greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png'
+    };
+    var SURE = { certain: '#2C5F50', likely: '#8A5A12', doubtful: '#8E2C1C' };
+    var k = function (text, src, sure) { return { text: text, src: src, sure: sure, sureStyle: 'font-weight: 600; color: ' + SURE[sure] }; };
+    var w = function (act, then) { return { act: act, then: then }; };
+    var TAG = { far: ['#6B5A48', 'rgba(107,90,72,0.12)'], known: ['#8A5A12', 'rgba(138,90,18,0.12)'], warm: ['#2C5F50', 'rgba(44,95,80,0.12)'], foe: ['#8E2C1C', 'rgba(142,44,28,0.12)'] };
+
+    var P = [
+      { id: 'q', x: 500, y: 82, name: 'Queen Cornelia', role: 'The crown', tag: 'beyond your reach', tone: 'far', hide: true,
+        want: 'To win the war that is coming without emptying her treasury.',
+        know: [k('She trusts the coast governor less each month.', 'Tavern talk', 'doubtful')],
+        ways: [w('Rise to honoured, then seek an audience', 'The slow, safe road.'), w('Be brought by a royal councillor', 'You know only one, and he is not yet your friend.'), w('Lend to the crown for the war', 'The crown never forgets a lender. Nor does it always repay.')] },
+      { id: 'c1', x: 175, y: 238, name: 'A councillor', role: 'Royal council', tag: 'unknown', tone: 'far', hide: true, want: 'Unknown.', know: [],
+        ways: [w('Plant a spy in the palace', '600 . If caught, you are finished at court.'), w('Ask a patron', 'You have none yet.')] },
+      { id: 'c2', x: 330, y: 214, name: 'A councillor', role: 'Royal council', tag: 'unknown', tone: 'far', hide: true, want: 'Unknown.', know: [],
+        ways: [w('Plant a spy in the palace', '600 . If caught, you are finished at court.'), w('Ask a patron', 'You have none yet.')] },
+      { id: 'c3', x: 830, y: 238, name: 'A councillor', role: 'Royal council', tag: 'unknown', tone: 'far', hide: true, want: 'Unknown.', know: [],
+        ways: [w('Plant a spy in the palace', '600 . If caught, you are finished at court.'), w('Ask a patron', 'You have none yet.')] },
+      { id: 'dom', x: 670, y: 214, name: 'Aulus Domitius', role: 'Royal council', tag: 'knows your name', tone: 'known', face: F.senator,
+        want: 'Merchants to stand behind his law capping the price of grain.',
+        know: [k('The grain growers of the valley hate him for it.', 'Common talk', 'likely'), k('He is short of coin before the vote.', 'Your banker', 'likely')],
+        ways: [w('Back his grain law', 'He may take you as his client. The grain growers will remember.'), w('Lend him 2,000 before the vote', 'A councillor in your debt.'), w('Invite him to dine', 'You need a villa to host a senator.')] },
+      { id: 'gov', x: 300, y: 432, name: 'Publius Valerius', role: 'Governor, river province', tag: 'met once', tone: 'known', face: F.gov,
+        want: 'To prove to the queen that his province is better run than the coast.',
+        know: [k('He is feuding with the governor of the coast.', 'Seen at the games', 'certain'), k('He suspects one of his tax chiefs is stealing.', 'Your informant', 'likely')],
+        ways: [w('Bring him proof against Gnaeus', 'His gratitude opens the province. Gnaeus becomes your enemy.'), w('Ask Domitius to introduce you', 'Only once Domitius owes you.')] },
+      { id: 'coast', x: 720, y: 432, name: 'Name unknown', role: 'Governor of the coast', tag: 'never met', tone: 'far', hide: true,
+        want: 'Unknown.', know: [k('He writes to the tyrant of Ostoronia.', 'A sailor in Lareanum', 'doubtful')],
+        ways: [w('Send a spy into his household', '400 . Could expose treason, or get your spy killed.'), w('Ask Varro', 'Varro trades on the coast and hears things.')] },
+      { id: 'gn', x: 370, y: 636, name: 'Gnaeus Licinius', role: 'Tax chief of Aquea', tag: 'owes you 300', tone: 'warm', face: F.tax,
+        want: 'A quiet loan of 1,500, and friends who do not ask questions.',
+        know: [k('He keeps one coin in ten of the harbour dues.', 'Your informant', 'certain'), k('He has dined with Rufus twice this month.', 'Sextus saw them', 'certain')],
+        ways: [w('Lend him the 1,500', 'He owes you deeply. If his theft comes out, you fall with him.'), w('Take your proof to Governor Valerius', 'A door to the province, and an enemy in the harbour.'), w('Call in the 300 he owes', 'He pays, and cools towards you.')] },
+      { id: 'ti', x: 625, y: 628, name: 'Captain Titus', role: 'Royal army', tag: 'needs you', tone: 'known', face: F.captain,
+        want: 'Grain on credit for the northern garrison.',
+        know: [k('Ostoronia is gathering men across the river.', 'Army talk', 'likely')],
+        ways: [w('Read his letter', 'It lies on your table.')] },
+      { id: 'ru', x: 862, y: 640, name: 'Rufus', role: 'Wine merchant', tag: 'your rival', tone: 'foe', face: F.rufus,
+        want: 'Your customers, and your seat at the tax chief\'s table.',
+        know: [k('He tells the forum you water your wine.', 'Heard it twice', 'certain'), k('He owes money to a Caleonian banker.', 'Rumour', 'doubtful')],
+        ways: [w('Plant a spy among his porters', '250 .'), w('Hold a public tasting in the forum', 'Answers the rumour, if your wine is good enough.'), w('Buy his debt from the Caleonian banker', 'Then Rufus owes you.')] },
+      { id: 'you', x: 400, y: 862, name: 'You', role: 'Respected merchant', tag: '', tone: 'warm', face: F.you, isYou: true },
+      { id: 'va', x: 180, y: 808, name: 'Varro', role: 'Friend', tag: 'a friend · loyal', tone: 'warm', face: F.varro,
+        want: 'Your promise about Rufus kept.', know: [k('He would lend you 1,000 in a crisis.', 'He said so', 'likely')],
+        ways: [w('Ask him about the coast governor', 'He trades on the coast.'), w('Bring him into a venture', 'Friends make the safest partners.')] },
+      { id: 'se', x: 285, y: 935, name: 'Sextus', role: 'Your client', tag: 'your client · devoted', tone: 'warm', face: F.client,
+        want: 'Your protection, and a start in the grain trade.', know: [k('He hears everything said on the quay.', 'Your own experience', 'certain')],
+        ways: [w('Ask him to watch Gnaeus', 'Cheap and quiet.'), w('Lend him a ship\'s share', 'He would owe you for life.')] },
+      { id: 'de', x: 768, y: 846, name: 'Demetrios', role: 'Your partner', tag: 'partner · unproven', tone: 'known', face: F.greek,
+        want: 'A bigger share of the Thetis.', know: [k('He keeps two sets of books in Rhodes.', 'A clerk', 'doubtful')],
+        ways: [w('Audit the Thetis accounts', 'Costs trust if he is honest.'), w('Buy him out', 'About 1,400 .')] }
+    ];
+    var byId = {}; P.forEach(function (p) { byId[p.id] = p; });
+
+    var people = P.map(function (p, i) {
+      var on = sel.kind === 'p' && sel.id === p.id;
+      var tilt = ((i * 37) % 7 - 3) * 0.6;
+      return {
+        name: p.name, role: p.role, known: !p.hide, hidden: !!p.hide, face: p.face || '',
+        aria: 'Open what you know of ' + p.name + ', ' + p.role,
+        pick: function () { self.setState(Object.assign({}, self.state || {}, { sel: { kind: 'p', id: p.id } })); },
+        style: 'position: absolute; left: ' + (p.x - 62) + 'px; top: ' + (p.y - 62) + 'px; width: 124px; min-height: 124px; box-sizing: border-box; padding: 10px 8px 9px; border: none; border-radius: 2px; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; transform: rotate(' + tilt + 'deg); ' +
+          (on ? 'box-shadow: 0 0 0 3px #F3D27E, 0 0 28px rgba(243,210,126,0.55), 0 14px 26px rgba(0,0,0,0.6); z-index: 2' : 'box-shadow: 0 12px 24px rgba(0,0,0,0.6)')
+      };
+    });
+
+    var COL = { owes: '#D9A441', friend: '#7FAE76', foe: '#C24A3A', rumour: '#B8A890', chain: '#A88A64' };
+    var th = function (a, b, kind, label, dashed, faint) {
+      var A = byId[a], B = byId[b];
+      var mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2 + 34;
+      return {
+        d: 'M' + A.x + ',' + A.y + ' Q' + mx + ',' + my + ' ' + B.x + ',' + B.y,
+        style: 'fill: none; stroke: ' + COL[kind] + '; stroke-width: ' + (faint ? 1.4 : 2.6) + 'px; stroke-opacity: ' + (faint ? 0.55 : 0.95) + (dashed ? '; stroke-dasharray: 6 5' : '') + '; stroke-linecap: round',
+        lx: (A.x + B.x) / 2, ly: (A.y + B.y) / 2 + 18, label: label,
+        labelStyle: 'font-family: Spectral, serif; font-size: 13px; font-weight: 600; text-anchor: middle; fill: ' + COL[kind] + '; paint-order: stroke; stroke: #1A100A; stroke-width: 4px; stroke-linejoin: round' + (faint ? '; opacity: 0.7' : '')
+      };
+    };
+    var threads = [
+      th('gn', 'gov', 'chain', 'reports to', false, true),
+      th('gov', 'q', 'chain', 'answers to', false, true),
+      th('coast', 'q', 'chain', '', false, true),
+      th('ti', 'q', 'chain', 'serves', false, true),
+      th('gov', 'coast', 'foe', 'feud', true, true),
+      th('dom', 'you', 'rumour', 'knows your name', true, true),
+      th('you', 'gn', 'owes', 'owes you 300'),
+      th('ru', 'gn', 'rumour', 'dined together', true),
+      th('ru', 'you', 'foe', 'rival'),
+      th('you', 'va', 'friend', 'friend'),
+      th('you', 'se', 'friend', 'your client'),
+      th('you', 'de', 'owes', 'partners', true)
+    ];
+
+    var notes = [
+      { head: 'YOUR INFORMANT', text: 'Gnaeus keeps one coin in ten of the harbour dues.',
+        style: 'position: absolute; left: 128px; top: 520px; width: 150px; padding: 10px 12px 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.6); transform: rotate(-4deg); display: flex; flex-direction: column; gap: 2px' },
+      { head: 'A RUMOUR', text: 'The coast governor writes to the tyrant of Ostoronia.',
+        style: 'position: absolute; left: 812px; top: 330px; width: 150px; padding: 10px 12px 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.6); transform: rotate(3deg); display: flex; flex-direction: column; gap: 2px' }
+    ];
+
+    var path = function (title, gain, cost, tone) {
+      return { title: title, gain: gain, cost: cost,
+        style: 'text-align: left; display: flex; flex-direction: column; gap: 3px; min-height: 44px; padding: 12px 14px; background: rgba(255,250,238,0.5); border: 1px solid rgba(90,58,34,0.3); border-left: 4px solid ' + tone + '; border-radius: 2px; font-family: Spectral, serif; cursor: pointer' };
+    };
+    var L = [
+      { id: 'titus', name: 'Captain Titus', seal: 'assets/eb15c5618e574cd16eaa21c996a6c5ba.png', x: 885, y: 918, tilt: -8,
+        text: '"The northern garrison is short of grain, and Ostoronia gathers men across the river. Sell me 2,000 measures on credit. The crown will pay when the war chest arrives."',
+        deadline: 'He waits at the north gate until tomorrow evening.',
+        paths: [path('Supply the army', 'The crown owes you. A friend in the army.', 'Paid late, or never if the war goes badly.', '#2C5F50'),
+                path('Supply half, for coin now', 'Some goodwill, no risk.', 'Titus thinks you a hard man.', '#8A5A12'),
+                path('Refuse', 'Your grain stays yours.', 'The crown remembers who refused.', '#8E2C1C')] },
+      { id: 'gnaeus', name: 'Gnaeus Licinius', seal: 'assets/f9c6da5d3c8008db0652383c8e1dde51.png', x: 940, y: 870, tilt: 7,
+        text: '"A small loan, between friends. Fifteen hundred, quietly. You will find the harbour inspectors very relaxed about your cargoes this winter."',
+        deadline: 'Rufus has dined with him twice. Decide before Rufus does.',
+        paths: [path('Lend it', 'He owes you deeply. Cheaper harbour.', 'If his theft comes out, you fall with him.', '#2C5F50'),
+                path('Report him to the governor', 'Valerius\'s gratitude.', 'Gnaeus and his friends become enemies.', '#8A5A12'),
+                path('Politely decline', 'No risk.', 'He cools. Inspections tighten.', '#8E2C1C')] }
+    ];
+    var letters = L.map(function (l) {
+      var on = sel.kind === 'l' && sel.id === l.id;
+      return { seal: l.seal, aria: 'Open the letter from ' + l.name,
+        pick: function () { self.setState(Object.assign({}, self.state || {}, { sel: { kind: 'l', id: l.id } })); },
+        style: 'position: absolute; left: ' + (l.x - 50) + 'px; top: ' + (l.y - 31) + 'px; width: 100px; height: 62px; padding: 0; border: none; border-radius: 1px; cursor: pointer; transform: rotate(' + l.tilt + 'deg); ' +
+          (on ? 'box-shadow: 0 0 0 3px #F3D27E, 0 0 24px rgba(243,210,126,0.5), 0 10px 20px rgba(0,0,0,0.6); z-index: 2' : 'box-shadow: 0 10px 20px rgba(0,0,0,0.6)') };
+    });
+
+    // the dossier
+    var d = { isPerson: false, isLetter: false, isYou: false, known: false, hidden: false, face: '', name: '', role: '', tag: '', tagStyle: '', want: '', know: [], knowsNothing: false, ways: [], seal: '', text: '', deadline: '', paths: [] };
+    if (sel.kind === 'l') {
+      var l = L.filter(function (x) { return x.id === sel.id; })[0];
+      d.isLetter = true; d.name = l.name; d.seal = l.seal; d.text = l.text; d.deadline = l.deadline; d.paths = l.paths;
+    } else {
+      var p = byId[sel.id];
+      if (p.isYou) { d.isYou = true; }
+      else {
+        var tc = TAG[p.tone];
+        d.isPerson = true; d.known = !p.hide; d.hidden = !!p.hide; d.face = p.face || ''; d.name = p.name; d.role = p.role.toUpperCase();
+        d.tag = p.tag; d.tagStyle = 'align-self: flex-start; margin-top: 4px; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 12px; color: ' + tc[0] + '; background: ' + tc[1] + '; border: 1px solid ' + tc[0];
+        d.want = p.want; d.know = p.know; d.knowsNothing = p.know.length === 0; d.ways = p.ways;
+      }
+    }
+    var rank = function (name, opens, state) {
+      return { name: name, opens: opens,
+        dot: 'flex: none; width: 10px; height: 10px; border-radius: 50%; ' + (state === 'now' ? 'background: #7E2A1A; box-shadow: 0 0 0 3px rgba(126,42,26,0.25)' : state === 'done' ? 'background: #5A3A22' : 'border: 1.5px solid #8A7658'),
+        style: 'font-size: 16px; ' + (state === 'now' ? 'font-weight: 700; color: #7E2A1A' : state === 'done' ? 'color: #4A3C30' : 'color: #8A7658') };
+    };
+
+    var lk = s.land || 'vararia', LD = LANDS.filter(function (x) { return x.id === lk; })[0], lean = s.lean || {};
+    var moodC = { Friendly: '#2C5F50', Neutral: '#6B5A48', Cool: '#8E2C1C' };
+    var oddsC = { Likely: '#2C5F50', Close: '#8A5A12', Rumoured: '#8E2C1C', Certain: '#2C5F50', Unknown: '#6B5A48' };
+    var total = LD.blocs.reduce(function (a, b) { return a + b[1]; }, 0);
+    var lands = LANDS.map(function (x) { var on = x.id === lk;
+      return { name: x.name, type: x.type, flag: x.flag, click: function () { self.setState(Object.assign({}, self.state || {}, { land: x.id })); },
+        flagStyle: 'font-size: 12px; font-weight: 600; color: ' + (x.flag === 'At war' ? '#F09A88' : on ? '#7E2A1A' : '#C9A86A'),
+        style: 'display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-height: 76px; padding: 10px 16px; border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer; ' + (on ? 'background: #EFE3C8; color: #2A1A0E; border: none; box-shadow: 0 0 0 3px #E9C982' : 'background: rgba(42,27,16,0.8); color: #F2E8D5; border: 1px solid rgba(233,201,130,0.3)') }; });
+    var land = { face: LD.face, ruler: LD.ruler, typeUpper: LD.type.toUpperCase(), how: LD.how, laws: LD.laws, good: LD.good, danger: LD.danger, yours: LD.yours, blocTitle: LD.blocTitle,
+      blocs: LD.blocs.map(function (b) { return { name: b[0] + (lk === 'peruaria' ? ' \u00b7 ' + b[1] + ' seats' : ' \u00b7 ' + Math.round(b[1] / total * 100) + '%'), mood: b[2] === 'Friendly' ? 'Likes you' : b[2] === 'Cool' ? 'Wary of you' : 'Indifferent', wants: b[3],
+        moodStyle: 'font-size: 13px; font-weight: 600; color: ' + moodC[b[2]], bar: 'display: block; height: 8px; border-radius: 4px; width: ' + Math.round(b[1] / total * 100) + '%; background: ' + moodC[b[2]] }; }),
+      offices: LD.offices.map(function (o) { return { title: o[0], holder: o[1], power: o[2] }; }),
+      coming: LD.coming.map(function (c, ci) { var key = lk + ci, pk = lean[key];
+        return { when: c[0], what: c[1], effect: c[2], odds: c[3], oddsStyle: 'font-size: 12px; font-weight: 700; color: ' + (oddsC[c[3]] || '#8A5A12'),
+          picked: pk !== undefined, outcome: pk !== undefined ? c[4][pk][1] : '',
+          acts: c[4].map(function (a, k) { var on = pk === k;
+            return { label: (on ? '\u2713 ' : '') + a[0], click: function () { var m = Object.assign({}, (self.state || {}).lean || {}); m[key] = k; self.setState(Object.assign({}, self.state || {}, { lean: m })); },
+              style: 'min-height: 36px; padding: 4px 12px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516' : k === 0 ? 'background: rgba(44,95,80,0.08); color: #1F3A30; border: 1px solid rgba(44,95,80,0.4)' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(90,58,34,0.3)') }; }) }; }) };
+    return {
+      aide: __AIDE(this, AIDE), nav: __NAV.top('Politics', navItem), subnav: __NAV.sub('Politics'), hasSub: __NAV.sub('Politics').length > 0,
+      lands: lands, land: land, people: people, threads: threads, notes: notes, letters: letters, d: d,
+      ranks: [rank('Unknown', '', 'done'), rank('Known', 'trade anywhere', 'done'), rank('Respected', 'the town', 'now'), rank('Honoured', 'governor, council', ''), rank('Influential', 'the court', ''), rank('Powerful', 'the queen\'s ear', '')]
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

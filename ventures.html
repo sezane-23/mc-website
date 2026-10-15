@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ventures — the forum wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#1E1B17}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.25), 0 5px 10px rgba(40,30,20,0.25), 0 16px 30px rgba(40,30,20,0.3)}
+.wall{background-color:#D6CDBB;background-image:radial-gradient(ellipse at 50% 30%, rgba(255,248,230,0.25) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(40,30,20,0.35) 100%), url(assets/c51c1402ee70b728739a9e560f5bffc7.jpg);background-size:auto, auto, cover;background-position:center}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#3A2516}
+.painted{font-family:Cinzel,serif;font-weight:900;letter-spacing:0.12em;color:rgba(142,38,24,0.88);text-shadow:0 0 1px rgba(142,38,24,0.4)}
+.alleyst{background-color:#141418;background-image:radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.5) 100%), url(assets/b635a9d2bcc8cf72cd66d2ffeff0f4b8.jpg);background-size:auto, cover;background-position:center}
+.dark{background:rgba(16,14,13,0.84);border:1px solid rgba(232,220,196,0.18);box-shadow:0 10px 26px rgba(0,0,0,0.55)}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.nail{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #8A8580 0%, #3E3A36 55%, #1E1C1A 100%);box-shadow:1px 2px 2px rgba(0,0,0,0.5)}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #1E1B17; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · THE FORUM</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<!-- YOUR PERSON READS THIS PAGE FOR YOU -->
+<section aria-label="Summary" style="display: grid; grid-template-columns: 1fr 360px; gap: 22px; padding: 16px 20px; background: #EFE3C8; color: #2A2119; border-radius: 3px; box-shadow: 0 14px 30px rgba(0,0,0,0.45); border-left: 6px solid #9A6A12">
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<img src="{{aide.face}}" alt="" style="flex: none; width: 56px; height: 56px; image-rendering: pixelated; box-shadow: 0 0 0 3px #F6EAD0, 0 4px 10px rgba(0,0,0,0.3)">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{aide.head}}</span>
+<sc-for list="{{aide.says}}" as="ai" hint-placeholder-count="3"><span style="{{ai.style}}">{{ai.t}}</span></sc-for>
+<span style="font-size: 13px; color: #6B5A48">{{aide.foot}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-left: 20px; border-left: 1px solid rgba(58,37,22,0.2)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">{{aide.askLabel}}</span>
+<div role="radiogroup" aria-label="{{aide.askLabel}}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px">
+<sc-for list="{{aide.levels}}" as="al" hint-placeholder-count="3"><button role="radio" aria-checked="{{al.on}}" onClick="{{al.click}}" style="{{al.style}}">{{al.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; line-height: 1.4; color: #1F1710">{{aide.will}}</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #E6B8A8">{{kick}}</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">{{title}}</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4"><span style="{{c.style}}">{{c.text}}</span></sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<sc-if value="{{forum}}" hint-placeholder-val="{{ true }}">
+<div class="wall" style="width: 1376px; box-sizing: border-box; padding: 34px 34px 40px; border-radius: 3px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; gap: 22px; color: #2A2119">
+
+<div style="display: flex; align-items: baseline; gap: 18px">
+<span class="painted" style="font-size: 30px">LOCATIONES</span>
+<span style="font-size: 16px; color: #4A3A2A">Public contracts, posted by order of the magistrates of Aquea</span>
+<button onClick="{{enterAlley}}" style="margin-left: auto; align-self: center; display: flex; gap: 12px; align-items: center; min-height: 52px; padding: 6px 18px 6px 8px; background: #241E19; color: #E8DCC4; border: 1px solid #0E0B09; border-radius: 3px; box-shadow: 0 8px 18px rgba(0,0,0,0.35); font-family: Spectral, serif; cursor: pointer">
+<img src="assets/35739c12084cd018e20520e1a5ec3722.png" alt="" style="width: 36px; height: 36px; image-rendering: pixelated; box-shadow: 0 0 0 2px #3A3026">
+<span style="display: flex; flex-direction: column; align-items: flex-start"><span style="font-family: Cinzel, serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: #E6B8A8">THE ALLEY</span><span style="font-size: 14px">Kallias is waiting →</span></span>
+</button>
+</div>
+
+<div style="display: grid; grid-template-columns: 540px 1fr 1fr; gap: 26px; align-items: start">
+
+<!-- TAX FARMING -->
+<div class="paper" style="position: relative; padding: 24px 26px; transform: rotate(-0.5deg); display: flex; flex-direction: column; gap: 12px">
+<span class="nail" style="left: 50%; top: 8px; margin-left: -6px"></span>
+<span class="kicker" style="color: #8E2418">TAX FARMING · SEALED BIDS</span>
+<span style="font-family: Cinzel, serif; font-size: 25px; font-weight: 700; line-height: 1.2; color: #2A1A0E">The taxes of Peruaria, for five years</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">Pay the state up front. Collect the harvest tax from every farm in Peruaria and keep whatever you gather. Good years make fortunes; war and famine ruin men.</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; padding: 10px 0; border-top: 1px solid rgba(58,37,22,0.18); border-bottom: 1px solid rgba(58,37,22,0.18)">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">Collections, per year</span><span style="font-size: 16px; color: #1F1710">9,000 to 14,000 </span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">Lowest bid accepted</span><span style="font-size: 16px; color: #1F1710">38,000 </span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">Bids opened</span><span style="font-size: 16px; color: #1F1710">On the Kalends, in 9 days</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">Cost of collecting</span><span style="font-size: 16px; color: #1F1710">About 15% to agents</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 14px; color: #6B5A48">Rumoured rival bids</span>
+<sc-for list="{{rivals}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; gap: 10px; align-items: center">
+<img src="{{r.face}}" alt="" style="width: 28px; height: 28px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0, 0 2px 4px rgba(0,0,0,0.3)">
+<span style="flex: 1; font-size: 15px; color: #1F1710">{{r.name}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #3A2516">{{r.bid}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: rgba(255,250,238,0.5); border: 1px solid rgba(58,37,22,0.25); border-radius: 3px">
+<span style="font-size: 14px; color: #6B5A48">Your sealed bid</span>
+<div style="display: flex; align-items: center; gap: 10px">
+<button onClick="{{bidDown}}" aria-label="Lower bid by 1,000" style="width: 44px; height: 44px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 22px; color: #3A2516; cursor: pointer">−</button>
+<span style="flex: 1; text-align: center; font-family: Cinzel, serif; font-size: 30px; font-weight: 700; color: #2A1A0E">{{bidText}}</span>
+<button onClick="{{bidUp}}" aria-label="Raise bid by 1,000" style="width: 44px; height: 44px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 22px; color: #3A2516; cursor: pointer">+</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #6B5A48">Chance to win</span><span style="color: #1F1710; font-weight: 600">{{winText}}</span></span>
+<div style="height: 8px; border-radius: 4px; background: rgba(58,37,22,0.15)"><div style="{{winBar}}"></div></div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 14px; color: #6B5A48">Partners who stand surety with you</span>
+<sc-for list="{{partners}}" as="p" hint-placeholder-count="3">
+<button onClick="{{p.click}}" style="{{p.style}}">
+<span style="{{p.box}}">{{p.mark}}</span>
+<span style="flex: 1; display: flex; flex-direction: column; text-align: left"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{p.name}}</span><span style="font-size: 13px; color: #6B5A48">{{p.note}}</span></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #3A2516">{{p.share}}</span>
+</button>
+</sc-for>
+<span style="{{suretyStyle}}">{{suretyText}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; color: #6B5A48">{{outcomeTitle}}</span>
+<sc-for list="{{outcomes}}" as="o" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 4px 0; border-top: 1px solid rgba(58,37,22,0.1)"><span style="font-size: 15px; color: #1F1710">{{o.k}}</span><span style="{{o.style}}">{{o.v}}</span></div>
+</sc-for>
+<span style="font-size: 13px; color: #8E2418; padding-top: 4px">Collecting in a foreign land makes enemies. Peruarians will curse the name of the house that taxes them.</span>
+</div>
+
+<sc-if value="{{bidOpen}}" hint-placeholder-val="{{ true }}">
+<button onClick="{{submitBid}}" style="{{submitStyle}}">{{submitLabel}}</button>
+</sc-if>
+<sc-if value="{{bidSent}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; background: rgba(44,95,80,0.12); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">
+<span style="font-size: 15px; font-weight: 600; color: #1F1710">{{sentText}}</span>
+<span style="font-size: 14px; color: #3A2516">The magistrate opens the bids on the Kalends. You’ll hear by letter. Until then, Fulvius will try to learn your number.</span>
+<button onClick="{{withdraw}}" style="align-self: flex-start; min-height: 32px; padding: 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Withdraw the bid</button>
+</div>
+</sc-if>
+</div>
+
+<!-- ARMY SUPPLY + TEMPLE -->
+<sc-for list="{{contracts}}" as="k" hint-placeholder-count="2">
+<div class="paper" style="{{k.style}}">
+<span class="nail" style="left: 50%; top: 8px; margin-left: -6px"></span>
+<span class="kicker" style="color: #8E2418">{{k.kicker}}</span>
+<span style="font-family: Cinzel, serif; font-size: 22px; font-weight: 700; line-height: 1.2; color: #2A1A0E">{{k.title}}</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">{{k.text}}</span>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 0; border-top: 1px solid rgba(58,37,22,0.18); border-bottom: 1px solid rgba(58,37,22,0.18)">
+<sc-for list="{{k.terms}}" as="t" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 10px"><span style="font-size: 14px; color: #6B5A48">{{t.k}}</span><span style="font-size: 15px; color: #1F1710; text-align: right">{{t.v}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; color: #6B5A48">{{k.meterLabel}}</span>
+<div style="height: 10px; border-radius: 5px; background: rgba(58,37,22,0.15); overflow: hidden"><div style="{{k.meter}}"></div></div>
+<span style="font-size: 13px; color: #3A2516">{{k.meterNote}}</span>
+</div>
+<span style="{{k.riskStyle}}">{{k.risk}}</span>
+<span style="font-size: 14px; color: #2C5F50">{{k.reward}}</span>
+<sc-if value="{{k.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 8px">
+<button onClick="{{k.sign}}" style="flex: 1; min-height: 46px; background: #3A2516; color: #FFF6E4; border: none; border-radius: 3px; font-family: Cinzel, serif; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer">Sign the contract</button>
+<button onClick="{{k.pass}}" style="min-height: 46px; padding: 6px 16px; background: transparent; color: #2A1A0E; border: 1px solid #5A3A22; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Pass</button>
+</div>
+</sc-if>
+<sc-if value="{{k.decided}}" hint-placeholder-val="{{ false }}">
+<div style="{{k.resultStyle}}"><span style="font-size: 15px; color: #1F1710">{{k.result}}</span><button onClick="{{k.undo}}" style="align-self: flex-start; min-height: 30px; padding: 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Change your mind</button></div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+
+<div style="display: flex; align-items: baseline; gap: 18px; margin-top: 10px">
+<span class="painted" style="font-size: 30px">VENALIA</span>
+<span style="font-size: 16px; color: #4A3A2A">For sale: land, businesses and shares. Buy one and it moves to your Business screen.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px; align-items: start">
+<sc-for list="{{sale}}" as="sg" hint-placeholder-count="3">
+<div class="paper" style="{{sg.style}}">
+<span class="nail" style="left: 50%; top: 10px; margin-left: -6px"></span>
+<span class="kicker">{{sg.title}}</span>
+<sc-for list="{{sg.items}}" as="it" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 10px 0; border-top: 1px solid rgba(58,37,22,0.14)">
+<span style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><span style="font-size: 16px; font-weight: 600; color: #1F1710">{{it.name}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #3A2516; white-space: nowrap">{{it.price}}</span></span>
+<span style="font-size: 14px; line-height: 1.4; color: #4A3A2A">{{it.note}}</span>
+<button onClick="{{it.click}}" style="{{it.btn}}">{{it.label}}</button>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start">
+
+<!-- GUILD -->
+<div class="paper" style="position: relative; padding: 22px 24px; transform: rotate(-0.3deg); display: flex; flex-direction: column; gap: 10px">
+<span class="nail" style="left: 14px; top: 10px"></span><span class="nail" style="right: 14px; top: 10px"></span>
+<span class="kicker">COLLEGIUM OF WINE MERCHANTS</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">You’re a member: 50  a month. The guild buries its dead, settles quarrels and speaks for wine merchants to the magistrates.</span>
+<div style="padding: 12px 14px; background: rgba(255,250,238,0.55); border: 1px solid rgba(58,37,22,0.25); border-radius: 3px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; font-weight: 600; color: #1F1710">Vote at the next meeting: a minimum price for wine in Aquea?</span>
+<span style="font-size: 13px; color: #6B5A48">{{guild.note}}</span>
+<div style="display: flex; gap: 8px">
+<sc-for list="{{guild.votes}}" as="v" hint-placeholder-count="3"><button onClick="{{v.click}}" style="{{v.style}}">{{v.label}}</button></sc-for>
+</div>
+</div>
+</div>
+
+<!-- SMUGGLING NOTE -->
+<div style="position: relative; padding: 22px 24px; transform: rotate(1.4deg); display: flex; flex-direction: column; gap: 10px; background: #3B332B; background-image: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2)); color: #E8DCC4; box-shadow: 0 6px 14px rgba(0,0,0,0.35), 0 18px 34px rgba(0,0,0,0.3); clip-path: polygon(0 2%, 8% 0, 22% 1.5%, 40% 0, 63% 1%, 80% 0, 100% 1.5%, 99% 30%, 100% 62%, 98.5% 100%, 70% 98.5%, 45% 100%, 20% 98.5%, 0 100%, 1% 60%)">
+<span class="nail" style="left: 50%; top: 10px; margin-left: -6px"></span>
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8">LEFT UNDER YOUR DOOR</span>
+<div style="display: flex; gap: 12px; align-items: center">
+<img src="assets/35739c12084cd018e20520e1a5ec3722.png" alt="" style="width: 40px; height: 40px; image-rendering: pixelated; box-shadow: 0 0 0 2px #2A231C">
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4">“I can bring Mirenian purple past the customs men at Sabino. No duty paid. You’d clear 600 more on a cargo. Ask for Kallias at the Red Anchor.”</span>
+</div>
+<span style="font-size: 14px; color: #C9BBA0">One run in seven gets caught: cargo seized, a fine, and your name in the magistrate’s book.</span>
+<span style="font-size: 14px; color: #E8DCC4">Kallias says there’s more where that came from, for a man who can keep his mouth shut.</span>
+<button onClick="{{enterAlley}}" style="min-height: 50px; margin-top: 4px; background: #E6B8A8; color: #1E1612; border: none; border-radius: 3px; font-family: Cinzel, serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer">Meet him in the alley →</button>
+</div>
+</div>
+
+</div>
+</sc-if>
+
+<sc-if value="{{alley}}" hint-placeholder-val="{{ false }}">
+<div class="alleyst" style="width: 1376px; box-sizing: border-box; padding: 30px 32px 40px; border-radius: 3px; box-shadow: 0 30px 60px rgba(0,0,0,0.7); display: flex; flex-direction: column; gap: 22px; color: #E8DCC4; animation: fadein 0.5s ease-out both">
+
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap">
+<button onClick="{{leaveAlley}}" style="min-height: 44px; padding: 6px 18px; background: rgba(16,14,13,0.75); color: #E8DCC4; border: 1px solid rgba(232,220,196,0.35); border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">← Back to the forum</button>
+<div class="dark" style="width: 440px; padding: 14px 18px; border-radius: 4px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8">NOTORIETY</span><span style="{{heatWordStyle}}">{{heatWord}}</span></div>
+<div style="display: flex; gap: 3px"><sc-for list="{{heatPips}}" as="hp" hint-placeholder-count="10"><span style="{{hp.style}}"></span></sc-for></div>
+<span style="font-size: 13px; color: #C9BBA0">{{heatNote}}</span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 460px 1fr; gap: 24px; align-items: start">
+<div class="dark" style="padding: 18px 20px; border-radius: 4px; display: flex; gap: 16px; align-items: center">
+<div style="flex: none; padding: 4px; background: #2A231C; box-shadow: 0 0 22px rgba(255,190,110,0.25)"><img src="assets/35739c12084cd018e20520e1a5ec3722.png" alt="" style="display: block; width: 64px; height: 64px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; color: #F2E8D5">Kallias, your fixer</span><span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4; color: #E8DCC4">“No names out here. Pick your trade, and I’ll tell you who to see.”</span></div>
+</div>
+<div role="tablist" aria-label="Trades of the alley" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px">
+<sc-for list="{{atabs}}" as="t" hint-placeholder-count="6">
+<button role="tab" onClick="{{t.click}}" style="{{t.style}}"><span style="font-family: Cinzel, serif; font-size: 15px; font-weight: 700">{{t.label}}</span><span style="font-size: 12px; opacity: 0.8">{{t.sub}}</span></button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start">
+<div class="dark" style="padding: 20px 22px; border-radius: 4px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Cinzel, serif; font-size: 22px; font-weight: 700; color: #F2E8D5">{{at.title}}</span>
+<span style="font-size: 15px; line-height: 1.5; color: #D8CCB4">{{at.intro}}</span>
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8; margin-top: 6px">WHO YOU KNOW</span>
+<sc-for list="{{at.contacts}}" as="ct" hint-placeholder-count="2"><span style="font-size: 14px; color: #E8DCC4">• {{ct}}</span></sc-for>
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8; margin-top: 6px">IF YOU’RE CAUGHT</span>
+<span style="font-size: 14px; line-height: 1.45; color: #D8A090">{{at.caught}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start">
+<sc-for list="{{jobs}}" as="j" hint-placeholder-count="3">
+<div class="dark" style="{{j.style}}">
+<span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; line-height: 1.25; color: #F2E8D5">{{j.title}}</span>
+<span style="font-size: 14px; line-height: 1.45; color: #D8CCB4">{{j.text}}</span>
+<div style="display: flex; flex-direction: column; gap: 3px; padding: 8px 0; border-top: 1px solid rgba(232,220,196,0.15); border-bottom: 1px solid rgba(232,220,196,0.15)">
+<span style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #A89C86">Pays</span><span style="font-family: 'IBM Plex Mono', monospace; color: #9FD4A8">{{j.pay}}</span></span>
+<span style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #A89C86">Notoriety</span><span style="font-family: 'IBM Plex Mono', monospace; color: #E6B8A8">{{j.heat}}</span></span>
+<span style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #A89C86">Chance it goes wrong</span><span style="font-family: 'IBM Plex Mono', monospace; color: #F0A890">{{j.risk}}</span></span>
+</div>
+<sc-if value="{{j.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 8px"><button onClick="{{j.take}}" style="flex: 1; min-height: 42px; background: #E6B8A8; color: #1E1612; border: none; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer">Take it</button><button onClick="{{j.pass}}" style="min-height: 42px; padding: 4px 14px; background: transparent; color: #E8DCC4; border: 1px solid rgba(232,220,196,0.35); border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Pass</button></div>
+</sc-if>
+<sc-if value="{{j.done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; background: rgba(255,255,255,0.05); border-left: 3px solid #E6B8A8; animation: fadein 0.4s ease-out both"><span style="font-size: 14px; line-height: 1.4; color: #F2E8D5">{{j.result}}</span><button onClick="{{j.undo}}" style="align-self: flex-start; min-height: 28px; padding: 0; border: none; background: transparent; color: #A89C86; font-family: Spectral, serif; font-size: 12px; text-decoration: underline; cursor: pointer">Undo</button></div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div class="dark" style="padding: 18px 22px; border-radius: 4px; display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8">COOLING DOWN</span><span style="font-size: 14px; color: #C9BBA0">Ways to make the watch forget your name.</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px">
+<sc-for list="{{cool}}" as="cl" hint-placeholder-count="3">
+<button onClick="{{cl.click}}" style="{{cl.style}}"><span style="font-size: 15px; font-weight: 600">{{cl.label}}</span><span style="font-size: 13px; opacity: 0.8">{{cl.hint}}</span></button>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var F = {
+  greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png', fulvius: 'assets/225899a8700d3084ef954b85828dc4bd.png', senator: 'assets/872bbd3ce5a5d5156ee9f28906de862d.png',
+  client: 'assets/054107f26dcd34ab67e0139fe33c08b3.png', lucia: 'assets/825d687ad982397231b83bbd7a9f3b55.png', taxman: 'assets/0826644edfdf42a585c7e8d8765821bb.png'
+};
+var SECURITY = 16000;   // what your estates and cash can stand surety for
+var PARTNERS = [
+  { id: 'dem', name: 'Demetrios', note: 'Your partner in the Thetis. Shrewd, wants a seat on the board.', share: 30 },
+  { id: 'bank', name: 'The Caecilius bank', note: 'Money for a price: takes its share and 1% a month.', share: 40 },
+  { id: 'guild', name: 'Collegium of Wine Merchants', note: 'Guild money, guild politics.', share: 20 }
+];
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+
+var ALLEY = {
+  smuggle: { label: 'Smuggling', sub: 'Past the customs men', title: 'Smuggling', intro: 'Goods that never see a customs house. The duty you don’t pay is your profit, until someone checks the cargo.',
+    contacts: ['Kallias, captain of the Swallow', 'A customs clerk at Sabino who likes wine'], caught: 'Cargo seized, a fine of twice the duty, and your name in the magistrate’s book.',
+    jobs: [['purple', 'Mirenian purple past Sabino', 'Dye worth a fortune, landed at night on the beach north of the harbour.', 600, 2, '1 in 7', 'The dye comes ashore at night. 600  clear, and Kallias knows your secret now.'],
+      ['wine', 'Caleonian wine, no duty', 'A night barge up the river into Aquea, past the toll chain.', 350, 1, '1 in 10', 'Forty amphorae in your warehouse by dawn. Silvanus asks no questions.'],
+      ['swords', 'Swords for the hill tribes', 'Ostoronian rebels want iron. They pay in silver, and the tyrant would pay more for your head.', 2000, 5, '1 in 4', 'The swords reach the hills. The rebels toast your name, which is a problem.']] },
+  dice: { label: 'Dice dens', sub: 'Back rooms and loaded dice', title: 'Dice and back rooms', intro: 'Gambling is illegal except at festivals, and everyone does it anyway. The house always wins, if the house is you.',
+    contacts: ['The brothers who run the Red Anchor’s back room', 'Quintus, your brother (a regular, sadly)'], caught: 'The aediles close the room, fine you, and every gossip in Aquea knows by morning.',
+    jobs: [['backroom', 'A back room at the Golden Cup', 'Turn the cellar of your own tavern into a dice room. Rich guests stay till dawn.', 90, 1, '1 in 12 a season', 'The dice room opens. Tertius loves it. So do the aediles’ nephews.'],
+      ['anchor', 'Buy into the Red Anchor’s den', 'A third of the take, and a say in who gets thrown out.', 140, 2, '1 in 8 a season', 'You own a third of the Red Anchor’s den. Your brother’s debts are suddenly negotiable.'],
+      ['loaded', 'Loaded dice for a rich fool', 'A senator’s son with more money than sense. One night, one table.', 900, 3, '1 in 3', 'He loses 900 and swears revenge on the dice-maker. Not on you. Yet.']] },
+  fence: { label: 'The fence', sub: 'Goods that fell off a cart', title: 'The fence', intro: 'Stolen goods, sold cheap to a man who can sell them on far from where they went missing.',
+    contacts: ['Old Mouse, who buys anything', 'A silversmith in Durona who melts things down'], caught: 'The owner wants his goods back, the watch wants a name, and you’re standing there holding the cups.',
+    jobs: [['cups', 'A crate of silver cups', 'Engraved with a family crest. Worth 900 melted down in Durona.', 600, 2, '1 in 6', 'The cups are melted in Durona. 600 clear. The crest belonged to a magistrate.'],
+      ['cargo', 'A cargo “found” at sea', 'Olive oil from a ship that sank suspiciously close to shore.', 450, 2, '1 in 8', 'The oil goes into your warehouse with new seals. Nobody asks.'],
+      ['horses', 'Six horses with no papers', 'Good Ostoronian stock. Their owner is in no position to complain.', 700, 3, '1 in 5', 'The horses are sold in Coria. Their brands were fresh.']] },
+  forge: { label: 'Forgery', sub: 'Papers and seals', title: 'Forgery', intro: 'A good forger can make a letter of passage, a customs receipt or a magistrate’s seal. A great one can make a will.',
+    contacts: ['Philo, a scribe with steady hands', 'A seal-cutter who works by candlelight'], caught: 'Forgery of official seals is punished with exile. Your estates can be seized.',
+    jobs: [['passage', 'A letter of passage, forged', 'Into Ostoronia without paying the tyrant’s clerks.', 25, 1, '1 in 10', 'Philo’s letter is better than the real thing. The guards wave you through.'],
+      ['receipts', 'Customs receipts for your cargo', 'Pay half the duty, show a receipt for all of it.', 300, 2, '1 in 6', 'The receipts pass. Philo wants a bigger cut next time.'],
+      ['seal', 'A magistrate’s seal', 'Award yourself a contract before the bids are opened.', 2500, 6, '1 in 3', 'The contract is yours on paper. If anyone compares seals, it’s exile.']] },
+  protect: { label: 'Protection', sub: 'Pay us, or else', title: 'Protection', intro: 'Some men pay for protection from the watch. Others pay for protection from you.',
+    contacts: ['Ten men from the docks who owe Kallias', 'A watch captain with expensive tastes'], caught: 'The shopkeepers testify. The watch arrests your men, and your men talk.',
+    jobs: [['guard', 'Hire the docks gang as guards', 'Pay them to guard your warehouse, and they stop robbing it.', 0, 1, '1 in 20', 'Your warehouse has never been safer. The gang drinks at your tavern now.'],
+      ['racket', 'Protection on the Via Nova', 'Twelve shops, a few coins a week each, or their windows break.', 250, 4, '1 in 5 a season', 'The shops pay. They hate you, quietly. One of them writes to the magistrate.'],
+      ['fulvius', 'A fire at one of Fulvius’s bakeries', 'Nobody hurt. Just the ovens.', 0, 6, '1 in 3', 'The bakery burns at night. Fulvius knows who did it, and he can’t prove it. Yet.']] },
+  poppy: { label: 'Poppy', sub: 'Juice of the poppy', title: 'The poppy', intro: 'Poppy juice from Mirene. Physicians buy it for pain and sleep. The dens buy it for other reasons, and pay three times as much.',
+    contacts: ['A Mirenian trader at the harbour', 'Two physicians in Aquea who ask no questions', 'The dens behind the Red Anchor'], caught: 'Selling to physicians is merely frowned on. Selling to the dens brings fines, and an angry city when its sons waste away.',
+    jobs: [['physic', 'A cask for the physicians', 'Sold as medicine. Almost respectable.', 400, 1, '1 in 15', 'The physicians pay well and thank you. The poppy eases a lot of pain in Aquea.'],
+      ['dens', 'A cask for the dens', 'Three times the price, no questions, and a growing number of customers.', 1200, 4, '1 in 5', 'The dens take all you can bring. There are more of them every season. People are starting to notice why.'],
+      ['corner', 'Corner the poppy trade', 'Buy every cask that lands at Aquea for a season. Name your price.', 3500, 7, '1 in 3', 'You own the poppy trade. The physicians hate you, the dens need you, and the governor is asking questions.']] }
+};
+var ATAB_ORDER = ['smuggle', 'dice', 'fence', 'forge', 'protect', 'poppy'];
+var __AIDE = function (self, A) {
+  var st = self.state || {}, lv = st.aideLv === undefined ? A.def : st.aideLv;
+  var tone = { good: '#1F3A30', warn: '#8E2418', info: '#1F1710' };
+  return { face: A.face, head: A.short.toUpperCase() + ', ' + A.role.toUpperCase() + ' · THE SHORT VERSION', foot: 'The full page is below, if you want it.',
+    says: A.says.map(function (s) { return { t: '• ' + s[1], style: 'font-size: 16px; line-height: 1.4; color: ' + tone[s[0]] + (s[0] === 'warn' ? '; font-weight: 600' : '') }; }),
+    askLabel: 'HOW MUCH CAN ' + A.short.toUpperCase() + ' DECIDE?', will: A.will[lv],
+    levels: ['Ask me first', 'Small things', 'Handle it'].map(function (l, k) { var on = lv === k;
+      return { label: l, on: on ? 'true' : 'false', click: function () { self.setState(Object.assign({}, self.state || {}, { aideLv: k })); },
+        style: 'min-height: 40px; padding: 4px 6px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516; font-weight: 600' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)') }; }) };
+};
+var AIDE = {"face": "assets/225761544304c6952429089c94176922.png", "role": "your doorkeeper, who sorts the offers", "short": "Bato", "says": [["good", "Two offers are worth your time: grain for the Third Legion, and marble for the Temple of Fortuna."], ["info", "The rest is small, or risky, or both."], ["warn", "Kallias from the alley came by again. I sent him off. Say the word if you want him let in."]], "will": ["He brings you every offer, however small.", "He turns away small offers and anyone from the alley. Big offers come to you.", "He accepts safe contracts under 1,000 by himself, and turns away the rest."], "def": 1};
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var fmt = function (n) { return Math.round(n).toLocaleString('en-US'); };
+    var bid = st.bid || 44000, picks = st.picks || { dem: true }, sent = !!st.sent;
+    var other = PARTNERS.reduce(function (a, p) { return a + (picks[p.id] ? p.share : 0); }, 0);
+    var mine = 100 - other;
+    var myStake = bid * mine / 100;
+    var covered = myStake <= SECURITY;
+    var win = Math.max(0.03, Math.min(0.95, Math.pow((bid - 38000) / 18000, 0.85)));
+    var scen = [['Good harvests, five years of peace', 14000], ['An ordinary five years', 11500], ['A war or a famine year', 8600]];
+    var outcomes = scen.map(function (s) {
+      var profit = (s[1] * 5 * 0.85 - bid) * mine / 100;
+      return { k: s[0], v: (profit >= 0 ? '+' : '−') + fmt(Math.abs(profit)) + ' ', style: 'font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 600; color: ' + (profit >= 0 ? '#2C5F50' : '#8E2418') };
+    });
+    var tick = function (on) { return 'flex: none; width: 24px; height: 24px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; ' + (on ? 'background: #2C5F50; color: #FFF6E4; border: 1px solid #2C5F50' : 'background: rgba(255,250,238,0.6); color: transparent; border: 1px solid #5A3A22'); };
+    var partners = PARTNERS.map(function (p) {
+      var on = !!picks[p.id];
+      return { name: p.name, note: p.note, share: p.share + '%', mark: on ? '✓' : '', box: tick(on),
+        click: function () { if ((self.state || {}).sent) return; var m = Object.assign({}, (self.state || {}).picks || { dem: true }); m[p.id] = !m[p.id]; put({ picks: m }); },
+        style: 'display: flex; gap: 10px; align-items: center; min-height: 50px; padding: 6px 12px; background: rgba(255,250,238,0.45); border: 1px solid rgba(58,37,22,0.22); border-radius: 3px; font-family: Spectral, serif; cursor: pointer' };
+    });
+
+
+    var inAlley = !!st.alley, atab = st.atab || 'smuggle', jobs = st.jobs || {}, cooled = st.cooled || {};
+    var heat = 2;
+    ATAB_ORDER.forEach(function (k) { ALLEY[k].jobs.forEach(function (j) { if (jobs[j[0]] === 'take') heat += j[4]; }); });
+    heat -= (cooled.bribe ? 3 : 0) + (cooled.lie ? 2 : 0) + (cooled.temple ? 1 : 0);
+    heat = Math.max(0, Math.min(10, heat));
+    var A = ALLEY[atab];
+    var alleyVals = {
+      heatWord: heat <= 3 ? 'Unknown' : heat <= 7 ? 'Watched' : 'Wanted',
+      heatWordStyle: 'font-family: Cinzel, serif; font-size: 15px; font-weight: 700; color: ' + (heat <= 3 ? '#9FD4A8' : heat <= 7 ? '#F0C070' : '#F08070'),
+      heatPips: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (i) { return { style: 'flex: 1; height: 10px; border-radius: 2px; background: ' + (i < heat ? (i < 4 ? '#7FB08A' : i < 8 ? '#D9A44A' : '#D0604A') : 'rgba(232,220,196,0.12)') }; }),
+      heatNote: heat <= 3 ? 'The watch doesn’t know your name.' : heat <= 7 ? 'The watch asks about you. Bribes cost more; respectable houses get careful.' : 'Raids, fines, seized goods. Exile is on the table.',
+      atabs: ATAB_ORDER.map(function (k) { var on = k === atab, n = ALLEY[k].jobs.filter(function (j) { return jobs[j[0]] === 'take'; }).length;
+        return { label: ALLEY[k].label, sub: n ? n + ' running' : ALLEY[k].sub, click: function () { put({ atab: k }); },
+          style: 'display: flex; flex-direction: column; align-items: flex-start; min-height: 58px; padding: 8px 14px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' +
+            (on ? 'background: #E6B8A8; color: #1E1612; border: none; box-shadow: 0 0 22px rgba(230,184,168,0.3)' : 'background: rgba(16,14,13,0.8); color: #E8DCC4; border: 1px solid rgba(232,220,196,0.25)') }; }),
+      at: { title: A.title, intro: A.intro, contacts: A.contacts, caught: A.caught },
+      jobs: A.jobs.map(function (j, i) { var s0 = jobs[j[0]];
+        var set = function (v) { return function () { var m = Object.assign({}, (self.state || {}).jobs || {}); if (v === null) delete m[j[0]]; else m[j[0]] = v; put({ jobs: m }); }; };
+        return { title: j[1], text: j[2], pay: j[3] ? '+' + j[3].toLocaleString('en-US') + ' ' : 'Saves you trouble', heat: '+' + j[4], risk: j[5], open: s0 === undefined, done: s0 !== undefined,
+          result: s0 === 'take' ? j[6] : 'You pass. Kallias shrugs: someone else will take it.', take: set('take'), pass: set('pass'), undo: set(null),
+          style: 'padding: 16px 18px; border-radius: 4px; display: flex; flex-direction: column; gap: 8px; transform: rotate(' + [-0.6, 0.4, -0.3][i] + 'deg)' + (j[4] >= 5 ? '; border-top: 3px solid #D0604A' : '') }; }),
+      cool: [['bribe', 'Bribe the watch captain', '300 . −3 notoriety.'], ['lie', 'Lie low for a season', 'No new jobs. −2 notoriety.'], ['temple', 'A gift to the temple', '200 . People see you pious. −1.']].map(function (c) { var on = !!cooled[c[0]];
+        return { label: on ? c[1] + ' ✓' : c[1], hint: c[2], click: function () { var m = Object.assign({}, (self.state || {}).cooled || {}); m[c[0]] = !m[c[0]]; put({ cooled: m }); },
+          style: 'display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 58px; padding: 8px 14px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; text-align: left; ' + (on ? 'background: rgba(127,176,138,0.18); color: #CFEAD6; border: 1px solid #7FB08A' : 'background: rgba(255,255,255,0.04); color: #E8DCC4; border: 1px solid rgba(232,220,196,0.25)') }; })
+    };
+    // contracts
+    var csign = st.contract || {};
+    var mk = function (id, o) {
+      var dec = csign[id];
+      o.open = dec === undefined; o.decided = dec !== undefined;
+      o.result = dec === 'sign' ? o.signed : dec === 'pass' ? o.passed : '';
+      o.resultStyle = 'display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-left: 3px solid ' + (dec === 'sign' ? '#2C5F50; background: rgba(44,95,80,0.1)' : '#6B5A48; background: rgba(107,90,72,0.08)') + '; animation: fadein 0.4s ease-out both';
+      o.sign = function () { var m = Object.assign({}, (self.state || {}).contract || {}); m[id] = 'sign'; put({ contract: m }); };
+      o.pass = function () { var m = Object.assign({}, (self.state || {}).contract || {}); m[id] = 'pass'; put({ contract: m }); };
+      o.undo = function () { var m = Object.assign({}, (self.state || {}).contract || {}); delete m[id]; put({ contract: m }); };
+      return o;
+    };
+    var contracts = [
+      mk('army', { kicker: 'ARMY SUPPLY', title: 'Grain for the Third Legion', style: 'position: relative; padding: 22px 24px; transform: rotate(0.6deg); display: flex; flex-direction: column; gap: 10px',
+        text: 'The legion on the Ostoronian border needs grain every month. The treasury pays well above market, on delivery.',
+        terms: [{ k: 'Each month, for 6 months', v: '2,000 modii' }, { k: 'Treasury pays', v: '0.55  a modius' }, { k: 'Market price today', v: '0.34 ' }, { k: 'Your farm can supply', v: 'about 60%; buy the rest' }],
+        meterLabel: 'How the war is going', meter: 'height: 10px; width: 46%; background: linear-gradient(90deg, #2C5F50, #9A6A12)', meterNote: 'Even. Neither side is winning. Rumours of an Ostoronian push in spring.',
+        risk: 'If the legion is beaten, the treasury may pay late, or not at all.', riskStyle: 'font-size: 14px; font-weight: 600; color: #8E2418',
+        reward: 'Expected: +2,500  over six months, and a friend in the army.',
+        signed: 'Signed. Marcus starts sending grain to the border next month. Watch the war news.', passed: 'You let it go. House Fulvius signs it the next morning.' }),
+      mk('temple', { kicker: 'PUBLIC WORKS', title: 'Marble for the Temple of Fortuna', style: 'position: relative; padding: 22px 24px; transform: rotate(-0.4deg); display: flex; flex-direction: column; gap: 10px',
+        text: 'The new temple in Aquea needs white marble for its steps and columns, and one flawless block for the goddess herself.',
+        terms: [{ k: 'Blocks, Good or better', v: '120 at 34 ' }, { k: 'The statue block, Prime', v: '1,800 ' }, { k: 'Deadline', v: 'One year from signing' }, { k: 'Late delivery', v: 'Fine of 10% a month' }],
+        meterLabel: 'What your quarry can supply now', meter: 'height: 10px; width: 30%; background: #5E7A4A', meterNote: '36 of 120 blocks in your yard. Tullus thinks the rest takes eight months.',
+        risk: 'A bad winter in the quarry could make you late.', riskStyle: 'font-size: 14px; font-weight: 600; color: #8E2418',
+        reward: 'Expected: +5,800 , and your name carved on the temple steps.',
+        signed: 'Signed. The priests want to see the white seam. Tullus is told to cut for the temple first.', passed: 'You pass. A Pisella quarry takes the contract; their marble is grey.' })
+    ];
+
+    // managers
+    var tChoice = st.tertius;
+    var tChoices = [['Raise his wage by a third', '+15/mo', 'Tertius stays, for the money. You wonder for how long.'], ['Offer him a tenth of the tavern', '10% share', 'Tertius is now a partner. He tells Fulvius’s man to get lost.'], ['Dismiss him today', '', 'Tertius leaves, and opens a tavern three doors down. Half your regulars follow him.']];
+    var tertius = { open: tChoice === undefined, done: tChoice !== undefined,
+      text: '“Tertius, who runs your tavern, was seen dining with House Fulvius’s steward. Twice.”',
+      result: tChoice !== undefined ? tChoices[tChoice][2] : '',
+      choices: tChoices.map(function (c, i) { return { label: c[0], cost: c[1], click: function () { put({ tertius: i }); } }; }) };
+    var loyStyle = function (c) { return 'font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 10px; color: ' + c + '; border: 1px solid ' + c; };
+    var managers = [
+      { name: 'Tertius', role: 'The Golden Cup tavern, Aquea', face: F.client, loy: tChoice === 2 ? 'Gone' : tChoice === 1 ? 'Partner' : tChoice === 0 ? 'Bought' : 'Wavering', loyStyle: loyStyle(tChoice === 1 ? '#2C5F50' : '#8E2418') },
+      { name: 'Pomponia', role: 'Your bakery on the Via Lata', face: F.lucia, loy: 'Loyal', loyStyle: loyStyle('#2C5F50') }
+    ];
+
+    // rival
+    var rC = st.rival;
+    var rChoices = [['Match his prices', 'Lose about 200 a month. Can you outlast him?', 'You match him. Both of you lose money. Fulvius has deeper pockets, for now.'],
+      ['Ignore it, sell better bread', 'Keep the customers who care about quality.', 'You lose the poor customers and keep the rich ones. Profit falls a little.'],
+      ['Complain to the aediles', 'Selling below cost is frowned on. Costs a favour.', 'The aedile has a word with Fulvius. Prices creep back up. Fulvius knows it was you.'],
+      ['Spread word his flour is chalked', 'It might even be true. Risky.', 'The rumour spreads fast. Fulvius’s bakeries empty. He is hiring men to find who started it.']];
+    var rival = { open: rC === undefined, done: rC !== undefined, result: rC !== undefined ? rChoices[rC][2] : '',
+      choices: rChoices.map(function (c, i) { return { label: c[0], hint: c[1], click: function () { put({ rival: i }); } }; }) };
+
+    // guild
+    var gv = st.vote;
+    var vb = function (k, label) { var on = gv === k; return { label: label, click: function () { put({ vote: k }); },
+      style: 'flex: 1; min-height: 42px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: none; font-weight: 600' : 'background: transparent; color: #2A1A0E; border: 1px solid #5A3A22') }; };
+    var guildNote = gv === 'for' ? 'You vote for it. Wine prices rise; the aediles grumble about the guild.' : gv === 'against' ? 'You vote against. The big houses note who stood in their way.' : gv === 'abstain' ? 'You stay out of it. Nobody thanks you.' : 'The big houses want it. The aediles don’t. Your vote is watched.';
+
+    // credit
+    var borrowed = !!st.borrowed;
+    var owed = 3000 + (borrowed ? 2000 : 0), limit = 8000;
+
+    // smuggling
+    var sm = st.smug;
+    var sChoices = [['Meet Kallias at the Red Anchor', 'One cargo, see how it goes.', 'The dye arrives at night. 600  more profit, and Kallias knows your secret now.'],
+      ['Burn the note', 'Not worth the risk.', 'You burn it. Somebody else will take the offer.'],
+      ['Hand it to the customs officers', 'The governor will be grateful. Kallias’s friends won’t.', 'Kallias is arrested at the Red Anchor. The governor sends thanks. Someone scratches your door that night.']];
+    var smug = { open: sm === undefined, done: sm !== undefined, result: sm !== undefined ? sChoices[sm][2] : '',
+      choices: sChoices.map(function (c, i) { return { label: c[0], hint: c[1], click: function () { put({ smug: i }); } }; }) };
+
+    var chip = function (text, kind) {
+      var c = { plain: ['rgba(242,232,213,0.1)', '#F2E8D5', 'rgba(242,232,213,0.25)'], good: ['rgba(120,190,150,0.15)', '#BFE6CC', 'rgba(120,190,150,0.35)'], bad: ['rgba(226,96,72,0.18)', '#F6B4A6', 'rgba(226,96,72,0.45)'] }[kind];
+      return { text: text, style: 'font-size: 15px; padding: 6px 14px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + '; border: 1px solid ' + c[2] };
+    };
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E6B8A8' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9D2C4') };
+    };
+    var sh = function (name, parts, div, note) {
+      return { name: name, div: div, note: note, parts: parts.map(function (p, i) { return { label: p[1] >= 20 ? p[0] + ' ' + p[1] + '%' : '', style: 'width: ' + p[1] + '%; background: ' + (i === 0 ? '#3A2516' : ['#9A6A12', '#5E7A4A', '#6B5A48'][i - 1]) + '; color: #FFF6E4; font-size: 11px; display: flex; align-items: center; padding-left: 6px; white-space: nowrap; overflow: hidden' }; }) };
+    };
+    var tavernParts = tChoice === 1 ? [['You', 90], ['Tertius', 10]] : [['You', 100]];
+    return {
+      aide: __AIDE(this, AIDE), nav: __NAV.top('Ventures', navItem), subnav: __NAV.sub('Ventures'), hasSub: __NAV.sub('Ventures').length > 0,
+      chips: [chip('3 contracts posted', 'plain'), chip('8 things for sale', 'plain'), chip('1 shady offer', 'bad')],
+      sale: [
+        ['LAND FOR SALE', [['Salt pans at Nebaella', '3,400', 'Peruaria coast. Salt never goes out of fashion.'], ['Pasture at Arvino', '2,100', 'Helerensia. Cattle, hides and cheese.'], ['Old Septimius\u2019s vines', '2,200', 'Twenty iugera next to your vineyard, badly neglected.']], -0.5],
+        ['BUSINESSES FOR SALE', [['A fullery in Durona', '1,800', 'Washes and finishes wool. The owner died; his widow wants out.'], ['The Baths of Aemilius, Aquea', '5,500', 'The city\u2019s second-best baths. Everyone who matters bathes somewhere.'], ['A bakery on the Via Nova', '900', 'Cheap because it\u2019s failing. Fulvius undercut it too.']], 0.4],
+        ['SHARES ON OFFER', [['30% of a Coria shipping house', '2,000', 'Three ships on the northern lanes. Good dividends, pirate risk.'], ['20% of the Sabium perfumers', '1,200', 'Small, rich and growing. They want a partner with ships.']], -0.3]
+      ].map(function (g, gi) { return { title: g[0], style: 'position: relative; padding: 22px 24px; display: flex; flex-direction: column; gap: 4px; transform: rotate(' + g[2] + 'deg)',
+        items: g[1].map(function (it, ii) { var k = gi + ':' + ii, on = !!(st.offers || {})[k];
+          return { name: it[0], price: it[1] + ' ', note: it[2], label: on ? 'Offer sent \u2713' : 'Make an offer',
+            click: function () { var m = Object.assign({}, (self.state || {}).offers || {}); m[k] = !m[k]; put({ offers: m }); },
+            btn: 'align-self: flex-start; min-height: 40px; padding: 4px 14px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (on ? 'background: transparent; color: #2C5F50; border: 1px solid #2C5F50' : 'background: #3A2516; color: #FFF6E4; border: none') }; }) }; }),
+      rivals: [{ name: 'House Fulvius', bid: '~46,000', face: F.fulvius }, { name: 'Demetrios’s friends from Sabium', bid: picks.dem ? 'with you' : '~43,000', face: F.greek }, { name: 'The Pisella bankers', bid: '~41,000', face: F.taxman }],
+      bidText: fmt(bid), winText: Math.round(win * 100) + '%', winBar: 'height: 8px; border-radius: 4px; width: ' + Math.round(win * 100) + '%; background: ' + (win > 0.5 ? '#2C5F50' : '#9A6A12') + '; transition: width 0.3s',
+      bidUp: function () { if ((self.state || {}).sent) return; put({ bid: Math.min(60000, ((self.state || {}).bid || 44000) + 1000) }); },
+      bidDown: function () { if ((self.state || {}).sent) return; put({ bid: Math.max(38000, ((self.state || {}).bid || 44000) - 1000) }); },
+      partners: partners,
+      suretyText: covered ? 'Your share is ' + mine + '%: ' + fmt(myStake) + ' . Your estates can stand surety for it.' : 'Your share is ' + mine + '%: ' + fmt(myStake) + ' . That’s more than your estates can cover (' + fmt(SECURITY) + '). Bring in partners.',
+      suretyStyle: 'font-size: 14px; font-weight: 600; color: ' + (covered ? '#2C5F50' : '#8E2418'),
+      outcomeTitle: 'Your ' + mine + '% over five years, after agents’ costs',
+      outcomes: outcomes,
+      bidOpen: !sent, bidSent: sent, sentText: 'Your sealed bid of ' + fmt(bid) + '  is lodged with the magistrate.',
+      submitBid: function () { if (!covered) return; put({ sent: true }); },
+      withdraw: function () { put({ sent: false }); },
+      submitLabel: covered ? 'Seal and lodge the bid' : 'Not enough surety',
+      submitStyle: 'min-height: 50px; border: none; border-radius: 3px; font-family: Cinzel, serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; ' + (covered ? 'background: #8E2418; color: #FFF6E4; cursor: pointer' : 'background: rgba(58,37,22,0.15); color: #6B5A48; cursor: not-allowed'),
+      contracts: contracts,
+      shares: [
+        sh('The Thetis, merchant ship', [['You', 60], ['Demetrios', 40]], '+380', 'Demetrios wants to buy you out. His offer is in your letters.'),
+        sh('The Golden Cup tavern, Aquea', tavernParts, '+150', tChoice === 1 ? 'Tertius now owns a tenth.' : 'All yours. Run by Tertius.'),
+        sh('Glassworks in Sabium', [['You', 25], ['House Pomponius', 75]], '+110', 'A sleeping share. They buy your quartz sand.'),
+        sh('Pomponia’s bakery', [['You', 100]], '−40', 'Losing money since Fulvius cut his prices.')
+      ],
+      managers: managers, tertius: tertius, rival: rival,
+      rivalLog: ['Last month: Fulvius hired away your best baker.', 'Two months ago: he outbid you for the Lavica salt.'],
+      guild: { note: guildNote, votes: [vb('for', 'For'), vb('against', 'Against'), vb('abstain', 'Abstain')] },
+      debts: [
+        { who: 'You owe the Caecilius bank', note: borrowed ? '5,000 at 1% a month. Due in 4 months.' : '3,000 at 1% a month. Due in 4 months.', amt: '−' + fmt(owed), style: 'font-family: "IBM Plex Mono", monospace; font-size: 15px; color: #8E2418' },
+        { who: 'Rufus owes you', note: 'For the grain you advanced him. Due in 12 days.', amt: '+800', style: 'font-family: "IBM Plex Mono", monospace; font-size: 15px; color: #2C5F50' },
+        { who: 'The Durona merchants owe you', note: 'On the oil delivered last month.', amt: '+1,240', style: 'font-family: "IBM Plex Mono", monospace; font-size: 15px; color: #2C5F50' }
+      ],
+      creditText: fmt(owed) + ' of ' + fmt(limit) + ' ',
+      creditBar: 'height: 8px; border-radius: 4px; width: ' + Math.round(owed / limit * 100) + '%; background: ' + (owed / limit > 0.5 ? '#9A6A12' : '#2C5F50'),
+      borrow: function () { put({ borrowed: !(self.state || {}).borrowed }); },
+      borrowLabel: borrowed ? 'Repay the extra 2,000' : 'Borrow 2,000 more at 1% a month',
+      borrowStyle: 'min-height: 44px; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer; ' + (borrowed ? 'background: transparent; color: #2A1A0E; border: 1px solid #5A3A22' : 'background: #3A2516; color: #FFF6E4; border: none'),
+      debtWarn: borrowed ? 'Careful: a bad season and two loans due at once is how houses fall.' : 'Debt lets you grow faster. It also lets you fall faster.',
+      smug: smug,
+      forum: !inAlley, alley: inAlley, kick: inAlley ? 'BEHIND THE RED ANCHOR' : 'THE FORUM WALL', title: inAlley ? 'The alley' : 'Ventures and contracts',
+      enterAlley: function () { put({ alley: true }); }, leaveAlley: function () { put({ alley: false }); },
+      heatWord: alleyVals.heatWord, heatWordStyle: alleyVals.heatWordStyle, heatPips: alleyVals.heatPips, heatNote: alleyVals.heatNote,
+      atabs: alleyVals.atabs, at: alleyVals.at, jobs: alleyVals.jobs, cool: alleyVals.cool
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estates — the land</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#191A14}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 22px 44px rgba(0,0,0,0.5)}
+.land{background-color:#22241A;background-image:linear-gradient(rgba(14,16,10,0.52), rgba(14,16,10,0.52)), radial-gradient(ellipse at 50% 40%, rgba(255,230,170,0.10) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%), url(assets/377e71acdac37d44ad9791a31cc0d4be.jpg);background-size:auto, auto, auto, cover;background-position:center}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#3A2516}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes grow{from{width:0}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #191A14; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · LATE AUTUMN</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<!-- YOUR PERSON READS THIS PAGE FOR YOU -->
+<section aria-label="Summary" style="display: grid; grid-template-columns: 1fr 360px; gap: 22px; padding: 16px 20px; background: #EFE3C8; color: #2A2119; border-radius: 3px; box-shadow: 0 14px 30px rgba(0,0,0,0.45); border-left: 6px solid #9A6A12">
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<img src="{{aide.face}}" alt="" style="flex: none; width: 56px; height: 56px; image-rendering: pixelated; box-shadow: 0 0 0 3px #F6EAD0, 0 4px 10px rgba(0,0,0,0.3)">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{aide.head}}</span>
+<sc-for list="{{aide.says}}" as="ai" hint-placeholder-count="3"><span style="{{ai.style}}">{{ai.t}}</span></sc-for>
+<span style="font-size: 13px; color: #6B5A48">{{aide.foot}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-left: 20px; border-left: 1px solid rgba(58,37,22,0.2)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">{{aide.askLabel}}</span>
+<div role="radiogroup" aria-label="{{aide.askLabel}}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px">
+<sc-for list="{{aide.levels}}" as="al" hint-placeholder-count="3"><button role="radio" aria-checked="{{al.on}}" onClick="{{al.click}}" style="{{al.style}}">{{al.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; line-height: 1.4; color: #1F1710">{{aide.will}}</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #CFD8A8">WHAT YOU OWN</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Your business</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4"><span style="{{c.style}}">{{c.text}}</span></sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div class="land" style="width: 1376px; box-sizing: border-box; padding: 30px; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #23241B; display: grid; grid-template-columns: 330px 1fr; gap: 28px; align-items: start">
+
+<!-- TABS -->
+<div role="tablist" aria-label="What you own" style="grid-column: 1 / -1; display: flex; gap: 12px; flex-wrap: wrap">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="3">
+<button role="tab" onClick="{{tb.click}}" style="{{tb.style}}"><span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700">{{tb.label}}</span><span style="font-size: 13px; opacity: 0.85">{{tb.sub}}</span></button>
+</sc-for>
+</div>
+
+<!-- ESTATE LIST -->
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{list}}" as="e" hint-placeholder-count="5">
+<button class="paper" onClick="{{e.pick}}" style="{{e.style}}">
+<span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; color: #2A1A0E; text-align: left">{{e.name}}</span>
+<sc-if value="{{e.hasBadge}}" hint-placeholder-val="{{ true }}"><span style="flex: none; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 10px; background: #8E2418; color: #FFF6E4">{{e.badge}}</span></sc-if>
+</span>
+<span style="font-size: 14px; color: #6B5A48; text-align: left">{{e.sub}}</span>
+<span style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 4px">
+<sc-for list="{{e.bar}}" as="b" hint-placeholder-count="4"><span style="{{b.style}}"></span></sc-for>
+</span>
+<span style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 2px"><span style="color: #3A2516">{{e.focus}}</span><span style="font-family: 'IBM Plex Mono', monospace; color: #2C5F50">{{e.income}}</span></span>
+</button>
+</sc-for>
+<span style="font-size: 13px; color: #E6E0C8; text-shadow: 0 1px 2px rgba(0,0,0,0.8); padding: 4px 4px 0">{{listNote}}</span>
+</div>
+
+<!-- SELECTED ESTATE -->
+<sc-if value="{{ownView}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px; min-width: 0">
+
+<div class="paper" style="padding: 22px 26px; color: #2A2119; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span class="kicker" style="color: #5A6B2A">{{s.kindUpper}}</span>
+<span style="font-family: Cinzel, serif; font-size: 30px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{s.name}}</span>
+<span style="font-size: 16px; color: #3A2516">{{s.where}}</span>
+<span style="font-size: 15px; color: #6B5A48; margin-top: 4px">{{s.season}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; width: 380px">
+<span style="font-size: 14px; color: #6B5A48">How you run it</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{focusSeg}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+<span style="font-size: 13px; color: #6B5A48">{{focusNote}}</span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 340px 1fr; gap: 22px; align-items: start">
+<!-- steward -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; transform: rotate(-0.4deg); display: flex; flex-direction: column; gap: 10px">
+<span class="kicker">{{s.stewardRole}}</span>
+<div style="display: flex; gap: 14px; align-items: center">
+<div style="flex: none; padding: 4px; background: #F6EAD0; box-shadow: 0 3px 8px rgba(0,0,0,0.3)"><img src="{{s.face}}" alt="" style="display: block; width: 56px; height: 56px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column"><span style="font-family: Cinzel, serif; font-size: 20px; font-weight: 700; color: #2A1A0E">{{s.steward}}</span><span style="font-size: 14px; color: #6B5A48">{{s.stewardSince}}</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{s.traits}}" as="t" hint-placeholder-count="3"><span style="{{t.style}}">{{t.label}}</span></sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #6B5A48">Loyalty</span><span style="color: #3A2516">{{s.loyaltyWord}}</span></span>
+<div style="height: 8px; border-radius: 4px; background: rgba(58,37,22,0.15)"><div style="{{s.loyaltyBar}}"></div></div>
+</div>
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4; color: #1F1710">{{s.quote}}</span>
+<sc-if value="{{s.audited}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #1F1710; padding: 8px 10px; background: rgba(44,95,80,0.12); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">{{s.auditResult}}</span></sc-if>
+<div style="display: flex; gap: 8px">
+<button onClick="{{audit}}" style="{{auditBtn}}">{{auditLabel}}</button>
+<button style="flex: 1; min-height: 42px; background: transparent; color: #2A1A0E; border: 1px solid #5A3A22; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer">Replace</button>
+</div>
+</div>
+
+<!-- this season -->
+<div class="paper" style="padding: 20px 24px; color: #2A2119; transform: rotate(0.3deg); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><span class="kicker">THIS SEASON</span><span style="font-size: 14px; color: #6B5A48">{{s.when}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px">
+<sc-for list="{{season}}" as="k" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">{{k.k}}</span><span style="{{k.style}}">{{k.v}}</span><span style="font-size: 12px; color: #6B5A48">{{k.sub}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 14px; color: #6B5A48">{{gradeTitle}}</span>
+<div style="display: flex; height: 22px; border-radius: 3px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(58,37,22,0.3)">
+<sc-for list="{{grades}}" as="g" hint-placeholder-count="4"><span style="{{g.style}}">{{g.pct}}</span></sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px">
+<sc-for list="{{grades}}" as="g" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column"><span style="{{g.labelStyle}}">{{g.grade}}</span><span style="font-size: 13px; color: #3A2516">{{g.name}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6B5A48">{{g.price}}</span></div>
+</sc-for>
+</div>
+</div>
+<span style="font-size: 14px; color: #3A2516; padding-top: 8px; border-top: 1px solid rgba(58,37,22,0.15)">{{s.buyers}}</span>
+</div>
+</div>
+
+<!-- decisions -->
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: #EFE6CC; text-shadow: 0 1px 3px rgba(0,0,0,0.8)">{{decisionsTitle}}</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start">
+<sc-for list="{{cards}}" as="d" hint-placeholder-count="2">
+<div class="paper" style="{{d.style}}">
+<span style="font-size: 13px; color: #8E2418; font-weight: 600">{{d.from}}</span>
+<span style="font-family: Cinzel, serif; font-size: 19px; font-weight: 700; line-height: 1.25; color: #2A1A0E">{{d.title}}</span>
+<span style="font-size: 16px; line-height: 1.45; color: #1F1710">{{d.text}}</span>
+<sc-if value="{{d.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 4px">
+<sc-for list="{{d.choices}}" as="ch" hint-placeholder-count="3">
+<button onClick="{{ch.click}}" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 48px; padding: 8px 14px; background: rgba(255,250,238,0.55); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer">
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{ch.label}}</span><span style="font-size: 13px; color: #6B5A48">{{ch.hint}}</span></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5A3A22; white-space: nowrap">{{ch.cost}}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{d.done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">
+<span style="font-size: 13px; color: #2C5F50; font-weight: 600">{{d.chosen}}</span>
+<span style="font-size: 15px; color: #1F1710">{{d.outcome}}</span>
+<button onClick="{{d.undo}}" style="align-self: flex-start; min-height: 32px; padding: 2px 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Choose again</button>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start">
+<!-- storage -->
+<div class="paper" style="padding: 20px 24px; color: #2A2119; transform: rotate(-0.3deg); display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><span class="kicker">{{s.storeName}}</span><span style="font-size: 13px; color: #6B5A48">{{s.storeCap}}</span></div>
+<sc-for list="{{stock}}" as="st" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<div style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; color: #1F1710">{{st.what}}</span><span style="font-size: 13px; color: #6B5A48">{{st.note}}</span></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #3A2516; white-space: nowrap">{{st.value}}</span>
+<button onClick="{{st.sell}}" style="{{st.btn}}">{{st.btnLabel}}</button>
+</div>
+</sc-for>
+<div style="display: flex; gap: 14px; align-items: center; padding-top: 6px">
+<svg width="170" height="54" viewBox="0 0 170 54" role="img" aria-label="{{s.trendAria}}" style="flex: none; background: rgba(255,250,238,0.5); border: 1px solid rgba(58,37,22,0.2)">
+<polyline points="{{s.spark}}" style="fill: none; stroke: #2C5F50; stroke-width: 2px; stroke-linejoin: round"></polyline>
+<circle cx="{{s.sparkX}}" cy="{{s.sparkY}}" r="3.5" style="fill: #8E2418"></circle>
+</svg>
+<span style="font-size: 14px; line-height: 1.4; color: #1F1710">{{s.trend}}</span>
+</div>
+<span style="font-size: 13px; color: #8E2418">{{s.spoil}}</span>
+</div>
+
+<!-- investments -->
+<div class="paper" style="padding: 20px 24px; color: #2A2119; transform: rotate(0.4deg); display: flex; flex-direction: column; gap: 10px">
+<span class="kicker">IMPROVEMENTS</span>
+<sc-for list="{{ups}}" as="u" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<div style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{u.name}}</span><span style="font-size: 13px; color: #6B5A48">{{u.effect}}</span></div>
+<button onClick="{{u.click}}" style="{{u.btn}}">{{u.btnLabel}}</button>
+</div>
+<sc-if value="{{u.building}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px"><div style="flex: 1; height: 6px; border-radius: 3px; background: rgba(58,37,22,0.15)"><div style="{{u.bar}}"></div></div><span style="font-size: 12px; color: #6B5A48; white-space: nowrap">{{u.eta}}</span></div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start">
+<div class="paper" style="padding: 20px 24px; color: #2A2119; transform: rotate(-0.2deg); display: flex; flex-direction: column; gap: 8px">
+<span class="kicker">NEIGHBOURS AND NAME</span>
+<sc-for list="{{s.neighbours}}" as="nb" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{nb.title}}</span><span style="font-size: 14px; color: #3A2516">{{nb.text}}</span></div>
+</sc-for>
+</div>
+<div style="padding: 18px 22px; background: rgba(12,14,10,0.78); border: 1px solid rgba(207,216,168,0.25); border-radius: 4px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 14px 30px rgba(0,0,0,0.45)">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #CFD8A8">IN MINECRAFT</span>
+<span style="font-size: 15px; line-height: 1.45; color: #E8E0CC">{{s.mc}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA58A">{{s.mcCoords}}</span>
+<button onClick="{{toggleVisit}}" style="align-self: flex-start; min-height: 42px; padding: 6px 16px; background: #E9C982; color: #2A1A0E; border: none; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer">{{visitLabel}}</button>
+</div>
+</div>
+
+<sc-if value="{{visitOpen}}" hint-placeholder-val="{{ false }}">
+<div class="paper" style="padding: 22px 24px; color: #2A2119; display: grid; grid-template-columns: 430px 1fr; gap: 26px; align-items: start; animation: fadein 0.4s ease-out both; border-top: 4px solid #8E2418">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="kicker" style="color: #8E2418">PLAN A VISIT</span>
+<div style="position: relative; width: 430px; height: 300px; box-shadow: 0 0 0 1px rgba(58,37,22,0.35), 0 6px 14px rgba(0,0,0,0.25)">
+<svg width="430" height="300" viewBox="{{v.box}}" role="img" aria-label="{{v.aria}}" style="display: block">
+<image href="assets/9f5158a39938dfbadce3acb1871c8938.jpg" x="0" y="0" width="1600" height="1000"></image>
+<path d="{{v.route}}" style="fill: none; stroke: #8E2418; stroke-width: 3px; stroke-dasharray: 8 6; stroke-linecap: round"></path>
+<circle cx="758" cy="714" r="6" style="fill: #2A1A0E; stroke: #F6EAD0; stroke-width: 2px"></circle>
+<text x="758" y="736" style="font-family: 'IM Fell English', serif; font-size: 16px; fill: #2A1A0E; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.9); stroke-width: 4px">Aquea (you)</text>
+<g transform="{{v.pinAt}}">
+<circle cx="0" cy="0" r="18" style="fill: rgba(142,36,24,0.18)"></circle>
+<path d="M0,0 C-9,-12 -11,-18 -11,-24 A11,11 0 1 1 11,-24 C11,-18 9,-12 0,0 Z" style="fill: #8E2418; stroke: #F6EAD0; stroke-width: 2px"></path>
+<circle cx="0" cy="-24" r="4.5" style="fill: #F6EAD0"></circle>
+</g>
+<text x="{{v.lx}}" y="{{v.ly}}" style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; fill: #7E1E12; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 5px">{{v.name}}</text>
+</svg>
+</div>
+<span style="font-size: 14px; color: #3A2516">{{v.trip}}</span>
+<div style="display: flex; gap: 8px">
+<button onClick="{{pinIt}}" style="{{pinStyle}}">{{pinLabel}}</button>
+<button style="flex: 1; min-height: 44px; background: transparent; color: #2A1A0E; border: 1px solid #5A3A22; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Plan the journey</button>
+</div>
+<span style="font-size: 13px; color: #6B5A48">{{pinNote}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 14px; min-width: 0">
+<span class="kicker">YOUR NOTES FOR THIS VISIT</span>
+<textarea aria-label="Your notes for this visit" placeholder="Whatever you want to remember when you get there." style="width: 100%; min-height: 150px; box-sizing: border-box; padding: 12px 14px; resize: vertical; background: rgba(255,250,238,0.6); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; font-size: 16px; line-height: 1.5; color: #1F1710"></textarea>
+<span class="kicker">REMIND ME</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{remindSeg}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; color: #3A2516">{{remindNote}}</span>
+</div>
+</div>
+</sc-if>
+
+</div>
+</sc-if>
+
+<sc-if value="{{shareView}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 22px; min-width: 0">
+<div class="paper" style="padding: 22px 26px; color: #2A2119; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; min-width: 0; max-width: 620px">
+<span class="kicker" style="color: #5A6B2A">{{sh.kicker}}</span>
+<span style="font-family: Cinzel, serif; font-size: 30px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{sh.name}}</span>
+<span style="font-size: 16px; line-height: 1.45; color: #3A2516">{{sh.note}}</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; width: 300px">
+<span style="font-family: Cinzel, serif; font-size: 40px; font-weight: 700; line-height: 1; color: #2A1A0E">{{sh.mine}}</span>
+<span style="font-size: 14px; color: #6B5A48">is yours</span>
+<div style="display: flex; width: 100%; height: 18px; border-radius: 2px; overflow: hidden"><sc-for list="{{sh.parts}}" as="pt" hint-placeholder-count="2"><span style="{{pt.style}}">{{pt.label}}</span></sc-for></div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start">
+<div class="paper" style="padding: 20px 22px; color: #2A2119; transform: rotate(-0.4deg); display: flex; flex-direction: column; gap: 10px">
+<span class="kicker">YOUR PARTNER</span>
+<div style="display: flex; gap: 14px; align-items: center">
+<div style="flex: none; padding: 4px; background: #F6EAD0; box-shadow: 0 3px 8px rgba(0,0,0,0.3)"><img src="{{sh.face}}" alt="" style="display: block; width: 52px; height: 52px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column"><span style="font-family: Cinzel, serif; font-size: 19px; font-weight: 700; color: #2A1A0E">{{sh.partner}}</span><span style="font-size: 14px; color: #6B5A48">{{sh.mood}}</span></div>
+</div>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">{{sh.rights}}</span>
+</div>
+<div class="paper" style="padding: 20px 22px; color: #2A2119; transform: rotate(0.3deg); display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span class="kicker">YOUR CUT</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2C5F50">{{sh.total}}</span></div>
+<div style="display: flex; gap: 10px; align-items: flex-end; height: 90px; padding-top: 6px">
+<sc-for list="{{sh.divs}}" as="dv" hint-placeholder-count="4">
+<div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; justify-content: flex-end; height: 100%"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #3A2516">{{dv.v}}</span><div style="{{dv.bar}}"></div><span style="font-size: 12px; color: #6B5A48">{{dv.k}}</span></div>
+</sc-for>
+</div>
+<span style="font-size: 14px; color: #3A2516">{{sh.worth}}</span>
+</div>
+</div>
+<div class="paper" style="{{sh.cardStyle}}">
+<span style="font-size: 13px; color: #8E2418; font-weight: 600">{{sh.cardFrom}}</span>
+<span style="font-family: Cinzel, serif; font-size: 19px; font-weight: 700; line-height: 1.25; color: #2A1A0E">{{sh.cardTitle}}</span>
+<span style="font-size: 16px; line-height: 1.45; color: #1F1710">{{sh.cardText}}</span>
+<sc-if value="{{sh.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding-top: 4px">
+<sc-for list="{{sh.choices}}" as="ch" hint-placeholder-count="3">
+<button onClick="{{ch.click}}" style="display: flex; flex-direction: column; gap: 2px; min-height: 64px; padding: 8px 12px; background: rgba(255,250,238,0.55); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{ch.label}}</span><span style="font-size: 13px; color: #6B5A48">{{ch.hint}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A3A22">{{ch.cost}}</span></button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{sh.done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">
+<span style="font-size: 15px; color: #1F1710">{{sh.outcome}}</span>
+<button onClick="{{sh.undo}}" style="align-self: flex-start; min-height: 32px; padding: 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Choose again</button>
+</div>
+</sc-if>
+</div>
+<div style="display: flex; gap: 12px">
+<button style="min-height: 46px; padding: 6px 20px; background: #E9C982; color: #2A1A0E; border: none; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer">Sell your share</button>
+<button style="min-height: 46px; padding: 6px 20px; background: rgba(12,14,10,0.6); color: #F2E8D5; border: 1px solid rgba(242,232,213,0.4); border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Offer to buy more</button>
+<button style="min-height: 46px; padding: 6px 20px; background: rgba(12,14,10,0.6); color: #F2E8D5; border: 1px solid rgba(242,232,213,0.4); border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Ask to see the books</button>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var FACE = {
+  overseer: 'assets/68c827b5e74ae6bac441631cd7975afd.png', client: 'assets/054107f26dcd34ab67e0139fe33c08b3.png', lucia: 'assets/825d687ad982397231b83bbd7a9f3b55.png',
+  rufus: 'assets/afa888f5d662c1e9b9a5dbbcf63ec6d1.png', captain: 'assets/cd8821c266aa1a8fe03490ab7954af9d.png',
+  baker: 'assets/dfb126d8e60c5d5542788c39fc298726.png', clerk: 'assets/0826644edfdf42a585c7e8d8765821bb.png', tertius: 'assets/054107f26dcd34ab67e0139fe33c08b3.png',
+  pomponius: 'assets/6b12bb77800455b9ce97f32e18cb0f93.png', greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png', fulvius: 'assets/225899a8700d3084ef954b85828dc4bd.png'
+};
+var GRADE_COL = ['#C9962A', '#5E7A4A', '#8A7A64', '#6B4A3A'];
+var GRADE_MULT = [2.2, 1.3, 1, 0.5];
+
+var ESTATES = [
+  { id: 'vine', name: 'Deloanum Vineyard', kind: 'Vineyard', where: 'Deloanum, Vararia. Your home country.', owned: 'Yours for 4 years', focus: 'premium',
+    season: 'Late autumn. The vintage is in the vats.', when: 'Vintage 4', unit: 'amphorae', qty: 180, price: 14,
+    dist: [15, 40, 35, 10], gradeNames: ['Reserve', 'Fine table wine', 'House red', 'Vinegar wine'],
+    buyers: 'Buyers: taverns in Aquea for the house red; the governor’s table and Durona merchants for the reserve.',
+    stewardRole: 'YOUR STEWARD', steward: 'Gaius', face: 'overseer', since: 'Steward for 3 years, wage 40  a month',
+    traits: [['Skilled', 'yes'], ['Honest', '?'], ['Ambitious', 'no']], loyalty: 72,
+    quote: '“The must came in sweeter than any year I remember, master. We should talk about what to do with it.”',
+    audit: 'Audit done. Gaius is honest: the books match the cellar to the last amphora. Honest ✓',
+    store: 'THE CELLAR', cap: '252 of 400 amphorae', stock: [
+      ['Vintage 1 reserve, Prime', '12 amphorae. Ageing well; peaks around vintage 6.', 42 * 12, 'Hold'],
+      ['Vintage 3, Good', '60 amphorae. Ready to drink now.', 24 * 60, 'Sell'],
+      ['This year’s wine, mixed', '180 amphorae, just pressed.', 14 * 180, 'Sell']],
+    spark: [12, 13, 12.5, 14, 15.5, 15, 16.5, 18], trend: 'Wine in Aquea is up 28% since spring. The festival of Bacchus is in three weeks.',
+    spoil: 'Wine can turn to vinegar: about 2% of stored amphorae a year.',
+    ups: [['Plant new vines on the east slope', 'More wine in 3 years. Young vines give poor wine at first.', 600, 'build', 40, '2 years, 3 months left'],
+      ['Stone press house', '+10% chance of Prime every vintage.', 900, 'done'],
+      ['Cool clay cellar', 'Halves the vinegar losses. Room for 300 more amphorae.', 400, 'buy'],
+      ['Terrace the hillside', 'Sun on every row. +15% Prime, takes a year.', 1200, 'buy']],
+    neighbours: [['Old Septimius is selling', 'His vines next door are dying of neglect. He’d sell 20 iugera for 2,200 .'],
+      ['Your label: “Varro’s Coastal Red”', 'Known in 3 cities. Every Prime vintage spreads the name; one bad year sets it back.']],
+    mc: 'Your villa, press house and three terraces of vines stand on the hill above Deloanum. The new east slope appears when the vines are planted.',
+    mcCoords: 'x -320  z 488  ·  1 day’s ride from Aquea',
+    cards: [
+      { id: 'v1', from: 'Gaius, your steward', title: 'An unusually sweet vintage', text: 'The must from the old south rows is the best in years. It could become something special, if you can wait.',
+        choices: [['Age it as a reserve', 'Seal 40 amphorae in the cellar for 3 years.', '', 'Forty amphorae sealed. In three years they could fetch triple.'],
+          ['Sell it young, now', 'Merchants will pay a premium today.', '+620 ', 'Sold to a Durona merchant for 620 . He looked very pleased.'],
+          ['Blend it into the house red', 'Lifts the whole year’s quality.', '', 'This year’s house red will sell as Good instead of Common.']] },
+      { id: 'v2', from: 'A letter from Durona', title: 'An offer for the whole crop', text: 'Titus Calvus offers 1,300  for every amphora of next year’s vintage, sight unseen, paid now.',
+        choices: [['Accept', 'Money now, whatever the weather does.', '+1,300 ', 'Done. If next year is a bad vintage, Calvus eats the loss. If it’s great, you do.'],
+          ['Counter at 1,600', 'He may walk away.', '', 'Calvus grumbles, then agrees to 1,450. Sealed.'],
+          ['Refuse', 'Keep your options open.', '', 'Calvus is offended. He’ll remember.']] }]
+  },
+  { id: 'grain', name: 'Tusonella Farm', kind: 'Grain farm', where: 'Tusonella, Vararia. Flat, fertile river land.', owned: 'Yours for 2 years', focus: 'volume',
+    season: 'Late autumn. The winter wheat is sown.', when: 'Harvest in 7 months', unit: 'modii', qty: 4000, price: 0.3,
+    dist: [5, 30, 50, 15], gradeNames: ['Seed wheat', 'Bread wheat', 'Common grain', 'Fodder'],
+    buyers: 'Buyers: the bakers of Aquea, the army supply contracts, and anyone in a famine.',
+    stewardRole: 'YOUR STEWARD', steward: 'Marcus', face: 'client', since: 'Steward for 2 years, wage 30  a month',
+    traits: [['Honest', 'yes'], ['Skilled', '?'], ['Lazy', '?']], loyalty: 55,
+    quote: '“The men are worried about the south. I’ve seen locust years before. I don’t want to see another.”',
+    audit: 'Audit done. Marcus is honest but slow: two fields were sown a week late. Lazy, a little.',
+    store: 'THE GRANARY', cap: '2,600 of 4,000 modii', stock: [
+      ['Last harvest, Common', '2,600 modii in the granary.', Math.round(2600 * 0.34), 'Sell'],
+      ['Seed for spring', '300 modii. Keep this.', 0, 'Keep']],
+    spark: [0.36, 0.33, 0.27, 0.24, 0.25, 0.28, 0.31, 0.34], trend: 'Grain fell after the harvest glut and is climbing back. By late winter it usually peaks.',
+    spoil: 'Rats and damp eat about 3% of the granary a month. Holding has a cost.',
+    ups: [['Enlarge the granary', 'Room for 4,000 more modii. Hold more, sell when it’s dear.', 700, 'buy'],
+      ['Irrigation channel from the river', 'Saves the crop in a dry year.', 1100, 'build', 70, '2 months left'],
+      ['A second ox team', '+15% grain from the same land.', 450, 'buy'],
+      ['Paved track to the Aquea road', 'Your grain reaches market a day sooner.', 800, 'buy']],
+    neighbours: [['The Fannii dammed the stream', 'Your lower fields are drying out. A word to the magistrate, a bribe, or a lawsuit?'],
+      ['Known for: steady, cheap grain', 'The bakers trust you. Nobody pays extra for it.']],
+    mc: 'A farmhouse, barns and a big stone granary by the river. The granary grows in the world when you enlarge it.',
+    mcCoords: 'x -912  z 424  ·  2 days from Aquea',
+    cards: [
+      { id: 'g1', from: 'Marcus, your steward', title: 'Locusts in the south valley', text: 'A swarm has been seen two valleys away. If the wind turns, they’ll be on us in days.',
+        choices: [['Burn a firebreak', 'Sacrifice the edge fields.', '−10% crop', 'The firebreak held. You lost a tenth of the crop and saved the rest.'],
+          ['Hire boys to drive them off', 'Noise, smoke and sticks. Works half the time.', '80 ', 'It worked, mostly. The north fields were stripped.'],
+          ['Pray at the temple of Ceres', 'Free. The gods may or may not listen.', 'free', 'The wind stayed in the west. This time, the gods were kind.']] },
+      { id: 'g2', from: 'The harvesters', title: 'They want an extra as a day', text: 'Twenty men stand at the gate. They say the Fannii pay more, and they’ll walk if you don’t match it.',
+        choices: [['Pay it', 'Happy workers, smaller profit.', '−90 ', 'Cheers at the gate. Loyalty on the farm rises.'],
+          ['Refuse', 'They may strike.', '', 'Half of them left for the Fannii. Sowing will be slow.'],
+          ['Hire outsiders', 'Cheaper, but no one knows them.', '−40 ', 'The new men are cheap. Two of them are already stealing.']] }]
+  },
+  { id: 'olive', name: 'Palia Olive Grove', kind: 'Olive grove', where: 'Palia, Peruaria. Foreign land: you pay their tax.', owned: 'Yours for 6 years', focus: 'balanced',
+    season: 'Late autumn. The picking has begun.', when: 'Picking now', unit: 'jars', qty: 520, price: 3.5,
+    dist: [12, 38, 40, 10], gradeNames: ['First pressing', 'Table oil', 'Lamp oil', 'Soap oil'],
+    buyers: 'Buyers: every kitchen and lamp on the continent. First pressing goes to rich houses.',
+    stewardRole: 'YOUR STEWARD', steward: 'Lucia', face: 'lucia', since: 'Steward for 5 years, wage 45  a month',
+    traits: [['Skilled', 'yes'], ['Honest', 'yes'], ['Ambitious', 'yes']], loyalty: 80,
+    quote: '“I’ve doubled this grove’s yield in five years. I think it’s time we talked about my share.”',
+    audit: 'Audit done. Spotless books. Lucia is the best steward you have, and she knows it.',
+    store: 'THE OIL STORE', cap: '310 of 600 jars', stock: [
+      ['Last year’s oil, Good', '310 jars in the store.', Math.round(310 * 4.2), 'Sell']],
+    spark: [3.2, 3.3, 3.5, 3.4, 3.6, 3.7, 3.6, 3.8], trend: 'Oil is steady and rising slowly. No sudden moves.',
+    spoil: 'Oil keeps well for a year, then turns rancid quickly.',
+    ups: [['A second oil press', 'Press faster at harvest, less fruit wasted.', 650, 'buy'],
+      ['Replant the old trees', 'Old trees yield less every year. New ones take 7 years.', 900, 'buy'],
+      ['Wall around the grove', 'Stops the goats and the thieves.', 300, 'done']],
+    neighbours: [['Peruarian tax', 'The council takes a tenth of your oil as a foreigner’s due. A local partner would avoid it.'],
+      ['Known for: honest oil', 'Your jars are never watered. Merchants pay a little more for that.']],
+    mc: 'Terraced olive trees, a press house and Lucia’s little house by the gate.',
+    mcCoords: 'x -1224  z 488  ·  in Peruaria, papers needed',
+    cards: [
+      { id: 'o1', from: 'Lucia, your steward', title: 'Lucia asks for a share', text: 'She wants a tenth of the grove’s profits, for good. The Fulvii have already made her an offer.',
+        choices: [['Give her a tenth share', 'She becomes a partner. Loyal for life.', '−10% profit', 'Lucia is now a partner. She’ll never leave, and she’ll work twice as hard.'],
+          ['Raise her wage instead', '+20  a month.', '−20 /mo', 'She accepts, for now. She’s still talking to the Fulvii.'],
+          ['Refuse', 'She may leave and take your best pickers.', '', 'Lucia goes quiet. Watch the Fulvii.']] }]
+  },
+  { id: 'marble', name: 'Celanona Marble Quarry', kind: 'Marble quarry', where: 'Celanona, Vararia. White stone in the hills.', owned: 'Yours for 1 year', focus: 'premium',
+    season: 'Late autumn. Cutting before the winter rains.', when: 'Cutting all season', unit: 'blocks', qty: 140, price: 18,
+    dist: [6, 26, 48, 20], gradeNames: ['Statuary white', 'Veined', 'Building stone', 'Rubble and lime'],
+    buyers: 'Buyers: temples and public works, rich men’s villas, sculptors. Rubble is burned for lime.',
+    stewardRole: 'YOUR FOREMAN', steward: 'Tullus', face: 'rufus', since: 'Foreman for 1 year, wage 50  a month',
+    traits: [['Skilled', 'yes'], ['Honest', 'no'], ['Hard', 'yes']], loyalty: 40,
+    quote: '“We’ve found white stone in the north face. Clean, no veins. I’ve never seen anything like it.”',
+    audit: 'Audit done. Tullus has been selling a few good blocks on the side: about 8% of the cut. Skimming.',
+    store: 'THE STONE YARD', cap: '216 of 250 blocks. A full yard stops the quarry.', stock: [
+      ['Statuary white, Prime', '2 blocks. Fit for a temple statue.', 2 * 160, 'Hold'],
+      ['Veined, Good', '34 blocks. Columns, floors, fine villas.', 34 * 30, 'Sell'],
+      ['Building stone, Common', '180 blocks. Walls and steps.', 180 * 18, 'Sell']],
+    spark: [16, 16, 17, 17, 19, 22, 24, 26], trend: 'Marble is climbing fast: the Temple of Fortuna in Aquea is going up. The contract is on the forum wall.',
+    spoil: 'Stone doesn’t spoil, but the yard is nearly full. Sell, or the quarry stops cutting.',
+    ups: [['Treadwheel crane', 'Lift bigger blocks safely. More Prime survives the cut.', 850, 'buy'],
+      ['Ox road down to the river', 'Floats blocks to Aquea at half the cost.', 1400, 'build', 25, '5 months left'],
+      ['Iron tools from Durona', '+20% cut per season.', 380, 'buy'],
+      ['Drain the lower pit', 'Opens a second face to work.', 600, 'buy']],
+    neighbours: [['The Temple of Fortuna wants marble', '120 blocks of Good or better for the new temple. See Ventures.'],
+      ['Known for: nothing yet', 'Deliver the temple stone and your marble will be famous.']],
+    mc: 'An open cut in the hillside with a crane, a stone yard and a road down to the river. The white seam is visible in the north face.',
+    mcCoords: 'x 1072  z 1016  ·  1 day from Aquea',
+    cards: [
+      { id: 'm1', from: 'Tullus, your foreman', title: 'A flawless white seam', text: 'The north face has opened onto pure white stone. One perfect block, or many good ones: you can’t have both.',
+        choices: [['Cut one statue block', 'Prime. The temple contract would pay a fortune.', '~1,800 ', 'One flawless block, wrapped in straw. The priests of Fortuna will want to see it.'],
+          ['Cut forty building blocks', 'Good grade. More money now, but floods the market.', '~2,600 ', 'Forty fine blocks. Marble prices in Aquea dip a little.'],
+          ['Leave it for later', 'It isn’t going anywhere.', '', 'Tullus shrugs. Someone will try to buy the seam off you.']] },
+      { id: 'm2', from: 'Tullus, your foreman', title: 'A rockfall in the lower pit', text: 'Three quarrymen are hurt, one badly. The others are watching to see what you do.',
+        choices: [['Pay the families', 'Doctors, and pay while they heal.', '120 ', 'The quarrymen talk about it for weeks. Loyalty rises.'],
+          ['Pay for doctors only', 'The decent minimum.', '40 ', 'The men are quiet. It’s enough, barely.'],
+          ['Do nothing', 'They knew the risks.', '', 'Two men leave. The rest work slower, and they talk.']] }]
+  },
+  { id: 'quartz', name: 'Lisorula Quartz Mine', kind: 'Quartz mine', where: 'Lisorula, Ostoronia. The tyrant’s country.', owned: 'Yours for 8 months', focus: 'balanced',
+    season: 'Late autumn. Deep shaft working day and night.', when: 'Digging all season', unit: 'loads', qty: 90, price: 22,
+    dist: [4, 26, 50, 20], gradeNames: ['Clear crystal', 'Milky quartz', 'Glass sand', 'Spoil'],
+    buyers: 'Buyers: jewellers and cup-carvers want clear crystal; the glassmakers of Sabium buy everything else.',
+    stewardRole: 'YOUR MINE CAPTAIN', steward: 'Brutus', face: 'captain', since: 'Captain for 8 months, wage 55  a month',
+    traits: [['Brave', 'yes'], ['Honest', '?'], ['Cruel', '?']], loyalty: 60,
+    quote: '“The tyrant’s men came again. They walked through the shaft like they owned it. Maybe they think they do.”',
+    audit: 'Audit done. Brutus is honest with your money. The miners say he’s brutal with them. Cruel ✓',
+    store: 'THE STRONGROOM', cap: 'Locked. Brutus has the only key.', stock: [
+      ['Clear crystal, Prime', '3 pieces, each the size of a fist.', 3 * 400, 'Hold'],
+      ['Milky quartz, Good', '40 loads.', 40 * 34, 'Sell'],
+      ['Glass sand, Common', '120 loads.', 120 * 22, 'Sell']],
+    spark: [20, 21, 21, 22, 22, 21, 23, 24], trend: 'Steady. Sabium’s glassmakers buy all you can send, but the road runs through Caleonia’s tolls.',
+    spoil: 'Quartz doesn’t spoil. But it does walk away: guard the strongroom.',
+    ups: [['Sink a deeper shaft', 'More clear crystal lies deep. Dangerous work.', 1200, 'buy'],
+      ['Ventilation shafts', 'Fewer collapses, healthier miners.', 500, 'buy'],
+      ['Hire six guards', 'The tyrant’s men think twice.', 260, 'buy'],
+      ['Wagon team to Sabium', 'Sell straight to the glassmakers.', 420, 'done']],
+    neighbours: [['The tyrant’s tax collector', 'Quintus Fabius takes what he likes from foreign mines. Friends at court help.'],
+      ['Known for: Sabium’s best glass sand', 'The glassmakers ask for your sand by name.']],
+    mc: 'A dark shaft head in the Ostoronian hills, a sorting shed and a stockade. Guards appear when you hire them.',
+    mcCoords: 'x 1064  z 40  ·  in Ostoronia, papers needed',
+    cards: [
+      { id: 'q1', from: 'An official of Quintus Fabius', title: 'A “protection fee”', text: 'Pay 300 , he says, or the mine “may need inspecting”. Inspections have been known to last a year.',
+        choices: [['Pay it', 'Peace, for now. He’ll be back.', '300 ', 'He smiles and pockets it. See you next season, he says.'],
+          ['Refuse', 'Risk losing the mine for a season.', '', 'Soldiers arrive two days later. The mine is “under inspection”.'],
+          ['Write to your patron', 'Costs you a favour with the senator.', '1 favour', 'Your patron writes to the tyrant’s court. The official is never seen again.']] },
+      { id: 'q2', from: 'Brutus, your mine captain', title: 'A perfect crystal', text: 'Clear as water and big as a melon. A cup carved from this would be fit for a queen.',
+        choices: [['Gift it to Queen Cornelia', 'Huge favour at court in Vararia.', '+court favour', 'The queen drinks from your cup at the birthday games. Everyone sees.'],
+          ['Sell it to the jewellers', 'Sabium will pay handsomely.', '+2,200 ', 'Sold. The jeweller says he’ll carve it for a king somewhere.'],
+          ['Keep it', 'Some things you don’t sell.', '', 'It sits on your desk. Visitors stare at it.']] }]
+  }
+];
+
+
+var TOWN = [
+  { id: 'tavern', name: 'The Golden Cup', kind: 'Tavern', where: 'Via Lata, Aquea. Two streets from the forum.', owned: 'Yours for 3 years', focus: 'balanced',
+    season: 'Late autumn. The new wine is in and the benches are full.', when: 'Every night', unit: 'cups', qty: 5200, price: 0.25, yieldLabel: 'Cups poured',
+    dist: [8, 30, 48, 14], gradeNames: ['Rich guests', 'Merchants', 'Workers', 'Trouble'], gradeHead: ['Best', 'Good', 'Most', 'Rough'], gradeTitle: 'Who drinks here',
+    buyers: 'Your own Coastal Red is poured here. Every cup sold is a cup you didn’t sell cheap to a trader.',
+    stewardRole: 'YOUR MANAGER', steward: 'Tertius', face: 'tertius', since: 'Manager for 2 years, wage 35  a month',
+    traits: [['Charming', 'yes'], ['Honest', '?'], ['Loyal', '?']], loyalty: 38,
+    quote: '“Business is good, master. Never better.” He doesn’t quite meet your eye.',
+    audit: 'Audit done. The takings are honest, but Tertius has been meeting House Fulvius’s steward. Loyal ✗',
+    store: 'THE TAVERN CELLAR', cap: '90 of 150 amphorae', stock: [
+      ['House red from your vineyard', '60 amphorae. Pour it, don’t sell it.', 60 * 14, 'Keep'],
+      ['Bought-in wine from Durona', '30 amphorae, a little sour.', 30 * 12, 'Sell']],
+    spark: [900, 960, 940, 1010, 1080, 1050, 1120, 1190], trend: 'Takings are up a third since summer. The festival of Bacchus is in three weeks.',
+    spoil: 'Wine in a busy cellar sours faster. Pour the old stock first.',
+    ups: [['A painted sign and new benches', 'More passers-by stop for a cup.', 180, 'buy'],
+      ['A back room for dice', 'Rich guests stay late. The aediles frown on gambling.', 350, 'buy'],
+      ['A kitchen', 'Hot food: people stay and drink more.', 600, 'build', 50, '1 month left'],
+      ['Rooms upstairs', 'Travellers sleep here. Rent, and news from everywhere.', 1100, 'buy']],
+    neighbours: [['The Red Anchor across the street', 'Rougher and cheaper, full of sailors. Kallias drinks there.'],
+      ['Known for: your own wine', 'People come in asking for the Coastal Red by name.']],
+    mc: 'A corner tavern with a painted counter open to the street, benches outside and a cellar under the floor.',
+    mcCoords: 'x -168  z 840  ·  in Aquea',
+    cards: [{ id: 't1', from: 'Pomponia, from the bakery next door', title: 'Tertius and the Fulvii', text: 'Tertius, who runs your tavern, was seen dining with House Fulvius’s steward. Twice.',
+      choices: [['Raise his wage by a third', 'He stays, for the money.', '+12 /mo', 'Tertius stays, for the money. You wonder for how long.'],
+        ['Offer him a tenth of the tavern', 'Makes him a partner.', '10% share', 'Tertius is now a partner. He tells Fulvius’s man to get lost.'],
+        ['Dismiss him today', 'Find someone new.', '', 'Tertius leaves and opens a tavern three doors down. Half your regulars follow him.']] }] },
+  { id: 'bakery', name: 'Pomponia’s Bakery', kind: 'Bakery', where: 'Via Lata, Aquea. Next door to the Golden Cup.', owned: 'Yours for 1 year', focus: 'balanced',
+    season: 'Ovens lit before dawn. Flour from your own farm.', when: 'Every morning', unit: 'loaves', qty: 9000, price: 0.06, yieldLabel: 'Loaves a season',
+    dist: [6, 26, 54, 14], gradeNames: ['Fine white loaves', 'Household bread', 'Coarse bread', 'Day-old'], gradeTitle: 'What comes out of the oven',
+    buyers: 'Buyers: the street, the tavern next door, and the rich houses that send a slave every morning.',
+    stewardRole: 'YOUR MANAGER', steward: 'Pomponia', face: 'baker', since: 'Manager for 1 year, wage 30  a month',
+    traits: [['Hard-working', 'yes'], ['Honest', 'yes'], ['Proud', '?']], loyalty: 82,
+    quote: '“Fulvius can sell bread at a loss for a while. Not for ever. Tell me what you want to do.”',
+    audit: 'Audit done. Pomponia’s books are perfect. She is proud, and she will not be told how to bake.',
+    store: 'THE FLOUR STORE', cap: '1,100 of 2,000 modii', stock: [
+      ['Flour from Tusonella', '1,100 modii. Your own grain, milled.', 0, 'Keep']],
+    spark: [520, 540, 530, 560, 420, 380, 360, 350], trend: 'Takings fell by a third the week Fulvius cut his prices. They’re still falling.',
+    spoil: 'Flour keeps a few months. Bread keeps a day.',
+    ups: [['A second oven', 'Bake twice as much at dawn.', 300, 'buy'],
+      ['A counter on the street', 'Sell to passers-by without coming in.', 120, 'done'],
+      ['Deliveries to the rich houses', 'A boy and a handcart. Steady customers.', 90, 'buy']],
+    neighbours: [['House Fulvius, three streets away', 'Six bakeries, all selling below cost to drive you out.'],
+      ['Known for: honest weight', 'Pomponia’s loaves are never short. People notice.']],
+    mc: 'A narrow bakery with a big domed oven in the back and a counter open to the Via Lata.',
+    mcCoords: 'x -176  z 846  ·  in Aquea',
+    cards: [{ id: 'b1', from: 'Pomponia, your manager', title: 'Fulvius cuts his bread prices', text: 'He has cut prices by a fifth in every bakery he owns. Your customers are drifting away.',
+      choices: [['Match his prices', 'Lose about 200 a month. Can you outlast him?', '−200/mo', 'You match him. Both of you lose money. Fulvius has deeper pockets, for now.'],
+        ['Sell better bread', 'Keep the customers who care.', '', 'You lose the poor customers and keep the rich ones. Profit falls a little.'],
+        ['Complain to the aediles', 'Selling below cost is frowned on.', '1 favour', 'The aedile has a word with Fulvius. Prices creep back up. He knows it was you.']] }] },
+  { id: 'warehouse', name: 'Dockside Warehouse', kind: 'Warehouse', where: 'The river docks, Aquea.', owned: 'Yours for 2 years', focus: 'volume',
+    season: 'Ships unloading all autumn. The bays are nearly full.', when: 'All season', unit: 'bays', qty: 40, price: 14, yieldLabel: 'Bays rented',
+    dist: [20, 40, 30, 10], gradeNames: ['Dry upper floor', 'Ground floor', 'Open yard', 'The leaky corner'], gradeTitle: 'Space you rent out',
+    buyers: 'Renters: merchants waiting for a ship, a good price or a buyer. Your own goods go in free.',
+    stewardRole: 'YOUR MANAGER', steward: 'Silvanus', face: 'clerk', since: 'Manager for 2 years, wage 30  a month',
+    traits: [['Careful', 'yes'], ['Honest', '?'], ['Greedy', '?']], loyalty: 58,
+    quote: '“A man wants a bay with no questions asked. He’ll pay three times the rent. I said I’d ask you.”',
+    audit: 'Audit done. Silvanus takes small gifts from renters for the best bays. Greedy, a little.',
+    store: 'YOUR OWN GOODS INSIDE', cap: '12 of 40 bays are yours', stock: [
+      ['Olive oil from Palia', '310 jars, waiting for a ship.', Math.round(310 * 4.2), 'Sell'],
+      ['Marble blocks for the temple', '34 Good blocks.', 34 * 30, 'Hold']],
+    spark: [12, 12, 13, 14, 14, 15, 16, 16], trend: 'Rents rise every autumn when the ships come in.',
+    spoil: 'Goods don’t spoil here, except in the leaky corner.',
+    ups: [['Fix the leaky corner', 'Turns the worst space into good space.', 150, 'buy'],
+      ['A night watchman', 'Thieves try the docks every week.', 60, 'done'],
+      ['A crane on the quay', 'Unload faster. Renters pay more.', 700, 'buy']],
+    neighbours: [['The customs house next door', 'Officers walk past daily. Useful, or awkward.'],
+      ['Known for: dry and safe', 'Merchants ask for your bays.']],
+    mc: 'A long brick warehouse on the quay with big doors, a loft and a crane.',
+    mcCoords: 'x -152  z 872  ·  in Aquea',
+    cards: [{ id: 'w1', from: 'Silvanus, your manager', title: '“No questions asked”', text: 'A stranger wants the back bay for a month and will pay three times the rent, on condition no one looks inside.',
+      choices: [['Take his money', 'Three times the rent.', '+120 ', 'He pays in silver. At night, men carry in long crates.'],
+        ['Refuse', 'Not worth the risk.', '', 'He leaves without a word. Silvanus looks disappointed.'],
+        ['Tell the customs officers', 'They’d be interested.', '', 'The officers raid the bay a week later. Smuggled swords. The governor hears your name.']] }] }
+];
+var SHARES = [
+  { id: 'glass', name: 'Glassworks in Sabium', where: 'Sabium, Caleonia', mine: 25, partner: 'House Pomponius', face: 'pomponius', mood: 'Polite, rich and old-fashioned',
+    note: 'A sleeping share: you don’t run it. They buy the sand from your quartz mine.', rights: 'One vote in four at the yearly meeting. They must offer you more shares before anyone else.',
+    divs: [110, 90, 130, 110], worth: 'Your share is worth about 2,600 .',
+    card: { id: 's1', from: 'House Pomponius', title: 'Money for a new furnace', text: 'They ask every partner to put in more, in proportion. Yours would be 400 . Refuse, and your share shrinks.',
+      choices: [['Put in 400', 'Keep your 25%.', '400 ', 'Your share stays at 25%. The new furnace doubles their glass.'], ['Refuse', 'Your share falls to about 18%.', '', 'Your share drops to 18%. Pomponius smiles politely.'], ['Offer to sell out', 'They’d pay about 2,600.', '+2,600', 'They agree to 2,450 after some haggling. It’s theirs now.']] } },
+  { id: 'timber', name: 'Durona timber yard', where: 'Durona, Ostoronia', mine: 40, partner: 'Demetrios', face: 'greek', mood: 'Your partner and friend. Mostly.',
+    note: 'Demetrios runs it day to day. You put up most of the money.', rights: 'Neither of you can sell without the other agreeing.',
+    divs: [160, 210, 90, 180], worth: 'Your share is worth about 3,900 .',
+    card: { id: 's2', from: 'Demetrios', title: 'He wants to buy you out', text: 'Demetrios offers 3,600  for your 40%. He says it’s generous. It isn’t, quite.',
+      choices: [['Accept 3,600', 'Clean and friendly.', '+3,600', 'Done. Demetrios is delighted, and owes you one.'], ['Ask for 4,200', 'He may grumble.', '', 'He grumbles, then settles at 3,950.'], ['Refuse', 'Keep your share.', '', 'Demetrios shrugs. He’ll ask again.']] } },
+  { id: 'salt', name: 'Lavica Salt Company', where: 'Lavica, Ostoronia', mine: 10, partner: 'House Fulvius (60%)', face: 'fulvius', mood: 'Your rival. Owns most of it.',
+    note: 'You hold a tenth: not enough to decide anything, enough to see the books.', rights: 'You can demand to see the accounts once a year.',
+    divs: [40, 45, 30, 60], worth: 'Your share is worth about 800 .',
+    card: { id: 's3', from: 'Your clerk', title: 'The accounts don’t add up', text: 'The company paid Fulvius 900  in “consulting fees” last season.',
+      choices: [['Demand an audit', 'Embarrasses him in public.', '40 ', 'The audit finds the fees. Fulvius repays them, and hates you a little more.'], ['Keep the proof quietly', 'Useful later, in Politics.', '', 'You file the proof away. A good weapon for later.'], ['Sell your tenth to Fulvius', 'He’ll pay to be rid of you.', '+760', 'He pays 760. You’re out.']] } }
+];
+
+var VISIT = {
+  vine: { at: [718, 622], days: '1 day\u2019s ride', now: [
+      ['Cool clay cellar, dug into the hill', '20 \u00d7 6, 4 deep', 'Stone brick walls, dirt over the roof, spruce door', 'upgrade'],
+      ['Amphora racks along the cellar walls', 'both walls', 'Decorated pots on spruce slabs', 'upgrade'],
+      ['Shrine to Bacchus by the press', '3 \u00d7 3', 'Smooth sandstone, a flower pot, a candle', 'small'],
+      ['Pergola over the villa path', '12 long', 'Oak fences, leaves, vines', 'small'],
+      ['Beehives at the end of the rows', '4 hives', 'Beehives, a few flowers', 'small']],
+    later: [[3, 'Terraces on the east slope', 'Dry-stone terraces and young vines.', false], [4, 'Rebuild the villa', 'A great rebuild: garden courtyard, baths, a feasting hall for the powerful.', true], [5, 'Wine port and tasting hall', 'Your own jetty below the villa.', true]] },
+  grain: { at: [530, 606], days: '2 days\u2019 ride', now: [
+      ['Watermill on the river', '10 \u00d7 8, wheel 7 high', 'Cobblestone, spruce, a water wheel of spruce fences', 'upgrade'],
+      ['Millrace channel', '30 long', 'Stone bricks, water', 'upgrade'],
+      ['Scarecrows in the far fields', '3', 'Fences, a hay bale, a carved pumpkin', 'small'],
+      ['Bread oven for the harvesters', '4 \u00d7 4', 'Bricks, a furnace, a campfire', 'small'],
+      ['Boundary stones with the Fannii', 'every 20 blocks', 'Cobblestone walls, one sign', 'small']],
+    later: [[3, 'The tenants\u2019 hamlet', 'Eight farmhouses and a threshing floor.', false], [4, 'The great horreum', 'A great rebuild: a granary for a whole province, and a market hall.', true], [5, 'A canal to Aquea', 'Barges straight into the city.', true]] },
+  olive: { at: [494, 622], days: '2 days\u2019 ride, papers needed', now: [
+      ['A second oil press', '6 \u00d7 4', 'Stripped oak, a stone weight, barrels', 'upgrade'],
+      ['Lucia\u2019s house by the gate, extended', '6 \u00d7 5', 'White terracotta, spruce roof', 'small'],
+      ['Goat fence along the lower terrace', '60 long', 'Oak fence, a gate', 'small'],
+      ['Shade tree seat for the pickers', '', 'A bench of stairs under an olive (birch)', 'small']],
+    later: [[3, 'Replant the old trees', 'New saplings across half the grove.', false], [4, 'An oil works and market', 'A great rebuild: presses, settling tanks, a shop on the Pisella road.', true]] },
+  marble: { at: [1018, 754], days: '1 day\u2019s ride', now: [
+      ['Finish the ox road to the river', '56 blocks left, 3 wide', 'Cobblestone, gravel edges', 'upgrade'],
+      ['Bridge over the stream', '14 \u00d7 5', 'Stone brick piers, oak planks, fence rails', 'upgrade'],
+      ['Loading dock on the river', '12 \u00d7 6', 'Spruce on oak posts, barrels, a small crane', 'upgrade'],
+      ['Shrine at the quarry gate', '3 \u00d7 3', 'Smooth quartz, a candle', 'small'],
+      ['Benches and shade for the cutters', '8 long', 'Spruce stairs, a wool awning', 'small'],
+      ['Lime kiln for the rubble', '5 \u00d7 5 \u00d7 6', 'Bricks, a furnace, a chimney', 'small']],
+    later: [[3, 'The quarrymen\u2019s village', 'Six houses, a well, a shrine to Hercules.', false], [4, 'The Marble Works and river port', 'A great rebuild: polish your own stone and sell columns, not blocks.', true], [5, 'A temple on the hill', 'Your own temple, in your own marble.', true]] },
+  tavern: { at: [774, 698], days: 'In Aquea, a short walk', now: [], later: [] },
+  bakery: { at: [776, 704], days: 'In Aquea, a short walk', now: [], later: [] },
+  warehouse: { at: [742, 724], days: 'In Aquea, by the river', now: [], later: [] },
+  quartz: { at: [1066, 510], days: '3 days\u2019 ride, papers needed', now: [
+      ['Guardhouse and stockade', '8 \u00d7 6, wall 30 long', 'Spruce logs, oak fence, a lantern', 'upgrade'],
+      ['Ventilation shafts', '2 shafts, 20 deep', 'Open shafts with ladders and trapdoors', 'upgrade'],
+      ['Sorting shed for the crystal', '10 \u00d7 5', 'Spruce, a crafting table, chests', 'small'],
+      ['A strongroom door Brutus can\u2019t open alone', '', 'Iron door, two buttons apart', 'small']],
+    later: [[3, 'Sink a deeper shaft', 'More clear crystal, more danger.', false], [4, 'A glassworks by the mine', 'A great rebuild: make glass on site and sell to Sabium yourself.', true]] }
+};
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+var __AIDE = function (self, A) {
+  var st = self.state || {}, lv = st.aideLv === undefined ? A.def : st.aideLv;
+  var tone = { good: '#1F3A30', warn: '#8E2418', info: '#1F1710' };
+  return { face: A.face, head: A.short.toUpperCase() + ', ' + A.role.toUpperCase() + ' · THE SHORT VERSION', foot: 'The full page is below, if you want it.',
+    says: A.says.map(function (s) { return { t: '• ' + s[1], style: 'font-size: 16px; line-height: 1.4; color: ' + tone[s[0]] + (s[0] === 'warn' ? '; font-weight: 600' : '') }; }),
+    askLabel: 'HOW MUCH CAN ' + A.short.toUpperCase() + ' DECIDE?', will: A.will[lv],
+    levels: ['Ask me first', 'Small things', 'Handle it'].map(function (l, k) { var on = lv === k;
+      return { label: l, on: on ? 'true' : 'false', click: function () { self.setState(Object.assign({}, self.state || {}, { aideLv: k })); },
+        style: 'min-height: 40px; padding: 4px 6px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516; font-weight: 600' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)') }; }) };
+};
+var AIDE = {"face": "assets/68c827b5e74ae6bac441631cd7975afd.png", "role": "your steward", "short": "Felix", "says": [["good", "All five estates are working. Harvest money, about 3,400, comes in at the end of the month."], ["warn", "The tavern’s wine bills don’t add up. Aelia thinks Tertius is skimming."], ["info", "The call-up will take men from the quarry and the farm this spring."]], "will": ["He reports. Every repair, wage and sale waits for you.", "He pays wages and fixes what breaks, up to 300 at a time.", "He runs the estates: hires, sells each harvest at the best price he hears of, and fixes what breaks."], "def": 1};
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var tab = st.tab || 'land';
+    var POOL = tab === 'town' ? TOWN : ESTATES;
+    var sel = tab === 'town' ? (st.selTown || 'tavern') : (st.sel || 'marble');
+    var E = POOL.filter(function (e) { return e.id === sel; })[0] || POOL[0];
+    var focusMap = st.focus || {}, chosen = st.chosen || {}, sold = st.sold || {}, bought = st.bought || {}, audited = st.audited || {};
+    var focusOf = function (e) { return focusMap[e.id] || e.focus; };
+    var distFor = function (e) {
+      var d = e.dist.slice(), f = focusOf(e);
+      if (f === 'premium') d = [d[0] + 9, d[1] + 9, d[2] - 11, d[3] - 7];
+      if (f === 'volume') d = [d[0] - 6, d[1] - 9, d[2] + 8, d[3] + 7];
+      d = d.map(function (x) { return Math.max(1, x); });
+      var t = d.reduce(function (a, b) { return a + b; }, 0);
+      d = d.map(function (x) { return Math.round(x * 100 / t); });
+      d[2] += 100 - d.reduce(function (a, b) { return a + b; }, 0);
+      return d;
+    };
+    var qtyFor = function (e) { var f = focusOf(e); return Math.round(e.qty * (f === 'premium' ? 0.75 : f === 'volume' ? 1.3 : 1)); };
+    var incomeFor = function (e) {
+      var d = distFor(e), q = qtyFor(e);
+      return Math.round(q * e.price * d.reduce(function (a, p, i) { return a + p / 100 * GRADE_MULT[i]; }, 0));
+    };
+    var openCards = function (e) { return e.cards.filter(function (c) { return !chosen[c.id]; }).length; };
+    var fmt = function (n) { return n.toLocaleString('en-US'); };
+    var FOCUS_LABEL = tab === 'town' ? { premium: 'Fine and dear', balanced: 'Balanced', volume: 'Cheap and busy' } : { premium: 'Premium', balanced: 'Balanced', volume: 'Volume' };
+
+    var list = POOL.map(function (e, i) {
+      var on = e.id === sel, d = distFor(e), open = openCards(e);
+      return { name: e.name, sub: e.kind + ' · ' + e.where.split('.')[0], focus: FOCUS_LABEL[focusOf(e)] + ' · ' + e.steward,
+        income: '+' + fmt(incomeFor(e)), hasBadge: open > 0, badge: open + (open === 1 ? ' decision' : ' decisions'),
+        bar: d.map(function (p, k) { return { style: 'width: ' + p + '%; background: ' + GRADE_COL[k] }; }),
+        pick: function () { put(tab === 'town' ? { selTown: e.id } : { sel: e.id }); },
+        style: 'display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: none; border-radius: 2px; cursor: pointer; font-family: Spectral, serif; color: #2A2119; transform: rotate(' + [-0.5, 0.4, -0.3, 0.5, -0.4][i] + 'deg); ' +
+          (on ? 'box-shadow: 0 0 0 3px #C9962A, 0 16px 30px rgba(0,0,0,0.55); margin-right: -14px' : '') };
+    });
+
+    var f = focusOf(E);
+    var focusSeg = [['premium', FOCUS_LABEL.premium], ['balanced', FOCUS_LABEL.balanced], ['volume', FOCUS_LABEL.volume]].map(function (o) {
+      var on = o[0] === f;
+      return { label: o[1], click: function () { var m = Object.assign({}, (self.state || {}).focus || {}); m[E.id] = o[0]; put({ focus: m }); },
+        style: 'min-height: 42px; padding: 6px 4px; border: none; border-right: 1px solid rgba(90,58,34,0.35); font-family: Spectral, serif; font-size: 15px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; font-weight: 600' : 'background: rgba(255,250,238,0.4); color: #2A1A0E') };
+    });
+    var focusNote = tab === 'town' ? { premium: 'Higher prices, better customers. Builds your name.', balanced: 'A steady middle course.', volume: 'Cheap and full. Lots of trade, little profit on each.' }[f] : { premium: 'Fewer ' + E.unit + ', more of the best. Builds your name.', balanced: 'A steady middle course.', volume: 'As many ' + E.unit + ' as possible. Cheaper, and floods markets.' }[f];
+
+    var d = distFor(E), q = qtyFor(E), inc = incomeFor(E);
+    var grades = d.map(function (p, i) {
+      return { pct: p >= 8 ? p + '%' : '', grade: (E.gradeHead || ['Prime', 'Good', 'Common', 'Poor'])[i], name: E.gradeNames[i],
+        price: (E.price * GRADE_MULT[i] < 1 ? (E.price * GRADE_MULT[i]).toFixed(2) : Math.round(E.price * GRADE_MULT[i])) + '  each',
+        style: 'width: ' + p + '%; background: ' + GRADE_COL[i] + '; color: #FFF6E4; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; transition: width 0.4s ease',
+        labelStyle: 'font-size: 13px; font-weight: 700; color: ' + GRADE_COL[i] };
+    });
+    var lo = Math.round(inc * 0.8), hi = Math.round(inc * 1.15);
+    var season = [
+      { k: E.yieldLabel || 'Expected yield', v: fmt(q) + ' ' + E.unit, sub: E.when, style: 'font-family: Cinzel, serif; font-size: 21px; font-weight: 700; color: #2A1A0E' },
+      { k: 'Should earn', v: fmt(lo) + '–' + fmt(hi), sub: 'sestertii, if it all sells', style: 'font-family: Cinzel, serif; font-size: 21px; font-weight: 700; color: #2C5F50' },
+      { k: 'Costs', v: fmt(Math.round(inc * 0.32)), sub: 'wages, tools, tax', style: 'font-family: Cinzel, serif; font-size: 21px; font-weight: 700; color: #8E2418' }
+    ];
+
+    var traitStyle = function (v) {
+      var c = v === 'yes' ? ['#2C5F50', 'rgba(44,95,80,0.12)'] : v === 'no' ? ['#8E2418', 'rgba(142,36,24,0.1)'] : ['#6B5A48', 'rgba(107,90,72,0.1)'];
+      return 'font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 12px; color: ' + c[0] + '; background: ' + c[1] + '; border: 1px solid ' + c[0];
+    };
+    var isAudited = !!audited[E.id];
+    var traits = E.traits.map(function (t) {
+      var v = t[1];
+      if (v === '?' && isAudited) v = (E.id === 'grain' && t[0] === 'Lazy') || (E.id === 'quartz' && t[0] === 'Cruel') ? 'yes' : (E.id === 'grain' && t[0] === 'Skilled') ? 'no' : 'yes';
+      return { label: t[0] + (v === 'yes' ? ' ✓' : v === 'no' ? ' ✗' : ' ?'), style: traitStyle(v) };
+    });
+    var loy = E.loyalty;
+    var hasDone = function (id, k) { return chosen[id] === k; };
+
+    var cards = E.cards.map(function (c, ci) {
+      var pick = chosen[c.id];
+      return { from: c.from, title: c.title, text: c.text, open: pick === undefined, done: pick !== undefined,
+        chosen: pick !== undefined ? 'You chose: ' + c.choices[pick][0] : '', outcome: pick !== undefined ? c.choices[pick][3] : '',
+        undo: function () { var m = Object.assign({}, (self.state || {}).chosen || {}); delete m[c.id]; put({ chosen: m }); },
+        style: 'padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(' + (ci ? 0.5 : -0.4) + 'deg); border-top: 4px solid ' + (pick === undefined ? '#8E2418' : '#2C5F50'),
+        choices: c.choices.map(function (ch, k) {
+          return { label: ch[0], hint: ch[1], cost: ch[2], click: function () { var m = Object.assign({}, (self.state || {}).chosen || {}); m[c.id] = k; put({ chosen: m }); } };
+        }) };
+    });
+
+    var stock = E.stock.map(function (r, i) {
+      var key = E.id + i, isSold = !!sold[key], keep = r[3] === 'Keep' || r[3] === 'Hold';
+      return { what: r[0], note: isSold ? 'Sold. The money is in your strongbox.' : r[1], value: isSold ? '+' + fmt(r[2]) : (r[2] ? '~' + fmt(r[2]) + ' ' : '—'),
+        btnLabel: isSold ? 'Sold' : r[3] === 'Keep' ? 'Keep' : r[3] === 'Hold' ? 'Sell anyway' : 'Sell now',
+        sell: function () { if (r[3] === 'Keep') return; var m = Object.assign({}, (self.state || {}).sold || {}); m[key] = !m[key]; put({ sold: m }); },
+        btn: 'min-width: 104px; min-height: 40px; padding: 4px 10px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: ' + (r[3] === 'Keep' ? 'default' : 'pointer') + '; ' +
+          (isSold ? 'background: #2C5F50; color: #FFF6E4; border: none' : keep ? 'background: transparent; color: #6B5A48; border: 1px solid rgba(58,37,22,0.3)' : 'background: #3A2516; color: #FFF6E4; border: none') };
+    });
+    var sp = E.spark, mn = Math.min.apply(null, sp), mx = Math.max.apply(null, sp);
+    var pts = sp.map(function (v, i) { return [8 + i * (154 / (sp.length - 1)), 46 - (v - mn) / ((mx - mn) || 1) * 38]; });
+
+    var ups = E.ups.map(function (u, i) {
+      var key = E.id + i, state = bought[key] ? 'build' : u[3], prog = bought[key] ? 5 : (u[4] || 0);
+      return { name: u[0], effect: u[1], building: state === 'build', bar: 'height: 6px; border-radius: 3px; background: #5E7A4A; width: ' + prog + '%; animation: grow 0.6s ease-out',
+        eta: bought[key] ? 'Just started' : (u[5] || ''),
+        btnLabel: state === 'done' ? 'Built ✓' : state === 'build' ? 'Under way' : 'Build · ' + fmt(u[2]),
+        click: function () { if (u[3] !== 'buy') return; var m = Object.assign({}, (self.state || {}).bought || {}); m[key] = !m[key]; put({ bought: m }); },
+        btn: 'flex: none; min-width: 120px; min-height: 40px; padding: 4px 10px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; ' +
+          (state === 'done' ? 'background: transparent; color: #2C5F50; border: 1px solid #2C5F50; cursor: default' : state === 'build' ? 'background: rgba(94,122,74,0.15); color: #3A5A2A; border: 1px solid #5E7A4A; cursor: pointer' : 'background: #3A2516; color: #FFF6E4; border: none; cursor: pointer') };
+    });
+
+    var visitOpen = st.visit && st.visit[E.id] !== undefined ? !!st.visit[E.id] : E.id === 'marble';
+    var V = VISIT[E.id], pinned = !!(st.pins && st.pins[E.id]), vdone = st.vdone || {};
+    var ax = 758, ay = 714, ex = V.at[0], ey = V.at[1];
+    var cx = (ax + ex) / 2, cy = (ay + ey) / 2, bw = Math.max(Math.abs(ax - ex) + 220, 380), bh = bw * 300 / 430;
+    if (Math.abs(ay - ey) + 160 > bh) { bh = Math.abs(ay - ey) + 160; bw = bh * 430 / 300; }
+    var nDone = 0;
+    var visitVals = {
+      box: (cx - bw / 2).toFixed(0) + ' ' + (cy - bh / 2).toFixed(0) + ' ' + bw.toFixed(0) + ' ' + bh.toFixed(0),
+      aria: 'Map from Aquea to ' + E.name,
+      route: 'M' + ax + ',' + ay + ' Q' + ((ax + ex) / 2 + (ey - ay) * 0.15).toFixed(0) + ',' + ((ay + ey) / 2 - (ex - ax) * 0.15).toFixed(0) + ' ' + ex + ',' + ey,
+      pinAt: 'translate(' + ex + ',' + ey + ')', lx: ex, ly: ey - 46, name: E.name.split(' ')[0],
+      trip: E.name + ': ' + V.days + ' from Aquea. Teleport there from the Travel screen; days pass as usual.',
+      now: V.now.map(function (b, i) {
+        var k = E.id + i, d = !!vdone[k]; if (d) nDone++;
+        return { name: b[0], size: b[1], blocks: b[2], tag: b[3] === 'upgrade' ? 'part of an upgrade' : 'small build', mark: d ? '\u2713' : '',
+          tagStyle: 'font-size: 11px; font-weight: 600; padding: 0 7px; border-radius: 8px; ' + (b[3] === 'upgrade' ? 'color: #9A6A12; border: 1px solid #9A6A12' : 'color: #2E5878; border: 1px solid #2E5878'),
+          nameStyle: 'font-size: 15px; font-weight: 600; color: ' + (d ? '#2C5F50; text-decoration: line-through' : '#1F1710'),
+          box: 'flex: none; width: 24px; height: 24px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; ' + (d ? 'background: #2C5F50; color: #FFF6E4; border: 1px solid #2C5F50' : 'background: rgba(255,250,238,0.6); color: transparent; border: 1px solid #5A3A22'),
+          click: function () { var m = Object.assign({}, (self.state || {}).vdone || {}); m[k] = !m[k]; put({ vdone: m }); } };
+      }),
+      later: V.later.map(function (l) {
+        var weeks = Math.round((l[0] - 1 - 1.75) * 6), when = weeks < 9 ? 'about ' + weeks + ' real weeks away' : 'about ' + Math.round(weeks / 4.3) + ' real months away';
+        return { year: 'Year ' + l[0], title: l[1], note: l[2], when: when,
+          style: 'display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 3px; ' + (l[3] ? 'background: rgba(142,36,24,0.07); border: 1px dashed rgba(142,36,24,0.55)' : 'background: rgba(255,250,238,0.4); border: 1px dashed rgba(58,37,22,0.35)'),
+          yearStyle: 'font-family: Cinzel, serif; font-size: 14px; font-weight: 700; color: ' + (l[3] ? '#8E2418' : '#3A2516') };
+      })
+    };
+    visitVals.doneText = nDone + ' of ' + V.now.length + ' built';
+    var landInc = ESTATES.reduce(function (a, e) { return a + incomeFor(e); }, 0), townInc = TOWN.reduce(function (a, e) { return a + incomeFor(e); }, 0);
+    var shareInc = SHARES.reduce(function (a, x) { return a + x.divs.reduce(function (p, q) { return p + q; }, 0); }, 0);
+    var totalInc = landInc + townInc + shareInc;
+    var openShares = SHARES.filter(function (x) { return !chosen[x.card.id]; }).length;
+    var landOpen = ESTATES.reduce(function (a, e) { return a + openCards(e); }, 0), townOpen = TOWN.reduce(function (a, e) { return a + openCards(e); }, 0);
+    var totalOpen = landOpen + townOpen + openShares;
+    var selShare = st.selShare || 'glass';
+    var SH = SHARES.filter(function (x) { return x.id === selShare; })[0];
+    if (tab === 'shares') {
+      list = SHARES.map(function (x, i) {
+        var on = x.id === selShare, open = !chosen[x.card.id];
+        return { name: x.name, sub: 'A ' + x.mine + '% share \u00b7 ' + x.where, focus: 'With ' + x.partner, income: '+' + fmt(x.divs.reduce(function (p, q) { return p + q; }, 0)),
+          hasBadge: open, badge: '1 decision',
+          bar: [{ style: 'width: ' + x.mine + '%; background: #C9962A' }, { style: 'width: ' + (100 - x.mine) + '%; background: #8A7A64' }],
+          pick: function () { put({ selShare: x.id }); },
+          style: 'display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: none; border-radius: 2px; cursor: pointer; font-family: Spectral, serif; color: #2A2119; transform: rotate(' + [-0.5, 0.4, -0.3][i] + 'deg); ' +
+            (on ? 'box-shadow: 0 0 0 3px #C9962A, 0 16px 30px rgba(0,0,0,0.55); margin-right: -14px' : '') };
+      });
+    }
+    var shPick = chosen[SH.card.id], dmax = Math.max.apply(null, SH.divs);
+    var shareVals = { kicker: 'A SHARE \u00b7 ' + SH.where.toUpperCase(), name: SH.name, note: SH.note, mine: SH.mine + '%', partner: SH.partner, face: FACE[SH.face], mood: SH.mood, rights: SH.rights,
+      parts: [{ label: 'You ' + SH.mine + '%', style: 'width: ' + SH.mine + '%; background: #3A2516; color: #FFF6E4; font-size: 11px; display: flex; align-items: center; padding-left: 6px; white-space: nowrap; overflow: hidden' },
+        { label: SH.partner.split(' (')[0], style: 'width: ' + (100 - SH.mine) + '%; background: #8A7A64; color: #FFF6E4; font-size: 11px; display: flex; align-items: center; padding-left: 6px; white-space: nowrap; overflow: hidden' }],
+      divs: SH.divs.map(function (v, i) { return { v: '+' + v, k: ['Spring', 'Summer', 'Autumn', 'Winter'][i], bar: 'width: 100%; border-radius: 2px 2px 0 0; background: #5E7A4A; height: ' + Math.round(v / dmax * 52) + 'px' }; }),
+      total: '+' + fmt(SH.divs.reduce(function (p, q) { return p + q; }, 0)) + ' a year', worth: SH.worth,
+      cardFrom: SH.card.from, cardTitle: SH.card.title, cardText: SH.card.text, open: shPick === undefined, done: shPick !== undefined,
+      outcome: shPick !== undefined ? SH.card.choices[shPick][3] : '',
+      undo: function () { var m = Object.assign({}, (self.state || {}).chosen || {}); delete m[SH.card.id]; put({ chosen: m }); },
+      cardStyle: 'padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; border-top: 4px solid ' + (shPick === undefined ? '#8E2418' : '#2C5F50'),
+      choices: SH.card.choices.map(function (ch, k) { return { label: ch[0], hint: ch[1], cost: ch[2], click: function () { var m = Object.assign({}, (self.state || {}).chosen || {}); m[SH.card.id] = k; put({ chosen: m }); } }; }) };
+    var tabBtn = function (id, label, sub) { var on = tab === id;
+      return { label: label, sub: sub, click: function () { put({ tab: id }); },
+        style: 'display: flex; flex-direction: column; align-items: flex-start; min-width: 210px; min-height: 58px; padding: 8px 20px; border-radius: 3px; cursor: pointer; font-family: Spectral, serif; ' +
+          (on ? 'background: #EFE3C8; color: #2A1A0E; border: none; box-shadow: 0 0 0 3px #C9962A, 0 10px 22px rgba(0,0,0,0.5)' : 'background: rgba(12,14,10,0.62); color: #F2E8D5; border: 1px solid rgba(242,232,213,0.3)') }; };
+    var tabs = [tabBtn('land', 'Land', ESTATES.length + ' estates \u00b7 +' + fmt(landInc) + (landOpen ? ' \u00b7 ' + landOpen + ' waiting' : '')),
+      tabBtn('town', 'Town', TOWN.length + ' businesses \u00b7 +' + fmt(townInc) + (townOpen ? ' \u00b7 ' + townOpen + ' waiting' : '')),
+      tabBtn('shares', 'Shares', SHARES.length + ' shares \u00b7 +' + fmt(shareInc) + (openShares ? ' \u00b7 ' + openShares + ' waiting' : ''))];
+    var chip = function (text, kind) {
+      var c = { plain: ['rgba(242,232,213,0.1)', '#F2E8D5', 'rgba(242,232,213,0.25)'], good: ['rgba(120,190,150,0.15)', '#BFE6CC', 'rgba(120,190,150,0.35)'], bad: ['rgba(226,96,72,0.18)', '#F6B4A6', 'rgba(226,96,72,0.45)'] }[kind];
+      return { text: text, style: 'font-size: 15px; padding: 6px 14px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + '; border: 1px solid ' + c[2] };
+    };
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 12px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#CFD8A8' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9D2C4') };
+    };
+
+    return {
+      aide: __AIDE(this, AIDE), nav: __NAV.top('Business', navItem), subnav: __NAV.sub('Business'), hasSub: __NAV.sub('Business').length > 0,
+      tabs: tabs, ownView: tab !== 'shares', shareView: tab === 'shares', sh: shareVals, gradeTitle: E.gradeTitle || 'Expected quality',
+      listNote: tab === 'land' ? 'Land for sale is on the Ventures wall.' : tab === 'town' ? 'Businesses for sale are on the Ventures wall.' : 'Your ships and ship shares are in the Fleet.',
+      chips: [chip((ESTATES.length + TOWN.length + SHARES.length) + ' things you own', 'plain'), chip('+' + fmt(totalInc) + ' expected this year', 'good'), chip(totalOpen + ' decisions waiting', totalOpen ? 'bad' : 'plain')],
+      list: list,
+      forSale: [{ name: 'Salt pans at Nebaella', price: '3,400 ', note: 'Peruaria coast. Salt never goes out of fashion.' }, { name: 'Pasture at Arvino', price: '2,100 ', note: 'Helerensia. Cattle, hides and cheese.' }],
+      s: {
+        name: E.name, kindUpper: E.kind.toUpperCase() + ' · ' + E.owned.toUpperCase(), where: E.where, season: E.season, when: E.when,
+        stewardRole: E.stewardRole, steward: E.steward, face: FACE[E.face], stewardSince: E.since, traits: traits, quote: E.quote,
+        loyaltyWord: loy >= 70 ? 'Loyal' : loy >= 50 ? 'Steady' : 'Restless', loyaltyBar: 'height: 8px; border-radius: 4px; width: ' + loy + '%; background: ' + (loy >= 70 ? '#2C5F50' : loy >= 50 ? '#9A6A12' : '#8E2418'),
+        audited: isAudited, auditResult: E.audit, buyers: E.buyers,
+        storeName: E.store, storeCap: E.cap, spark: pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '),
+        sparkX: pts[pts.length - 1][0], sparkY: pts[pts.length - 1][1], trend: E.trend, trendAria: 'Price trend for ' + E.kind.toLowerCase() + ' goods over the last eight weeks', spoil: E.spoil,
+        neighbours: E.neighbours.map(function (n) { return { title: n[0], text: n[1] }; }), mc: E.mc, mcCoords: E.mcCoords
+      },
+      visitOpen: visitOpen, visitLabel: visitOpen ? 'Close the visit plan' : 'Plan a visit',
+      toggleVisit: function () { var m = Object.assign({}, (self.state || {}).visit || {}); m[E.id] = !visitOpen; put({ visit: m }); },
+      v: visitVals,
+      remindSeg: [['login', 'Next time I log in'], ['week', 'In a week'], ['near', 'When I\u2019m nearby']].map(function (o) { var cur = (st.remind || {})[E.id] || 'login', on = cur === o[0];
+        return { label: o[1], click: function () { var m = Object.assign({}, (self.state || {}).remind || {}); m[E.id] = o[0]; put({ remind: m }); },
+          style: 'min-height: 42px; padding: 6px 4px; border: none; border-right: 1px solid rgba(90,58,34,0.35); font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; font-weight: 600' : 'background: rgba(255,250,238,0.4); color: #2A1A0E') }; }),
+      remindNote: { login: 'Felix will mention it in your morning note.', week: 'A letter arrives in a week: \u201cYou meant to visit ' + E.name + '.\u201d', near: 'When you\u2019re within a day\u2019s ride, Minecraft and the website both nudge you.' }[(st.remind || {})[E.id] || 'login'],
+      pinIt: function () { var m = Object.assign({}, (self.state || {}).pins || {}); m[E.id] = !m[E.id]; put({ pins: m }); },
+      pinLabel: pinned ? 'Pinned \u2713' : 'Pin it on the map',
+      pinStyle: 'flex: 1; min-height: 44px; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer; ' + (pinned ? 'background: transparent; color: #2C5F50; border: 1px solid #2C5F50' : 'background: #8E2418; color: #FFF6E4; border: none'),
+      pinNote: pinned ? 'On your map, and a waypoint in Minecraft with this list beside it.' : 'Pinning puts it on your map and adds a waypoint in Minecraft.',
+      focusSeg: focusSeg, focusNote: focusNote, grades: grades, season: season, cards: cards, stock: stock, ups: ups,
+      decisionsTitle: openCards(E) ? 'WAITING FOR YOUR DECISION' : 'DECIDED THIS SEASON',
+      audit: function () { if (audited[E.id]) return; var m = Object.assign({}, (self.state || {}).audited || {}); m[E.id] = true; put({ audited: m }); },
+      auditLabel: isAudited ? 'Audited' : 'Order an audit · 40',
+      auditBtn: 'flex: 1.4; min-height: 42px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; ' + (isAudited ? 'background: transparent; color: #2C5F50; border: 1px solid #2C5F50; cursor: default' : 'background: #3A2516; color: #FFF6E4; border: none; cursor: pointer')
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

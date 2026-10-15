@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fleet — the chart room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#141A1E}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#F3D27E}a:hover{color:#FFF0C0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px}
+.deck{background-color:#111B22;background-image:radial-gradient(ellipse at 38% 32%, rgba(80,120,140,0.16) 0%, rgba(0,0,0,0) 45%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%), url(assets/6f851292d5daa8b571187cac50665eb3.png);background-size:auto, auto, 480px 240px}
+@keyframes drift{0%{transform:translateX(0)}100%{transform:translateX(-330px)}}
+@keyframes row{0%{background-position:0% 0}16.667%{background-position:20% 0}33.333%{background-position:40% 0}50%{background-position:60% 0}66.667%{background-position:80% 0}83.333%{background-position:100% 0}100%{background-position:100% 0}}
+.tack{position:absolute;width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #FFE8B0 0%, #CC9A40 35%, #7A5218 75%, #4A300C 100%);box-shadow:0 3px 4px rgba(0,0,0,0.6)}
+@keyframes sail{0%{offset-distance:0%}100%{offset-distance:100%}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-2px) rotate(2deg)}}
+@keyframes lurk{0%,100%{transform:translate(0,0) rotate(-3deg)}50%{transform:translate(8px,-3px) rotate(3deg)}}
+@keyframes swell{0%,100%{transform:translateY(1px) rotate(-1.4deg)}25%{transform:translateY(-3px) rotate(0deg)}50%{transform:translateY(-5px) rotate(1.4deg)}75%{transform:translateY(-1px) rotate(0.2deg)}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #141A1E; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<!-- TOP BAR -->
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA HARBOUR · IDES OF OCTOBER</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
+<a href="#" style="{{n.style}}">{{n.label}}</a>
+</sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #9CC4E4">THE CHART ROOM</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Your fleet</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+<span style="{{c.style}}">{{c.text}}</span>
+</sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div class="deck" style="position: relative; width: 1376px; height: 1130px; overflow: hidden; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #1A2228">
+
+<!-- THE SEA CHART -->
+<div style="position: absolute; left: 30px; top: 28px; width: 900px; height: 562px; transform: rotate(-0.4deg); box-shadow: 0 2px 2px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.35), 0 30px 60px rgba(0,0,0,0.45)">
+<img src="assets/ad43d3e6758e9f318afe1711fd706c5a.jpg" alt="Sea chart of the continent" style="position: absolute; inset: 0; width: 900px; height: 562px">
+
+<svg width="900" height="562" aria-hidden="true" style="position: absolute; inset: 0">
+<defs>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" style="stroke: rgba(150,36,24,0.45); stroke-width: 2px"></line></pattern>
+<pattern id="storm" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 5 q2.5 -3 5 0 t5 0" style="fill: none; stroke: rgba(40,70,100,0.5); stroke-width: 1.4px"></path></pattern>
+</defs>
+<!-- danger -->
+<ellipse cx="375" cy="140" rx="70" ry="40" style="fill: url(#hatch); stroke: rgba(150,36,24,0.7); stroke-width: 1.5px; stroke-dasharray: 5 4"></ellipse>
+<text x="375" y="98" style="font-family: 'IM Fell English', serif; font-size: 15px; fill: #8E2418; text-anchor: middle; paint-order: stroke; stroke: rgba(240,228,200,0.9); stroke-width: 4px">Pirates sighted</text>
+<ellipse cx="690" cy="510" rx="110" ry="34" style="fill: url(#storm); stroke: rgba(40,70,100,0.5); stroke-width: 1.2px; stroke-dasharray: 4 4"></ellipse>
+<text x="690" y="470" style="font-family: 'IM Fell English', serif; font-size: 15px; fill: #2A4A66; text-anchor: middle; paint-order: stroke; stroke: rgba(240,228,200,0.9); stroke-width: 4px">Autumn storms</text>
+<!-- lanes -->
+<sc-for list="{{lanes}}" as="l" hint-placeholder-count="6">
+<path d="{{l.d}}" style="{{l.style}}"></path>
+</sc-for>
+<!-- ports -->
+<sc-for list="{{ports}}" as="p" hint-placeholder-count="7">
+<circle cx="{{p.x}}" cy="{{p.y}}" r="5" style="fill: #9C2E1E; stroke: #F2E4C4; stroke-width: 1.5px"></circle>
+<text x="{{p.tx}}" y="{{p.ty}}" style="{{p.labelStyle}}">{{p.name}}</text>
+</sc-for>
+</svg>
+
+<!-- the pirate, lurking -->
+<img src="assets/8f3a90a9bfcf704e43f3dcf69eccb1da.png" alt="" title="Pirate galley" style="position: absolute; left: 346px; top: 116px; width: 64px; height: 45px; animation: lurk 6s ease-in-out infinite; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.4))">
+
+<!-- your ships, sailing their lanes -->
+<sc-for list="{{tokens}}" as="t" hint-placeholder-count="4">
+<button onClick="{{t.pick}}" aria-label="{{t.aria}}" title="{{t.title}}" style="{{t.style}}">
+<img src="{{t.sprite}}" alt="" style="{{t.imgStyle}}">
+</button>
+</sc-for>
+
+<span class="tack" aria-hidden="true" style="left: 10px; top: 10px"></span>
+<span class="tack" aria-hidden="true" style="right: 10px; top: 10px"></span>
+<span class="tack" aria-hidden="true" style="left: 10px; bottom: 10px"></span>
+<span class="tack" aria-hidden="true" style="right: 10px; bottom: 10px"></span>
+</div>
+
+<!-- THE SELECTED SHIP -->
+<div class="paper" style="position: absolute; left: 30px; top: 620px; width: 900px; height: 480px; box-sizing: border-box; padding: 24px 28px; color: #2A2119; box-shadow: 0 1px 1px rgba(0,0,0,0.35), 0 6px 12px rgba(0,0,0,0.3), 0 24px 46px rgba(0,0,0,0.45); display: flex; gap: 28px">
+<div style="flex: none; width: 330px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; height: 240px; border-radius: 3px; overflow: hidden; background: radial-gradient(circle at 74% 34%, rgba(255,244,214,0.95) 0%, rgba(255,236,200,0.35) 14%, rgba(255,236,200,0) 34%), linear-gradient(180deg, #A9BEC4 0%, #CBD2C6 34%, #E4DAC0 52%, #8FA6A8 53%); box-shadow: inset 0 0 0 1px rgba(58,37,22,0.35), inset 0 0 30px rgba(40,30,20,0.25)">
+<svg width="330" height="240" aria-hidden="true" style="position: absolute; left: 0; top: 0"><path d="M0,130 C30,120 58,112 92,119 C118,124 140,110 176,106 C206,103 226,117 252,121 C280,125 304,118 330,122 L330,150 L0,150 Z" style="fill: #9AAFAC"></path><path d="M0,132 C46,126 80,124 120,128 C170,132 220,126 330,129 L330,150 L0,150 Z" style="fill: #8CA3A2"></path></svg>
+<sc-for list="{{s.back}}" as="w" hint-placeholder-count="4">
+<div aria-hidden="true" style="{{w.style}}"><svg width="660" height="240" style="display: block"><path d="{{w.d}}" style="{{w.fill}}"></path><path d="{{w.crest}}" style="{{w.foam}}"></path></svg></div>
+</sc-for>
+<div aria-hidden="true" style="position: absolute; left: 150px; top: 136px; width: 150px; height: 60px; background: radial-gradient(ellipse at 50% 50%, rgba(255,246,220,0.55) 0%, rgba(255,246,220,0) 70%); mix-blend-mode: screen"></div>
+<div style="position: absolute; left: 0; top: 4px; width: 330px; height: 231px; transform-origin: 50% 82%; animation: swell 5s ease-in-out infinite">
+<img src="{{s.body}}" alt="{{s.alt}}" style="position: absolute; left: 0; top: 0; width: 330px; height: 231px">
+<div aria-hidden="true" style="{{s.oarStyle}}"></div>
+</div>
+<sc-for list="{{s.front}}" as="w" hint-placeholder-count="2">
+<div aria-hidden="true" style="{{w.style}}"><svg width="660" height="240" style="display: block"><path d="{{w.d}}" style="{{w.fill}}"></path><path d="{{w.crest}}" style="{{w.foam}}"></path></svg></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{s.stats}}" as="st" hint-placeholder-count="5">
+<div style="display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: center">
+<span style="font-size: 14px; color: #6B5A48">{{st.k}}</span>
+<span style="display: flex; gap: 4px" aria-label="{{st.aria}}">
+<sc-for list="{{st.pips}}" as="pp" hint-placeholder-count="5"><span style="{{pp.style}}"></span></sc-for>
+</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #6B5A48">{{s.typeUpper}}</span>
+<span style="font-family: Cinzel, serif; font-size: 28px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{s.name}}</span>
+<span style="font-size: 16px; color: #3A2516">{{s.status}}</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+<span style="font-size: 13px; color: #6B5A48">Hull</span>
+<div style="width: 120px; height: 8px; background: rgba(58,37,22,0.15); border-radius: 4px"><div style="{{s.hullBar}}"></div></div>
+<span style="font-size: 13px; color: #3A2516">{{s.hullText}}</span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; padding: 12px 0; border-top: 1px solid rgba(58,37,22,0.18); border-bottom: 1px solid rgba(58,37,22,0.18)">
+<sc-for list="{{s.facts}}" as="f" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">{{f.k}}</span><span style="{{f.style}}">{{f.v}}</span></div>
+</sc-for>
+</div>
+
+<div style="display: flex; gap: 12px; align-items: center">
+<div style="flex: none; padding: 3px; background: #EFE3C8; box-shadow: 0 3px 8px rgba(0,0,0,0.3); transform: rotate(-3deg)"><img src="{{s.capFace}}" alt="" style="display: block; width: 40px; height: 40px; image-rendering: pixelated"></div>
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4; color: #1F1710">{{s.capLine}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">IMPROVE HER</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{s.upgrades}}" as="u" hint-placeholder-count="4">
+<button style="text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 48px; padding: 6px 12px; background: rgba(255,250,238,0.5); border: 1px solid rgba(58,37,22,0.25); border-radius: 3px; font-family: Spectral, serif; cursor: pointer">
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{u.name}}</span><span style="font-size: 13px; color: #6B5A48">{{u.effect}}</span></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5A3A22; white-space: nowrap">{{u.cost}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap">
+<sc-for list="{{s.actions}}" as="a" hint-placeholder-count="3">
+<button style="{{a.style}}">{{a.label}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- SHIP ROSTER -->
+<div style="position: absolute; left: 960px; top: 28px; width: 386px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: #D6E4EC; text-shadow: 0 1px 2px rgba(0,0,0,0.6)">YOUR SHIPS</span>
+<sc-for list="{{roster}}" as="r" hint-placeholder-count="4">
+<button class="paper" onClick="{{r.pick}}" style="{{r.style}}">
+<img src="{{r.sprite}}" alt="" style="flex: none; width: 112px; height: 78px; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3))">
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; text-align: left">
+<span style="display: flex; justify-content: space-between; align-items: baseline; gap: 6px"><span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; color: #2A1A0E">{{r.name}}</span><span style="{{r.riskStyle}}">{{r.risk}}</span></span>
+<span style="font-size: 13px; color: #6B5A48">{{r.type}}</span>
+<span style="font-size: 15px; color: #1F1710">{{r.status}}</span>
+</span>
+</button>
+</sc-for>
+</div>
+
+<!-- LANES -->
+<div class="paper" style="position: absolute; left: 960px; top: 612px; width: 386px; box-sizing: border-box; padding: 20px 22px; color: #2A2119; box-shadow: 0 1px 1px rgba(0,0,0,0.35), 0 6px 12px rgba(0,0,0,0.3), 0 24px 46px rgba(0,0,0,0.45); transform: rotate(0.5deg); display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">YOUR SEA LANES</span>
+<sc-for list="{{laneRows}}" as="lr" hint-placeholder-count="5">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(58,37,22,0.12)">
+<div style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 16px; color: #1F1710">{{lr.name}}</span><span style="{{lr.noteStyle}}">{{lr.note}}</span></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2C5F50; white-space: nowrap">{{lr.take}}</span>
+</div>
+</sc-for>
+<div style="display: flex; gap: 8px; padding-top: 4px">
+<button style="flex: 1; min-height: 44px; background: #2E5878; color: #FFF6E4; border: none; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer">Chart a new lane</button>
+<button style="flex: 1; min-height: 44px; background: transparent; color: #2A1A0E; border: 1px solid #5A3A22; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Visit the shipyard</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var selId = s.sel || 'aurora';
+    var K = 0.5625;                         // map units to chart pixels
+    var sc = function (d) { return d.replace(/-?\d+(\.\d+)?/g, function (n) { return (parseFloat(n) * K).toFixed(1); }); };
+    var navItem = function (label, active) {
+      return { label: label,
+        style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#9CC4E4' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9DEE0') };
+    };
+    var chip = function (text, kind) {
+      var c = { plain: ['rgba(214,228,236,0.12)', '#E6EEF2', 'rgba(214,228,236,0.25)'], good: ['rgba(120,190,150,0.15)', '#BFE6CC', 'rgba(120,190,150,0.35)'], bad: ['rgba(226,96,72,0.15)', '#F6B4A6', 'rgba(226,96,72,0.4)'] }[kind];
+      return { text: text, style: 'font-size: 15px; padding: 6px 14px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + '; border: 1px solid ' + c[2] };
+    };
+    var SPR = { merchant: 'assets/2ecca6031507a8596e2e22d0d29686ea.png', galley: 'assets/8f630f71d0524175b7e81b4127bb3ab0.png' };
+    var BODY = { merchant: 'assets/2ecca6031507a8596e2e22d0d29686ea.png', galley: 'assets/fbaa01505d8fb2c9746347ac680dcab7.png' };
+    var OARS = { galley: 'assets/d61c9e06abcb3669fad3a17391dccfff.png' };
+    var wave = function (base, A, p, col, dur, foamA, op) {
+      var n = Math.round(660 / p), pts = [], R = p / (2 * Math.PI), d = 0.12 * p;
+      for (var i = 0; i <= n * 32; i++) {
+        var ph = (i / 32) * 2 * Math.PI;
+        pts.push((R * ph + d * Math.sin(ph)).toFixed(1) + ',' + (base + A * Math.cos(ph)).toFixed(1));
+      }
+      return { d: 'M0,240 L' + pts.join(' L') + ' L660,240 Z', crest: 'M' + pts.join(' L'),
+        fill: 'fill: ' + col + '; opacity: ' + (op || 1),
+        foam: 'fill: none; stroke: rgba(236,244,238,' + foamA + '); stroke-width: 1.4px',
+        style: 'position: absolute; left: 0; top: 0; width: 660px; height: 240px; animation: drift ' + dur + 's linear infinite' };
+    };
+    var F = { client: 'assets/054107f26dcd34ab67e0139fe33c08b3.png', greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png', captain: 'assets/4b348a319e394291dcda8ed147cca6d3.png', over: 'assets/68c827b5e74ae6bac441631cd7975afd.png' };
+
+    var LANE = {
+      coria: 'M1298,202 Q1028,153 870,378',
+      casinica: 'M426,206 Q686,194 870,378',
+      sabino: 'M758,714 Q961,899 1234,874',
+      rhodes: 'M1418,882 Q1520,930 1590,960',
+      lareanum: 'M758,714 Q861,752 958,702'
+    };
+    var SHIPS = [
+      { id: 'fortuna', name: 'Fortuna', type: 'Merchant ship · corbita', kind: 'merchant', lane: null, at: [1298, 202], status: 'In port at Coria · awaiting orders', risk: 'in port', riskKind: 'plain',
+        hull: 92, stats: [2, 4, 3, 1, 3], cargo: 'Empty', profit: '—', eta: 'Ready to sail', cap: F.client,
+        capLine: '"Grain sells high here, master. Say the word and we load for the south, or we wait for an escort past the pirates."' },
+      { id: 'aurora', name: 'Aurora', type: 'Merchant ship · corbita', kind: 'merchant', lane: 'casinica', dur: 46, status: 'At sea · Casinica to Durona · 2 days', risk: 'pirates', riskKind: 'bad',
+        hull: 74, stats: [2, 4, 2, 1, 2], cargo: '120 jars of olive oil', profit: '+420 expected', eta: '2 days, if the wind holds', cap: F.over,
+        capLine: '"Black sails off the headland at dawn. They have not closed yet. I would give a great deal for marines aboard."' },
+      { id: 'celeritas', name: 'Celeritas', type: 'Fast galley · liburna', kind: 'galley', lane: 'sabino', dur: 38, status: 'At sea · Aquea to Sabino · 4 days', risk: 'storms', riskKind: 'warn',
+        hull: 96, stats: [4, 2, 4, 3, 4], cargo: '80 bars of iron', profit: '+310 expected', eta: '4 days', cap: F.captain,
+        capLine: '"Weather is turning in the south. We can outrun most of it. Most."' },
+      { id: 'thetis', name: 'Thetis', type: 'Merchant ship · shared, 60%', kind: 'merchant', lane: 'rhodes', dur: 60, status: 'Bound for Rhodes · 9 days · off the chart', risk: 'far', riskKind: 'plain',
+        hull: 85, stats: [3, 5, 3, 2, 3], cargo: '2,000 jars of wine', profit: '+1,020 your share', eta: '9 days', cap: F.greek,
+        capLine: '"A fair wind east. Do think on my offer, partner. House Fulvius will not wait for ever."' }
+    ];
+    var STAT_NAMES = ['Speed', 'Hold', 'Crew', 'Marines', 'Sails'];
+
+    var lanes = [
+      { k: 'coria', status: 'safe' }, { k: 'lareanum', status: 'safe' }, { k: 'casinica', status: 'threat' },
+      { k: 'sabino', status: 'storm' }, { k: 'rhodes', status: 'safe' }
+    ].map(function (l) {
+      var sel = SHIPS.filter(function (x) { return x.id === selId; })[0];
+      var on = sel && sel.lane === l.k;
+      var color = l.status === 'threat' ? '#9C2E1E' : l.status === 'storm' ? '#2A4A66' : '#3A2516';
+      return { d: sc(LANE[l.k]), style: 'fill: none; stroke: ' + (on ? '#C9962A' : color) + '; stroke-width: ' + (on ? 4 : 2.2) + 'px; stroke-dasharray: ' + (on ? '10 6' : '7 6') + '; stroke-linecap: round; opacity: ' + (on ? 1 : 0.8) };
+    });
+    var PORTS = [['Coria', 1298, 202, 1], ['Durona', 870, 378, -1], ['Casinica', 426, 206, -1], ['Aquea', 758, 714, -1], ['Sabino', 1418, 882, -1], ['Lareanum', 958, 702, 1], ['Galorae', 1234, 874, -1]];
+    var ports = PORTS.map(function (p) {
+      var x = p[1] * K, y = p[2] * K;
+      return { name: p[0], x: x, y: y, tx: x + (p[3] > 0 ? 9 : -9), ty: y + 5,
+        labelStyle: 'font-family: "IM Fell English", serif; font-size: 15px; fill: #2A1A0E; text-anchor: ' + (p[3] > 0 ? 'start' : 'end') + '; paint-order: stroke; stroke: rgba(240,228,200,0.92); stroke-width: 4px' };
+    });
+
+    var tokens = SHIPS.map(function (sh, i) {
+      var on = sh.id === selId;
+      var base = 'position: absolute; left: 0; top: 0; width: 64px; height: 46px; padding: 0; border: none; background: transparent; cursor: pointer; border-radius: 50%; ' +
+        (on ? 'outline: 2px solid #C9962A; outline-offset: 2px; ' : '');
+      var style = sh.lane
+        ? base + 'offset-path: path(\'' + sc(LANE[sh.lane]) + '\'); offset-rotate: 0deg; offset-anchor: 50% 75%; animation: sail ' + sh.dur + 's linear ' + (-i * 7) + 's infinite alternate'
+        : base + 'transform: translate(' + (sh.at[0] * K - 32) + 'px, ' + (sh.at[1] * K - 40) + 'px)';
+      return { sprite: SPR[sh.kind], aria: 'Select the ' + sh.name, title: sh.name + ' · ' + sh.status, style: style,
+        imgStyle: 'display: block; width: 64px; height: 46px; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.45)); animation: bob ' + (3 + i * 0.4) + 's ease-in-out infinite',
+        pick: function () { self.setState({ sel: sh.id }); } };
+    });
+
+    var RISK = { bad: ['#9C2E1E', 'rgba(156,46,30,0.1)'], warn: ['#2A4A66', 'rgba(42,74,102,0.1)'], plain: ['#6B5A48', 'rgba(107,90,72,0.1)'] };
+    var roster = SHIPS.map(function (sh, i) {
+      var on = sh.id === selId; var rc = RISK[sh.riskKind];
+      return { name: sh.name, type: sh.type, status: sh.status, sprite: SPR[sh.kind], risk: sh.risk,
+        riskStyle: 'font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 10px; color: ' + rc[0] + '; background: ' + rc[1] + '; border: 1px solid ' + rc[0],
+        pick: function () { self.setState({ sel: sh.id }); },
+        style: 'display: flex; gap: 12px; align-items: center; padding: 10px 14px; border: none; border-radius: 2px; cursor: pointer; font-family: Spectral, serif; transform: rotate(' + [-0.6, 0.5, -0.3, 0.4][i] + 'deg); ' +
+          (on ? 'box-shadow: 0 0 0 3px #C9962A, 0 14px 28px rgba(0,0,0,0.5)' : 'box-shadow: 0 1px 1px rgba(0,0,0,0.35), 0 6px 12px rgba(0,0,0,0.3), 0 18px 34px rgba(0,0,0,0.4)') };
+    });
+
+    var sh = SHIPS.filter(function (x) { return x.id === selId; })[0];
+    var pips = function (n) {
+      var out = [];
+      for (var i = 0; i < 5; i++) out.push({ style: 'width: 22px; height: 10px; border-radius: 2px; ' + (i < n ? 'background: #5A3A22' : 'background: rgba(58,37,22,0.12); box-shadow: inset 0 0 0 1px rgba(58,37,22,0.25)') });
+      return out;
+    };
+    var btn = function (label, kind) {
+      return { label: label, style: 'min-height: 44px; padding: 8px 18px; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; font-weight: 600; cursor: pointer; ' +
+        (kind === 'primary' ? 'background: #2E5878; color: #FFF6E4; border: none' : 'background: transparent; color: #2A1A0E; border: 1px solid #5A3A22') };
+    };
+    var actionsFor = {
+      fortuna: [btn('Give orders', 'primary'), btn('Wait for an escort'), btn('Let the captain decide')],
+      aurora: [btn('Send the Celeritas to escort her', 'primary'), btn('Run for the nearest port'), btn('Insure the cargo')],
+      celeritas: [btn('Change course', 'primary'), btn('Shelter at Galorae'), btn('Press on')],
+      thetis: [btn('Read the partner\'s offer', 'primary'), btn('Audit the ship\'s books')]
+    };
+    var hullColor = sh.hull < 80 ? '#9C2E1E' : '#2C5F50';
+    var s2 = {
+      body: BODY[sh.kind],
+      oarStyle: OARS[sh.kind] ? 'position: absolute; left: 0; top: 0; width: 330px; height: 231px; background-image: url(' + OARS[sh.kind] + '); background-size: 600% 100%; background-repeat: no-repeat; animation: row 1.9s step-end infinite' : 'display: none',
+      back: [wave(133, 1.6, 55, '#86A0A1', 26, 0.25), wave(147, 2.6, 66, '#739396', 18, 0.3), wave(162, 4, 110, '#5F7D83', 13, 0.35), wave(177, 5, 110, '#4E6D75', 10, 0.4)],
+      front: [wave(194, 6.5, 165, '#3F5F69', 7.5, 0.6, 0.94), wave(214, 8, 110, '#32505B', 5.5, 0.55)],
+      name: sh.name, typeUpper: sh.type.toUpperCase(), status: sh.status, sprite: SPR[sh.kind], alt: 'The ' + sh.name + ' under sail',
+      hullBar: 'width: ' + sh.hull + '%; height: 8px; border-radius: 4px; background: ' + hullColor, hullText: sh.hull + '% sound',
+      stats: STAT_NAMES.map(function (n, i) { return { k: n, pips: pips(sh.stats[i]), aria: n + ': ' + sh.stats[i] + ' of 5' }; }),
+      facts: [
+        { k: 'Carrying', v: sh.cargo, style: 'font-size: 16px; color: #1F1710' },
+        { k: 'Arrives', v: sh.eta, style: 'font-size: 16px; color: #1F1710' },
+        { k: 'Should earn', v: sh.profit, style: 'font-size: 16px; color: #2C5F50; font-weight: 600' },
+        { k: 'Danger', v: sh.risk === 'pirates' ? 'Pirates on the lane' : sh.risk === 'storms' ? 'Storm season ahead' : sh.risk === 'far' ? 'Long voyage, out of reach' : 'Safe in harbour', style: 'font-size: 16px; color: ' + (sh.riskKind === 'bad' ? '#9C2E1E' : '#1F1710') }
+      ],
+      capFace: sh.cap, capLine: sh.capLine,
+      upgrades: [
+        { name: 'Repair and caulk the hull', effect: 'Back to full strength', cost: sh.hull < 90 ? '180 ' : '—' },
+        { name: 'Take on marines', effect: 'Fight off pirates', cost: '320 ' },
+        { name: 'New linen sails', effect: 'Faster on every lane', cost: '450 ' },
+        { name: 'Widen the hold', effect: 'Carry a fifth more', cost: '900 ' }
+      ],
+      actions: actionsFor[sh.id]
+    };
+
+    var laneRows = [
+      { name: 'Coria · Durona', note: 'Grain north, iron back. Safe.', take: '+380', ns: 'safe' },
+      { name: 'Aquea · Lareanum', note: 'Short coastal hop. Safe.', take: '+140', ns: 'safe' },
+      { name: 'Casinica · Durona', note: 'Pirates sighted. Escort advised.', take: '+420', ns: 'bad' },
+      { name: 'Aquea · Sabino', note: 'Storm season is starting.', take: '+310', ns: 'warn' },
+      { name: 'Sabino · Rhodes', note: 'Long, rich, and out of sight.', take: '+1,020', ns: 'safe' }
+    ].map(function (r) { return Object.assign(r, { noteStyle: 'font-size: 13px; color: ' + (r.ns === 'bad' ? '#9C2E1E' : r.ns === 'warn' ? '#2A4A66' : '#6B5A48') }); });
+
+    return {
+      nav: __NAV.top('Fleet', navItem), subnav: __NAV.sub('Fleet'), hasSub: __NAV.sub('Fleet').length > 0,
+      chips: [chip('4 ships, one shared', 'plain'), chip('5 sea lanes', 'plain'), chip('+2,270 this season', 'good'), chip('1 lane under threat', 'bad')],
+      lanes: lanes, ports: ports, tokens: tokens, roster: roster, s: s2, laneRows: laneRows
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

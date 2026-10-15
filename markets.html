@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markets — what you've heard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#171B1C}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 22px 44px rgba(0,0,0,0.5)}
+.slate{background-color:#2A3032;background-image:radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%), url(assets/e96f316ec4bcf032a279eca079e5e2ac.jpg);background-size:auto, auto, cover;background-position:center}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#3A2516}
+.chalk{font-family:Cinzel,serif;font-weight:700;letter-spacing:0.16em;color:#E6E8E2;text-shadow:0 0 1px rgba(255,255,255,0.4)}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes ping{0%{r:10;opacity:0.7}100%{r:30;opacity:0}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #171B1C; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · LATE AUTUMN · 3 WEEKS UNTIL THE SEA CLOSES</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<!-- YOUR PERSON READS THIS PAGE FOR YOU -->
+<section aria-label="Summary" style="display: grid; grid-template-columns: 1fr 360px; gap: 22px; padding: 16px 20px; background: #EFE3C8; color: #2A2119; border-radius: 3px; box-shadow: 0 14px 30px rgba(0,0,0,0.45); border-left: 6px solid #9A6A12">
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<img src="{{aide.face}}" alt="" style="flex: none; width: 56px; height: 56px; image-rendering: pixelated; box-shadow: 0 0 0 3px #F6EAD0, 0 4px 10px rgba(0,0,0,0.3)">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{aide.head}}</span>
+<sc-for list="{{aide.says}}" as="ai" hint-placeholder-count="3"><span style="{{ai.style}}">{{ai.t}}</span></sc-for>
+<span style="font-size: 13px; color: #6B5A48">{{aide.foot}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-left: 20px; border-left: 1px solid rgba(58,37,22,0.2)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">{{aide.askLabel}}</span>
+<div role="radiogroup" aria-label="{{aide.askLabel}}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px">
+<sc-for list="{{aide.levels}}" as="al" hint-placeholder-count="3"><button role="radio" aria-checked="{{al.on}}" onClick="{{al.click}}" style="{{al.style}}">{{al.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; line-height: 1.4; color: #1F1710">{{aide.will}}</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #B9C7C9">WHAT YOU'VE HEARD</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Markets</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4"><span style="{{c.style}}">{{c.text}}</span></sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div class="slate" style="width: 1376px; box-sizing: border-box; padding: 28px 30px 38px; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #3A4244; display: flex; flex-direction: column; gap: 24px">
+
+<!-- goods -->
+<div role="tablist" aria-label="Goods" style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{goods}}" as="g" hint-placeholder-count="6"><button role="tab" onClick="{{g.click}}" style="{{g.style}}"><span style="font-family: Cinzel, serif; font-size: 15px; font-weight: 700">{{g.name}}</span><span style="font-size: 12px; opacity: 0.8">{{g.sub}}</span></button></sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 520px; gap: 24px; align-items: start">
+<!-- the knowledge book -->
+<div class="paper" style="padding: 22px 24px; color: #2A2119; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><span class="kicker">{{book.title}}</span><span style="font-size: 13px; color: #6B5A48">{{book.note}}</span></div>
+<div style="display: grid; grid-template-columns: 110px 136px 1fr 110px 110px; gap: 10px; padding: 6px 0; border-bottom: 2px solid rgba(58,37,22,0.35); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: #6B5A48">
+<span>TOWN</span><span>PRICE</span><span>WHO SAYS SO, AND WHEN</span><span>HOW SURE</span><span>STOCKS THERE</span>
+</div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+<div style="{{r.rowStyle}}">
+<span style="font-family: Cinzel, serif; font-size: 15px; font-weight: 700; color: #2A1A0E">{{r.town}}</span>
+<span style="display: flex; flex-direction: column"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: #1F1710">{{r.price}}</span><span style="{{r.vsStyle}}">{{r.vs}}</span></span>
+<span style="display: flex; gap: 8px; align-items: center; min-width: 0"><img src="{{r.face}}" alt="" style="{{r.faceStyle}}"><span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 14px; color: #1F1710">{{r.source}}</span><span style="font-size: 12px; color: #6B5A48">{{r.age}}</span></span></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="{{r.sureStyle}}">{{r.dots}}</span><span style="font-size: 12px; color: #6B5A48">{{r.sure}}</span></span>
+<span style="display: flex; flex-direction: column; gap: 3px"><span style="display: block; height: 7px; border-radius: 4px; background: rgba(58,37,22,0.15)"><span style="{{r.stockBar}}"></span></span><span style="font-size: 12px; color: #3A2516">{{r.stock}}</span></span>
+</div>
+</sc-for>
+<div style="{{deal.style}}">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em">{{deal.kicker}}</span>
+<span style="font-size: 16px; line-height: 1.45">{{deal.text}}</span>
+<span style="font-size: 13px; opacity: 0.85">{{deal.caveat}}</span>
+</div>
+</div>
+
+<!-- the price map -->
+<div class="paper" style="padding: 16px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(0.4deg)">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span class="kicker">{{mapTitle}}</span><span style="font-size: 12px; color: #6B5A48">faded = old news</span></div>
+<svg width="488" height="305" viewBox="60 140 1500 940" role="img" aria-label="{{mapAria}}" style="display: block; box-shadow: 0 0 0 1px rgba(58,37,22,0.3)">
+<image href="assets/9f5158a39938dfbadce3acb1871c8938.jpg" x="0" y="0" width="1600" height="1000"></image>
+<rect x="0" y="0" width="1600" height="1000" style="fill: rgba(246,236,212,0.25)"></rect>
+<sc-for list="{{moves}}" as="mv" hint-placeholder-count="3"><path d="{{mv.d}}" style="{{mv.style}}"></path></sc-for>
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="7">
+<g style="{{d.g}}">
+<circle cx="{{d.x}}" cy="{{d.y}}" r="{{d.r}}" style="{{d.fill}}"></circle>
+<text x="{{d.x}}" y="{{d.ty}}" style="font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; fill: #1F1710; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 6px">{{d.label}}</text>
+<text x="{{d.x}}" y="{{d.ny}}" style="font-family: 'IM Fell English', serif; font-size: 26px; fill: #3A2516; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.9); stroke-width: 5px">{{d.name}}</text>
+</g>
+</sc-for>
+</svg>
+<div style="display: flex; gap: 14px; font-size: 12px; color: #3A2516; flex-wrap: wrap">
+<span><span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #3E8A5A; margin-right: 4px"></span>cheap</span>
+<span><span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #C9962A; margin-right: 4px"></span>usual</span>
+<span><span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #B23A24; margin-right: 4px"></span>dear</span>
+<span>bigger circle = fuller stores</span>
+<span>dashed = goods on the move</span>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<!-- on the move -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.4deg)">
+<span class="kicker">ON THE MOVE</span>
+<sc-for list="{{transit}}" as="t" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<span style="{{t.iconStyle}}">{{t.icon}}</span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 15px; color: #1F1710">{{t.text}}</span><span style="font-size: 13px; color: #6B5A48">{{t.meta}}</span><span style="{{t.effectStyle}}">{{t.effect}}</span></span>
+</div>
+</sc-for>
+</div>
+<!-- rival houses -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(0.3deg)">
+<span class="kicker">WHAT THE OTHER HOUSES ARE DOING</span>
+<sc-for list="{{rivals}}" as="rv" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<img src="{{rv.face}}" alt="" style="width: 40px; height: 40px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0, 0 2px 4px rgba(0,0,0,0.3)">
+<span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{rv.name}} <span style="{{rv.moodStyle}}">{{rv.mood}}</span></span><span style="font-size: 14px; color: #1F1710">{{rv.text}}</span><span style="font-size: 12px; color: #6B5A48">{{rv.meta}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 22px">
+<!-- rumours -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 10px; transform: rotate(0.4deg); border-top: 4px solid #9A6A12">
+<span class="kicker">RUMOURS YOU CAN’T CONFIRM</span>
+<sc-for list="{{rumours}}" as="ru" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 8px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4; color: #1F1710">{{ru.text}}</span>
+<span style="font-size: 13px; color: #6B5A48">{{ru.meta}}</span>
+<sc-if value="{{ru.open}}" hint-placeholder-val="{{ true }}"><div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{ru.acts}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="min-height: 38px; padding: 4px 12px; background: rgba(255,250,238,0.6); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; font-size: 13px; cursor: pointer">{{a.label}}</button></sc-for></div></sc-if>
+<sc-if value="{{ru.done}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #1F3A30; padding: 6px 10px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both">{{ru.outcome}}</span></sc-if>
+</div>
+</sc-for>
+</div>
+<!-- spies -->
+<div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; background: #2E2824; color: #E8DCC4; box-shadow: 0 10px 24px rgba(0,0,0,0.5); border: 1px solid rgba(232,220,196,0.2); transform: rotate(-0.3deg)">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8">SPIES AND OTHER PEOPLE’S LETTERS</span>
+<div style="display: flex; gap: 10px; align-items: center"><img src="assets/a6d6538e5b5bc088097dd36f4020019c.png" alt="" style="width: 34px; height: 34px; image-rendering: pixelated; box-shadow: 0 0 0 2px #3A3026; filter: brightness(0.9)"><span style="font-size: 14px; line-height: 1.4">Your spy, a kitchen girl in Fulvius’s house: <span style="font-family: 'IM Fell English', serif; font-size: 16px">“He means to hold the salt until the sea opens in spring, then sell it in Aquea at double.”</span></span></div>
+<div style="padding: 12px 14px; background: #EFE3C8; color: #2A2119; transform: rotate(0.6deg); box-shadow: 0 6px 14px rgba(0,0,0,0.4)">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #8E2418">INTERCEPTED AT THE CORIA HARBOUR · FULVIUS TO HIS AGENT</span>
+<p style="margin: 4px 0 0; font-family: 'IM Fell English', serif; font-size: 16px; line-height: 1.45">“Buy all the grain you can in Coria before the news from Melulona arrives. Pay up to 0.50. Tell no one.”</p>
+</div>
+<sc-if value="{{letter.open}}" hint-placeholder-val="{{ true }}"><div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px"><sc-for list="{{letter.acts}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 58px; padding: 6px 10px; background: rgba(255,255,255,0.05); color: #E8DCC4; border: 1px solid rgba(232,220,196,0.3); border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer"><span style="font-size: 14px; font-weight: 600">{{a.label}}</span><span style="font-size: 12px; color: #C9BBA0">{{a.hint}}</span></button></sc-for></div></sc-if>
+<sc-if value="{{letter.done}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; padding: 8px 10px; background: rgba(255,255,255,0.06); border-left: 3px solid #E6B8A8; animation: fadein 0.4s ease-out both">{{letter.outcome}}</span></sc-if>
+<div style="display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px solid rgba(232,220,196,0.18)">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #E6B8A8">PLANT A RUMOUR OF YOUR OWN</span>
+<span style="font-size: 14px">{{plant.text}}</span>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><sc-for list="{{plant.opts}}" as="p" hint-placeholder-count="3"><button onClick="{{p.click}}" style="{{p.style}}">{{p.label}}</button></sc-for></div>
+<span style="font-size: 12px; color: #C9BBA0">{{plant.note}}</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- banks, war, government -->
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start">
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.3deg)">
+<span class="kicker">THE BANKS</span>
+<sc-for list="{{banks}}" as="bk" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 3px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{bk.name}}</span><span style="{{bk.wordStyle}}">{{bk.word}}</span></span>
+<span style="display: block; height: 7px; border-radius: 4px; background: rgba(58,37,22,0.15)"><span style="{{bk.bar}}"></span></span>
+<span style="font-size: 13px; color: #3A2516">{{bk.text}}</span>
+</div>
+</sc-for>
+<span style="font-size: 13px; color: #8E2418; padding-top: 6px; border-top: 1px solid rgba(58,37,22,0.15)">{{bankWarn}}</span>
+</div>
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(0.4deg); border-top: 4px solid #8E2418">
+<span class="kicker">THE WAR, AND WHAT IT EATS</span>
+<sc-for list="{{war}}" as="w" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{w.t}}</span><span style="font-size: 14px; color: #3A2516">{{w.d}}</span></div>
+</sc-for>
+</div>
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.2deg)">
+<span class="kicker">WHAT THE RULERS WILL DO</span>
+<span style="font-size: 13px; color: #6B5A48; margin-top: -4px">Politics runs without you. This is the forecast.</span>
+<sc-for list="{{gov}}" as="gv" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 2px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A48">{{gv.where}}</span><span style="{{gv.oddsStyle}}">{{gv.odds}}</span></span>
+<span style="font-size: 15px; color: #1F1710">{{gv.t}}</span>
+<span style="font-size: 13px; color: #2E5878">{{gv.d}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var FACE = {
+  you: 'assets/009faa795ce967e9ad726e9f5012f930.png', philon: 'assets/e4a0ef19de516d0fa88d55ea65e5b653.png', brennus: 'assets/0c1205adf207e43b33d846e25666b359.png',
+  sosia: 'assets/58c9f3e88922b880ccd4ee24608de0a3.png', captain: 'assets/4b348a319e394291dcda8ed147cca6d3.png', gossip: 'assets/fd9e00e369e125fde7b27626e4001af5.png',
+  unknown: 'assets/0e10e97c9c68c3d3bca6f43d14b768eb.png', fulvius: 'assets/225899a8700d3084ef954b85828dc4bd.png', pomponius: 'assets/6b12bb77800455b9ce97f32e18cb0f93.png', greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png'
+};
+// id, name, x, y, source face, source label, days old, reliability 0..1, days by sea/road from Aquea
+var TOWNS = [
+  ['aquea', 'Aquea', 758, 714, 'you', 'You saw it yourself', 0, 1.0, 0],
+  ['durona', 'Durona', 870, 378, 'philon', 'Philon, your agent', 3, 0.9, 6],
+  ['coria', 'Coria', 1298, 202, 'brennus', 'Brennus, your agent', 6, 0.55, 11],
+  ['sabino', 'Sabino', 1418, 882, 'sosia', 'Sosia, your agent', 5, 0.9, 7],
+  ['fidanum', 'Fidanum', 170, 406, 'captain', 'Captain of the Fortuna', 12, 0.75, 9],
+  ['pisella', 'Pisella', 298, 738, 'gossip', 'Your brother, from a tavern', 9, 0.45, 5],
+  ['melulona', 'Melulona', 1118, 278, 'unknown', 'A rumour, nobody knows whose', 4, 0.25, 10]
+];
+// price and stocks (0..1.4 of what the town needs) per good per town, as heard
+var GOODS = {
+  grain: { name: 'Grain', unit: 'a modius', sub: 'Bread. Spikes hard.', p: { aquea: 0.34, durona: 0.41, coria: 0.52, sabino: 0.30, fidanum: 0.45, pisella: 0.33, melulona: 0.70 }, s: { aquea: 0.8, durona: 0.6, coria: 0.45, sabino: 1.2, fidanum: 0.55, pisella: 0.95, melulona: 0.2 }, dec: 2 },
+  wine: { name: 'Wine', unit: 'an amphora', sub: 'Steady, loved', p: { aquea: 14, durona: 16, coria: 19, sabino: 12, fidanum: 15, pisella: 13, melulona: 17 }, s: { aquea: 1.0, durona: 0.8, coria: 0.6, sabino: 1.3, fidanum: 0.9, pisella: 1.1, melulona: 0.7 }, dec: 0 },
+  oil: { name: 'Olive oil', unit: 'a jar', sub: 'Kitchens and lamps', p: { aquea: 4.2, durona: 4.8, coria: 4.5, sabino: 4.0, fidanum: 3.6, pisella: 3.4, melulona: 5.0 }, s: { aquea: 0.9, durona: 0.7, coria: 0.8, sabino: 1.0, fidanum: 1.2, pisella: 1.3, melulona: 0.6 }, dec: 1 },
+  salt: { name: 'Salt', unit: 'a sack', sub: 'Fulvius is buying it all', p: { aquea: 3.1, durona: 3.9, coria: 4.4, sabino: 2.6, fidanum: 2.4, pisella: 2.5, melulona: 4.0 }, s: { aquea: 0.5, durona: 0.4, coria: 0.35, sabino: 1.1, fidanum: 1.2, pisella: 1.0, melulona: 0.5 }, dec: 1 },
+  iron: { name: 'Iron', unit: 'a bar', sub: 'The army wants it', p: { aquea: 12, durona: 15, coria: 14, sabino: 13, fidanum: 11, pisella: 12, melulona: 15 }, s: { aquea: 0.7, durona: 0.4, coria: 0.6, sabino: 0.8, fidanum: 0.9, pisella: 0.8, melulona: 0.5 }, dec: 0 },
+  timber: { name: 'Timber', unit: 'a load', sub: 'Builders and ships', p: { aquea: 8, durona: 5, coria: 6, sabino: 9, fidanum: 8, pisella: 7, melulona: 6 }, s: { aquea: 0.7, durona: 1.4, coria: 1.2, sabino: 0.6, fidanum: 0.8, pisella: 0.9, melulona: 1.1 }, dec: 0 }
+};
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+
+var __AIDE = function (self, A) {
+  var st = self.state || {}, lv = st.aideLv === undefined ? A.def : st.aideLv;
+  var tone = { good: '#1F3A30', warn: '#8E2418', info: '#1F1710' };
+  return { face: A.face, head: A.short.toUpperCase() + ', ' + A.role.toUpperCase() + ' · THE SHORT VERSION', foot: 'The full page is below, if you want it.',
+    says: A.says.map(function (s) { return { t: '• ' + s[1], style: 'font-size: 16px; line-height: 1.4; color: ' + tone[s[0]] + (s[0] === 'warn' ? '; font-weight: 600' : '') }; }),
+    askLabel: 'HOW MUCH CAN ' + A.short.toUpperCase() + ' DECIDE?', will: A.will[lv],
+    levels: ['Ask me first', 'Small things', 'Handle it'].map(function (l, k) { var on = lv === k;
+      return { label: l, on: on ? 'true' : 'false', click: function () { self.setState(Object.assign({}, self.state || {}, { aideLv: k })); },
+        style: 'min-height: 40px; padding: 4px 6px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; border: 1px solid #3A2516; font-weight: 600' : 'background: rgba(255,250,238,0.6); color: #1F1710; border: 1px solid rgba(58,37,22,0.3)') }; }) };
+};
+var AIDE = {"face": "assets/a3dc5c3de123ac381ccfb225966f5604.png", "role": "your secretary", "short": "Nikias", "says": [["good", "Best trade I trust: timber, Durona to Sabino. About 4 a load after carriage. Philon and Sosia both confirm it."], ["warn", "Ignore the famine rumour in Melulona. It started with one of Fulvius’s men."], ["info", "Watch the Pisella bankers. If they fall, Demetrios will sell cheap. You owe them nothing."]], "will": ["He tells you what he sees and waits for your word.", "He makes small trades that two agents confirm, up to 500 at a time, and ignores rumours. Anything bigger, he asks.", "He trades for you up to 2,000 a season, checks rumours himself, and only writes when something big happens."], "def": 1};
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var gk = st.good || 'grain', G = GOODS[gk], ru = st.ru || {}, planted = st.planted;
+    var fmtP = function (v) { return v.toFixed(G.dec) + ' '; };
+    var here = G.p.aquea;
+    var age = function (d) { return d === 0 ? 'Today' : d === 1 ? 'Yesterday' : d + ' days ago'; };
+    var sureWord = function (r) { return r >= 0.85 ? 'Trust it' : r >= 0.65 ? 'Probably' : r >= 0.4 ? 'Doubtful' : 'Could be a lie'; };
+    var rows = TOWNS.map(function (t) {
+      var p = G.p[t[0]], s = G.s[t[0]], diff = Math.round((p / here - 1) * 100), dots = Math.max(1, Math.round(t[7] * 5));
+      var fade = Math.max(0.55, 1 - t[6] * 0.03);
+      return { town: t[1], price: fmtP(p), vs: t[0] === 'aquea' ? 'here' : (diff > 0 ? '+' : '') + diff + '% vs here',
+        vsStyle: 'font-size: 12px; color: ' + (t[0] === 'aquea' ? '#6B5A48' : diff > 8 ? '#8E2418' : diff < -8 ? '#2C5F50' : '#6B5A48'),
+        face: FACE[t[4]], faceStyle: 'flex: none; width: 28px; height: 28px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0' + (t[4] === 'unknown' ? '; filter: grayscale(1) brightness(0.6)' : ''),
+        source: t[5], age: age(t[6]) + (t[6] > 7 ? ' · may have changed' : ''),
+        dots: '●'.repeat(dots) + '○'.repeat(5 - dots), sure: sureWord(t[7]),
+        sureStyle: 'font-size: 14px; letter-spacing: 2px; color: ' + (t[7] >= 0.85 ? '#2C5F50' : t[7] >= 0.65 ? '#9A6A12' : '#8E2418'),
+        stockBar: 'display: block; height: 7px; border-radius: 4px; width: ' + Math.min(100, Math.round(s / 1.4 * 100)) + '%; background: ' + (s < 0.5 ? '#B23A24' : s < 0.85 ? '#C9962A' : '#3E8A5A'),
+        stock: s < 0.5 ? 'Running short' : s < 0.85 ? 'Below need' : s < 1.15 ? 'Enough' : 'Glut',
+        rowStyle: 'display: grid; grid-template-columns: 110px 136px 1fr 110px 110px; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(58,37,22,0.12); opacity: ' + fade };
+    });
+    // best trade worth considering, weighted by how much you trust the far price
+    var best = null;
+    TOWNS.forEach(function (a) { TOWNS.forEach(function (b) {
+      if (a === b) return;
+      var buy = G.p[a[0]], sell = G.p[b[0]], trust = Math.min(a[7], b[7]);
+      var days = Math.abs(a[8] - b[8]) + 3, cost = buy * 0.02 * days;
+      var gain = (sell - buy - cost) / buy * trust;
+      if (!best || gain > best.gain) best = { a: a, b: b, buy: buy, sell: sell, days: days, cost: cost, gain: gain, trust: trust };
+    }); });
+    var margin = best.sell - best.buy - best.cost;
+    var deal = { kicker: 'WHAT IT ADDS UP TO',
+      text: 'Buy in ' + best.a[1] + ' at ' + fmtP(best.buy) + ', sell in ' + best.b[1] + ' at ' + fmtP(best.sell) + '. About ' + best.days + ' days between them. After carriage, roughly ' + fmtP(margin) + ' ' + G.unit + '.',
+      caveat: best.trust < 0.6 ? 'If ' + (best.a[7] < best.b[7] ? best.a[5].split(',')[0] : best.b[5].split(',')[0]) + ' is right. That source is shaky, and the news is ' + Math.max(best.a[6], best.b[6]) + ' days old.' : 'Both sources are good. By the time your goods arrive, others may have seen the same gap.',
+      style: 'display: flex; flex-direction: column; gap: 4px; margin-top: 6px; padding: 12px 14px; border-radius: 3px; ' + (best.trust < 0.6 ? 'background: rgba(154,106,18,0.12); border-left: 4px solid #9A6A12; color: #3A2A08' : 'background: rgba(44,95,80,0.12); border-left: 4px solid #2C5F50; color: #1F3A30') };
+    var vals = TOWNS.map(function (t) { return G.p[t[0]]; }), mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+    var dots = TOWNS.map(function (t) {
+      var p = G.p[t[0]], k = (p - mn) / ((mx - mn) || 1), s = G.s[t[0]];
+      var c = k < 0.33 ? '#3E8A5A' : k < 0.66 ? '#C9962A' : '#B23A24';
+      return { x: t[2], y: t[3], r: 16 + s * 18, name: t[1], label: p.toFixed(G.dec), ty: t[3] - 30 - s * 18, ny: t[3] + 40 + s * 18,
+        fill: 'fill: ' + c + '; fill-opacity: 0.75; stroke: #F6EAD0; stroke-width: 4px', g: 'opacity: ' + Math.max(0.35, 1 - t[6] * 0.05) };
+    });
+    var moves = [
+      { d: 'M1066,330 Q1000,500 870,600 Q800,660 758,714', style: 'fill: none; stroke: #8E2418; stroke-width: 6px; stroke-dasharray: 16 12' },
+      { d: 'M1418,882 Q1250,820 1050,800 Q900,780 870,600', style: 'fill: none; stroke: #2E5878; stroke-width: 6px; stroke-dasharray: 16 12' },
+      { d: 'M426,206 Q686,194 870,378', style: 'fill: none; stroke: #3A2516; stroke-width: 5px; stroke-dasharray: 10 12' }
+    ];
+    var goods = Object.keys(GOODS).map(function (k) { var on = k === gk;
+      return { name: GOODS[k].name, sub: GOODS[k].sub, click: function () { put({ good: k }); },
+        style: 'display: flex; flex-direction: column; align-items: flex-start; min-width: 150px; min-height: 54px; padding: 6px 16px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' + (on ? 'background: #EFE3C8; color: #2A1A0E; border: none; box-shadow: 0 0 0 3px #C9962A' : 'background: rgba(20,24,25,0.65); color: #E6E8E2; border: 1px solid rgba(230,232,226,0.3)') }; });
+    var transit = [
+      ['⚓', 'Fulvius: three ships of salt left Lavica for Aquea.', 'A harbour clerk saw them load, 4 days ago.', 'When they land, salt in Aquea could fall. Unless he hoards it.', '#8E2418'],
+      ['⚓', 'Your Aurora: 120 jars of olive oil, bound for Durona.', 'Your own ship. Due in 2 days.', 'Durona oil is dear. Good timing, if she gets past the pirates.', '#2C5F50'],
+      ['≡', 'A grain convoy, 40 carts, Sabino to the Third Legion.', 'Sosia saw it leave, 5 days ago.', 'The army is buying. Sabino grain will creep up.', '#9A6A12'],
+      ['✖', 'Lost: Demetrios’s ship Kallisto sank off Galorae, carrying wine for Coria.', 'A fisherman’s story, 6 days old.', 'Coria wine should rise in about two weeks, when the shortage bites.', '#8E2418']
+    ].map(function (t) { return { icon: t[0], text: t[1], meta: t[2], effect: t[3],
+      iconStyle: 'width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; color: #FFF6E4; background: ' + (t[0] === '✖' ? '#5A2A20' : '#2E5878'),
+      effectStyle: 'font-size: 13px; font-weight: 600; color: ' + t[4] }; });
+    var rivals = [
+      ['House Fulvius', 'fulvius', 'Aggressive', 'Buying salt everywhere; you think he holds 6 sacks in 10 from Lavica. Also buying grain quietly in Coria.', 'From your spy and two harbour clerks. Days old, mostly true.'],
+      ['House Pomponius', 'pomponius', 'Nervous', 'Selling glass cheap in three cities at once. Old families only do that when they’re short of money.', 'What the prices tell you. They’ve said nothing.'],
+      ['Demetrios', 'greek', 'Hurt', 'Lost the Kallisto in a storm. He has borrowed from the Pisella bankers before; if they call it in, he may have to sell his share of the timber yard.', 'Gossip and your own guess.']
+    ].map(function (r) { return { name: r[0], face: FACE[r[1]], mood: r[2], text: r[3], meta: r[4],
+      moodStyle: 'font-size: 11px; font-weight: 700; padding: 0 7px; border-radius: 8px; margin-left: 6px; color: ' + (r[2] === 'Aggressive' ? '#8E2418' : '#9A6A12') + '; border: 1px solid ' + (r[2] === 'Aggressive' ? '#8E2418' : '#9A6A12') }; });
+    var RUM = [
+      { id: 'mel', text: '“Famine in Melulona. Grain at seventy, and rising.”', meta: 'Heard in three taverns this week. Nobody knows who said it first.',
+        acts: [['Send Philon to check', 'Philon writes back: Melulona’s granaries are half full. The rumour started with a man in Fulvius’s pay. He wants grain dear before he sells.'], ['Buy grain now, just in case', 'You buy 2,000 modii at 0.36. Then the rumour turns out to be false, and you’re holding grain at the top of the market.'], ['Ignore it', 'You ignore it. Fulvius sells his grain to the people who didn’t.']] },
+      { id: 'pis', text: '“The Pisella bankers have lent too much. One big default and they’re finished.”', meta: 'Two separate sources, both ten days old. Pomponius’s cheap glass fits the story.',
+        acts: [['Call in what Demetrios owes you', 'You get your money before the trouble starts. Demetrios is hurt that you didn’t trust him.'], ['Wait, and keep cash ready', 'You keep 2,000  ready. If the bank falls, there will be bargains.'], ['Warn your partners', 'Your partners pull their deposits. The run starts a little earlier because of you.']] }
+    ];
+    var rumours = RUM.map(function (r) { var pick = ru[r.id];
+      return { text: r.text, meta: r.meta, open: pick === undefined, done: pick !== undefined, outcome: pick !== undefined ? r.acts[pick][1] : '',
+        acts: r.acts.map(function (a, k) { return { label: a[0], click: function () { var m = Object.assign({}, (self.state || {}).ru || {}); m[r.id] = k; put({ ru: m }); } }; }) }; });
+    var LET = [['Copy it and send it on', 'He never knows you read it.', 'You copy it and send it on. Now you know Fulvius is buying Coria grain up to 0.50, so you sell him yours at 0.49.'],
+      ['Forge a different letter', 'Tell his agent to stop buying.', 'His agent stops buying. Fulvius will find out eventually, and he’ll wonder who.'],
+      ['Keep it as proof', 'Useful in court, or in Politics.', 'The letter goes in your strongbox, with the other things you know.']];
+    var lpick = st.letter;
+    var letter = { open: lpick === undefined, done: lpick !== undefined, outcome: lpick !== undefined ? LET[lpick][2] : '',
+      acts: LET.map(function (a, k) { return { label: a[0], hint: a[1], click: function () { put({ letter: k }); } }; }) };
+    var PL = [['up', G.name + ' going up in Aquea'], ['down', G.name + ' going down in Coria'], ['bank', 'The Caecilius bank is in trouble']];
+    var plant = { text: planted ? 'You paid two men to say “' + PL.filter(function (p) { return p[0] === planted; })[0][1].toLowerCase() + '” in every tavern. It will take about a week to spread.' : 'Pay men to say something in the right taverns. False or true, prices move if people believe it.',
+      note: planted === 'bank' ? 'Dangerous: you owe the Caecilius bank 3,000. If it fails, it calls in your loan.' : '150 . One in six times, it’s traced back to you.',
+      opts: PL.map(function (p) { var on = planted === p[0];
+        return { label: on ? '✓ ' + p[1] : p[1], click: function () { put({ planted: (self.state || {}).planted === p[0] ? null : p[0] }); },
+          style: 'min-height: 38px; padding: 4px 12px; border-radius: 3px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #E6B8A8; color: #1E1612; border: none; font-weight: 600' : 'background: rgba(255,255,255,0.05); color: #E8DCC4; border: 1px solid rgba(232,220,196,0.3)') }; }) };
+    var bank = function (name, h, word, text) { var c = h > 0.66 ? '#2C5F50' : h > 0.4 ? '#9A6A12' : '#8E2418';
+      return { name: name, word: word, text: text, wordStyle: 'font-size: 13px; font-weight: 700; color: ' + c, bar: 'display: block; height: 7px; border-radius: 4px; width: ' + Math.round(h * 100) + '%; background: ' + c }; };
+    var banks = [bank('Caecilius bank, Aquea', 0.78, 'Steady', 'Lends at 1% a month. You owe them 3,000.'), bank('The Pisella bankers', 0.3, 'Shaky', 'Lent heavily to Demetrios and Pomponius. Two rumours of trouble.'), bank('Temple treasury, Durona', 0.9, 'Solid', 'Lends to the tyrant’s friends, and only them.')];
+    var war = [
+      { t: 'Ostoronian border: neither side winning', d: 'The Ferum to Durona road is unsafe. Goods go round by sea, or not at all.' },
+      { t: 'The Third Legion is short of grain and boots', d: 'Army buyers pay 0.55 a modius and 9  a pair. They pay late.' },
+      { t: 'Spring levy in Vararia', d: 'One man in five called up. Your farm and quarry lose workers; wages rise.' },
+      { t: 'If Durona falls', d: 'Its houses’ property goes to auction. Including the timber yard you own with Demetrios.' }
+    ];
+    var gov = [
+      { where: 'VARARIA · THE QUEEN', t: 'A free grain dole for Aquea’s poor next month', d: 'Grain demand in Aquea up by a tenth. Prices up.', odds: 'Likely', c: '#2C5F50' },
+      { where: 'CALEONIA · THE SENATE', t: 'A tax on salt imports, voted in 7 days', d: 'Bad for Fulvius’s salt. Good for anyone holding salt inside Caleonia.', odds: 'Close', c: '#9A6A12' },
+      { where: 'OSTORONIA · THE TYRANT', t: 'Seizing foreign-owned mines “for the war”', d: 'Your quartz mine is foreign-owned.', odds: 'Rumoured', c: '#8E2418' },
+      { where: 'PERUARIA · THE ELDERS', t: 'Nothing. They never do anything in winter.', d: 'Calm. Good for the olive grove.', odds: 'Certain', c: '#2C5F50' }
+    ].map(function (g) { return Object.assign(g, { oddsStyle: 'font-size: 12px; font-weight: 700; color: ' + g.c }); });
+    var chip = function (text, kind) {
+      var c = { plain: ['rgba(230,232,226,0.1)', '#E6E8E2', 'rgba(230,232,226,0.28)'], warn: ['rgba(226,170,72,0.16)', '#F0D49A', 'rgba(226,170,72,0.45)'], bad: ['rgba(226,96,72,0.18)', '#F6B4A6', 'rgba(226,96,72,0.45)'] }[kind];
+      return { text: text, style: 'font-size: 15px; padding: 6px 14px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + '; border: 1px solid ' + c[2] };
+    };
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#B9C7C9' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9D2C4') };
+    };
+    return {
+      aide: __AIDE(this, AIDE), nav: __NAV.top('Markets', navItem), subnav: __NAV.sub('Markets'), hasSub: true,
+      chips: [chip('News from 7 towns', 'plain'), chip('Oldest: 12 days (Fidanum)', 'warn'), chip('2 rumours unconfirmed', 'bad')],
+      goods: goods, rows: rows, deal: deal, dots: dots, moves: moves,
+      book: { title: G.name.toUpperCase() + ', ' + G.unit.toUpperCase(), note: 'Not the price: what you were told, and when.' },
+      mapTitle: G.name.toUpperCase() + ' ACROSS THE CONTINENT', mapAria: 'Map of ' + G.name.toLowerCase() + ' prices in seven towns',
+      transit: transit, rivals: rivals, rumours: rumours, letter: letter, plant: plant, banks: banks,
+      bankWarn: 'If the Pisella bankers fall, they call in loans across Peruaria. Expect fire sales, and bargains, within weeks.',
+      war: war, gov: gov
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auctions — under the spear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#1D1813}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 22px 44px rgba(0,0,0,0.5)}
+.awning{background-color:#2A231C;background-image:linear-gradient(rgba(20,15,10,0.5), rgba(20,15,10,0.5)), radial-gradient(ellipse at 60% 20%, rgba(255,226,170,0.12) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%), url(assets/69b67fdf5dacc46b909416fd9e860cfc.jpg);background-size:auto, auto, auto, cover;background-position:center}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#3A2516}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes ring{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #1D1813; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">{{where}}</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #E6C29A">SUB HASTA · UNDER THE SPEAR</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Auctions</h1>
+</div>
+<div role="tablist" aria-label="City" style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{cities}}" as="c" hint-placeholder-count="3"><button role="tab" onClick="{{c.click}}" style="{{c.style}}"><span style="font-family: Cinzel, serif; font-size: 15px; font-weight: 700">{{c.name}}</span><span style="font-size: 12px; opacity: 0.85">{{c.sub}}</span></button></sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div class="awning" style="width: 1376px; box-sizing: border-box; padding: 28px 30px 36px; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); display: grid; grid-template-columns: 400px 1fr; gap: 26px; align-items: start">
+
+<!-- LOTS -->
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="{{presence.style}}">
+<img src="{{presence.face}}" alt="" style="width: 40px; height: 40px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0">
+<span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">{{presence.title}}</span><span style="font-size: 13px; opacity: 0.85">{{presence.note}}</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{cats}}" as="ct" hint-placeholder-count="5"><button onClick="{{ct.click}}" style="{{ct.style}}">{{ct.label}}</button></sc-for>
+</div>
+<sc-for list="{{lots}}" as="l" hint-placeholder-count="6">
+<button class="paper" onClick="{{l.pick}}" style="{{l.style}}">
+<span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #8E2418">{{l.cat}}</span><span style="{{l.tagStyle}}">{{l.tag}}</span></span>
+<span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700; line-height: 1.25; color: #2A1A0E; text-align: left">{{l.name}}</span>
+<span style="display: flex; justify-content: space-between; gap: 8px; font-size: 14px"><span style="color: #6B5A48; text-align: left">{{l.when}}</span><span style="font-family: 'IBM Plex Mono', monospace; color: #1F1710">{{l.price}}</span></span>
+</button>
+</sc-for>
+</div>
+
+<!-- THE LOT ON THE BLOCK -->
+<div style="display: flex; flex-direction: column; gap: 22px; min-width: 0">
+<div class="paper" style="padding: 24px 28px; color: #2A2119; display: flex; flex-direction: column; gap: 14px; animation: fadein 0.35s ease-out both">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; min-width: 0; max-width: 560px">
+<span class="kicker" style="color: #8E2418">{{lot.kicker}}</span>
+<span style="font-family: Cinzel, serif; font-size: 28px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{lot.name}}</span>
+<span style="font-size: 16px; line-height: 1.45; color: #1F1710">{{lot.text}}</span>
+</div>
+<div style="display: flex; gap: 12px; align-items: center">
+<img src="{{lot.sellerFace}}" alt="" style="width: 44px; height: 44px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0, 0 3px 6px rgba(0,0,0,0.3)">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">Sold by</span><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{lot.seller}}</span><span style="font-size: 13px; color: #6B5A48">{{lot.sellerNote}}</span></div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="kicker">WHAT’S IN THE LOT</span>
+<sc-for list="{{lot.contents}}" as="ci" hint-placeholder-count="4">
+<div style="display: flex; gap: 10px; align-items: center; padding: 6px 10px; background: rgba(30,28,26,0.9); border-radius: 2px"><span style="font-family: VT323, monospace; font-size: 20px; color: #FFFFFF; flex: 1">{{ci.name}}</span><span style="font-family: VT323, monospace; font-size: 20px; color: #FFFF55">{{ci.qty}}</span></div>
+</sc-for>
+<span style="font-size: 13px; color: #6B5A48">{{lot.contentsNote}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="kicker">{{lot.deliverTitle}}</span>
+<sc-if value="{{lot.isPallet}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{dest}}" as="d" hint-placeholder-count="3"><button onClick="{{d.click}}" style="{{d.style}}"><span style="{{d.radio}}"></span><span style="display: flex; flex-direction: column; text-align: left"><span style="font-size: 15px; color: #1F1710">{{d.name}}</span><span style="font-size: 13px; color: #6B5A48">{{d.note}}</span></span></button></sc-for>
+</div>
+</sc-if>
+<span style="font-size: 14px; line-height: 1.45; color: #1F1710">{{lot.deliverNote}}</span>
+<span class="kicker" style="margin-top: 6px">LAST TIME, SIMILAR LOTS WENT FOR</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #1F1710">{{lot.past}}</span>
+</div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 360px; gap: 22px; align-items: start">
+<!-- the bidding -->
+<div class="paper" style="padding: 22px 26px; color: #2A2119; display: flex; flex-direction: column; gap: 12px; transform: rotate(-0.3deg)">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 14px; color: #6B5A48">{{bid.label}}</span>
+<span style="{{bid.priceStyle}}">{{bid.price}}</span>
+</div>
+<div style="display: flex; gap: 10px; align-items: center">
+<img src="{{bid.leaderFace}}" alt="" style="width: 44px; height: 44px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">Highest bidder</span><span style="{{bid.leaderStyle}}">{{bid.leader}}</span></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; max-height: 150px; overflow: hidden; padding: 8px 12px; background: rgba(255,250,238,0.55); border: 1px solid rgba(58,37,22,0.2); border-radius: 3px">
+<sc-for list="{{bid.history}}" as="h" hint-placeholder-count="5"><span style="{{h.style}}">{{h.text}}</span></sc-for>
+</div>
+<sc-if value="{{bid.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; color: #6B5A48">Your ceiling: the herald bids for you, a step at a time, up to this and no further.</span>
+<div style="display: flex; align-items: center; gap: 10px">
+<button onClick="{{bid.down}}" aria-label="Lower your ceiling" style="width: 46px; height: 46px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 22px; color: #3A2516; cursor: pointer">−</button>
+<span style="flex: 1; text-align: center; font-family: Cinzel, serif; font-size: 28px; font-weight: 700; color: #2A1A0E">{{bid.ceiling}}</span>
+<button onClick="{{bid.up}}" aria-label="Raise your ceiling" style="width: 46px; height: 46px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 22px; color: #3A2516; cursor: pointer">+</button>
+</div>
+<div style="display: flex; gap: 8px">
+<button onClick="{{bid.place}}" style="flex: 1; min-height: 50px; background: #8E2418; color: #FFF6E4; border: none; border-radius: 3px; font-family: Cinzel, serif; font-size: 15px; font-weight: 700; letter-spacing: 0.05em; cursor: pointer">{{bid.placeLabel}}</button>
+<button onClick="{{bid.hammer}}" style="min-height: 50px; padding: 4px 16px; background: transparent; color: #2A1A0E; border: 1px solid #5A3A22; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer">Let the hammer fall</button>
+</div>
+<span style="font-size: 13px; color: #6B5A48">{{bid.hint}}</span>
+</div>
+</sc-if>
+<sc-if value="{{bid.ended}}" hint-placeholder-val="{{ false }}">
+<div style="{{bid.endStyle}}"><span style="font-size: 16px; font-weight: 600">{{bid.endTitle}}</span><span style="font-size: 14px">{{bid.endText}}</span><button onClick="{{bid.reopen}}" style="align-self: flex-start; min-height: 30px; padding: 0; border: none; background: transparent; color: inherit; opacity: 0.75; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Run it again</button></div>
+</sc-if>
+</div>
+
+<!-- your bids -->
+<div class="paper" style="padding: 20px 22px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(0.5deg)">
+<span class="kicker">YOUR BIDS TODAY</span>
+<sc-for list="{{mine}}" as="m" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 0; border-top: 1px solid rgba(58,37,22,0.12)"><span style="font-size: 14px; color: #1F1710">{{m.name}}</span><span style="{{m.style}}">{{m.state}}</span></div>
+</sc-for>
+<sc-if value="{{noMine}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #6B5A48">No bids yet. Pick a lot and set your ceiling.</span></sc-if>
+<span style="font-size: 13px; color: #6B5A48; padding-top: 6px; border-top: 1px solid rgba(58,37,22,0.15)">Pay when the hammer falls. Pallets are packed into crates and carted to you; open them in Minecraft and the blocks are yours.</span>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var FACE = {
+  you: 'assets/009faa795ce967e9ad726e9f5012f930.png', fulvius: 'assets/225899a8700d3084ef954b85828dc4bd.png', greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png',
+  pomponius: 'assets/6b12bb77800455b9ce97f32e18cb0f93.png', builder: 'assets/68c827b5e74ae6bac441631cd7975afd.png', ulf: 'assets/0a5ec64b1fd9a8aec4c3b381766ef95d.png',
+  brennus: 'assets/0c1205adf207e43b33d846e25666b359.png', philon: 'assets/e4a0ef19de516d0fa88d55ea65e5b653.png', sosia: 'assets/58c9f3e88922b880ccd4ee24608de0a3.png',
+  auctioneer: 'assets/338eba5c01c1ff3df58a1407e34fb7e2.png', widow: 'assets/7f807918c2994c576b71f4b766042260.png', matho: 'assets/3cee28593077c78f1005c50116888cba.png'
+};
+var RIV = {
+  fulvius: ['House Fulvius', 'fulvius'], builder: ['Decimus the builder', 'builder'], brennusP: ['House of Brennus (a player)', 'brennus'],
+  pomponius: ['House Pomponius', 'pomponius'], greek: ['Demetrios', 'greek'], matho: ['Matho of Mirene', 'matho']
+};
+// [id, category, name, text, seller, sellerFace, sellerNote, open, step, rivals [[who, ceiling]], contents [[name, qty]], contentsNote, past, when, isPallet]
+var LOTS = {
+  aquea: [
+    ['stone', 'pallet', 'A pallet of cut stone', 'Squared blocks from the Pomponius quarry, ready to lay. Enough for a decent house.', 'House Pomponius', 'pomponius', 'An old family, selling surplus', 120, 10,
+      [['builder', 205], ['brennusP', 190], ['fulvius', 150]], [['Stone Bricks', '20 stacks'], ['Stone Brick Stairs', '4 stacks'], ['Stone Brick Slabs', '4 stacks']], '1,792 blocks in all. Packed in 9 crates.', '180 · 210 · 165', 'Hammer in 1 hour', true],
+    ['spruce', 'pallet', 'Spruce beams from the north', 'Seasoned beams, stripped and squared, floated down from Ostoronia.', 'Ulf’s timber camp', 'ulf', 'Another player, in Ostoronia', 60, 5,
+      [['builder', 115], ['greek', 95]], [['Stripped Spruce Logs', '12 stacks'], ['Spruce Planks', '6 stacks'], ['Spruce Fence', '2 stacks']], 'Good for roofs, floors and cranes.', '90 · 120 · 105', 'Hammer in 2 hours', true],
+    ['tiles', 'pallet', 'Roof tiles and red brick', 'From the kilns outside Aquea. Most roofs in the city came out of these kilns.', 'The Aquea kilns', 'builder', 'Sell every week', 80, 5,
+      [['builder', 140], ['fulvius', 120]], [['Bricks', '10 stacks'], ['Terracotta', '8 stacks'], ['Granite Stairs', '6 stacks']], 'Roofs, walls and floors.', '130 · 125 · 150', 'Hammer in 3 hours', true],
+    ['glass', 'pallet', 'Glass from Sabium', 'Clear panes, packed in straw. Half of them made from your own quartz sand.', 'House Pomponius', 'pomponius', 'Your partners in the glassworks', 100, 10,
+      [['fulvius', 170], ['greek', 150]], [['Glass Panes', '8 stacks'], ['Glass', '2 stacks']], 'Windows for a villa, or a bathhouse.', '140 · 160', 'Hammer this afternoon', true],
+    ['marble', 'pallet', 'White marble, polished', 'Columns and blocks of polished white marble. Rich men’s houses are made of this.', 'Matho of Mirene', 'matho', 'A trader from across the sea', 300, 20,
+      [['fulvius', 520], ['brennusP', 430], ['pomponius', 400]], [['Block of Quartz', '10 stacks'], ['Quartz Pillar', '4 stacks'], ['Smooth Quartz Stairs', '2 stacks']], 'Or cut your own, once your quarry’s Marble Works is built.', '410 · 480 · 455', 'Hammer this afternoon', true],
+    ['septimius', 'land', 'Old Septimius’s vines', 'Twenty iugera next to your vineyard. Septimius died in debt; his creditors are selling.', 'His creditors', 'widow', 'Want it gone quickly', 1600, 100,
+      [['fulvius', 2400], ['pomponius', 1900]], [['Land', '20 iugera'], ['Old vines', 'neglected'], ['A farmhouse', 'leaking']], 'Joins your Deloanum vineyard if you win it.', '2,100 (similar land, last spring)', 'Hammer tomorrow', false],
+    ['wine', 'goods', 'A dead man’s cellar', 'Eighty amphorae of Caleonian wine, some of it very old.', 'His heirs', 'widow', 'Need cash for the funeral', 400, 20,
+      [['greek', 620], ['fulvius', 560]], [['Amphorae of wine', '80'], ['Of which, very old', 'about 10']], 'Sell it, pour it at the Golden Cup, or age it.', '540 · 600', 'Hammer in 2 hours', false],
+    ['enemywh', 'war', 'An Ostoronian merchant’s warehouse', 'Seized by the crown when the war began. Its owner fled to Durona. The queen needs coin to pay the legion.', 'The royal treasury', 'auctioneer', 'Sells fast, for soldiers’ pay', 900, 50,
+      [['fulvius', 1500], ['pomponius', 1150]], [['Warehouse', 'on the river docks'], ['Left inside', '40 sacks of salt'], ['His claim', 'if he ever comes back']], 'If Ostoronia wins the war, the old owner will want it back. See War.', 'Rarely sold', 'Hammer tomorrow', false],
+    ['statue', 'curio', 'A bronze of a runner', 'A Greek bronze, two hundred years old. It stood in a rich man’s garden in Fidanum.', 'Demetrios', 'greek', 'Says it’s genuine', 700, 50,
+      [['fulvius', 1200], ['pomponius', 950]], [['Bronze statue', '1'], ['Its stone base', '1']], 'Prestige: guests remember it. Gift it, and a senator remembers you.', 'Rarely sold', 'Hammer tomorrow', false]
+  ],
+  durona: [
+    ['oak', 'pallet', 'Oak logs, straight from the forest', 'Ostoronia is timber country. Oak here is half the price it is in Aquea.', 'A logging camp', 'ulf', 'Sells to anyone', 40, 5,
+      [['builder', 80], ['brennusP', 70]], [['Oak Logs', '16 stacks'], ['Oak Planks', '8 stacks']], 'Barged downriver, or carted overland.', '60 · 75', 'Hammer in 1 hour', true],
+    ['varhouse', 'war', 'A Vararian merchant’s house', 'The tyrant seized everything Vararians owned in Durona. This was the Caecilius bank’s agent’s house.', 'The tyrant’s treasury', 'auctioneer', 'Cheap, for war money', 400, 20,
+      [['matho', 600], ['brennusP', 520]], [['Townhouse', '3 floors'], ['Small warehouse', 'empty']], 'Legal in Ostoronia. At home in Vararia, people will call it helping the enemy.', 'Rarely sold', 'Hammer in 3 days', false],
+    ['horses', 'goods', 'Six Ostoronian horses', 'Strong, sure-footed hill horses. Faster travel for whoever owns them.', 'A horse-breeder', 'ulf', 'Honest, he says', 300, 20,
+      [['fulvius', 460], ['brennusP', 420]], [['Horses', '6'], ['Saddles', '6']], 'Your travel on land gets faster.', '380 · 450', 'Hammer this afternoon', false]
+  ],
+  sabino: [
+    ['sandstone', 'pallet', 'Cut sandstone', 'Warm yellow stone from the Helerensian cliffs.', 'A quarry guild', 'builder', 'Sell by the cartload', 70, 5,
+      [['builder', 120], ['matho', 100]], [['Cut Sandstone', '16 stacks'], ['Sandstone Stairs', '4 stacks']], 'Good for southern-style houses and baths.', '95 · 110', 'Hammer in 2 hours', true]
+  ]
+};
+var CITY = {
+  aquea: ['Aquea', 'You’re here', null],
+  durona: ['Durona', 'Philon bids for you', ['philon', 'Philon, your agent in Durona', 'He takes 3%. His report reaches you in 3 days.']],
+  sabino: ['Sabino', 'Sosia bids for you', ['sosia', 'Sosia, your agent in Sabino', 'She takes 4%. Her report reaches you in 6 days.']]
+};
+var CAT = { all: 'All lots', pallet: 'Building pallets', land: 'Land', goods: 'Goods', curio: 'Curiosities', war: 'Seized in war' };
+var CATLABEL = { pallet: 'BUILDING PALLET', land: 'LAND', goods: 'GOODS', curio: 'CURIOSITY', war: 'SEIZED IN WAR' };
+var DEST = [['house', 'Your townhouse in Aquea', 'Arrives tomorrow'], ['marble', 'The marble quarry at Celanona', 'Arrives in 2 days'], ['vine', 'The vineyard at Deloanum', 'Arrives in 2 days']];
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var fmt = function (n) { return n.toLocaleString('en-US'); };
+    var city = st.city || 'aquea', cat = st.cat || 'all', bids = st.bids || {}, dest = st.dest || 'marble';
+    var all = LOTS[city];
+    var shown = all.filter(function (l) { return cat === 'all' || l[1] === cat; });
+    var selId = st.sel && all.some(function (l) { return l[0] === st.sel; }) ? st.sel : all[0][0];
+    var L = all.filter(function (l) { return l[0] === selId; })[0];
+
+    // the bidding, settled against the rivals' hidden ceilings
+    var settle = function (l) {
+      var b = bids[l[0]] || {}, mine = b.ceiling, rivals = l[9].slice().sort(function (a, c) { return c[1] - a[1]; });
+      var hist = [], step = l[8], open = l[7];
+      // rivals open the bidding
+      var price = open, leader = rivals[rivals.length - 1][0];
+      hist.push([RIV[leader][0], open]);
+      rivals.slice().reverse().forEach(function (r, i) { if (i > 0 && r[1] > price) { price = Math.min(r[1], price + step * 2); leader = r[0]; hist.push([RIV[r[0]][0], price]); } });
+      var meLeading = false;
+      if (mine) {
+        var top = rivals[0], second = rivals[1] ? rivals[1][1] : open;
+        if (mine > top[1]) { price = Math.max(price, Math.min(mine, top[1] + step)); meLeading = true; hist.push([RIV[top[0]][0], top[1]]); hist.push(['You', price]); }
+        else { hist.push(['You', mine]); price = Math.max(price, Math.min(top[1], mine + step)); leader = top[0]; hist.push([RIV[top[0]][0], price]); }
+      }
+      return { price: price, leader: meLeading ? 'you' : leader, meLeading: meLeading, hist: hist.slice(-6), ended: !!b.ended, placed: !!mine, ceiling: b.ceil || mine || (price + step) };
+    };
+    var S = settle(L), b0 = bids[L[0]] || {};
+    var ceil = b0.ceil || S.ceiling;
+    var setBid = function (patch) { var m = Object.assign({}, (self.state || {}).bids || {}); m[L[0]] = Object.assign({}, m[L[0]] || {}, patch); put({ bids: m }); };
+
+    var lots = shown.map(function (l, i) {
+      var s = settle(l), on = l[0] === selId, b = bids[l[0]] || {};
+      var tag = b.ended ? (s.meLeading ? 'Won' : 'Lost') : s.placed ? (s.meLeading ? 'You lead' : 'Outbid') : '';
+      return { cat: CATLABEL[l[1]], name: l[2], when: l[13], price: fmt(s.price) + ' ', tag: tag,
+        tagStyle: 'font-size: 12px; font-weight: 700; color: ' + (tag === 'Won' || tag === 'You lead' ? '#2C5F50' : '#8E2418'),
+        pick: function () { put({ sel: l[0] }); },
+        style: 'display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border: none; border-radius: 2px; cursor: pointer; font-family: Spectral, serif; color: #2A2119; transform: rotate(' + [-0.4, 0.3, -0.2, 0.4, -0.3, 0.2, -0.4, 0.3][i % 8] + 'deg); ' +
+          (on ? 'box-shadow: 0 0 0 3px #C9962A, 0 16px 30px rgba(0,0,0,0.55); margin-right: -14px' : '') };
+    });
+    var cats = Object.keys(CAT).map(function (k) { var on = k === cat;
+      return { label: CAT[k], click: function () { put({ cat: k }); },
+        style: 'min-height: 36px; padding: 4px 12px; border-radius: 999px; font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (on ? 'background: #EFE3C8; color: #2A1A0E; border: none; font-weight: 600' : 'background: rgba(20,15,10,0.6); color: #F2E8D5; border: 1px solid rgba(242,232,213,0.3)') }; });
+    var cities = Object.keys(CITY).map(function (k) { var on = k === city;
+      return { name: CITY[k][0], sub: CITY[k][1], click: function () { put({ city: k, cat: 'all' }); },
+        style: 'display: flex; flex-direction: column; align-items: flex-start; min-width: 150px; min-height: 52px; padding: 6px 16px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' + (on ? 'background: #EFE3C8; color: #2A1A0E; border: none; box-shadow: 0 0 0 3px #C9962A' : 'background: rgba(20,15,10,0.6); color: #F2E8D5; border: 1px solid rgba(242,232,213,0.3)') }; });
+    var C = CITY[city];
+    var presence = C[2] ? { face: FACE[C[2][0]], title: 'Bidding through ' + C[2][1], note: C[2][2] } : { face: FACE.you, title: 'You’re standing in the crowd', note: 'The auctioneer has seen you. Bid in person, no commission.' };
+    presence.style = 'display: flex; gap: 12px; align-items: center; padding: 10px 14px; border-radius: 4px; background: rgba(20,15,10,0.72); border: 1px solid rgba(242,232,213,0.25); color: #F2E8D5';
+
+    var isPallet = L[14];
+    var lot = { kicker: CATLABEL[L[1]] + ' · ' + L[13].toUpperCase(), name: L[2], text: L[3], seller: L[4], sellerFace: FACE[L[5]], sellerNote: L[6],
+      contents: L[10].map(function (c) { return { name: c[0], qty: c[1] }; }), contentsNote: L[11], past: L[12] + ' ', isPallet: isPallet,
+      deliverTitle: isPallet ? 'DELIVER TO' : 'IF YOU WIN',
+      deliverNote: isPallet ? 'Crates appear at the gate of the place you choose, in Minecraft. Your steward signs for them.' : (L[1] === 'land' ? 'The deed is yours; it shows up on your Business screen under Land.' : 'It goes to your warehouse in Aquea.') };
+    var destList = DEST.map(function (d) { var on = d[0] === dest;
+      return { name: d[1], note: d[2], click: function () { put({ dest: d[0] }); },
+        radio: 'flex: none; width: 18px; height: 18px; border-radius: 50%; box-sizing: border-box; border: 2px solid #5A3A22; ' + (on ? 'background: radial-gradient(circle, #5A3A22 0%, #5A3A22 40%, transparent 45%)' : 'background: transparent'),
+        style: 'display: flex; gap: 10px; align-items: center; min-height: 46px; padding: 4px 10px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' + (on ? 'background: rgba(201,150,42,0.16); border: 1px solid #9A6A12' : 'background: rgba(255,250,238,0.4); border: 1px solid rgba(58,37,22,0.2)') }; });
+
+    var leaderInfo = S.leader === 'you' ? ['You', FACE.you] : [RIV[S.leader][0], FACE[RIV[S.leader][1]]];
+    var won = S.ended && S.meLeading;
+    var bid = {
+      label: S.ended ? 'Sold for' : 'Bidding stands at', price: fmt(S.price) + ' ',
+      priceStyle: 'font-family: Cinzel, serif; font-size: 34px; font-weight: 700; color: ' + (S.meLeading ? '#2C5F50' : '#2A1A0E') + '; animation: bump 0.4s ease-out',
+      leader: leaderInfo[0], leaderFace: leaderInfo[1], leaderStyle: 'font-size: 16px; font-weight: 700; color: ' + (S.meLeading ? '#2C5F50' : '#8E2418'),
+      history: S.hist.map(function (h, i, a) { var me = h[0] === 'You', last = i === a.length - 1;
+        return { text: h[0] + ' — ' + fmt(h[1]) + ' ', style: 'font-family: "IBM Plex Mono", monospace; font-size: 13px; color: ' + (me ? '#2C5F50' : '#3A2516') + (last ? '; font-weight: 600' : '; opacity: 0.8') }; }),
+      open: !S.ended, ended: S.ended, ceiling: fmt(ceil) + ' ',
+      up: function () { setBid({ ceil: ceil + L[8] }); }, down: function () { setBid({ ceil: Math.max(L[7] + L[8], ceil - L[8]) }); },
+      place: function () { setBid({ ceiling: ceil }); },
+      placeLabel: S.placed ? (S.meLeading ? 'You lead · raise your ceiling?' : 'Outbid · bid again') : 'Bid up to ' + fmt(ceil),
+      hammer: function () { setBid({ ended: true }); }, reopen: function () { setBid({ ended: false, ceiling: null }); },
+      hint: S.placed && !S.meLeading ? leaderInfo[0] + ' went higher. Their ceiling is hidden; the last prices are your only clue.' : 'Rivals have hidden limits. Past prices are your best guess at them.',
+      endTitle: won ? 'Sold, to you, for ' + fmt(S.price) + ' ' : 'Sold to ' + leaderInfo[0] + ' for ' + fmt(S.price) + ' ',
+      endText: won ? (isPallet ? 'The crates go to ' + (function (n) { return n.charAt(0).toLowerCase() + n.slice(1); })(DEST.filter(function (d) { return d[0] === dest; })[0][1]) + '. ' + DEST.filter(function (d) { return d[0] === dest; })[0][2] + '.' : 'It’s yours. Pay the auctioneer’s clerk on the way out.') : 'Better luck next market day. Similar lots come up most weeks.',
+      endStyle: 'display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-left: 4px solid ' + (won ? '#2C5F50; background: rgba(44,95,80,0.12); color: #1F3A30' : '#8E2418; background: rgba(142,36,24,0.08); color: #4A1A10') + '; animation: fadein 0.4s ease-out both'
+    };
+    var mine = [];
+    Object.keys(LOTS).forEach(function (c) { LOTS[c].forEach(function (l) { var b = bids[l[0]]; if (!b || !b.ceiling) return; var s = settle(l);
+      var stt = s.ended ? (s.meLeading ? 'Won · ' + fmt(s.price) : 'Lost') : (s.meLeading ? 'Leading · ' + fmt(s.price) : 'Outbid · ' + fmt(s.price));
+      mine.push({ name: l[2] + (c !== 'aquea' ? ' (' + CITY[c][0] + ')' : ''), state: stt, style: 'font-size: 13px; font-weight: 700; color: ' + (s.meLeading ? '#2C5F50' : '#8E2418') }); }); });
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E6C29A' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9D2C4') };
+    };
+    return {
+      nav: __NAV.top('Auctions', navItem), subnav: __NAV.sub('Auctions'), hasSub: true,
+      where: C[0].toUpperCase() + ' · MARKET DAY',
+      cities: cities, cats: cats, lots: lots, presence: presence, lot: lot, dest: destList, bid: bid, mine: mine, noMine: mine.length === 0
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

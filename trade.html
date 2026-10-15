@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Negotiation — at the stall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#3A2B1E}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#E2C17C}a:hover{color:#F3DDA6}
+input,select,textarea{font:inherit}
+.plaster{background-color:#4A4036;background-image:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0) 30%, rgba(0,0,0,0.25)), radial-gradient(ellipse at 50% 35%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%), url(assets/aac08c0c9c243ce7f17b60e7008ab1ee.jpg);background-size:auto, auto, 640px 640px}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.35), 0 5px 10px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.42) !important}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div class="plaster" style="min-height: 100vh; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 18px; line-height: 1.55">
+
+<!-- SCENE -->
+<header style="max-width: 1440px; margin: 0 auto; padding: 22px 32px 18px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 32px; box-sizing: border-box; border-bottom: 1px solid rgba(226,193,124,0.25)">
+<div style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 420px">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.2em; color: #E9C982">OSTIA · THE WINE STALLS BY THE TIBER</span>
+<span style="color: #EFE4CE; font-size: 16px">Three ships unloaded wine at the quay this morning, and the porters are still complaining about it.</span>
+</div>
+<span style="font-size: 16px; color: #EFE4CE">Around Ostia you're known as <span style="color: #FFF6E4">a fair dealer</span></span>
+</header>
+
+<div role="tablist" aria-label="How you trade" style="max-width: 1440px; margin: 0 auto; padding: 18px 32px 0; box-sizing: border-box; display: flex; gap: 10px; flex-wrap: wrap">
+<sc-for list="{{modeTabs}}" as="mt" hint-placeholder-count="3"><button role="tab" onClick="{{mt.click}}" style="{{mt.style}}"><span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700">{{mt.label}}</span><span style="font-size: 13px; opacity: 0.85">{{mt.sub}}</span></button></sc-for>
+</div>
+
+<sc-if value="{{inPerson}}" hint-placeholder-val="{{ true }}">
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 28px 32px 56px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; box-sizing: border-box">
+
+<!-- LEFT: THE MAN, THE STALL, YOUR NOTES -->
+<section style="flex: 1 1 280px; max-width: 320px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; gap: 16px; align-items: center">
+<div style="padding: 6px; background: #EFE3C8; box-shadow: 0 8px 18px rgba(0,0,0,0.4); flex: none; transform: rotate(-2deg)">
+<img src="assets/c1e421a40d1298e1f79fcc61708ffbb6.png" alt="Pixel portrait of Varro: olive skin, dark hair, greying beard" style="display: block; width: 84px; height: 84px; image-rendering: pixelated">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 style="margin: 0; font-family: Cinzel, serif; font-size: 20px; letter-spacing: 0.05em; color: #FFF6E4">Gaius Tullius Varro</h2>
+<span style="color: #E9C982; font-size: 16px">Wine merchant, Collegium of Vintners</span>
+</div>
+</div>
+
+<p class="paper" style="margin: 0; color: #2A2119; padding: 14px 16px; font-size: 17px; box-shadow: 0 8px 20px rgba(0,0,0,0.35)">He sets his cup down harder than he needs to and folds his arms. He hasn't turned to the next customer yet, but his eyes keep drifting to the street.</p>
+
+<!-- RIVAL BUYER -->
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px dashed rgba(243,210,126,0.6); border-radius: 2px; background: rgba(20,13,8,0.35)">
+<div aria-hidden="true" style="flex: none; padding: 3px; background: #EFE3C8; transform: rotate(2deg)">
+<img src="assets/51cea2a5099cccbcd6674dbb671dee2d.png" alt="" style="display: block; width: 32px; height: 32px; image-rendering: pixelated">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; font-size: 15px; line-height: 1.45">
+<span style="color: #F3D27E; font-weight: 600">Also at the stall</span>
+<span style="color: #F2E8D5">Demetrios of Rhodes is tasting the same Falernian and asking how many jars are left.</span>
+<span style="color: #E6D8BC; font-size: 14px">If you take too long, Varro may sell to him.</span>
+</div>
+</div>
+
+<!-- NOTEBOOK -->
+<div class="paper" style="color: #2A2119; padding: 18px 20px; box-shadow: 0 14px 30px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 12px; transform: rotate(0.6deg)">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.12em; color: #5A3A22">MY READ ON VARRO</span>
+<sc-for list="{{traits}}" as="t" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; gap: 8px; font-size: 16px">
+<span><strong style="font-weight: 600">{{t.name}}</strong> <span style="color: #5E5042">· {{t.guess}}</span></span>
+<span aria-label="{{t.confLabel}}" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5A3A22; letter-spacing: 2px">{{t.dots}}</span>
+</div>
+<div style="height: 6px; background: rgba(120,90,50,0.22); border-radius: 3px"><div style="{{t.bar}}"></div></div>
+<sc-if value="{{t.hasNote}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 13px; color: #2C5F50">↑ {{t.note}}</span>
+</sc-if>
+</div>
+</sc-for>
+<div style="display: flex; justify-content: flex-end; gap: 6px; font-size: 13px; color: #5E5042"><span style="font-family: 'IBM Plex Mono', monospace">●○○○</span> a guess · <span style="font-family: 'IBM Plex Mono', monospace">●●●●</span> sure of it</div>
+</div>
+
+<!-- WHAT YOU KNOW -->
+<div class="paper" style="color: #2A2119; padding: 18px 20px; box-shadow: 0 14px 30px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 10px; transform: rotate(-0.5deg)">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.12em; color: #5A3A22">WHAT I KNOW</span>
+<sc-for list="{{facts}}" as="f" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 1px; padding-bottom: 8px; border-bottom: 1px solid rgba(90,58,34,0.2)">
+<span style="font-size: 16px; color: #1F1710">{{f.text}}</span>
+<span style="font-size: 13px; color: #5E5042">{{f.source}} · <span style="{{f.sureStyle}}">{{f.sure}}</span></span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- CENTER: THE EXCHANGE + YOUR MOVE -->
+<section style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 24px; color: #FFF6E4; letter-spacing: 0.03em">Falernian wine, 200 jars</h1>
+
+<sc-for list="{{thread}}" as="m" hint-placeholder-count="5">
+<sc-if value="{{m.isBeat}}" hint-placeholder-val="{{ false }}">
+<p style="{{m.beatStyle}}">{{m.text}}</p>
+</sc-if>
+<sc-if value="{{m.isLine}}" hint-placeholder-val="{{ true }}">
+<div style="{{m.wrap}}">
+<div aria-hidden="true" style="{{m.faceBox}}">
+<img src="{{m.face}}" alt="" style="display: block; width: 32px; height: 32px; image-rendering: pixelated">
+</div>
+<div class="paper" style="{{m.slip}}">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">{{m.who}}</span>
+<p style="{{m.speechStyle}}">{{m.speech}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; padding-top: 4px">
+<sc-for list="{{m.terms}}" as="term" hint-placeholder-count="5">
+<span style="{{term.style}}">{{term.label}}</span>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+</sc-for>
+
+<div style="font-size: 14px; color: #E6D8BC; display: flex; gap: 18px; flex-wrap: wrap; justify-content: center">
+<span><span style="display: inline-block; width: 11px; height: 11px; background: #F2D49A; border: 1px solid #8A5A12; margin-right: 6px; vertical-align: -1px"></span>Changed</span>
+<span><span style="display: inline-block; width: 11px; height: 11px; background: #EFE3C8; border: 2px solid #8E2C1C; margin-right: 6px; vertical-align: -1px"></span>New demand</span>
+<span><span style="display: inline-block; width: 11px; height: 11px; border-bottom: 2px solid #F3D27E; margin-right: 6px"></span>What you noticed</span>
+</div>
+
+<!-- YOUR MOVE -->
+<div style="margin-top: 10px; display: flex; flex-direction: column; gap: 16px; padding-top: 18px; border-top: 1px solid rgba(226,193,124,0.25)">
+<span style="font-family: Cinzel, serif; font-size: 18px; color: #FFF6E4">What are you after?</span>
+<sc-for list="{{groups}}" as="grp" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px">
+<span style="font-size: 16px; color: #F3D27E; font-weight: 600">{{grp.title}}</span>
+<span style="font-size: 14px; color: #E6D8BC">{{grp.note}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px">
+<sc-for list="{{grp.options}}" as="o" hint-placeholder-count="5">
+<button class="paper" style="{{o.style}}">
+<span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<span style="font-weight: 600; font-size: 16px; color: #1F1710">{{o.label}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5A3A22">{{o.mark}}</span>
+</span>
+<span style="font-size: 14px; color: #4A3C30; line-height: 1.4">{{o.what}}</span>
+<span style="{{o.readStyle}}">{{o.read}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+
+<div class="paper" style="padding: 18px 20px; box-shadow: 0 14px 30px rgba(0,0,0,0.4); color: #2A2119; display: flex; flex-direction: column; gap: 12px; transform: rotate(-0.4deg)">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px">
+<label for="draft" style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">WHAT YOU'LL SAY</label>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #5E5042">
+<span>Warm</span>
+<div role="img" aria-label="Tone: slightly blunt" style="position: relative; width: 120px; height: 6px; background: rgba(90,58,34,0.25); border-radius: 3px">
+<div style="position: absolute; left: 62%; top: -6px; width: 18px; height: 18px; border-radius: 50%; background: #5A3A22; box-shadow: 0 2px 4px rgba(0,0,0,0.3)"></div>
+</div>
+<span>Blunt</span>
+</div>
+</div>
+<textarea id="draft" rows="3" style="width: 100%; box-sizing: border-box; resize: vertical; padding: 10px 12px; background: rgba(255,250,238,0.55); border: 1px solid rgba(90,58,34,0.35); border-radius: 2px; color: #1F1710; font-family: Spectral, serif; font-size: 19px; line-height: 1.5">Nobody in Ostia pours like you, Varro; that's why I'm at your stall and not on the quay. So: ten days away from Rufus, not thirty. For that, eleven and a half a jar, Grade A.</textarea>
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px">
+<span style="font-size: 14px; color: #5E5042">Built from your choices and terms sheet. Change the words if you like; he'll hear the tone as much as the numbers.</span>
+<button style="min-height: 46px; padding: 10px 22px; background: #5A3A22; color: #FFF6E4; border: none; border-radius: 2px; font-family: Cinzel, serif; font-weight: 700; font-size: 15px; letter-spacing: 0.08em; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3)">Say it</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- RIGHT: LEDGER + TERMS -->
+<section style="flex: 1 1 320px; max-width: 380px; display: flex; flex-direction: column; gap: 22px">
+
+<!-- STAKES / LEDGER -->
+<div class="paper" style="padding: 18px 22px; box-shadow: 0 14px 30px rgba(0,0,0,0.4); color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.7deg)">
+<span style="font-family: Cinzel, serif; font-size: 15px; font-weight: 700; letter-spacing: 0.12em; color: #3A2516">WHAT'S AT STAKE</span>
+<sc-for list="{{stakes}}" as="s" hint-placeholder-count="6">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 16px">
+<span style="color: #4A3C30">{{s.label}}</span>
+<span style="{{s.valueStyle}}">{{s.value}}</span>
+</div>
+</sc-for>
+<div style="margin-top: 4px; padding: 8px 10px; border: 2px solid #8E2C1C; color: #6E2214; font-size: 15px; transform: rotate(0.6deg)">Your buyer in Rome wants it within <strong>12 days</strong>. Varro offers 14.</div>
+</div>
+
+<!-- TERMS -->
+<div class="paper" style="padding: 22px 24px; box-shadow: 0 18px 36px rgba(0,0,0,0.45); color: #2A2119; display: flex; flex-direction: column; gap: 10px; transform: rotate(0.8deg)">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; letter-spacing: 0.12em; color: #3A2516">THE TERMS</span>
+<span style="font-size: 13px; color: #5E5042">his · <span style="color: #1F1710; font-weight: 600">yours</span></span>
+</div>
+<sc-for list="{{terms}}" as="t" hint-placeholder-count="8">
+<div style="display: flex; flex-direction: column; gap: 2px; border-bottom: 1px solid rgba(90,58,34,0.22); padding-bottom: 8px">
+<span style="font-size: 13px; color: #6B5A48; letter-spacing: 0.04em">{{t.name}}</span>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 17px">
+<span style="color: #6B5A48">{{t.his}}</span>
+<span style="{{t.yoursStyle}}">{{t.yours}}</span>
+</div>
+</div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 4px">
+<span style="font-family: Cinzel, serif; letter-spacing: 0.1em; color: #3A2516">SUMMA</span>
+<span style="display: flex; flex-direction: column; align-items: flex-end">
+<span style="color: #6B5A48; font-size: 15px">his <span style="font-family: Cinzel, serif">MMD</span> · 2,500 </span>
+<span style="font-size: 18px; font-weight: 600; color: #1F1710">yours <span style="font-family: Cinzel, serif">MMCCC</span> · 2,300 </span>
+</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; gap: 10px">
+<button class="paper" style="flex: 1; min-height: 46px; color: #1F4A40; border: 2px solid #3F7A6A; border-radius: 2px; font-family: Spectral, serif; font-size: 17px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 14px rgba(0,0,0,0.35)">Shake on his terms</button>
+<button class="paper" style="flex: 1; min-height: 46px; color: #6E2214; border: 2px solid #9C3220; border-radius: 2px; font-family: Spectral, serif; font-size: 17px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 14px rgba(0,0,0,0.35)">Walk away</button>
+</div>
+<p style="margin: 0; font-size: 14px; color: #E6D8BC; line-height: 1.45">If you walk: a greedy man may call you back with a better price. A proud one may let you go and not forget it. With Demetrios at the stall, he may not need you at all.</p>
+</div>
+</section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{byLetter}}" hint-placeholder-val="{{ false }}">
+<main style="max-width: 1440px; margin: 0 auto; padding: 28px 32px 56px; box-sizing: border-box; display: flex; justify-content: center">
+<div class="paper" style="max-width: 760px; padding: 28px 32px; color: #2A2119; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #8E2418">TRADING BY LETTER</span>
+<span style="font-family: Cinzel, serif; font-size: 26px; font-weight: 700; color: #2A1A0E">Write to a merchant in another city</span>
+<span style="font-size: 17px; line-height: 1.5; color: #1F1710">The same haggle, slowed down: each offer and counteroffer travels by rider or ship, and takes days. You can’t read his face, only his words. Good for distant deals you can’t be at in person.</span>
+<span style="font-size: 15px; color: #6B5A48">This tab gets its own full design later.</span>
+</div>
+</main>
+</sc-if>
+
+<sc-if value="{{byAgent}}" hint-placeholder-val="{{ false }}">
+<main style="max-width: 1440px; margin: 0 auto; padding: 28px 32px 56px; box-sizing: border-box; display: grid; grid-template-columns: 320px 1fr 380px; gap: 28px; align-items: start">
+
+<!-- your agents -->
+<section style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.16em; color: #E9C982">YOUR AGENTS</span>
+<sc-for list="{{agents}}" as="ag" hint-placeholder-count="3">
+<button class="paper" onClick="{{ag.pick}}" style="{{ag.style}}">
+<div style="flex: none; padding: 3px; background: #F6EAD0; box-shadow: 0 2px 6px rgba(0,0,0,0.35)"><img src="{{ag.face}}" alt="" style="display: block; width: 46px; height: 46px; image-rendering: pixelated"></div>
+<span style="display: flex; flex-direction: column; text-align: left; min-width: 0"><span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; color: #2A1A0E">{{ag.name}}</span><span style="font-size: 13px; color: #6B5A48">{{ag.where}}</span><span style="{{ag.statusStyle}}">{{ag.status}}</span></span>
+</button>
+</sc-for>
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.16em; color: #E9C982; margin-top: 10px">FOR HIRE</span>
+<sc-for list="{{hire}}" as="h" hint-placeholder-count="2">
+<div style="display: flex; gap: 12px; align-items: center; padding: 10px 12px; border: 1px dashed rgba(243,210,126,0.5); border-radius: 2px; background: rgba(20,13,8,0.4)">
+<img src="{{h.face}}" alt="" style="width: 40px; height: 40px; image-rendering: pixelated; box-shadow: 0 0 0 2px #EFE3C8">
+<span style="flex: 1; display: flex; flex-direction: column; min-width: 0"><span style="font-size: 15px; font-weight: 600; color: #FFF6E4">{{h.name}}</span><span style="font-size: 13px; color: #E6D8BC">{{h.note}}</span></span>
+<button onClick="{{h.click}}" style="{{h.btn}}">{{h.label}}</button>
+</div>
+</sc-for>
+</section>
+
+<!-- orders -->
+<section class="paper" style="padding: 24px 28px; color: #2A2119; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 18px; align-items: flex-start">
+<div style="flex: none; padding: 5px; background: #F6EAD0; box-shadow: 0 4px 10px rgba(0,0,0,0.3)"><img src="{{ag1.face}}" alt="" style="display: block; width: 76px; height: 76px; image-rendering: pixelated"></div>
+<div style="flex: 1; display: flex; flex-direction: column; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #8E2418">{{ag1.kicker}}</span>
+<span style="font-family: Cinzel, serif; font-size: 26px; font-weight: 700; color: #2A1A0E">{{ag1.name}}</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">{{ag1.note}}</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; padding: 10px 0; border-top: 1px solid rgba(58,37,22,0.18); border-bottom: 1px solid rgba(58,37,22,0.18)">
+<sc-for list="{{ag1.stats}}" as="sk" hint-placeholder-count="4"><div style="display: flex; justify-content: space-between; gap: 10px"><span style="font-size: 14px; color: #6B5A48">{{sk.k}}</span><span style="{{sk.style}}">{{sk.v}}</span></div></sc-for>
+</div>
+
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">GIVE ORDERS</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px 22px">
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 14px; color: #6B5A48">Buy or sell</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden"><sc-for list="{{o.sides}}" as="x" hint-placeholder-count="2"><button onClick="{{x.click}}" style="{{x.style}}">{{x.label}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 14px; color: #6B5A48">What</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{o.goods}}" as="x" hint-placeholder-count="6"><button onClick="{{x.click}}" style="{{x.style}}">{{x.label}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 14px; color: #6B5A48">How much</span>
+<div style="display: flex; align-items: center; gap: 8px"><button onClick="{{o.qtyDown}}" aria-label="Less" style="width: 42px; height: 42px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 20px; cursor: pointer">−</button><span style="flex: 1; text-align: center; font-family: Cinzel, serif; font-size: 20px; font-weight: 700">{{o.qty}}</span><button onClick="{{o.qtyUp}}" aria-label="More" style="width: 42px; height: 42px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 20px; cursor: pointer">+</button></div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 14px; color: #6B5A48">{{o.limitLabel}}</span>
+<div style="display: flex; align-items: center; gap: 8px"><button onClick="{{o.limDown}}" aria-label="Lower" style="width: 42px; height: 42px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 20px; cursor: pointer">−</button><span style="flex: 1; text-align: center; font-family: Cinzel, serif; font-size: 20px; font-weight: 700">{{o.limit}}</span><button onClick="{{o.limUp}}" aria-label="Higher" style="width: 42px; height: 42px; border: 1px solid #5A3A22; background: transparent; border-radius: 3px; font-size: 20px; cursor: pointer">+</button></div>
+<span style="font-size: 12px; color: #6B5A48">{{o.heard}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1"><span style="font-size: 14px; color: #6B5A48">How much freedom</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden"><sc-for list="{{o.freedom}}" as="x" hint-placeholder-count="3"><button onClick="{{x.click}}" style="{{x.style}}">{{x.label}}</button></sc-for></div>
+<span style="font-size: 13px; color: #3A2516">{{o.freedomNote}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1"><span style="font-size: 14px; color: #6B5A48">Send the order</span>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden"><sc-for list="{{o.send}}" as="x" hint-placeholder-count="2"><button onClick="{{x.click}}" style="{{x.style}}">{{x.label}}</button></sc-for></div></div>
+</div>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710; padding: 10px 12px; background: rgba(46,88,120,0.08); border-left: 3px solid #2E5878">{{o.expect}}</span>
+<sc-if value="{{o.notSent}}" hint-placeholder-val="{{ true }}"><button onClick="{{o.sendIt}}" style="min-height: 52px; background: #3A2516; color: #FFF6E4; border: none; border-radius: 3px; font-family: Cinzel, serif; font-size: 16px; font-weight: 700; letter-spacing: 0.05em; cursor: pointer">{{o.sendLabel}}</button></sc-if>
+<sc-if value="{{o.sent}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; background: rgba(44,95,80,0.12); border-left: 3px solid #2C5F50"><span style="font-size: 15px; font-weight: 600; color: #1F3A30">{{o.sentText}}</span><button onClick="{{o.unsend}}" style="align-self: flex-start; min-height: 30px; padding: 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Write a different order</button></div></sc-if>
+</section>
+
+<!-- reports -->
+<section style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.16em; color: #E9C982">THEIR REPORTS</span>
+<sc-for list="{{reports}}" as="r" hint-placeholder-count="3">
+<div class="paper" style="{{r.style}}">
+<div style="display: flex; gap: 10px; align-items: center"><img src="{{r.face}}" alt="" style="width: 32px; height: 32px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0"><span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600; color: #1F1710">{{r.from}}</span><span style="font-size: 12px; color: #6B5A48">{{r.when}}</span></span></div>
+<span style="font-family: 'IM Fell English', serif; font-size: 16px; line-height: 1.45; color: #1F1710">{{r.text}}</span>
+<sc-if value="{{r.hasDoubt}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #8E2418; font-weight: 600">{{r.doubt}}</span></sc-if>
+<sc-if value="{{r.hasActs}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{r.acts}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="min-height: 38px; padding: 4px 12px; background: rgba(255,250,238,0.6); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; font-size: 13px; cursor: pointer">{{a.label}}</button></sc-for></div>
+</sc-if>
+<sc-if value="{{r.hasOutcome}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #1F3A30; padding: 6px 10px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50">{{r.outcome}}</span></sc-if>
+</div>
+</sc-for>
+</section>
+</main>
+</sc-if>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+
+const AGENTS = [
+  { id: 'philon', name: 'Philon', city: 'Durona', face: 'assets/e4a0ef19de516d0fa88d55ea65e5b653.png', since: 'Your agent for 3 years', commission: 3, haggle: 4, honest: '?', langs: 'Greek, Ostoronian', speed: 'Slow and careful', reach: 3,
+    status: 'Buying timber for you', busy: true, note: 'Old, careful and slow. Never overpays. Sometimes misses a deal because of it.', expect: 'usually gets within 3% of your limit, and walks away rather than overpay' },
+  { id: 'sosia', name: 'Sosia', city: 'Sabino', face: 'assets/58c9f3e88922b880ccd4ee24608de0a3.png', since: 'Your agent for 1 year', commission: 4, haggle: 3, honest: 'yes', langs: 'Helerensian, Latin', speed: 'Fast, takes risks', reach: 6,
+    status: 'Waiting for orders', busy: false, note: 'Quick and well connected in the south. Takes risks with your money, and usually wins.', expect: 'acts fast and often beats your limit, but she’ll stretch your freedom as far as it goes' },
+  { id: 'brennus', name: 'Brennus', city: 'Coria', face: 'assets/0c1205adf207e43b33d846e25666b359.png', since: 'Your agent for 2 years', commission: 2, haggle: 2, honest: '?', langs: 'Ostoronian, a little Latin', speed: 'Steady', reach: 4,
+    status: 'Selling your olive oil', busy: true, note: 'The cheapest agent you have. Perhaps too cheap: his prices always seem a little worse than the gossip.', expect: 'reports prices a little below what you hear elsewhere. Whether that’s bad luck is another question' }
+];
+const GOODS = [['grain', 'Grain', 0.34, 'modii'], ['wine', 'Wine', 14, 'amphorae'], ['oil', 'Olive oil', 4.2, 'jars'], ['marble', 'Marble', 30, 'blocks'], ['timber', 'Timber', 8, 'loads'], ['iron', 'Iron', 12, 'bars']];
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {}, self = this;
+    const put = (o) => self.setState(Object.assign({}, self.state || {}, o));
+    const mode = st.mode || 'person';
+    const tabStyle = (on) => 'display: flex; flex-direction: column; align-items: flex-start; min-width: 200px; min-height: 56px; padding: 8px 18px; border-radius: 2px; font-family: Spectral, serif; cursor: pointer; ' +
+      (on ? 'background: #EFE3C8; color: #2A1A0E; border: none; box-shadow: 0 0 0 3px #C9962A, 0 10px 22px rgba(0,0,0,0.45)' : 'background: rgba(20,13,8,0.55); color: #F2E8D5; border: 1px solid rgba(243,210,126,0.35)');
+    const modeTabs = [['person', 'In person', 'At the stall, face to face'], ['letter', 'By letter', 'Slow, from afar'], ['agents', 'Agents', '3 agents, 2 at work']].map((m) => ({ label: m[1], sub: m[2], click: () => put({ mode: m[0] }), style: tabStyle(mode === m[0]) }));
+    const agId = st.agent || 'sosia';
+    const A = AGENTS.find((a) => a.id === agId);
+    const agents = AGENTS.map((a, i) => ({ name: a.name, where: a.city + ' · ' + a.commission + '% commission', status: (st.sent || {})[a.id] ? 'Order on its way' : a.status, face: a.face,
+      statusStyle: 'font-size: 13px; font-weight: 600; color: ' + ((st.sent || {})[a.id] || a.busy ? '#9A6A12' : '#2C5F50'),
+      pick: () => put({ agent: a.id }),
+      style: 'display: flex; gap: 12px; align-items: center; padding: 12px 14px; border: none; border-radius: 2px; cursor: pointer; font-family: Spectral, serif; transform: rotate(' + [-0.5, 0.4, -0.3][i] + 'deg); ' + (a.id === agId ? 'box-shadow: 0 0 0 3px #C9962A, 0 14px 28px rgba(0,0,0,0.5)' : '') }));
+    const hired = st.hired || {};
+    const hire = [['matho', 'Matho of Mirene', 'assets/3cee28593077c78f1005c50116888cba.png', 'Across the ocean. Speaks Mirenian. 5%.'], ['ulf', 'Ulf, in Coria', 'assets/0a5ec64b1fd9a8aec4c3b381766ef95d.png', 'Young, eager, cheap. A check on Brennus? 2%.']].map((h) => ({ name: h[1], face: h[2], note: h[3], label: hired[h[0]] ? 'Hired ✓' : 'Hire',
+      click: () => { const m = Object.assign({}, (self.state || {}).hired || {}); m[h[0]] = !m[h[0]]; put({ hired: m }); },
+      btn: 'min-height: 38px; padding: 4px 12px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (hired[h[0]] ? 'background: transparent; color: #CFEAD6; border: 1px solid #7FB08A' : 'background: #EFE3C8; color: #2A1A0E; border: none') }));
+    const ord = Object.assign({ side: 'buy', good: 'wine', qty: 40, limit: 13, free: 'judge', send: 'rider' }, (st.orders || {})[agId] || {});
+    const setOrd = (patch) => { const m = Object.assign({}, (self.state || {}).orders || {}); m[agId] = Object.assign({}, ord, patch); put({ orders: m }); };
+    const G = GOODS.find((g) => g[0] === ord.good);
+    const segStyle = (on) => 'min-height: 42px; padding: 4px 6px; border: none; border-right: 1px solid rgba(90,58,34,0.35); font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (on ? 'background: #3A2516; color: #FFF6E4; font-weight: 600' : 'background: rgba(255,250,238,0.4); color: #2A1A0E');
+    const step = G[2] < 1 ? 0.02 : G[2] < 10 ? 0.1 : 1;
+    const fmtP = (v) => (G[2] < 1 ? v.toFixed(2) : G[2] < 10 ? v.toFixed(1) : String(Math.round(v)));
+    const freeNote = { stick: A.name + ' won’t go a coin past your limit. Safe, but you may get nothing.', judge: A.name + ' can go up to a tenth past your limit if the deal is good. Most agents work best like this.', any: 'Get it, whatever it costs. Fast, and expensive. An honest agent is essential here.' }[ord.free];
+    const sentNow = !!(st.sent || {})[agId];
+    const o = {
+      sides: [['buy', 'Buy'], ['sell', 'Sell']].map((x) => ({ label: x[1], click: () => setOrd({ side: x[0] }), style: segStyle(ord.side === x[0]) })),
+      goods: GOODS.map((g) => ({ label: g[1], click: () => setOrd({ good: g[0], limit: g[2] }), style: 'min-height: 36px; padding: 4px 10px; border-radius: 999px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (ord.good === g[0] ? 'background: #3A2516; color: #FFF6E4; border: none' : 'background: rgba(255,250,238,0.5); color: #2A1A0E; border: 1px solid rgba(58,37,22,0.35)') })),
+      qty: ord.qty + ' ' + G[3], qtyUp: () => setOrd({ qty: ord.qty + 10 }), qtyDown: () => setOrd({ qty: Math.max(10, ord.qty - 10) }),
+      limitLabel: ord.side === 'buy' ? 'Pay no more than (each)' : 'Sell for no less than (each)',
+      limit: fmtP(ord.limit) + ' ', limUp: () => setOrd({ limit: +(ord.limit + step).toFixed(2) }), limDown: () => setOrd({ limit: Math.max(step, +(ord.limit - step).toFixed(2)) }),
+      heard: 'Last you heard, ' + G[1].toLowerCase() + ' in ' + A.city + ' was ' + fmtP(G[2]) + ' . That was 8 days ago.',
+      freedom: [['stick', 'Stick to my price'], ['judge', 'Use your judgment'], ['any', 'At any cost']].map((x) => ({ label: x[1], click: () => setOrd({ free: x[0] }), style: segStyle(ord.free === x[0]) })),
+      freedomNote: freeNote,
+      send: [['rider', 'By rider · 20 , ' + Math.max(1, A.reach - 1) + ' days'], ['ship', 'With the next ship · free, ' + (A.reach + 4) + ' days']].map((x) => ({ label: x[1], click: () => setOrd({ send: x[0] }), style: segStyle(ord.send === x[0]) })),
+      expect: A.name + ' ' + A.expect + '. Commission: ' + A.commission + '% of the deal, about ' + Math.round(ord.qty * ord.limit * A.commission / 100) + ' .',
+      notSent: !sentNow, sent: sentNow, sendLabel: 'Seal the order and send it to ' + A.name,
+      sentText: 'Sealed and sent ' + (ord.send === 'rider' ? 'with a rider' : 'with the next ship') + '. ' + A.name + ' gets it in about ' + (ord.send === 'rider' ? Math.max(1, A.reach - 1) : A.reach + 4) + ' days; a report follows when it’s done.',
+      sendIt: () => { const m = Object.assign({}, (self.state || {}).sent || {}); m[agId] = true; put({ sent: m }); },
+      unsend: () => { const m = Object.assign({}, (self.state || {}).sent || {}); delete m[agId]; put({ sent: m }); }
+    };
+    const stat = (k, v, kind) => ({ k, v, style: 'font-size: 14px; font-weight: 600; color: ' + (kind === 'good' ? '#2C5F50' : kind === 'bad' ? '#8E2418' : '#1F1710') });
+    const ag1 = { name: A.name, face: A.face, kicker: 'YOUR AGENT IN ' + A.city.toUpperCase(), note: A.note,
+      stats: [stat('Haggling', '●'.repeat(A.haggle) + '○'.repeat(5 - A.haggle)), stat('Honest', A.honest === 'yes' ? 'Yes, proven' : 'Not sure yet', A.honest === 'yes' ? 'good' : 'bad'), stat('Speaks', A.langs), stat('Style', A.speed), stat('Commission', A.commission + '%'), stat('With you', A.since.replace('Your agent for ', ''))] };
+    const rep = st.rep || {};
+    const REPORTS = [
+      { id: 'r1', from: 'Brennus, from Coria', face: AGENTS[2].face, when: '2 days ago', text: '“Sold 120 jars of your oil at 4.1 each, after my 2%. A hard market, master.”',
+        doubt: 'Gossip from a captain says oil in Coria fetched 4.5 that week.',
+        acts: [['ask', 'Ask him to explain', 'Brennus blames a glut from Melulona. It might even be true.'], ['check', 'Send Ulf to check quietly', 'Ulf finds the buyer: he paid 4.4. Brennus pocketed the difference.'], ['trust', 'Let it go', 'You let it go. Brennus’s next report is just as low.']] },
+      { id: 'r2', from: 'Philon, from Durona', face: AGENTS[0].face, when: '4 days ago', text: '“No timber under your limit this week. Fulvius’s men are buying every log on the river. I will wait.”', doubt: '', acts: [] },
+      { id: 'r3', from: 'Sosia, from Sabino', face: AGENTS[1].face, when: '6 days ago', text: '“Bought 40 amphorae at 13, under your limit. I could have had 200 if you trusted me with more.”', doubt: '', acts: [] }
+    ];
+    const reports = REPORTS.map((r, i) => ({ from: r.from, face: r.face, when: r.when, text: r.text, doubt: r.doubt, hasDoubt: !!r.doubt,
+      hasActs: r.acts.length > 0 && rep[r.id] === undefined, hasOutcome: rep[r.id] !== undefined, outcome: rep[r.id] !== undefined ? r.acts[rep[r.id]][2] : '',
+      acts: r.acts.map((a, k) => ({ label: a[1], click: () => { const m = Object.assign({}, (self.state || {}).rep || {}); m[r.id] = k; put({ rep: m }); } })),
+      style: 'padding: 16px 18px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(' + [0.5, -0.4, 0.3][i] + 'deg)' + (r.doubt ? '; border-top: 4px solid #8E2418' : '') }));
+    const varroFace = 'assets/c1e421a40d1298e1f79fcc61708ffbb6.png';
+    const youFace = 'assets/009faa795ce967e9ad726e9f5012f930.png';
+
+    const chip = (kind) => {
+      const base = 'font-size: 13px; line-height: 1.3; padding: 3px 8px; border-radius: 2px; font-family: "IBM Plex Mono", monospace; ';
+      if (kind === 'changed') return base + 'background: #F2D49A; border: 1px solid #8A5A12; color: #3E2808';
+      if (kind === 'new') return base + 'background: rgba(255,250,238,0.6); border: 2px solid #8E2C1C; color: #7A2216; font-weight: 600; transform: rotate(-2deg)';
+      return base + 'background: rgba(255,250,238,0.5); border: 1px solid rgba(90,58,34,0.35); color: #5E5042';
+    };
+    const t = (label, kind) => ({ label, style: chip(kind) });
+
+    const line = (who, face, mine, latest, tilt, speech, terms) => ({
+      isLine: true, isBeat: false, who, face, speech, terms,
+      wrap: 'display: flex; gap: 12px; align-items: flex-start; ' + (mine ? 'flex-direction: row-reverse; margin-left: 56px' : 'margin-right: 56px') + (latest ? '' : '; opacity: 0.88'),
+      faceBox: 'flex: none; padding: 4px; background: #EFE3C8; box-shadow: 0 4px 10px rgba(0,0,0,0.4); transform: rotate(' + (mine ? '3' : '-3') + 'deg); margin-top: 6px',
+      slip: 'flex: 1; min-width: 0; padding: ' + (latest ? '18px 22px' : '12px 18px') + '; display: flex; flex-direction: column; gap: 4px; color: #2A2119; box-shadow: 0 ' + (latest ? '16px 32px rgba(0,0,0,0.45)' : '8px 18px rgba(0,0,0,0.35)') + '; transform: rotate(' + tilt + 'deg)',
+      speechStyle: 'margin: 0; color: #1F1710; font-size: ' + (latest ? '21px' : '17px')
+    });
+    const beat = (text, noticed) => ({ isBeat: true, isLine: false, text, terms: [], face: '',
+      beatStyle: 'margin: 0 auto; padding: 0 12px; max-width: 560px; color: #E6D8BC; font-size: 16px; text-align: center' +
+        (noticed ? '; color: #FFF6E4; font-size: 17px; text-decoration: underline; text-decoration-color: #F3D27E; text-decoration-thickness: 2px; text-underline-offset: 5px' : '') });
+
+    const traitBar = (pct, color) => 'height: 6px; border-radius: 3px; width: ' + pct + '%; background: ' + color;
+    const trait = (name, guess, pct, color, conf, note) => ({
+      name, guess, bar: traitBar(pct, color), note: note || '', hasNote: !!note,
+      dots: '●'.repeat(conf) + '○'.repeat(4 - conf),
+      confLabel: 'how sure: ' + conf + ' of 4'
+    });
+
+    const sureColor = { seen: '#2C5F50', heard: '#8A5A12', doubt: '#8E2C1C' };
+    const fact = (text, source, sure, kind) => ({ text, source, sure, sureStyle: 'color: ' + sureColor[kind] + '; font-weight: 600' });
+
+    const readColor = { good: '#2C5F50', risk: '#8E2C1C', neutral: '#5E5042' };
+    const opt = (label, mark, what, read, kind, selected) => ({ label, mark, what, read,
+      readStyle: 'font-size: 13px; color: ' + readColor[kind] + '; border-top: 1px dashed rgba(90,58,34,0.3); padding-top: 6px; margin-top: 2px',
+      style: 'text-align: left; display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 2px; font-family: Spectral, serif; cursor: pointer; ' +
+        (selected ? 'border: 3px solid #F3D27E; box-shadow: 0 0 0 2px #5A3A22, 0 10px 22px rgba(0,0,0,0.45); transform: translateY(-2px)' : 'border: 1px solid rgba(90,58,34,0.35); box-shadow: 0 4px 10px rgba(0,0,0,0.3); opacity: 0.92') });
+
+    const stake = (label, value, kind) => ({ label, value,
+      valueStyle: 'font-family: "IBM Plex Mono", monospace; font-size: 15px; font-weight: 600; color: ' + (kind === 'good' ? '#2C5F50' : kind === 'bad' ? '#8E2C1C' : '#1F1710') });
+
+    const term = (name, his, yours, changed) => ({ name, his, yours,
+      yoursStyle: changed ? 'color: #1F1710; font-weight: 600; background: rgba(242,212,154,0.75); padding: 0 6px' : 'color: #1F1710' });
+
+    return {
+      modeTabs, inPerson: mode === 'person', byLetter: mode === 'letter', byAgent: mode === 'agents', agents, hire, ag1, o, reports,
+      traits: [
+        trait('Greedy', 'very', 75, '#8E2C1C', 3),
+        trait('Proud', 'extremely', 85, '#8E2C1C', 4, 'his jaw tightened at "Rufus"'),
+        trait('Patient', 'not very', 30, '#8A5A12', 2),
+        trait('Honest', 'can\'t tell yet', 50, '#9E9078', 1),
+        trait('Takes risks', 'rarely, I think', 30, '#2C6455', 2)
+      ],
+      facts: [
+        fact('Three wine ships docked this morning', 'You saw them yourself', 'certain', 'seen'),
+        fact('Rufus is selling Falernian at 11 a jar', 'A porter at the quay', 'might be wrong', 'heard'),
+        fact('Rome is paying 17 a jar', 'A letter from Marcus, 9 days old', 'probably still true', 'heard'),
+        fact('Varro owes the guild money', 'Tavern gossip', 'doubtful', 'doubt')
+      ],
+      thread: [
+        line('VARRO', varroFace, false, false, '-0.6',
+          '"Falernian, from the slopes themselves. Fourteen a jar, paid in full. You\'ll thank me at your table."',
+          [t('200 jars'), t('Grade A'), t('14 '), t('10 days'), t('Full upfront')]),
+        line('YOU', youFace, true, false, '0.5',
+          '"Three ships came in yesterday, Varro. Grade B at eleven, half now and half when it lands."',
+          [t('Grade B', 'changed'), t('11 ', 'changed'), t('20 days', 'changed'), t('Half / half', 'changed')]),
+        beat('A man in a white Greek cap stops at the stall and asks to taste the Falernian. Varro pours for him without taking his eyes off you.', false),
+        beat('When you mention the ships, his jaw tightens. Then he laughs once, without humour.', true),
+        line('VARRO', varroFace, false, true, '-0.3',
+          '"Eleven? By Bacchus, the gods would weep. Twelve and a half, Grade A, the real Falernian, and you may pay in three parts. But you buy no more wine from that thief Rufus. Not for a month."',
+          [t('Grade A', 'changed'), t('12½ ', 'changed'), t('14 days', 'changed'), t('3 parts', 'changed'), t('No Rufus, 30 days', 'new')])
+      ],
+      groups: [
+        { title: '1. What you want from him', note: 'Pick one to push hardest',
+          options: [
+            opt('A lower price', '→ 11½', 'Down from 12½ a jar. Set the number on your terms sheet.', 'He\'s greedy: he\'ll fight for every coin', 'risk', true),
+            opt('Drop the Rufus demand', '', 'Refuse to be told who else you buy from.', 'Proud men hate a flat no', 'risk', false),
+            opt('Faster delivery', '→ 10 days', 'Rome wants it in 12 days; 14 is too late.', 'Costs him little; he may give it', 'good', false),
+            opt('A guarantee', '', 'Any jar turned to vinegar, he refunds.', 'Can\'t tell if he\'s honest yet', 'neutral', false)
+          ] },
+        { title: '2. What you give in return', note: 'Optional, but he wants something',
+          options: [
+            opt('A shorter Rufus promise', '10 days', 'Not thirty. Lets him save face.', 'This is what he wants most', 'good', true),
+            opt('More paid upfront', 'half now', 'Better than his three parts.', 'If the gossip is true, he needs cash', 'good', false),
+            opt('Buy more jars', '250', 'A bigger order for a better rate.', 'Wine is glutted: risky for you', 'risk', false),
+            opt('Nothing', '', 'Ask for a better deal and give no ground.', 'Expect him to dig in', 'risk', false)
+          ] },
+        { title: '3. How you press him', note: 'Up to two · only what you know',
+          options: [
+            opt('Praise his wine', '', 'Tell him it\'s the best in Ostia.', 'Works well on pride', 'good', true),
+            opt('The glut', 'seen', 'Three ships came in this morning.', 'True, but it stung last time', 'risk', false),
+            opt('Rufus\'s price', 'rumour', 'Say Rufus sells at 11.', 'If it\'s wrong, he\'ll know you lied', 'risk', false),
+            opt('Your good name', '', 'Remind him you\'ve always delivered.', 'He remembers the late oil', 'neutral', false),
+            opt('Make amends', '', 'Apologise for paying late in March.', 'Might soften him', 'good', false),
+            opt('Silence', '', 'Let him speak first.', 'Risky with Demetrios waiting', 'risk', false)
+          ] }
+      ],
+      stakes: [
+        stake('Resale in Rome', '17  a jar', ''),
+        stake('Shipping to Rome', '−1½  a jar', 'bad'),
+        stake('Profit at your price', '+4 a jar · +800', 'good'),
+        stake('Profit at his price', '+3 a jar · +600', 'good'),
+        stake('Purse after first payment', '4,053 ', ''),
+        stake('Warehouse space', '200 of 260 free', '')
+      ],
+      terms: [
+        term('Wine', '200 jars', '200 jars', false),
+        term('Quality', 'Grade A', 'Grade A', false),
+        term('Price a jar', '12½ ', '11½ ', true),
+        term('Delivery', '14 days', '14 days', false),
+        term('Payment', 'three parts', 'three parts', false),
+        term('No Rufus', '30 days', '10 days', true),
+        term('Bundle', 'none', 'none', false),
+        term('Guarantee', 'none', 'none', false)
+      ]
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

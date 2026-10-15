@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The whole game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#16110C}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px}
+.k{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: radial-gradient(ellipse at 50% 0%, #2E2216 0%, #16110C 70%); color: #2A2119; font-family: Spectral, Georgia, serif; font-size: 16px; line-height: 1.45; padding: 40px 32px 56px; box-sizing: border-box">
+<div class="paper" style="max-width: 1376px; margin: 0 auto; padding: 40px 44px 44px; box-sizing: border-box; box-shadow: 0 30px 70px rgba(0,0,0,0.7); display: flex; flex-direction: column; gap: 34px">
+
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding-bottom: 18px; border-bottom: 2px solid #3A2516">
+<div style="display: flex; flex-direction: column">
+<span class="k" style="color: #7E2A1A">EVERYTHING IN THE GAME, ON ONE PAGE</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 40px; font-weight: 900; letter-spacing: 0.04em; color: #2A1A0E">The whole game</h1>
+</div>
+<p style="margin: 0; max-width: 620px; font-size: 17px; color: #3A2516">You are the head of a merchant house. The world runs on its own: goods move, news travels, rivals trade, rulers rule, armies march. You choose how much of it to touch. Everything below is optional except the first row. Money is counted in sestertii, written <span style="font-size: 1.15em"></span>.</p>
+</div>
+
+<!-- THE SCREENS -->
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span class="k" style="color: #3A2516">THE MENU, AND WHAT EACH SCREEN IS FOR</span>
+<div style="display: grid; grid-template-columns: 0.8fr 1.2fr 1.2fr 1.2fr 0.9fr; gap: 14px; align-items: stretch">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
+<div style="{{g.box}}">
+<span style="{{g.headStyle}}">{{g.name}}</span>
+<span style="font-size: 13px; color: #6B5A48; margin-top: -6px">{{g.sub}}</span>
+<sc-for list="{{g.screens}}" as="s" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 2px; padding: 9px 0; border-top: 1px solid rgba(58,37,22,0.18)">
+<span style="display: flex; justify-content: space-between; gap: 6px"><span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700; color: #2A1A0E">{{s.name}}</span><span style="{{s.tagStyle}}">{{s.tag}}</span></span>
+<span style="font-size: 14px; color: #1F1710">{{s.what}}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 30px; align-items: start">
+<!-- THE ENGINES -->
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="k" style="color: #3A2516">SEVEN THINGS THAT RUN UNDERNEATH</span>
+<span style="font-size: 14px; color: #6B5A48; margin-top: -6px">You never see these as menus. You see their effects on every screen.</span>
+<sc-for list="{{engines}}" as="e" hint-placeholder-count="7">
+<div style="display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 8px 0; border-top: 1px solid rgba(58,37,22,0.15)">
+<span style="{{e.num}}">{{e.n}}</span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 16px; font-weight: 600; color: #1F1710">{{e.t}}</span><span style="font-size: 14px; color: #3A2516">{{e.d}}</span><span style="font-size: 12px; color: #6B5A48">Shows up in: {{e.where}}</span></span>
+</div>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 26px">
+<!-- ONE CHAIN -->
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="k" style="color: #3A2516">HOW ONE THING LEADS TO ANOTHER</span>
+<div style="display: flex; flex-direction: column; gap: 0">
+<sc-for list="{{chain}}" as="c" hint-placeholder-count="7">
+<div style="display: grid; grid-template-columns: 26px 1fr; gap: 10px">
+<span style="display: flex; flex-direction: column; align-items: center"><span style="width: 12px; height: 12px; border-radius: 50%; background: #7E2A1A; margin-top: 5px; flex: none"></span><span style="{{c.line}}"></span></span>
+<span style="display: flex; flex-direction: column; padding-bottom: 10px"><span style="font-size: 15px; color: #1F1710">{{c.t}}</span><span style="font-size: 12px; color: #6B5A48">{{c.where}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+<!-- TWO WAYS TO PLAY -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px">
+<sc-for list="{{play}}" as="p" hint-placeholder-count="2">
+<div style="{{p.box}}">
+<span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; color: #2A1A0E">{{p.t}}</span>
+<sc-for list="{{p.steps}}" as="st" hint-placeholder-count="4"><span style="font-size: 14px; color: #1F1710">• {{st.t}}</span></sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- WHAT YOU CAN IGNORE -->
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 20px; border-top: 2px solid #3A2516">
+<sc-for list="{{ignore}}" as="ig" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: Cinzel, serif; font-size: 16px; font-weight: 700; color: #2A1A0E">{{ig.t}}</span>
+<span style="font-size: 14px; color: #3A2516">{{ig.d}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var GROUPS = [
+  ['Home', 'Start here every time', '#7E2A1A', [['Home', 'The morning briefing: your people read every screen and give you one line each, with what they’d do. Say yes, no, or let them decide next time.', 'core']]],
+  ['World', 'Where things are, and what they cost', '#2E5878', [
+    ['Map', 'The continent: five countries, their towns, roads and sea lanes.', 'core'],
+    ['Travel', 'Plan a route over road or sea, then press teleport and you’re there in Minecraft.', 'core'],
+    ['Markets', 'Prices as you heard them: who said so, how long ago, how sure. Rumours, spies, banks, rulers’ plans.', 'deep'],
+    ['Auctions', 'Bid in person or through agents. Building pallets, land, curiosities, and property seized in the war.', 'core']]],
+  ['Wealth', 'What you own and how it earns', '#2C5F50', [
+    ['Business', 'Everything you own: estates, town businesses, shares. Upgrades, and planning visits.', 'core'],
+    ['Counting desk', 'The money: what came in, what went out, loans, the ledger.', 'core'],
+    ['Fleet', 'Your ships, their cargoes and routes. Pirates and storms.', 'core'],
+    ['Ventures', 'Opportunities: contracts, tax farming, businesses for sale. And the alley, if you want crime.', 'optional']]],
+  ['Power', 'People, and the world’s rulers', '#6E3A5A', [
+    ['Politics', 'Who holds power where you live. The five countries run themselves; you see what’s coming and can lean on it.', 'optional'],
+    ['War', 'The front, what armies buy, the call-up, your own guards, and what a fallen city sells.', 'optional'],
+    ['Family', 'Your family tree, heir, marriages, and how free a hand each of them has.', 'core'],
+    ['Household', 'Your servants. Each one reads part of the game for you and decides as much as you let them.', 'core']]],
+  ['Letters', 'Everything that arrives', '#9A6A12', [['Letters', 'Agents’ reports, offers, threats, invitations. Trading by letter happens here.', 'not built yet'], ['In Minecraft', 'Your trade chest, item hover text, teleport. The in-game ledger menu is next.', 'next']]]
+];
+var ENGINES = [
+  ['Goods are real', 'Every good is grown or made somewhere, eaten somewhere else, and stored in between. Prices move because of shortages, not dice.', 'Markets, Business, Fleet'],
+  ['News is real', 'Everything you know came from someone, some days ago. It may be old, wrong, or a lie someone planted.', 'Markets, Home, Politics'],
+  ['Rivals play by your rules', 'Fulvius, Pomponius and Demetrios buy, sell, borrow, build and go broke, exactly as you can.', 'Markets, Auctions, Politics'],
+  ['Money is trust', 'Banks lend to houses that lend to each other. When one fails, the trouble spreads.', 'Markets, Counting desk'],
+  ['Rulers rule without you', 'Laws, offices and elections happen on their own. You get a forecast and can lean in if you want.', 'Politics, Home'],
+  ['War eats', 'Armies need grain. They close roads, call up your workers, and sell the cities they take.', 'War, Markets, Auctions'],
+  ['People act on their own', 'Family and servants make deals and mistakes, as far as the hand you give them.', 'Family, Household']
+];
+var CHAIN = [
+  ['A storm sinks Demetrios’s ship, the Kallisto.', 'You hear it on Home, six days late, from a fisherman'],
+  ['Coria runs short of wine. In two weeks the price climbs.', 'Markets'],
+  ['Demetrios can’t repay the Pisella bankers.', 'Markets · the banks'],
+  ['The bank wobbles. Pomponius, who also owes it, starts selling glass cheap.', 'Markets · rival houses'],
+  ['Pomponius puts his share of the glassworks up for sale.', 'Auctions or Ventures'],
+  ['You buy it cheap, if you saw it coming. Or Fulvius does.', 'Business · shares']
+];
+var PLAY = [
+  ['Ten minutes', ['Read the morning briefing on Home', 'Say yes or no to each of your people', 'Seal anything still waiting', 'Done. They run the house while you’re gone']],
+  ['Four hours', ['Teleport to a city and haggle in person', 'Build in Minecraft, at a place you planned to visit', 'Chase a rumour, plant one, read a stolen letter', 'Sign a war contract, marry off a son, bid at auction']]
+];
+var IGNORE = [
+  ['You can ignore politics', 'Bots hold every office and pass every law. You’ll still feel the effects, on Home and in prices.'],
+  ['You can ignore the war', 'It happens anyway. Roads close and prices move. You just don’t profit from it.'],
+  ['You can ignore crime', 'The alley in Ventures only opens if you walk into it.']
+];
+class Component extends DCLogic {
+  renderVals() {
+    var tag = { core: ['Core', '#2C5F50'], deep: ['Deep', '#2E5878'], optional: ['Optional', '#6B5A48'], 'not built yet': ['To design', '#8E2418'], next: ['Next', '#9A6A12'] };
+    return {
+      groups: GROUPS.map(function (g) { return { name: g[0], sub: g[1],
+        headStyle: 'font-family: Cinzel, serif; font-size: 22px; font-weight: 900; letter-spacing: 0.06em; color: ' + g[2],
+        box: 'display: flex; flex-direction: column; gap: 6px; padding: 16px 16px 8px; background: rgba(255,250,238,0.45); border: 1px solid rgba(58,37,22,0.22); border-top: 5px solid ' + g[2],
+        screens: g[3].map(function (s) { var t = tag[s[2]]; return { name: s[0], what: s[1], tag: t[0], tagStyle: 'flex: none; align-self: center; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 0 7px; border-radius: 8px; color: ' + t[1] + '; border: 1px solid ' + t[1] }; }) }; }),
+      engines: ENGINES.map(function (e, i) { return { n: String(i + 1), t: e[0], d: e[1], where: e[2],
+        num: 'width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: Cinzel, serif; font-size: 15px; font-weight: 700; color: #FFF6E4; background: #3A2516' }; }),
+      chain: CHAIN.map(function (c, i) { return { t: c[0], where: c[1], line: 'flex: 1; width: 2px; background: ' + (i < CHAIN.length - 1 ? 'rgba(126,42,26,0.45)' : 'transparent') }; }),
+      play: PLAY.map(function (p, i) { return { t: p[0], steps: p[1].map(function (x) { return { t: x }; }), box: 'display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: ' + (i ? 'rgba(46,88,120,0.1)' : 'rgba(44,95,80,0.1)') + '; border-left: 4px solid ' + (i ? '#2E5878' : '#2C5F50') }; }),
+      ignore: IGNORE.map(function (x) { return { t: x[0], d: x[1] }; })
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

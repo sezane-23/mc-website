@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travel — the road</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#1B1A19}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#F3D27E}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 24px 46px rgba(0,0,0,0.5)}
+.road{background-color:#2A241E;background-image:linear-gradient(rgba(22,18,14,0.38), rgba(22,18,14,0.38)), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%), url(assets/9cca28775fc0a10ecba9c20c7ee81507.jpg);background-size:auto, auto, cover;background-position:center;background-repeat:no-repeat}
+.tack{position:absolute;width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #FFE8B0 0%, #CC9A40 35%, #7A5218 75%, #4A300C 100%);box-shadow:0 3px 4px rgba(0,0,0,0.6)}
+@keyframes march{to{stroke-dashoffset:-56}}
+@keyframes journey{0%{offset-distance:0%}100%{offset-distance:100%}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px #6B4A16, 0 8px 22px rgba(232,194,106,0.25), inset 0 1px 0 rgba(255,250,230,0.7)}50%{box-shadow:0 0 0 1px #6B4A16, 0 8px 34px rgba(232,194,106,0.55), inset 0 1px 0 rgba(255,250,230,0.7)}}
+@keyframes pulse{0%{r:14;opacity:0.9}100%{r:40;opacity:0}}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #1B1A19; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">{{whereHeader}}</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
+<a href="#" style="{{n.style}}">{{n.label}}</a>
+</sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #D8C49A">THE ROAD</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Plan a journey</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<span style="font-size: 15px; padding: 6px 14px; border-radius: 999px; background: rgba(242,232,213,0.1); color: #F2E8D5; border: 1px solid rgba(242,232,213,0.25)">{{hereChip}}</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; padding: 6px 14px; border-radius: 999px; background: rgba(120,190,150,0.14); color: #BFE6CC; border: 1px solid rgba(120,190,150,0.35)"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #6FD08C; box-shadow: 0 0 8px #6FD08C; animation: blink 2.4s ease-in-out infinite"></span>Minecraft: online, standing in the forum</span>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div class="road" style="position: relative; width: 1376px; box-sizing: border-box; padding: 30px; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #232120; display: grid; grid-template-columns: 880px 1fr; gap: 30px; align-items: start">
+
+<!-- LEFT: map + legs -->
+<div style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: -12px">
+<div role="tablist" aria-label="How far" style="display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; gap: 4px; background: rgba(18,14,10,0.62); border: 1px solid rgba(242,232,213,0.22); border-radius: 999px">
+<sc-for list="{{scopes}}" as="sc" hint-placeholder-count="2"><button role="tab" onClick="{{sc.click}}" style="{{sc.style}}">{{sc.label}}</button></sc-for>
+</div>
+<span style="font-size: 15px; color: #E6D6B4; text-shadow: 0 1px 2px rgba(0,0,0,0.8)">{{scopeHint}}</span>
+</div>
+<div style="position: relative; width: 880px; height: 550px; transform: rotate(-0.3deg); box-shadow: 0 2px 2px rgba(0,0,0,0.45), 0 12px 24px rgba(0,0,0,0.4), 0 34px 70px rgba(0,0,0,0.5)">
+<sc-if value="{{landView}}" hint-placeholder-val="{{ true }}">
+<svg width="880" height="550" viewBox="0 0 1600 1000" role="img" aria-label="Map of the continent with your planned route" style="position: absolute; left: 0; top: 0; display: block">
+<image href="assets/9f5158a39938dfbadce3acb1871c8938.jpg" x="0" y="0" width="1600" height="1000"></image>
+<sc-for list="{{countries}}" as="c" hint-placeholder-count="5">
+<path d="{{c.d}}" style="{{c.style}}"></path>
+</sc-for>
+<sc-for list="{{roads}}" as="r" hint-placeholder-count="60">
+<path d="{{r.d}}" style="{{r.style}}"></path>
+</sc-for>
+<path d="{{routeD}}" style="fill: none; stroke: rgba(255,244,214,0.85); stroke-width: 14px; stroke-linecap: round; stroke-linejoin: round"></path>
+<path d="{{routeD}}" style="fill: none; stroke: #8E2418; stroke-width: 6px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 18 10; animation: march 1.6s linear infinite"></path>
+<sc-for list="{{dangers}}" as="dg" hint-placeholder-count="2">
+<g>
+<circle cx="{{dg.x}}" cy="{{dg.y}}" r="15" style="fill: #9C2E1E; stroke: #F6EAD0; stroke-width: 3px"></circle>
+<text x="{{dg.x}}" y="{{dg.ty}}" style="font-family: Spectral, serif; font-size: 22px; font-weight: 600; fill: #FFF6E4; text-anchor: middle">!</text>
+<text x="{{dg.x}}" y="{{dg.ly}}" style="font-family: Spectral, serif; font-size: 21px; font-weight: 600; fill: #7E1E12; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 6px">{{dg.label}}</text>
+</g>
+</sc-for>
+<sc-for list="{{towns}}" as="t" hint-placeholder-count="24">
+<g onClick="{{t.pick}}" style="cursor: pointer">
+<title>{{t.title}}</title>
+<circle cx="{{t.x}}" cy="{{t.y}}" r="24" style="fill: rgba(0,0,0,0)"></circle>
+<circle cx="{{t.x}}" cy="{{t.y}}" r="{{t.r}}" style="{{t.dot}}"></circle>
+<text x="{{t.lx}}" y="{{t.ly}}" style="{{t.label}}">{{t.name}}</text>
+</g>
+</sc-for>
+<sc-for list="{{badges}}" as="b" hint-placeholder-count="2">
+<g style="pointer-events: none">
+<circle cx="{{b.x}}" cy="{{b.y}}" r="14" style="fill: #3A2516; animation: pulse 1.8s ease-out infinite"></circle>
+<circle cx="{{b.x}}" cy="{{b.y}}" r="16" style="fill: #C9962A; stroke: #2A1A0E; stroke-width: 3px"></circle>
+<text x="{{b.x}}" y="{{b.ty}}" style="font-family: Cinzel, serif; font-size: 19px; font-weight: 700; fill: #2A1A0E; text-anchor: middle">{{b.n}}</text>
+</g>
+</sc-for>
+<sc-if value="{{showYou}}" hint-placeholder-val="{{ true }}">
+<g style="pointer-events: none">
+<rect x="{{you.rx}}" y="{{you.ry}}" width="52" height="52" style="fill: #F6EAD0; stroke: #2A1A0E; stroke-width: 3px"></rect>
+<image href="assets/009faa795ce967e9ad726e9f5012f930.png" x="{{you.ix}}" y="{{you.iy}}" width="44" height="44" style="image-rendering: pixelated"></image>
+<text x="{{you.x}}" y="{{you.ty}}" style="font-family: Cinzel, serif; font-size: 20px; font-weight: 700; fill: #2A1A0E; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 6px">You</text>
+</g>
+</sc-if>
+</svg>
+</sc-if>
+<sc-if value="{{oceanView}}" hint-placeholder-val="{{ false }}">
+<svg width="880" height="550" viewBox="0 0 1600 1000" role="img" aria-label="Chart of the outer sea, your continent and the lands across it" style="position: absolute; left: 0; top: 0; display: block">
+<defs><pattern id="wpaper" patternUnits="userSpaceOnUse" width="420" height="420"><image href="assets/9c7efc059b51944b3cd05c0456c88232.jpg" x="0" y="0" width="420" height="420"></image></pattern></defs>
+<rect x="0" y="0" width="1600" height="1000" style="fill: url(#wpaper)"></rect>
+<rect x="0" y="0" width="1600" height="1000" style="fill: #5E8496; opacity: 0.30"></rect>
+<sc-for list="{{world.swells}}" as="sw" hint-placeholder-count="20"><path d="{{sw.d}}" style="fill: none; stroke: rgba(30,62,84,0.20); stroke-width: 2px; stroke-linecap: round"></path></sc-for>
+<g transform="translate(40,260) scale(0.42)">
+<sc-for list="{{world.home}}" as="h" hint-placeholder-count="5"><path d="{{h.d}}" style="fill: none; stroke: rgba(30,62,84,0.18); stroke-width: 60px; stroke-linejoin: round"></path></sc-for>
+<sc-for list="{{world.home}}" as="h" hint-placeholder-count="5"><path d="{{h.d}}" style="fill: #EADBB6; stroke: #EADBB6; stroke-width: 3px"></path></sc-for>
+<sc-for list="{{world.home}}" as="h" hint-placeholder-count="5"><path d="{{h.d}}" style="{{h.tint}}"></path></sc-for>
+<path d="{{world.landPath}}" style="fill: none; stroke: rgba(255,244,214,0.9); stroke-width: 26px; stroke-linecap: round; stroke-linejoin: round"></path>
+<path d="{{world.landPath}}" style="fill: none; stroke: #8E2418; stroke-width: 11px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 30 18"></path>
+</g>
+<sc-for list="{{world.lands}}" as="w" hint-placeholder-count="5"><path d="{{w.d}}" style="fill: none; stroke: rgba(30,62,84,0.18); stroke-width: 26px; stroke-linejoin: round"></path></sc-for>
+<sc-for list="{{world.lands}}" as="w" hint-placeholder-count="5"><path d="{{w.d}}" style="{{w.fill}}"></path></sc-for>
+<path d="{{world.border}}" style="fill: none; stroke: #5A3A22; stroke-opacity: 0.6; stroke-width: 2.5px; stroke-dasharray: 10 6"></path>
+<sc-for list="{{world.labels}}" as="lb" hint-placeholder-count="7"><text x="{{lb.x}}" y="{{lb.y}}" style="{{lb.style}}">{{lb.t}}</text></sc-for>
+<sc-for list="{{world.lanes}}" as="ln" hint-placeholder-count="3"><path d="{{ln.d}}" style="{{ln.style}}"></path></sc-for>
+<sc-for list="{{world.dangers}}" as="dg" hint-placeholder-count="1">
+<g>
+<circle cx="{{dg.x}}" cy="{{dg.y}}" r="15" style="fill: #9C2E1E; stroke: #F6EAD0; stroke-width: 3px"></circle>
+<text x="{{dg.x}}" y="{{dg.ty}}" style="font-family: Spectral, serif; font-size: 22px; font-weight: 600; fill: #FFF6E4; text-anchor: middle">!</text>
+<text x="{{dg.x}}" y="{{dg.ly}}" style="font-family: Spectral, serif; font-size: 21px; font-weight: 600; fill: #7E1E12; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 6px">{{dg.label}}</text>
+</g>
+</sc-for>
+<sc-for list="{{world.homePorts}}" as="hp" hint-placeholder-count="2">
+<g><circle cx="{{hp.x}}" cy="{{hp.y}}" r="9" style="fill: #2A1A0E; stroke: #F6EAD0; stroke-width: 3px"></circle>
+<text x="{{hp.lx}}" y="{{hp.ly}}" style="font-family: 'IM Fell English', serif; font-size: 24px; fill: #2A1A0E; text-anchor: end; paint-order: stroke; stroke: rgba(246,236,212,0.9); stroke-width: 6px">{{hp.name}}</text></g>
+</sc-for>
+<sc-for list="{{world.ports}}" as="pt" hint-placeholder-count="3">
+<g onClick="{{pt.pick}}" style="cursor: pointer">
+<title>{{pt.title}}</title>
+<circle cx="{{pt.x}}" cy="{{pt.y}}" r="30" style="fill: rgba(0,0,0,0)"></circle>
+<circle cx="{{pt.x}}" cy="{{pt.y}}" r="12" style="{{pt.dot}}"></circle>
+<text x="{{pt.lx}}" y="{{pt.ly}}" style="{{pt.label}}">{{pt.name}}</text>
+</g>
+</sc-for>
+<sc-if value="{{world.hasBadge}}" hint-placeholder-val="{{ true }}">
+<g style="pointer-events: none">
+<circle cx="{{world.badge.x}}" cy="{{world.badge.y}}" r="14" style="fill: #3A2516; animation: pulse 1.8s ease-out infinite"></circle>
+<circle cx="{{world.badge.x}}" cy="{{world.badge.y}}" r="16" style="fill: #C9962A; stroke: #2A1A0E; stroke-width: 3px"></circle>
+<text x="{{world.badge.x}}" y="{{world.badge.ty}}" style="font-family: Cinzel, serif; font-size: 19px; font-weight: 700; fill: #2A1A0E; text-anchor: middle">1</text>
+</g>
+</sc-if>
+<sc-if value="{{showYou}}" hint-placeholder-val="{{ true }}">
+<g style="pointer-events: none">
+<rect x="{{world.you.rx}}" y="{{world.you.ry}}" width="52" height="52" style="fill: #F6EAD0; stroke: #2A1A0E; stroke-width: 3px"></rect>
+<image href="assets/009faa795ce967e9ad726e9f5012f930.png" x="{{world.you.ix}}" y="{{world.you.iy}}" width="44" height="44" style="image-rendering: pixelated"></image>
+<text x="{{world.you.x}}" y="{{world.you.ty}}" style="font-family: Cinzel, serif; font-size: 20px; font-weight: 700; fill: #2A1A0E; text-anchor: middle; paint-order: stroke; stroke: rgba(246,236,212,0.95); stroke-width: 6px">You</text>
+</g>
+</sc-if>
+</svg>
+</sc-if>
+<sc-if value="{{going}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 1600px; height: 1000px; transform: scale(0.55); transform-origin: 0 0; pointer-events: none">
+<div style="{{traveller}}"><img src="assets/009faa795ce967e9ad726e9f5012f930.png" alt="" style="display: block; width: 44px; height: 44px; image-rendering: pixelated; border: 4px solid #F6EAD0; box-shadow: 0 0 0 3px #2A1A0E, 0 0 30px rgba(255,220,140,0.9)"></div>
+</div>
+</sc-if>
+<div style="position: absolute; left: 18px; bottom: 16px; padding: 8px 14px; background: rgba(246,236,212,0.92); border: 1px solid rgba(58,37,22,0.35); font-size: 14px; color: #3A2516; display: flex; gap: 14px; align-items: center">
+<span>{{mapHint}}</span>
+</div>
+<span class="tack" aria-hidden="true" style="left: 10px; top: 10px"></span>
+<span class="tack" aria-hidden="true" style="right: 10px; top: 10px"></span>
+<span class="tack" aria-hidden="true" style="right: 10px; bottom: 10px"></span>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 330px; gap: 26px; align-items: start">
+<div class="paper" style="padding: 22px 24px; color: #2A2119; transform: rotate(0.4deg); display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">{{legsTitle}}</span>
+<span style="font-size: 14px; color: #6B5A48">{{legCount}}</span>
+</div>
+<sc-for list="{{legs}}" as="l" hint-placeholder-count="5">
+<div style="display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: start; padding: 8px 0; border-top: 1px solid rgba(58,37,22,0.14)">
+<span style="{{l.iconStyle}}">{{l.icon}}</span>
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span style="font-size: 16px; color: #1F1710">{{l.title}}</span>
+<span style="font-size: 14px; color: #6B5A48">{{l.how}}</span>
+<sc-if value="{{l.hasNote}}" hint-placeholder-val="{{ false }}"><span style="{{l.noteStyle}}">{{l.note}}</span></sc-if>
+</div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #3A2516; white-space: nowrap">{{l.days}}</span>
+</div>
+</sc-for>
+</div>
+
+<div class="paper" style="padding: 22px 22px; color: #2A2119; transform: rotate(-0.6deg); display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">WHILE YOU'RE AWAY</span>
+<span style="font-size: 14px; color: #6B5A48; margin-top: -6px">{{awayIntro}}</span>
+<sc-for list="{{away}}" as="w" hint-placeholder-count="6">
+<div style="{{w.row}}">
+<span style="{{w.dayStyle}}">{{w.day}}</span>
+<span style="font-size: 15px; line-height: 1.35">{{w.text}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- RIGHT: the journey -->
+<div class="paper" style="padding: 24px 24px 26px; color: #2A2119; display: flex; flex-direction: column; gap: 18px; transform: rotate(0.25deg)">
+
+<sc-if value="{{planning}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+
+<sc-if value="{{landView}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">YOUR ROUTE</span>
+<div style="display: flex; flex-direction: column; border-left: 3px solid #8E2418; margin-left: 9px; padding-left: 16px; gap: 6px">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">From</span><span style="font-size: 18px; font-weight: 600; color: #1F1710">Aquea, where you are now</span></div>
+<sc-for list="{{stopRows}}" as="sr" hint-placeholder-count="1">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">{{sr.kind}}</span><span style="font-size: 18px; font-weight: 600; color: #1F1710">{{sr.name}}</span></div>
+<button onClick="{{sr.remove}}" aria-label="{{sr.aria}}" style="width: 40px; height: 40px; border: 1px solid rgba(58,37,22,0.3); background: transparent; border-radius: 50%; font-size: 18px; color: #5A3A22; cursor: pointer">×</button>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 8px">
+<button onClick="{{toggleAdd}}" style="{{addBtn}}">{{addLabel}}</button>
+<button onClick="{{clear}}" style="min-height: 40px; padding: 6px 14px; background: transparent; color: #5A3A22; border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer">Clear</button>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">WHICH WAY</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{segMode}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{oceanView}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">ACROSS THE SEA, TO</span>
+<sc-for list="{{oDests}}" as="od" hint-placeholder-count="3">
+<button onClick="{{od.click}}" style="{{od.style}}">
+<span style="display: flex; flex-direction: column; text-align: left; flex: 1; min-width: 0"><span style="font-size: 17px; font-weight: 600; color: #1F1710">{{od.name}}</span><span style="font-size: 13px; color: #6B5A48">{{od.sub}}</span></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #3A2516; white-space: nowrap">{{od.days}}</span>
+</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">THE SHIP</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{segShip}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; color: #1F1710">{{shipNote}}</span>
+<span style="font-size: 13px; color: #6B5A48">None of your ships can cross open ocean. A round-bellied ocean ship from the shipyard could.</span>
+</div>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">GETTING THERE</span>
+<span style="font-size: 14px; color: #6B5A48">{{landLabel}}</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{segLand}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+<sc-if value="{{landView}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; color: #6B5A48">Along the coast</span>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{segSea}}" as="o" hint-placeholder-count="2"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">PROTECTION</span>
+<span style="font-size: 14px; color: #6B5A48">Guards</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{segEscort}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+<span style="font-size: 14px; color: #6B5A48">Coin you carry</span>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #5A3A22; border-radius: 3px; overflow: hidden">
+<sc-for list="{{segPurse}}" as="o" hint-placeholder-count="3"><button onClick="{{o.click}}" style="{{o.style}}">{{o.label}}</button></sc-for>
+</div>
+<span style="font-size: 13px; color: #6B5A48">{{purseNote}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #3A2516">BRING, PAPERS AND PEOPLE</span>
+<sc-for list="{{checks}}" as="ck" hint-placeholder-count="4">
+<button onClick="{{ck.click}}" style="{{ck.style}}">
+<span style="{{ck.box}}">{{ck.mark}}</span>
+<span style="display: flex; flex-direction: column; text-align: left; min-width: 0; flex: 1"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{ck.label}}</span><span style="{{ck.subStyle}}">{{ck.sub}}</span></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5A3A22; white-space: nowrap">{{ck.cost}}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 14px 0; border-top: 1px solid rgba(58,37,22,0.2); border-bottom: 1px solid rgba(58,37,22,0.2)">
+<sc-for list="{{totals}}" as="tt" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center"><span style="font-size: 13px; color: #6B5A48">{{tt.k}}</span><span style="{{tt.style}}">{{tt.v}}</span><span style="font-size: 12px; color: #6B5A48">{{tt.sub}}</span></div>
+</sc-for>
+</div>
+
+<div style="display: flex; gap: 12px; align-items: center; padding: 10px 12px; background: rgba(30,28,26,0.88); border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.6)">
+<span aria-hidden="true" style="flex: none; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #9FF0D8 0%, #2E8C7A 40%, #0E3A34 75%, #06201C 100%); box-shadow: 0 0 12px rgba(80,220,190,0.45)"></span>
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-family: VT323, monospace; font-size: 20px; line-height: 1.1; color: #FFFF55">{{arrive.title}}</span><span style="font-family: VT323, monospace; font-size: 18px; line-height: 1.1; color: #AAAAAA">{{arrive.sub}}</span></span>
+</div>
+
+<button onClick="{{teleport}}" style="{{tpStyle}}">
+<span style="font-family: Cinzel, serif; font-size: 21px; font-weight: 700; letter-spacing: 0.06em">{{tpLabel}}</span>
+<span style="font-family: Spectral, serif; font-size: 14px; font-weight: 500">{{tpSub}}</span>
+</button>
+<span style="font-size: 13px; color: #6B5A48; text-align: center; margin-top: -8px">{{tpNote}}</span>
+</div>
+</sc-if>
+
+<sc-if value="{{arrived}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; animation: fadein 0.6s ease-out both">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #2C5F50">YOU HAVE ARRIVED</span>
+<span style="font-family: Cinzel, serif; font-size: 30px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{done.title}}</span>
+<span style="font-size: 16px; color: #3A2516; margin-top: -8px">{{done.sub}}</span>
+<span style="font-size: 13px; color: #6B5A48">In Minecraft, your chat says:</span>
+<div style="display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; background: rgba(0,0,0,0.78); border-radius: 2px">
+<sc-for list="{{done.chat}}" as="m" hint-placeholder-count="5">
+<span style="font-family: VT323, monospace; font-size: 20px; line-height: 1.15; color: #FFFFFF; text-shadow: 2px 2px 0 #3F3F3F"><span style="{{m.tagStyle}}">{{m.tag}}</span> <span style="{{m.textStyle}}">{{m.text}}</span></span>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<button style="min-height: 48px; background: #3A2516; color: #FFF6E4; border: none; border-radius: 3px; font-family: Cinzel, serif; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer">{{done.market}}</button>
+<button onClick="{{reset}}" style="min-height: 44px; background: transparent; color: #2A1A0E; border: 1px solid #5A3A22; border-radius: 3px; font-family: Spectral, serif; font-size: 15px; cursor: pointer">Plan another journey</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var D = {"places":[[0,"Sabino","capital",1418,882,0,1],[1,"Fidanum","capital",170,406,1,1],[2,"Aquea","capital",758,714,2,1],[3,"Durona","capital",870,378,3,1],[4,"Pisella","capital",298,738,4,1],[5,"Coria","city",1298,202,3,1],[6,"Melulona","city",1118,278,3,1],[7,"Lareanum","city",958,702,2,1],[8,"Sabium","city",518,258,1,1],[9,"Seroentum","town",1502,678,0,1],[10,"Cluona","town",638,734,2,1],[11,"Ferum","town",858,662,2,1],[12,"Casinica","town",426,206,1,1],[13,"Galorae","town",1234,874,0,1],[14,"Nebaella","town",138,630,4,1],[15,"Sorae","town",342,342,1,1],[16,"Seriona","town",146,510,1,0],[17,"Lavica","town",1014,306,3,1],[18,"Casora","town",1454,774,0,0],[19,"Galorulum","town",530,694,2,0],[20,"Soriula","town",442,530,4,0],[21,"Falorona","town",602,510,2,0],[22,"Briulum","town",1242,490,3,0],[23,"Aquanentum","town",1298,790,0,0],[24,"Cesulum","village",810,702,2,0],[25,"Cameum","village",782,378,3,0],[26,"Venanum","village",354,738,4,0],[27,"Sorino","village",1358,266,3,0],[28,"Veraentum","village",1322,890,0,0],[29,"Nebara","village",910,670,2,0],[30,"Celanona","village",1018,754,2,0],[31,"Pisonara","village",586,738,2,0],[32,"Larenula","village",922,374,3,0],[33,"Delaia","village",806,670,2,0],[34,"Ravacum","village",1198,834,0,0],[35,"Balona","village",370,710,4,0],[36,"Antino","village",1322,274,3,0],[37,"Lariula","village",930,638,2,0],[38,"Lariulum","village",1314,846,0,0],[39,"Fidera","village",898,622,2,0],[40,"Verona","village",958,390,3,0],[41,"Venania","village",1406,806,0,0],[42,"Deloanum","village",718,622,2,0],[43,"Salulia","village",442,670,4,0],[44,"Tareara","village",738,646,2,0],[45,"Ureaona","village",474,690,4,0],[46,"Tibonula","village",558,638,2,0],[47,"Arvino","village",1386,746,0,0],[48,"Arverula","village",1134,370,3,0],[49,"Tusonella","village",530,606,2,0],[50,"Palia","village",494,622,4,0],[51,"Vinuanum","village",690,602,2,0],[52,"Saliara","village",458,594,4,0],[53,"Novulum","village",1350,674,0,0],[54,"Laronanum","village",198,618,4,0],[55,"Cluoracum","village",1174,398,3,0],[56,"Celorium","village",1290,302,3,0],[57,"Tarella","village",994,646,2,0],[58,"Arvania","village",414,638,4,0],[59,"Narae","village",1354,622,0,0],[60,"Laruella","village",1378,694,0,0],[61,"Saboia","village",1134,422,3,0],[62,"Veriula","village",1206,782,0,0],[63,"Durinulum","village",954,610,2,0],[64,"Aquona","village",1066,398,3,0],[65,"Deleracum","village",446,274,1,0],[66,"Helenanum","village",1478,262,0,0],[67,"Arderentum","village",990,478,3,0],[68,"Caluica","village",1078,750,2,0],[69,"Naria","village",510,338,1,0],[70,"Lisorula","village",1066,510,3,0],[71,"Ardarulum","village",1486,342,0,0]],"roads":[[13,23,1266,832,"road"],[8,12,472,233,"road"],[9,18,1477,725,"road"],[6,17,1066,292,"road"],[2,11,799,672,"road"],[0,18,1433,827,"road"],[10,19,583,716,"road"],[14,16,140,570,"road"],[0,23,1360,833,"road"],[20,21,523,524,"road"],[1,15,254,369,"road"],[19,20,487,612,"road"],[4,14,219,683,"road"],[8,15,424,288,"road"],[5,6,1206,235,"road"],[2,19,643,710,"road"],[4,19,410,697,"road"],[6,22,1177,386,"road"],[15,16,247,429,"road"],[3,6,1002,347,"road"],[3,11,869,520,"road"],[22,23,1262,642,"road"],[3,7,923,538,"road"],[24,33,807,686,"track"],[25,3,826,377,"track"],[26,35,362,724,"track"],[27,36,1340,269,"track"],[28,38,1318,868,"track"],[29,37,919,654,"track"],[30,68,1048,752,"track"],[31,10,612,732,"track"],[32,40,940,382,"track"],[34,62,1201,808,"track"],[37,39,914,630,"track"],[41,18,1430,791,"track"],[42,44,728,634,"track"],[43,45,458,680,"track"],[46,49,545,621,"track"],[47,60,1381,720,"track"],[48,55,1154,385,"track"],[49,50,512,613,"track"],[51,42,704,613,"track"],[52,50,476,608,"track"],[53,60,1364,683,"track"],[54,14,168,626,"track"],[55,61,1154,410,"track"],[56,36,1305,287,"track"],[57,63,974,628,"track"],[58,43,429,653,"track"],[59,53,1351,648,"track"],[63,37,942,624,"track"],[64,61,1101,408,"track"],[65,12,435,240,"track"],[67,40,975,434,"track"],[69,8,512,298,"track"],[70,61,1101,467,"track"],[2,7,861,752,"sea"],[3,17,926,310,"sea"],[4,10,469,845,"sea"],[5,3,1028,153,"sea"],[7,10,805,788,"sea"],[12,3,686,194,"sea"],[13,11,999,851,"sea"],[13,2,961,899,"sea"]],"countries":[["Helerensia","#B5652E","M1298,911 L1277,910 L1250,877 L1238,878 L1226,888 L1206,881 L1194,882 L1182,866 L1146,847 L1147,826 L1138,813 L1126,805 L1110,802 L1094,816 L1059,814 L1061,806 L1076,786 L1106,760 L1115,746 L1112,730 L1115,690 L1111,674 L1097,654 L1096,642 L1106,633 L1134,632 L1151,622 L1174,594 L1234,536 L1250,516 L1278,495 L1290,474 L1342,429 L1370,416 L1422,414 L1431,394 L1429,382 L1440,350 L1441,330 L1456,302 L1451,274 L1462,261 L1486,261 L1495,270 L1505,294 L1518,310 L1516,318 L1500,334 L1501,350 L1511,370 L1513,402 L1526,426 L1540,434 L1548,450 L1547,482 L1529,498 L1528,546 L1512,586 L1512,662 L1506,682 L1516,706 L1512,718 L1516,730 L1511,750 L1514,762 L1489,790 L1487,810 L1463,842 L1463,858 L1450,875 L1434,883 L1418,885 L1406,897 L1383,874 L1374,873 L1350,887 L1318,893 L1307,906 L1298,911Z"],["Caleonia","#6F7E3A","M138,623 L115,622 L118,606 L108,590 L112,570 L105,558 L100,534 L132,498 L137,482 L150,468 L170,467 L183,458 L183,446 L169,430 L166,406 L153,402 L144,390 L155,362 L158,341 L174,330 L190,313 L214,307 L222,309 L234,297 L246,293 L262,297 L298,289 L308,302 L306,323 L314,329 L326,330 L334,338 L342,339 L349,330 L352,314 L367,310 L389,290 L386,266 L377,266 L368,286 L358,296 L350,299 L335,282 L326,277 L310,273 L298,281 L294,279 L301,258 L338,246 L362,257 L367,254 L374,232 L370,228 L354,227 L351,222 L353,218 L366,215 L382,219 L402,201 L422,203 L434,191 L454,211 L491,222 L498,243 L531,262 L559,322 L554,346 L518,353 L494,371 L482,374 L474,383 L454,385 L438,395 L422,393 L402,415 L362,429 L298,496 L278,493 L272,498 L259,526 L245,538 L242,559 L198,612 L186,618 L150,616 L138,623Z M203,362 L207,358 L206,350 L186,340 L185,346 L193,358 L203,362Z"],["Vararia","#3F6C86","M1058,810 L1050,810 L1047,786 L1029,774 L1019,758 L986,756 L978,752 L971,714 L947,694 L906,674 L902,675 L894,691 L870,697 L864,690 L863,670 L858,664 L846,668 L830,691 L806,707 L754,717 L749,722 L746,737 L722,725 L682,744 L662,729 L654,728 L630,739 L598,737 L578,740 L562,752 L542,737 L534,737 L526,743 L508,706 L515,694 L512,522 L518,494 L750,492 L774,508 L862,591 L910,604 L1086,609 L1091,614 L1092,638 L1097,654 L1111,674 L1115,690 L1112,730 L1116,742 L1108,758 L1076,786 L1058,810Z M530,766 L524,762 L526,746 L536,758 L530,766Z"],["Ostoronia","#8A4A6E","M1102,635 L1094,637 L1091,614 L1082,608 L978,608 L962,604 L910,604 L862,591 L774,508 L750,492 L514,491 L492,470 L488,458 L477,446 L475,426 L461,406 L461,390 L518,353 L554,346 L562,322 L570,320 L598,324 L618,321 L634,330 L645,318 L650,318 L674,339 L706,345 L726,368 L742,353 L774,352 L782,358 L782,374 L790,375 L826,349 L834,348 L854,356 L862,374 L866,375 L878,359 L890,368 L906,367 L926,355 L933,334 L942,325 L950,325 L958,332 L982,335 L997,318 L1042,284 L1061,262 L1098,260 L1118,251 L1128,234 L1162,205 L1210,196 L1238,206 L1246,188 L1274,176 L1286,177 L1292,182 L1297,198 L1313,218 L1330,218 L1334,221 L1347,238 L1358,263 L1370,263 L1382,255 L1391,262 L1391,278 L1394,279 L1402,269 L1418,264 L1450,278 L1456,302 L1441,330 L1440,350 L1429,382 L1431,394 L1422,414 L1370,416 L1342,429 L1290,474 L1278,495 L1250,516 L1234,536 L1174,594 L1151,622 L1138,631 L1102,635Z"],["Peruaria","#B08A2A","M178,795 L162,792 L152,770 L151,750 L170,726 L161,710 L169,690 L150,680 L130,659 L129,650 L134,638 L124,626 L150,616 L186,618 L195,614 L235,570 L243,558 L245,538 L259,526 L274,496 L282,493 L298,496 L358,432 L402,415 L422,393 L438,395 L454,386 L458,387 L461,406 L475,426 L477,446 L516,498 L512,522 L515,694 L508,706 L524,742 L522,766 L506,768 L494,763 L474,761 L466,775 L454,779 L438,775 L426,783 L414,784 L406,778 L406,770 L403,766 L390,772 L370,773 L361,766 L354,746 L346,745 L334,755 L318,756 L310,751 L306,739 L302,738 L286,748 L250,745 L241,754 L238,767 L222,783 L210,788 L190,789 L178,795Z"]]};
+var START = 2;
+var SPOKEN = { 1: true, 2: true };
+var LANG = ['Helerensian', 'Greek', 'Latin', 'Ostoronian', 'Peruarian'];
+var WORLD = {"n": "M991,461 L990,450 L986,438 L983,426 L978,413 L985,404 L990,394 L1002,388 L1010,380 L1021,375 L1024,366 L1030,358 L1029,346 L1030,335 L1028,321 L1031,312 L1033,300 L1031,286 L1028,269 L1030,257 L1034,246 L1038,235 L1042,224 L1051,221 L1055,209 L1058,195 L1060,180 L1061,163 L1067,154 L1077,150 L1085,143 L1093,138 L1101,132 L1111,132 L1120,129 L1131,131 L1142,137 L1152,137 L1160,134 L1166,123 L1171,109 L1179,105 L1188,102 L1197,102 L1206,106 L1215,106 L1225,119 L1232,114 L1241,125 L1250,134 L1257,145 L1265,155 L1272,162 L1279,166 L1286,164 L1293,175 L1299,185 L1304,198 L1308,217 L1313,221 L1317,232 L1323,234 L1327,244 L1332,249 L1337,251 L1343,251 L1350,250 L1360,240 L1370,232 L1381,223 L1386,230 L1393,231 L1396,243 L1401,249 L1408,252 L1415,254 L1424,253 L1432,256 L1436,264 L1442,270 L1450,273 L1456,279 L1464,282 L1469,289 L1470,301 L1475,308 L1470,324 L1477,330 L1481,338 L1493,340 L1500,346 L1508,353 L1517,359 L1521,368 L1529,376 L1537,384 L1544,393 L1549,403 L1548,415 L1546,427 L1538,440 L1539,451 L1539,462 L1539,462 L1539,461 L1520,472 L1501,484 L1482,490 L1464,490 L1445,482 L1426,472 L1407,464 L1388,461 L1370,462 L1351,465 L1332,464 L1313,459 L1295,450 L1276,443 L1257,440 L1238,446 L1220,457 L1201,470 L1182,479 L1163,482 L1144,481 L1126,478 L1107,477 L1088,481 L1069,487 L1051,492 L1032,492 L1013,484 L994,472Z", "s": "M1548,472 L1554,482 L1550,494 L1551,505 L1553,516 L1551,527 L1561,540 L1556,551 L1556,562 L1556,574 L1553,585 L1550,596 L1551,608 L1557,623 L1563,638 L1572,655 L1573,669 L1573,683 L1571,696 L1562,705 L1553,713 L1547,724 L1542,734 L1535,743 L1520,744 L1508,747 L1499,753 L1488,755 L1484,765 L1480,776 L1473,782 L1463,784 L1452,784 L1435,774 L1430,782 L1420,780 L1413,784 L1409,793 L1402,798 L1394,798 L1387,800 L1382,810 L1378,819 L1374,833 L1367,837 L1359,836 L1350,832 L1340,821 L1331,814 L1325,818 L1319,821 L1312,822 L1305,824 L1299,828 L1292,822 L1286,836 L1279,845 L1272,848 L1265,861 L1258,860 L1250,863 L1243,852 L1236,856 L1227,866 L1218,876 L1210,876 L1200,887 L1191,890 L1184,885 L1174,887 L1168,876 L1160,876 L1154,865 L1147,859 L1145,839 L1144,820 L1142,803 L1134,803 L1128,796 L1121,794 L1114,790 L1110,781 L1108,769 L1104,759 L1099,752 L1090,752 L1089,740 L1083,734 L1080,726 L1076,717 L1072,710 L1068,702 L1059,699 L1046,699 L1036,695 L1034,685 L1036,673 L1041,660 L1044,650 L1048,640 L1047,631 L1056,620 L1060,611 L1067,600 L1069,592 L1068,583 L1056,577 L1051,569 L1044,559 L1046,548 L1039,537 L1035,526 L1026,516 L1022,505 L1004,494 L995,483 L994,472 L994,472 L994,472 L1013,484 L1032,492 L1051,492 L1069,487 L1088,481 L1107,477 L1126,478 L1144,481 L1163,482 L1182,479 L1201,470 L1220,457 L1238,446 L1257,440 L1276,443 L1295,450 L1313,459 L1332,464 L1351,465 L1370,462 L1388,461 L1407,464 L1426,472 L1445,482 L1464,490 L1482,490 L1501,484 L1520,472 L1539,461Z", "border": "M994,472 L1013,484 L1032,492 L1051,492 L1069,487 L1088,481 L1107,477 L1126,478 L1144,481 L1163,482 L1182,479 L1201,470 L1220,457 L1238,446 L1257,440 L1276,443 L1295,450 L1313,459 L1332,464 L1351,465 L1370,462 L1388,461 L1407,464 L1426,472 L1445,482 L1464,490 L1482,490 L1501,484 L1520,472 L1539,461", "harb": {"Thessara": [1051, 221], "Port Kesh": [1044, 559], "Mirene": [1144, 820]}, "isles": ["M855,760 L855,761 L853,762 L856,764 L857,766 L857,768 L859,771 L858,773 L854,773 L850,772 L847,773 L844,773 L842,773 L840,775 L838,777 L835,776 L832,776 L829,777 L826,778 L823,776 L819,777 L817,775 L816,773 L817,770 L813,770 L811,769 L808,767 L806,766 L803,764 L808,762 L810,760 L811,758 L811,757 L816,756 L818,755 L820,755 L824,755 L825,755 L823,752 L822,749 L822,747 L824,744 L826,742 L829,742 L832,742 L835,740 L839,739 L842,740 L845,742 L848,742 L850,744 L853,745 L856,745 L860,746 L859,749 L858,752 L856,754 L854,756 L851,758 L854,759Z", "M886,786 L888,788 L886,789 L884,791 L881,791 L880,792 L879,794 L876,793 L874,793 L871,792 L870,792 L869,792 L867,792 L865,793 L861,794 L856,795 L855,793 L853,791 L854,789 L854,788 L854,786 L857,785 L857,783 L858,782 L859,781 L862,781 L864,781 L865,780 L867,779 L868,777 L870,777 L872,777 L875,776 L877,777 L878,779 L878,781 L880,781 L883,782 L885,783 L886,784Z", "M813,790 L815,791 L814,793 L813,794 L813,796 L811,797 L809,797 L807,797 L805,799 L803,798 L801,797 L799,796 L800,793 L801,792 L801,791 L798,790 L798,789 L797,787 L798,785 L799,784 L801,783 L802,781 L805,781 L807,784 L808,784 L809,786 L810,786 L812,787 L814,787 L815,788Z"], "far": "M1543,120 L1543,123 L1548,126 L1546,128 L1543,131 L1541,133 L1543,137 L1536,138 L1530,138 L1523,138 L1519,138 L1512,135 L1511,138 L1508,142 L1505,144 L1500,143 L1495,144 L1491,144 L1487,142 L1483,141 L1478,141 L1476,138 L1477,134 L1476,132 L1476,130 L1475,128 L1471,127 L1463,127 L1463,124 L1465,122 L1467,120 L1464,118 L1468,116 L1465,114 L1463,111 L1463,108 L1469,107 L1466,103 L1467,100 L1467,95 L1472,93 L1475,89 L1482,90 L1490,94 L1496,97 L1500,97 L1504,100 L1507,102 L1510,103 L1512,105 L1512,109 L1516,108 L1522,107 L1525,108 L1528,109 L1531,110 L1532,112 L1528,115 L1532,116 L1537,118Z"};
+var OCEAN = {
+  'Mirene': { from: 'Sabino', harbour: 0, lane: 'M636,630 Q720,730 835,760 Q1000,850 1144,820', wait: 4, ship: 'Pelagia', berth: 140, charter: 1100,
+    legs: [['Sabino', 'the Fortunate Isles', 7, 'Pirates lurk around the isles', 0.08], ['the Fortunate Isles', 'Mirene', 9, '', 0.03]],
+    region: 'Mirenian League', lang: 'Mirenian', guide: 'Ama', rough: 'Pirates shadowed you past the isles. You lost two days but no cargo.', danger: [742, 716, 'Pirates'], sells: 'purple dye, cedar, spices' },
+  'Port Kesh': { from: 'Sabino', harbour: 0, lane: 'M636,630 Q840,560 1044,559', wait: 6, ship: 'Fortunata', berth: 120, charter: 950,
+    legs: [['Sabino', 'Port Kesh', 14, 'No land in sight for twelve days', 0.12]],
+    region: 'Mirenian League', lang: 'Mirenian', guide: 'Ama', rough: 'A storm caught you in the deep ocean. You lost two days.', danger: [842, 578, 'Open sea'], sells: 'ivory and incense' },
+  'Thessara': { from: 'Coria', harbour: 5, lane: 'M585,345 C700,250 900,170 1051,221', wait: 3, ship: 'Boreas', berth: 180, charter: 1300,
+    legs: [['Coria', 'Thessara', 22, 'Northern gales this time of year', 0.14]],
+    region: 'Kingdom of Thessar', lang: 'Thessarian', guide: 'Brannoc', rough: 'Gales off the north cape. You lost two days but no cargo.', danger: [822, 206, 'Gales'], sells: 'amber, furs and tin' }
+};
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var st = this.state || {};
+    var g = function (k, d) { return st[k] === undefined ? d : st[k]; };
+    var stops = g('stops', [3]), mode = g('mode', 'fast'), land = g('land', 'horse'), sea = g('sea', 'passage');
+    var escort = g('escort', 1), purse = g('purse', 1), goods = g('goods', true), papers = g('papers', false);
+    var interp = g('interp', true), fwd = g('fwd', true), phase = g('phase', 'plan'), addMode = g('addMode', false);
+    var scope = g('scope', 'land'), odest = g('odest', 'Mirene'), oship = g('oship', 'berth'), stores = g('stores', true), steward = g('steward', true), ointerp = g('ointerp', true);
+    var ocean = scope === 'ocean', O = OCEAN[odest];
+    if (ocean) { stops = [O.harbour]; fwd = false; }
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var set = function (o) { return function () { if ((self.state || {}).phase && (self.state || {}).phase !== 'plan') return; put(o); }; };
+
+    var P = {};
+    D.places.forEach(function (p) { P[p[0]] = { id: p[0], name: p[1], tier: p[2], x: p[3], y: p[4], c: p[5], port: p[6] }; });
+
+    // ---------------- the road network
+    var qlen = function (ax, ay, cx, cy, bx, by) {
+      var L = 0, px = ax, py = ay;
+      for (var i = 1; i <= 16; i++) { var t = i / 16, u = 1 - t; var x = u * u * ax + 2 * u * t * cx + t * t * bx, y = u * u * ay + 2 * u * t * cy + t * t * by; L += Math.hypot(x - px, y - py); px = x; py = y; }
+      return L;
+    };
+    var SPEED = { foot: 40, horse: 75, cart: 55 };
+    var LANDCOST = { foot: 0, horse: 12, cart: 20 };
+    var ESC = [1, 0.5, 0.2], ESC_COST = [0, 14, 40], ESC_MOUTHS = [1, 3, 7];
+    var adj = {}, edges = [];
+    D.roads.forEach(function (r, i) {
+      var a = P[r[0]], b = P[r[1]], kind = r[4];
+      var L = qlen(a.x, a.y, r[2], r[3], b.x, b.y), days, cost, risk, danger = '';
+      if (kind === 'sea') {
+        days = L / (sea === 'passage' ? 120 : 150);
+        cost = L * (sea === 'passage' ? 0.1 : 0.32);
+        risk = 0.015 * days;
+        if ((r[0] === 12 && r[1] === 3) || (r[0] === 3 && r[1] === 12)) { risk += 0.22; danger = 'Pirates sighted on this lane'; }
+        else if (r[0] === 13 || r[1] === 13) { risk += 0.06; danger = 'Autumn storms in the south'; }
+      } else {
+        var sp = SPEED[land] * (kind === 'track' ? (land === 'cart' ? 0.55 : 0.75) : 1);
+        if (goods && land !== 'cart') sp *= 0.8;
+        days = L / sp;
+        cost = days * LANDCOST[land];
+        var lawless = kind === 'road' && (a.c === 3 || b.c === 3);
+        risk = days * ((kind === 'track' ? 0.025 : 0.012) + (lawless ? 0.03 : 0));
+        if (lawless) danger = 'Bandits on the tyrant’s roads';
+        risk *= ESC[escort] * (goods ? 1.2 : 1);
+      }
+      var e = { i: i, a: r[0], b: r[1], cx: r[2], cy: r[3], kind: kind, days: days, cost: cost, risk: Math.min(risk, 0.6), danger: danger };
+      edges.push(e);
+      (adj[r[0]] = adj[r[0]] || []).push({ to: r[1], e: e });
+      (adj[r[1]] = adj[r[1]] || []).push({ to: r[0], e: e });
+    });
+    var weight = function (e) {
+      if (mode === 'fast') return e.days + (e.kind === 'sea' && sea === 'passage' ? 0.3 : 0);
+      if (mode === 'safe') return e.days * (1 + 6 * e.risk / Math.max(e.days, 0.2)) + 30 * e.risk;
+      return e.cost + e.days * 3 * ESC_MOUTHS[escort] + e.days * ESC_COST[escort];
+    };
+    var route = function (s, t) {
+      var dist = {}, prev = {}, done = {};
+      dist[s] = 0;
+      for (;;) {
+        var u = null, best = Infinity;
+        for (var k in dist) if (!done[k] && dist[k] < best) { best = dist[k]; u = +k; }
+        if (u === null) return null;
+        if (u === t) break;
+        done[u] = true;
+        (adj[u] || []).forEach(function (n) {
+          var nd = dist[u] + weight(n.e);
+          if (dist[n.to] === undefined || nd < dist[n.to]) { dist[n.to] = nd; prev[n.to] = { from: u, e: n.e }; }
+        });
+      }
+      var path = [], v = t;
+      while (v !== s) { var pr = prev[v]; path.unshift({ from: pr.from, to: v, e: pr.e }); v = pr.from; }
+      return path;
+    };
+
+    // ---------------- build the journey
+    var seq = [START].concat(stops), steps = [];
+    for (var si = 0; si + 1 < seq.length; si++) {
+      var part = route(seq[si], seq[si + 1]) || [];
+      part.forEach(function (p, j) { p.stopEnd = j === part.length - 1 ? si + 1 : 0; });
+      steps = steps.concat(part);
+    }
+    var dest = stops.length ? P[stops[stops.length - 1]] : null;
+    var totDays = 0, travelCost = 0, survive = 1, foreignDays = 0, borders = 0, needsPapers = false, lastSea = false;
+    var legs = [], dangers = [], routeD = '';
+    var fmt = function (d) {
+      var h = Math.max(0.5, Math.round(d * 2) / 2), w = Math.floor(h), half = h - w > 0;
+      return (w ? w : '') + (half ? '½' : '') + (h <= 1 ? ' day' : ' days');
+    };
+    var LANDNAME = { foot: 'on foot', horse: 'on horseback', cart: 'by carriage' };
+    steps.forEach(function (s, idx) {
+      var e = s.e, A = P[s.from], B = P[s.to], fwdDir = e.a === s.from;
+      routeD += (idx === 0 ? 'M' + A.x + ',' + A.y : '') + ' Q' + e.cx + ',' + e.cy + ' ' + B.x + ',' + B.y;
+      var wait = (e.kind === 'sea' && sea === 'passage' && !lastSea) ? 1 : 0;
+      lastSea = e.kind === 'sea';
+      var d = e.days + wait;
+      totDays += d; travelCost += e.cost; survive *= (1 - e.risk);
+      if (!SPOKEN[B.c] || !SPOKEN[A.c]) foreignDays += d;
+      var note = '', noteKind = '';
+      if (A.c !== B.c) { borders++; note = 'Border: you enter ' + D.countries[B.c][0] + ', toll 12 '; noteKind = 'info'; if (B.c === 3) needsPapers = true; }
+      if (B.c === 3 || A.c === 3) needsPapers = true;
+      if (wait) { note = (note ? note + '. ' : '') + 'Wait about a day in ' + A.name + ' for a ship'; noteKind = noteKind || 'info'; }
+      if (e.danger) {
+        note = (note ? note + '. ' : '') + e.danger + (e.kind === 'sea' ? '' : (escort ? ', your guards help' : ', and you have no guards'));
+        noteKind = 'bad';
+        var t = 0.5, u = 0.5;
+        dangers.push({ x: Math.round(u * u * A.x + 2 * u * t * e.cx + t * t * B.x), y: Math.round(u * u * A.y + 2 * u * t * e.cy + t * t * B.y), label: e.kind === 'sea' ? (e.risk > 0.15 ? 'Pirates' : 'Storms') : 'Bandits' });
+      }
+      var how = e.kind === 'sea' ? (sea === 'passage' ? 'By sea, on a merchant’s ship' : 'By sea, on a hired boat') : (e.kind === 'track' ? 'Rough track, ' : 'Paved road, ') + (e.kind === 'sea' ? '' : LANDNAME[land]);
+      legs.push({ icon: e.kind === 'sea' ? '≈' : (e.kind === 'track' ? '∴' : '═'), title: A.name + ' to ' + B.name + (s.stopEnd ? (s.stopEnd === stops.length ? '' : ' (stop ' + s.stopEnd + ')') : ''),
+        how: how, days: fmt(d), hasNote: !!note, note: note,
+        iconStyle: 'width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; color: #FFF6E4; background: ' + (e.kind === 'sea' ? '#2E5878' : '#5A3A22'),
+        noteStyle: 'font-size: 13px; color: ' + (noteKind === 'bad' ? '#9C2E1E; font-weight: 600' : '#2E5878') });
+    });
+    totDays = Math.max(totDays, 0);
+    var mouths = ESC_MOUTHS[escort];
+    var food = totDays * 3 * mouths;
+    var guardCost = totDays * ESC_COST[escort];
+    var interpCost = interp ? foreignDays * 9 : 0;
+    var tolls = borders * 12;
+    var paperCost = needsPapers && papers ? 45 : 0;
+    var lettersHeld = Math.round(totDays * 0.7);
+    var fwdCost = fwd ? lettersHeld * 2 : 0;
+    var risk = 1 - survive;
+    if (needsPapers && !papers) risk = 1 - (1 - risk) * 0.85;
+    if (foreignDays > 0 && !interp) risk = 1 - (1 - risk) * 0.96;
+    var total = Math.round(travelCost + food + guardCost + interpCost + tolls + paperCost + fwdCost);
+    var D2 = Math.round(totDays);
+    var riskWord = risk < 0.08 ? 'Low' : risk < 0.2 ? 'Some' : 'High';
+    var riskColor = risk < 0.08 ? '#2C5F50' : risk < 0.2 ? '#9A6A12' : '#9C2E1E';
+
+    // ---------------- the ocean crossing (after the land leg to the harbour)
+    var spread = 0, oDays = {};
+    Object.keys(OCEAN).forEach(function (k) { var o = OCEAN[k], t = (oship === 'berth' ? o.wait : 1) + (o.legs.length - 1); o.legs.forEach(function (l) { t += l[2] * (oship === 'charter' ? 0.9 : 1); }); oDays[k] = t; });
+    if (ocean) {
+      var owait = oship === 'berth' ? O.wait : 1, seaDays = 0, surviveO = 1;
+      legs.push({ icon: '\u2693', title: 'Wait in ' + O.from + (oship === 'berth' ? ' for the ' + O.ship + ' to sail' : ' while your ship takes on stores'),
+        how: oship === 'berth' ? 'A berth on an ocean merchantman' : 'You charter the whole ship', days: fmt(owait), hasNote: false, note: '',
+        iconStyle: 'width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; color: #FFF6E4; background: #1E3E5A', noteStyle: '' });
+      O.legs.forEach(function (l, k) {
+        var d = l[2] * (oship === 'charter' ? 0.9 : 1) + (k ? 1 : 0); seaDays += d;
+        var r = l[4] * (stores ? 1 : 1.8) * (oship === 'charter' ? 0.85 : 1); surviveO *= 1 - r;
+        legs.push({ icon: '\u2248', title: (k ? 'On from ' + l[0] : l[0]) + ' to ' + l[1], how: 'Open ocean' + (k ? ', after a day taking on water' : ''),
+          days: fmt(d), hasNote: !!l[3], note: l[3] + (l[3] && !stores ? '. Your stores are thin.' : ''),
+          iconStyle: 'width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; color: #FFF6E4; background: #1E3E5A',
+          noteStyle: 'font-size: 13px; color: #9C2E1E; font-weight: 600' });
+      });
+      spread = Math.round(seaDays * 0.3);
+      totDays = totDays + owait + seaDays;
+      total = total + (oship === 'berth' ? O.berth : O.charter) + (stores ? 60 : 0) + (ointerp ? 70 : 0) + Math.round((owait + seaDays) * 3);
+      risk = 1 - (1 - risk) * surviveO * (ointerp ? 1 : 0.95);
+      D2 = Math.round(totDays);
+      lettersHeld = Math.round(totDays * 0.7);
+      riskWord = risk < 0.08 ? 'Low' : risk < 0.2 ? 'Some' : 'High';
+      riskColor = risk < 0.08 ? '#2C5F50' : risk < 0.2 ? '#9A6A12' : '#9C2E1E';
+    }
+
+    // ---------------- map layers
+    var countries = D.countries.map(function (c) { return { d: c[2], style: 'fill: ' + c[1] + '; fill-opacity: 0.10; stroke: ' + c[1] + '; stroke-opacity: 0.55; stroke-width: 2.5px; stroke-dasharray: 10 6' }; });
+    var used = {}; steps.forEach(function (s) { used[s.e.i] = true; });
+    var roads = edges.map(function (e) {
+      var A = P[e.a], B = P[e.b];
+      return { d: 'M' + A.x + ',' + A.y + ' Q' + e.cx + ',' + e.cy + ' ' + B.x + ',' + B.y,
+        style: 'fill: none; stroke: ' + (e.kind === 'sea' ? '#2E5878' : '#5A3A22') + '; stroke-opacity: ' + (e.kind === 'track' ? 0.35 : 0.5) + '; stroke-width: ' + (e.kind === 'track' ? 2 : 3) + 'px; stroke-dasharray: ' + (e.kind === 'sea' ? '10 8' : e.kind === 'track' ? '4 6' : 'none') };
+    });
+    var stopIndex = {}; stops.forEach(function (id, i) { stopIndex[id] = i + 1; });
+    var TIERS = { capital: 9, city: 7, town: 5.5 };
+    var towns = D.places.filter(function (p) { return TIERS[p[2]]; }).map(function (p) {
+      var pl = P[p[0]], onRoute = stopIndex[pl.id], here = pl.id === START;
+      var right = pl.x < 1400;
+      return { x: pl.x, y: pl.y, r: TIERS[pl.tier] * 1.6, name: pl.name, title: pl.id === START ? 'Aquea — you are here' : 'Travel to ' + pl.name,
+        lx: pl.x + (right ? 16 : -16), ly: pl.y + 7,
+        dot: 'fill: ' + (pl.tier === 'capital' ? '#8E2418' : '#2A1A0E') + '; stroke: #F6EAD0; stroke-width: 3px',
+        label: 'font-family: "IM Fell English", serif; font-size: ' + (pl.tier === 'town' ? 22 : 26) + 'px; fill: ' + (onRoute ? '#7E1E12' : '#2A1A0E') + '; font-weight: ' + (onRoute ? 700 : 400) + '; text-anchor: ' + (right ? 'start' : 'end') + '; paint-order: stroke; stroke: rgba(246,236,212,0.9); stroke-width: 6px',
+        pick: function () {
+          var s0 = self.state || {};
+          if ((s0.phase || 'plan') !== 'plan' || pl.id === START) return;
+          var cur = (s0.stops || [3]).slice();
+          var at = cur.indexOf(pl.id);
+          if (at >= 0) { cur.splice(at, 1); }
+          else if (s0.addMode && cur.length) { cur.splice(cur.length - 1, 0, pl.id); }
+          else if (cur.length) { cur[cur.length - 1] = pl.id; }
+          else cur = [pl.id];
+          put({ stops: cur.slice(0, 4), addMode: false });
+        } };
+    });
+    var badges = stops.map(function (id, i) { var pl = P[id]; return { x: pl.x, y: pl.y - 34, ty: pl.y - 27, n: String(i + 1) }; });
+    var youAt = phase === 'arrived' && dest ? dest : P[START];
+    var you = { x: youAt.x, rx: youAt.x - 26 - 46, ry: youAt.y - 26, ix: youAt.x - 22 - 46, iy: youAt.y - 22, ty: youAt.y + 46 };
+    you.x = youAt.x - 46;
+
+    // ---------------- controls
+    var seg = function (opts, cur, key) {
+      return opts.map(function (o) {
+        var on = o[0] === cur;
+        return { label: o[1], click: set((function () { var x = {}; x[key] = o[0]; return x; })()),
+          style: 'min-height: 42px; padding: 6px 4px; border: none; border-right: 1px solid rgba(90,58,34,0.35); font-family: Spectral, serif; font-size: 15px; cursor: pointer; ' +
+            (on ? 'background: #3A2516; color: #FFF6E4; font-weight: 600' : 'background: rgba(255,250,238,0.4); color: #2A1A0E') };
+      });
+    };
+    var check = function (on, label, sub, cost, key, warn) {
+      return { label: label, sub: sub, cost: cost, mark: on ? '✓' : '', click: set((function () { var x = {}; x[key] = !on; return x; })()),
+        subStyle: 'font-size: 13px; color: ' + (warn ? '#9C2E1E' : '#6B5A48'),
+        box: 'flex: none; width: 24px; height: 24px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; ' + (on ? 'background: #2C5F50; color: #FFF6E4; border: 1px solid #2C5F50' : 'background: rgba(255,250,238,0.6); color: transparent; border: 1px solid #5A3A22'),
+        style: 'display: flex; gap: 12px; align-items: center; min-height: 52px; padding: 8px 12px; background: rgba(255,250,238,0.45); border: 1px solid ' + (warn ? 'rgba(156,46,30,0.55)' : 'rgba(58,37,22,0.22)') + '; border-radius: 3px; font-family: Spectral, serif; cursor: pointer' };
+    };
+    var checks = [];
+    checks.push(check(goods, 'Bring 20 jars of wine to sell', goods ? (land === 'cart' ? 'They ride in the carriage.' : 'Heavy: slows you down unless you take a carriage.') : 'Travel light; sell nothing on arrival.', goods ? 'cargo' : '', 'goods', goods && land !== 'cart'));
+    if (needsPapers) checks.push(check(papers, 'Letter of passage for Ostoronia', papers ? 'The tyrant’s guards will wave you through.' : 'Without it, guards may turn you back or want a bribe.', '45 ', 'papers', !papers));
+    if (foreignDays > 0) checks.push(check(interp, 'Take a translator', interp ? 'Lucius speaks ' + Array.from(new Set(steps.map(function (s) { return P[s.to].c; }).filter(function (c) { return !SPOKEN[c]; }).map(function (c) { return LANG[c]; }))).join(' and ') + '.' : 'You won’t understand the locals. Worse prices, more risk.', Math.round(foreignDays * 9) + ' ', 'interp', !interp));
+    if (ocean) {
+      checks.push(check(stores, 'Extra water and stores', stores ? 'Enough for a long calm or a wrong turn.' : 'If the wind dies, the barrels run dry.', '60 ', 'stores', !stores));
+      checks.push(check(ointerp, 'Hire an interpreter for ' + O.lang, ointerp ? O.guide + ' grew up there and sails with you.' : 'Nobody there speaks Latin or Greek.', '70 ', 'ointerp', !ointerp));
+      checks.push(check(steward, 'Leave Felix in full charge', steward ? 'He can sign deals up to 500  while you\u2019re gone.' : 'Deals and rents wait for you, a month or more.', '', 'steward', !steward));
+    } else checks.push(check(fwd, 'Forward my letters', fwd ? 'About ' + lettersHeld + ' letters will follow you on the road.' : 'Letters wait in Aquea until you return.', fwdCost ? fwdCost + ' ' : '', 'fwd', false));
+
+    var lastStep = steps[steps.length - 1];
+    var bySea = lastStep && lastStep.e.kind === 'sea';
+    var fromWest = lastStep && P[lastStep.from].x < (dest ? dest.x : 0);
+    var spot = !dest ? '' : bySea ? 'the harbour steps' : (fromWest ? 'the west gate' : 'the east gate');
+    var mc = dest ? { x: dest.x * 4 - 3200, z: dest.y * 4 - 2000 } : null;
+    var WH = WORLD.harb;
+    if (ocean) {
+      dest = { name: odest, x: WH[odest][0], y: WH[odest][1] };
+      spot = 'the harbour steps';
+      mc = { x: 14000 + Math.round((dest.x - 1000) * 24), z: Math.round((dest.y - 500) * 24) };
+    }
+
+    var ok = !!dest && steps.length > 0;
+    var going = phase === 'going', arrived = phase === 'arrived';
+    var EVENTS = [
+      [1, 'Felix opens the counting house without you.'],
+      [2, 'The Aurora should reach Durona with the olive oil.'],
+      [3, 'Market day in Aquea. Grain prices reset.'],
+      [5, 'Rent from the Ferum estate: +120 .'],
+      [7, 'The Senate of Caleonia votes on the salt tax.'],
+      [9, 'The Thetis reaches Rhodes.'],
+      [12, 'Rufus’s loan falls due. Someone must collect it.']
+    ];
+    if (ocean) EVENTS = EVENTS.concat([
+      [15, 'The harvest comes in across Vararia. Grain prices fall.'],
+      [20, 'House Fulvius moves in on your grain buyers in Durona.'],
+      [26, 'Queen Cornelia\u2019s birthday games. Everyone who matters is in Aquea.'],
+      [34, 'Rent from the Ferum estate: +120 .']
+    ]);
+    if (ocean && !steward) EVENTS.push([10, 'A buyer for your Lareanum salt gives up waiting.']);
+    EVENTS.sort(function (a, b) { return a[0] - b[0]; });
+    var away = EVENTS.map(function (ev) {
+      var during = ev[0] <= D2;
+      return { day: 'Day ' + ev[0], text: ev[1],
+        row: 'display: grid; grid-template-columns: 52px 1fr; gap: 8px; align-items: baseline; color: ' + (during ? '#1F1710' : '#9A8A76'),
+        dayStyle: 'font-family: "IBM Plex Mono", monospace; font-size: 13px; color: ' + (during ? '#8E2418' : '#B0A08A') };
+    });
+    var cap = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
+    var chat = dest ? [
+      { tag: '[Journey]', text: 'You arrive at ' + dest.name + ', ' + spot + '.', t: '#FFAA00' },
+      { tag: '', text: cap(fmt(totDays)) + ' have passed while you travelled.', t: '#AAAAAA', plain: true },
+      risk > 0.2 ? { tag: '[Road]', text: 'Bandits stopped you on the way. ' + (escort ? 'Your guards drove them off.' : 'They took 120 .'), t: '#FF5555' } : { tag: '[Road]', text: 'The road was quiet.', t: '#55FF55' },
+      { tag: '[Felix]', text: fwd ? lettersHeld + ' letters are waiting in your satchel.' : lettersHeld + ' letters are waiting for you in Aquea.', t: '#FFFF55' },
+      D2 >= 2 ? { tag: '[Fleet]', text: 'The Aurora made port in Durona.', t: '#55FFFF' } : { tag: '[Fleet]', text: 'The Aurora is still at sea.', t: '#55FFFF' }
+    ].map(function (m) { return { tag: m.tag, text: m.text, tagStyle: 'color: ' + m.t, textStyle: m.plain ? 'color: #AAAAAA' : 'color: #FFFFFF' }; }) : [];
+    if (ocean) chat = [
+      { tag: '[Voyage]', text: 'You step ashore at ' + odest + ', ' + spot + '.', t: '#FFAA00' },
+      { tag: '', text: D2 + ' days have passed since you left Aquea.', t: '#AAAAAA', plain: true },
+      risk > 0.2 ? { tag: '[Voyage]', text: O.rough, t: '#FF5555' } : { tag: '[Voyage]', text: 'Fair winds the whole way.', t: '#55FF55' },
+      ointerp ? { tag: '[' + O.guide + ']', text: 'Stay close. I\u2019ll do the talking until you learn some ' + O.lang + '.', t: '#FFFF55' } : { tag: '[Harbour]', text: 'You can\u2019t understand a word anyone says.', t: '#FF5555' },
+      { tag: '[Felix]', text: lettersHeld + ' letters are waiting for you back in Aquea.', t: '#FFFF55' }
+    ].map(function (m) { return { tag: m.tag, text: m.text, tagStyle: 'color: ' + m.t, textStyle: m.plain ? 'color: #AAAAAA' : 'color: #FFFFFF' }; });
+
+    // ---------------- the world chart
+    var toW = function (d) { return d.replace(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g, function (m, x, y) { return (40 + x * 0.42).toFixed(1) + ',' + (260 + y * 0.42).toFixed(1); }); };
+    var worldD = ocean ? (routeD ? toW(routeD) + ' ' + O.lane.replace(/^M/, 'L') : O.lane) : '';
+    var youW = phase === 'arrived' && ocean ? { x: WH[odest][0], y: WH[odest][1] } : { x: 358, y: 560 };
+    var lbl = function (x, y, t, st) { return { x: x, y: y, t: t, style: st }; };
+    var bigLbl = 'font-family: Cinzel, serif; font-size: 30px; font-weight: 700; letter-spacing: 0.35em; fill: rgba(58,37,22,0.55); text-anchor: middle';
+    var seaLbl = 'font-family: Cinzel, serif; font-size: 28px; font-weight: 500; letter-spacing: 0.5em; fill: rgba(24,52,72,0.5); text-anchor: middle';
+    var smallLbl = 'font-family: "IM Fell English", serif; font-size: 24px; fill: #3A2516; text-anchor: middle; paint-order: stroke; stroke: rgba(234,219,182,0.8); stroke-width: 5px';
+    var swells = [];
+    for (var sy = 80; sy < 1000; sy += 92) for (var sx = (sy / 92) % 2 ? 60 : 160; sx < 1600; sx += 210) {
+      if (sx > 70 && sx < 720 && sy > 300 && sy < 680) continue;
+      if (sx > 950 && sx < 1560 && sy > 110 && sy < 900) continue;
+      swells.push({ d: 'M' + sx + ',' + sy + ' q14,-9 28,0 q14,9 28,0' });
+    }
+    var world = {
+      swells: swells,
+      home: D.countries.map(function (c) { return { d: c[2], tint: 'fill: ' + c[1] + '; fill-opacity: 0.2; stroke: ' + c[1] + '; stroke-opacity: 0.6; stroke-width: 4px' }; }),
+      landPath: ocean && routeD ? routeD : 'M0,0',
+      lands: [
+        { d: WORLD.n, fill: 'fill: #E8D9B4; stroke: #5A3A22; stroke-width: 2.5px' }, { d: WORLD.s, fill: 'fill: #E8D9B4; stroke: #5A3A22; stroke-width: 2.5px' },
+        { d: WORLD.n, fill: 'fill: #4F7A5A; fill-opacity: 0.2; stroke: none' }, { d: WORLD.s, fill: 'fill: #A0522D; fill-opacity: 0.2; stroke: none' },
+        { d: WORLD.far, fill: 'fill: #E8D9B4; stroke: #5A3A22; stroke-width: 2px' }
+      ].concat(WORLD.isles.map(function (d) { return { d: d, fill: 'fill: #E8D9B4; stroke: #5A3A22; stroke-width: 2px' }; })),
+      border: WORLD.border,
+      labels: [lbl(1270, 96, 'AURELIA', bigLbl), lbl(380, 280, 'YOUR LANDS', bigLbl), lbl(470, 860, 'THE OUTER SEA', seaLbl),
+        lbl(1290, 330, 'Kingdom of Thessar', smallLbl), lbl(1300, 650, 'Mirenian League', smallLbl), lbl(838, 735, 'The Fortunate Isles', smallLbl), lbl(1500, 168, 'Unknown', smallLbl)],
+      lanes: Object.keys(OCEAN).map(function (k) { var on = ocean && k === odest;
+        return { d: OCEAN[k].lane, style: 'fill: none; stroke: ' + (on ? '#8E2418' : '#1E3E5A') + '; stroke-opacity: ' + (on ? 1 : 0.55) + '; stroke-width: ' + (on ? 5 : 3) + 'px; stroke-dasharray: ' + (on ? '18 10' : '10 10') + '; stroke-linecap: round' + (on ? '; animation: march 1.6s linear infinite' : '') }; }),
+      dangers: ocean && phase !== 'arrived' ? [{ x: O.danger[0], y: O.danger[1], ty: O.danger[1] + 8, ly: O.danger[1] - 24, label: O.danger[2] }] : [],
+      homePorts: [{ name: 'Coria', x: 585, y: 345, lx: 572, ly: 336 }, { name: 'Sabino', x: 636, y: 630, lx: 623, ly: 664 }],
+      ports: Object.keys(WH).map(function (k) {
+        var on = ocean && k === odest, p = WH[k];
+        return { name: k, x: p[0], y: p[1], lx: p[0] + 20, ly: p[1] + 8, title: 'Sail to ' + k + ' (' + OCEAN[k].region + ')',
+          dot: 'fill: ' + (on ? '#C9962A' : '#8E2418') + '; stroke: #F6EAD0; stroke-width: 3px',
+          label: 'font-family: "IM Fell English", serif; font-size: 27px; font-weight: ' + (on ? 700 : 400) + '; fill: ' + (on ? '#7E1E12' : '#2A1A0E') + '; paint-order: stroke; stroke: rgba(234,219,182,0.92); stroke-width: 6px',
+          pick: function () { if (((self.state || {}).phase || 'plan') !== 'plan') return; put({ odest: k }); } };
+      }),
+      hasBadge: ocean && phase !== 'arrived',
+      badge: { x: WH[odest][0], y: WH[odest][1] - 36, ty: WH[odest][1] - 29 },
+      you: { x: youW.x - 46, rx: youW.x - 72, ry: youW.y - 26, ix: youW.x - 68, iy: youW.y - 22, ty: youW.y + 46 }
+    };
+
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E9C982' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#D9D2C4') };
+    };
+
+    return {
+      whereHeader: arrived && dest ? dest.name.toUpperCase() + ' · ' + spot.toUpperCase() : 'AQUEA · THE FORUM',
+      hereChip: arrived && dest ? 'You are in ' + dest.name : 'You are in Aquea',
+      nav: __NAV.top('Travel', navItem), subnav: __NAV.sub('Travel'), hasSub: __NAV.sub('Travel').length > 0,
+      countries: countries, roads: roads, routeD: routeD || 'M0,0', towns: towns, badges: arrived ? [] : badges, dangers: arrived ? [] : dangers,
+      showYou: !going, you: you, going: going,
+      traveller: 'position: absolute; left: 0; top: 0; offset-path: path(\'' + ((ocean ? worldD : routeD) || 'M0,0') + '\'); offset-rotate: 0deg; animation: journey 3.4s ease-in-out forwards',
+      mapHint: going ? (ocean ? 'Under sail…' : 'On the road…') : ocean ? 'Click a harbour across the sea to sail there.' : addMode ? 'Click a town to add it as a stop before your destination.' : 'Click a town to travel there. Click a stop again to remove it.',
+      legsTitle: ocean ? 'THE VOYAGE, STEP BY STEP' : 'THE ROAD, STEP BY STEP',
+      legCount: steps.length ? steps.length + ' stages, ' + fmt(totDays) : 'Pick a destination',
+      legs: legs,
+      awayIntro: dest ? fmt(totDays).replace(/^\d/, function (c) { return c; }) + ' will pass in the world while you’re on the road.' : 'Pick a destination to see what happens while you travel.',
+      away: away,
+      planning: !arrived,
+      landView: !ocean, oceanView: ocean, world: world,
+      scopes: [['land', 'This continent'], ['ocean', 'Across the ocean']].map(function (o) { var on = scope === o[0];
+        return { label: o[1], click: set({ scope: o[0] }), style: 'min-height: 40px; padding: 6px 18px; border: none; border-radius: 999px; font-family: Spectral, serif; font-size: 15px; cursor: pointer; ' + (on ? 'background: #E9C982; color: #2A1A0E; font-weight: 600' : 'background: transparent; color: #E6D6B4') }; }),
+      scopeHint: ocean ? 'Weeks at sea. The world won\u2019t wait for you.' : 'Roads, tracks and coastal ships',
+      landLabel: ocean ? 'To the harbour at ' + O.from : 'On land',
+      oDests: Object.keys(OCEAN).map(function (k) { var o = OCEAN[k], on = k === odest;
+        return { name: k, sub: o.region + ', via ' + o.from + '. Sells ' + o.sells + '.', days: '~' + Math.round(oDays[k]) + ' days from port', click: set({ odest: k }),
+          style: 'display: flex; gap: 10px; align-items: center; min-height: 56px; padding: 8px 12px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' + (on ? 'background: rgba(201,150,42,0.22); border: 2px solid #9A6A12' : 'background: rgba(255,250,238,0.45); border: 1px solid rgba(58,37,22,0.25)') }; }),
+      segShip: seg([['berth', 'A berth'], ['charter', 'Charter'], ['own', 'Your own ship']], oship, 'oship').map(function (b, i) { if (i === 2) { b.click = function () {}; b.style += '; opacity: 0.45; cursor: not-allowed'; } return b; }),
+      shipNote: oship === 'berth' ? 'The ' + O.ship + ' sails from ' + O.from + ' in ' + O.wait + ' days. ' + O.berth + '  for a berth.' : 'Leave as soon as you reach ' + O.from + ', with room for all your cargo. ' + O.charter + ' .',
+      stopRows: stops.map(function (id, i) { return { name: P[id].name, kind: i === stops.length - 1 ? 'To' : 'Stop ' + (i + 1), aria: 'Remove ' + P[id].name, remove: set({ stops: stops.filter(function (x) { return x !== id; }) }) }; }),
+      toggleAdd: set({ addMode: !addMode }),
+      addLabel: addMode ? 'Now click a town…' : '+ Add a stop on the way',
+      addBtn: 'flex: 1; min-height: 40px; padding: 6px 14px; border-radius: 3px; font-family: Spectral, serif; font-size: 14px; cursor: pointer; ' + (addMode ? 'background: #C9962A; color: #2A1A0E; border: 1px solid #8A6418; font-weight: 600' : 'background: transparent; color: #2A1A0E; border: 1px solid #5A3A22'),
+      clear: set({ stops: [] }),
+      segMode: seg([['fast', 'Fastest'], ['safe', 'Safest'], ['cheap', 'Cheapest']], mode, 'mode'),
+      segLand: seg([['foot', 'On foot'], ['horse', 'Horse'], ['cart', 'Carriage']], land, 'land'),
+      segSea: seg([['passage', 'Book passage'], ['boat', 'Hire a boat']], sea, 'sea'),
+      segEscort: seg([[0, 'None'], [1, 'Two guards'], [2, 'Six guards']], escort, 'escort'),
+      segPurse: seg([[0, '200'], [1, '800'], [2, '2,000']], purse, 'purse'),
+      purseNote: 'Enough to trade on arrival. If you’re robbed, you could lose up to ' + ['200', '800', '2,000'][purse] + ' .',
+      checks: checks,
+      totals: [
+        { k: 'Time', v: dest ? (ocean ? Math.round(totDays) + '–' + Math.round(totDays + spread) + ' days' : fmt(totDays)) : '—', sub: dest ? (ocean ? 'the wind decides' : 'arrive day ' + Math.max(1, Math.ceil(totDays))) : '', style: 'font-family: Cinzel, serif; font-size: 22px; font-weight: 700; color: #2A1A0E' },
+        { k: 'Cost', v: dest ? total + ' ' : '—', sub: dest ? 'food, fares, wages' : '', style: 'font-family: Cinzel, serif; font-size: 22px; font-weight: 700; color: #2A1A0E' },
+        { k: 'Danger', v: dest ? riskWord : '—', sub: dest ? Math.round(risk * 100) + '% chance of trouble' : '', style: 'font-family: Cinzel, serif; font-size: 22px; font-weight: 700; color: ' + riskColor }
+      ],
+      arrive: dest ? { title: 'You’ll appear at ' + dest.name + ', ' + spot, sub: 'x ' + mc.x + '  z ' + mc.z + '  ·  in Minecraft' } : { title: 'No destination yet', sub: 'Pick a town on the map' },
+      teleport: function () {
+        var s0 = self.state || {};
+        if ((s0.phase || 'plan') !== 'plan' || !ok) return;
+        put({ phase: 'going' });
+        setTimeout(function () { put({ phase: 'arrived' }); }, 3500);
+      },
+      tpLabel: going ? 'On the road…' : ok ? 'Teleport to ' + dest.name : 'Pick a destination',
+      tpSub: ok ? (ocean ? 'About ' + Math.round(totDays) + ' days' : fmt(totDays)) + ' pass · ' + total + ' ' : 'Then press to go',
+      tpStyle: 'display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 70px; padding: 10px 16px; border: none; border-radius: 4px; color: #2A1A0E; cursor: ' + (ok && !going ? 'pointer' : 'default') + '; ' +
+        (ok ? 'background: linear-gradient(180deg, #F2D58A 0%, #D9AE52 55%, #B88A2E 100%); animation: glow 2.6s ease-in-out infinite' : 'background: rgba(58,37,22,0.12); color: #6B5A48') + (going ? '; opacity: 0.7' : ''),
+      tpNote: (ocean ? 'A month is a long time. Make sure someone you trust minds the business. ' : '') + 'You’re moved the moment you press. If you’re offline, you’ll wake up there next time you log in.',
+      arrived: arrived,
+      done: dest ? { title: 'Welcome to ' + dest.name, sub: (ocean ? D2 + ' days at sea and on the road.' : cap(fmt(totDays)) + ' on the road.') + ' You spent ' + total + ' .', chat: chat, market: 'Open the ' + dest.name + ' market' } : { title: '', sub: '', chat: [], market: '' },
+      reset: function () { put({ phase: 'plan', stops: [3] }); }
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

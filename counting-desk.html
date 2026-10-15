@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business — the counting desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#1A110A}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+a{color:#F3D27E}a:hover{color:#FFF0C0}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.35), 0 5px 10px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.42) !important}
+.wood{background-color:#4A3220;background-image:url(assets/f8781ae71473f5b064757900db65402c.jpg);background-size:512px 512px}
+.leaf{background-color:#F1E5C8;background-image:radial-gradient(ellipse at 60% 40%, rgba(255,250,232,0.6) 0%, rgba(0,0,0,0) 70%), radial-gradient(ellipse at 20% 80%, rgba(170,130,80,0.10) 0%, rgba(0,0,0,0) 50%)}
+.inked{color:#E2C28E;text-shadow:0 -1px 0 rgba(0,0,0,0.7), 0 1px 0 rgba(255,214,150,0.18)}
+@keyframes turnNextA{0%{transform:rotateY(0deg);opacity:1}96%{transform:rotateY(-180deg);opacity:1}100%{transform:rotateY(-180deg);opacity:0}}
+@keyframes turnNextB{0%{transform:rotateY(0deg);opacity:1}96%{transform:rotateY(-180deg);opacity:1}100%{transform:rotateY(-180deg);opacity:0}}
+@keyframes turnPrevA{0%{transform:rotateY(0deg);opacity:1}96%{transform:rotateY(180deg);opacity:1}100%{transform:rotateY(180deg);opacity:0}}
+@keyframes turnPrevB{0%{transform:rotateY(0deg);opacity:1}96%{transform:rotateY(180deg);opacity:1}100%{transform:rotateY(180deg);opacity:0}}
+@keyframes glint{0%{background-position:130% 0}14%{background-position:-30% 0}100%{background-position:-30% 0}}
+@keyframes sparkle{0%,6%{transform:scale(0) rotate(0deg);opacity:0}10%{transform:scale(1) rotate(45deg);opacity:1}15%,100%{transform:scale(0) rotate(90deg);opacity:0}}
+@keyframes lateA{0%,55%{opacity:0}100%{opacity:1}}
+@keyframes lateB{0%,55%{opacity:0}100%{opacity:1}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div style="min-height: 100vh; background: #1A110A; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<!-- TOP BAR -->
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · IDES OF OCTOBER · MORNING</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5">
+<a href="#" style="{{n.style}}">{{n.label}}</a>
+</sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #C9A86A">YOUR BUSINESSES</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">The counting desk</h1>
+</div>
+<p style="margin: 0; max-width: 520px; font-size: 16px; color: #E6D8BC">Your managers run things. You read the books, press your seal on what matters, and watch who is circling. Turn the ledger's pages, or click a pile of coins.</p>
+</div>
+
+<div style="overflow-x: auto">
+<div class="wood" style="position: relative; width: 1376px; height: 1110px; overflow: hidden; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 2px #3A2616">
+<div style="position: absolute; inset: 22px; border-radius: 3px; background-color: #14281E; background-image: url(assets/7b4f0533033bead1efc1d91d2b56b8ae.jpg); background-size: 700px 700px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.6), inset 0 0 40px rgba(0,0,0,0.35), 0 1px 0 rgba(255,220,170,0.15)"></div>
+<div style="position: absolute; inset: 36px; border: 1.5px solid rgba(201,162,92,0.5); border-radius: 2px; pointer-events: none; box-shadow: 0 0 0 3px rgba(0,0,0,0), inset 0 0 0 4px rgba(201,162,92,0.12)"></div>
+<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 45% 45%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.3) 100%)"></div>
+
+<!-- COIN PILES -->
+<div style="position: absolute; left: 44px; top: 22px; width: 900px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: #F6E7C4; text-shadow: 0 1px 2px rgba(0,0,0,0.6)">THIS SEASON'S TAKINGS, YOUR CUT</span>
+<div style="display: flex; align-items: flex-end; gap: 22px">
+<sc-for list="{{stacks}}" as="st" hint-placeholder-count="6">
+<button onClick="{{st.pick}}" aria-label="{{st.aria}}" style="{{st.btn}}">
+<div style="position: relative; width: 124px; height: 168px">
+<div style="position: absolute; left: 8px; bottom: 0; width: 110px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.45); filter: blur(5px)"></div>
+<sc-for list="{{st.coins}}" as="cn" hint-placeholder-count="8">
+<img src="{{cn.src}}" alt="" style="{{cn.style}}">
+</sc-for>
+<div aria-hidden="true" style="{{st.glint}}"></div>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" style="{{st.spark}}"><path d="M9 0 L10.4 7.6 L18 9 L10.4 10.4 L9 18 L7.6 10.4 L0 9 L7.6 7.6 Z" style="fill: #FFF4D6"></path></svg>
+</div>
+<span class="paper" style="{{st.tag}}">{{st.label}}<span style="display: block; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #2C5F50">{{st.amount}}</span></span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<!-- THE LEDGER -->
+<div style="position: absolute; left: 28px; top: 290px; width: 940px; height: 800px; perspective: 2400px">
+<img src="assets/f1bdf203460222963da7bbc04186b16e.png" alt="" style="position: absolute; left: 0; top: 0; width: 940px; height: 800px">
+
+<!-- index tabs on the fore-edge of the pages -->
+<div style="position: absolute; left: 900px; top: 110px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="3">
+<button onClick="{{tb.go}}" aria-label="{{tb.aria}}" style="{{tb.style}}"><span style="writing-mode: vertical-rl">{{tb.label}}</span></button>
+</sc-for>
+</div>
+
+<!-- LEFT PAGE -->
+<div style="{{lp.style}}">
+<sc-if value="{{sp.p0}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; height: 100%">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; letter-spacing: 0.1em; color: #3A2516">THE BOOKS</span>
+<span style="font-size: 16px; color: #6B5A48">autumn</span>
+</div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 40px 52px 52px 58px; gap: 0 6px; font-size: 12px; color: #6B5A48; border-bottom: 1px solid rgba(58,37,22,0.5); padding-bottom: 4px">
+<span>Business</span><span style="text-align: right">Yours</span><span style="text-align: right">In</span><span style="text-align: right">Out</span><span style="text-align: right">Your cut</span>
+</div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+<button onClick="{{r.pick}}" style="{{r.style}}">
+<span style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 17px; line-height: 1.2; color: #1F1710">{{r.name}}</span><span style="font-size: 13px; color: #6B5A48">{{r.kind}}</span></span>
+<span style="text-align: right; font-size: 15px; color: #3A2516">{{r.share}}</span>
+<span style="text-align: right; font-size: 15px; color: #3A2516">{{r.inc}}</span>
+<span style="text-align: right; font-size: 15px; color: #3A2516">{{r.out}}</span>
+<span style="text-align: right; font-size: 16px; font-weight: 700; color: #2C5F50">{{r.kept}}</span>
+</button>
+</sc-for>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding: 8px 6px 0; border-top: 1px solid rgba(58,37,22,0.5)">
+<span style="font-family: Cinzel, serif; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: #3A2516">SUMMA</span>
+<span style="font-size: 19px; font-weight: 700; color: #2C5F50">{{total}}</span>
+</div>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.45; color: #3A2516">
+<span>Six businesses in three countries. The further a business lies from you, the more its manager is tempted.</span>
+<span style="color: #8E2C1C">Tax to the crown this season: 540 . Gifts to officials: 120 .</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{sp.p1}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px; height: 100%">
+<span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; letter-spacing: 0.1em; color: #3A2516">DEBTS AND CREDIT</span>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #8E2C1C">WHAT YOU OWE</span>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(58,37,22,0.12)">
+<div style="display: flex; flex-direction: column"><span style="font-size: 17px; color: #1F1710">Sextus Octavius, your banker</span><span style="font-size: 14px; color: #6B5A48">Secured on Varenia. 250 due in 9 days.</span></div>
+<span style="font-size: 18px; color: #8E2C1C">3,000</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #2C5F50">WHAT YOU ARE OWED</span>
+<sc-for list="{{owed}}" as="o" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(58,37,22,0.12)">
+<div style="display: flex; flex-direction: column"><span style="font-size: 17px; color: #1F1710">{{o.who}}</span><span style="font-size: 14px; color: #6B5A48">{{o.terms}}</span></div>
+<span style="font-size: 18px; color: #2C5F50">{{o.amount}}</span>
+</div>
+</sc-for>
+</div>
+<div style="margin-top: auto; font-size: 16px; line-height: 1.45; color: #3A2516">Interest coming to you this season: about 140 , if everyone pays. Gnaeus has not.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{sp.p2}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px; height: 100%">
+<span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; letter-spacing: 0.1em; color: #3A2516">PARTNERS AND SHARES</span>
+<sc-for list="{{partners}}" as="pt" hint-placeholder-count="3">
+<div style="display: flex; gap: 12px; align-items: flex-start; padding-bottom: 12px; border-bottom: 1px solid rgba(58,37,22,0.12)">
+<div style="flex: none; padding: 3px; background: #EFE3C8; box-shadow: 0 3px 8px rgba(0,0,0,0.3)"><img src="{{pt.face}}" alt="" style="display: block; width: 40px; height: 40px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1">
+<div style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 17px; color: #1F1710">{{pt.name}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 2px; color: #5A3A22">{{pt.loyal}}</span></div>
+<span style="font-size: 14px; color: #6B5A48">{{pt.stake}}</span>
+<span style="font-size: 15px; color: #3A2516">{{pt.note}}</span>
+</div>
+</div>
+</sc-for>
+<div style="margin-top: auto; font-size: 16px; line-height: 1.45; color: #3A2516">Partners share the risk and the profit. They also share your secrets, and some of them talk.</div>
+</div>
+</sc-if>
+</div>
+
+<!-- RIGHT PAGE -->
+<div style="{{rp.style}}">
+<sc-if value="{{sp.p0}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 13px; height: 100%">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #6B5A48">{{b.kindUpper}}</span>
+<span style="font-family: Cinzel, serif; font-size: 23px; font-weight: 700; line-height: 1.2; color: #2A1A0E">{{b.name}}</span>
+<span style="font-size: 15px; color: #5E5042">{{b.where}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">WHAT IT KEPT, SEASON BY SEASON</span>
+<svg width="344" height="116" viewBox="0 0 344 116" role="img" aria-label="{{b.chartLabel}}">
+<line x1="0" y1="88" x2="344" y2="88" style="stroke: rgba(58,37,22,0.6); stroke-width: 1px"></line>
+<sc-for list="{{b.bars}}" as="bar" hint-placeholder-count="4">
+<rect x="{{bar.x}}" y="{{bar.y}}" width="52" height="{{bar.h}}" style="{{bar.style}}"></rect>
+<text x="{{bar.tx}}" y="{{bar.vy}}" style="font-family: 'IM Fell English', serif; font-size: 14px; fill: #2A1A0E; text-anchor: middle">{{bar.v}}</text>
+<text x="{{bar.tx}}" y="107" style="font-family: 'IM Fell English', serif; font-size: 13px; fill: #6B5A48; text-anchor: middle">{{bar.season}}</text>
+</sc-for>
+</svg>
+</div>
+<div style="display: flex; gap: 14px; align-items: flex-start">
+<div style="flex: none; padding: 3px; background: #EFE3C8; box-shadow: 0 3px 8px rgba(0,0,0,0.3); transform: rotate(-3deg)"><img src="{{b.mgrFace}}" alt="" style="display: block; width: 44px; height: 44px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1">
+<span style="font-size: 16px; color: #1F1710"><strong style="font-weight: 600">{{b.mgr}}</strong> runs it</span>
+<sc-for list="{{b.traits}}" as="t" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; gap: 8px; font-size: 14px"><span style="color: #4A3C30">{{t.name}} · {{t.guess}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 2px; color: #5A3A22">{{t.dots}}</span></div>
+</sc-for>
+</div>
+</div>
+<div style="padding: 6px 0 6px 14px; border-left: 2px solid rgba(138,90,18,0.6); font-size: 17px; line-height: 1.45; color: #1F1710">{{b.report}}</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #7E2A1A">WHO OWNS IT</span>
+<div style="display: flex; height: 10px; border: 1px solid rgba(58,37,22,0.6); border-radius: 2px; overflow: hidden"><div style="{{b.yourBar}}"></div><div style="flex: 1; background: rgba(90,58,34,0.12)"></div></div>
+<span style="font-size: 15px; color: #3A2516">{{b.owners}}</span>
+</div>
+<sc-if value="{{b.hasThreat}}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: auto; padding: 8px 12px; border: 1.5px solid rgba(142,44,28,0.75); color: #6E2214; font-size: 15px">{{b.threat}}</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{sp.p1}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px; height: 100%">
+<span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; letter-spacing: 0.1em; color: #3A2516">YOUR BANKER</span>
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 17px; color: #1F1710">The house of Sextus Octavius, Aquea</span>
+<span style="font-size: 30px; color: #1F1710">12,400 </span>
+<span style="font-size: 15px; color: #2C5F50">earning about 40 a month</span>
+</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #3A2516">Safe from road thieves. The house is sound, though talk of war in Ostoronia has some depositors nervous. If the war comes, there may be a run on the bank.</p>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{bankActs}}" as="ba" hint-placeholder-count="3">
+<button style="text-align: left; min-height: 44px; padding: 6px 0; border: none; border-bottom: 1px solid rgba(58,37,22,0.12); background: transparent; font-family: 'IM Fell English', serif; cursor: pointer; display: flex; flex-direction: column">
+<span style="font-size: 17px; color: #1F1710">{{ba.act}}</span><span style="font-size: 14px; color: #6B5A48">{{ba.note}}</span>
+</button>
+</sc-for>
+</div>
+<div style="margin-top: auto; padding: 8px 12px; border: 1.5px solid rgba(138,90,18,0.7); color: #5A3A12; font-size: 15px">Later, with enough standing, you could open a bank of your own.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{sp.p2}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px; height: 100%">
+<span style="font-family: Cinzel, serif; font-size: 18px; font-weight: 700; letter-spacing: 0.1em; color: #3A2516">RIVALS IN THE TRADE</span>
+<sc-for list="{{rivals}}" as="rv" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid rgba(58,37,22,0.12)">
+<div style="display: flex; gap: 12px; align-items: center">
+<div style="flex: none; padding: 3px; background: #EFE3C8; box-shadow: 0 3px 8px rgba(0,0,0,0.3)"><img src="{{rv.face}}" alt="" style="display: block; width: 40px; height: 40px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 18px; color: #1F1710">{{rv.name}}</span><span style="font-size: 14px; color: #6B5A48">{{rv.what}}</span></div>
+</div>
+<span style="font-size: 15px; color: #6E2214">{{rv.moves}}</span>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B5A48"><span>Their size beside yours</span><div style="flex: 1; height: 8px; background: rgba(90,58,34,0.12); border-radius: 4px"><div style="{{rv.bar}}"></div></div></div>
+</div>
+</sc-for>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 15px; color: #3A2516"><span>Envy you draw</span><span>low, rising</span></div>
+<div style="height: 6px; background: rgba(90,58,34,0.12); border-radius: 3px"><div style="width: 30%; height: 6px; border-radius: 3px; background: #8E2C1C"></div></div>
+</div>
+</div>
+</sc-if>
+</div>
+
+
+<!-- the turning leaf -->
+<div style="{{leaf.style}}">
+<div class="leaf" style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: inset 30px 0 40px -20px rgba(70,40,20,0.35), 0 10px 30px rgba(0,0,0,0.35)"></div>
+<div class="leaf" style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); box-shadow: inset -30px 0 40px -20px rgba(70,40,20,0.35), 0 10px 30px rgba(0,0,0,0.35)"></div>
+</div>
+</div>
+
+<!-- YOUR MONEY, on a slip of paper -->
+<div class="paper" style="position: absolute; left: 994px; top: 30px; width: 230px; padding: 16px 20px 18px; box-shadow: 0 14px 26px rgba(0,0,0,0.5); transform: rotate(-1.5deg); color: #2A1A0E; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #5A3A22">YOUR MONEY</span>
+<sc-for list="{{box}}" as="bx" hint-placeholder-count="4">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-family: 'IM Fell English', serif; padding-bottom: 6px; border-bottom: 1px solid rgba(58,37,22,0.12)"><span style="font-size: 15px; color: #6B5A48">{{bx.k}}</span><span style="{{bx.style}}">{{bx.v}}</span></div>
+</sc-for>
+</div>
+
+<!-- REQUESTS AWAITING YOUR SEAL -->
+<div style="position: absolute; left: 976px; top: 290px; width: 370px; display: flex; flex-direction: column; gap: 18px">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: #F6E7C4; text-shadow: 0 1px 2px rgba(0,0,0,0.6)">AWAITING YOUR SEAL</span>
+<sc-for list="{{reqs}}" as="rq" hint-placeholder-count="3">
+<article class="paper" style="{{rq.card}}">
+<div style="display: flex; gap: 12px; align-items: flex-start">
+<div style="flex: none; padding: 3px; background: #EFE3C8; box-shadow: 0 3px 8px rgba(0,0,0,0.3)"><img src="{{rq.face}}" alt="" style="display: block; width: 36px; height: 36px; image-rendering: pixelated"></div>
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span style="font-family: Cinzel, serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #7E2A1A">{{rq.from}}</span>
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.4; color: #1F1710">{{rq.text}}</span>
+</div>
+</div>
+<span style="font-size: 14px; color: #5E5042">{{rq.note}}</span>
+<sc-if value="{{rq.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button onClick="{{rq.approve}}" aria-label="{{rq.approveLabel}}" style="flex: none; width: 58px; height: 58px; border-radius: 50%; border: 2px dashed #8A5A12; background: rgba(138,90,18,0.08); cursor: pointer; font-family: Cinzel, serif; font-size: 11px; font-weight: 700; color: #8A5A12; line-height: 1.1">PRESS<br>SEAL</button>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1">
+<span style="font-size: 15px; color: #1F1710">{{rq.yes}}</span>
+<button onClick="{{rq.refuse}}" style="align-self: flex-start; min-height: 32px; padding: 2px 0; border: none; background: transparent; font-family: Spectral, serif; font-size: 15px; color: #8E2C1C; text-decoration: underline; cursor: pointer">{{rq.no}}</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{rq.done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<sc-if value="{{rq.approved}}" hint-placeholder-val="{{ false }}"><img src="assets/f9c6da5d3c8008db0652383c8e1dde51.png" alt="Your seal" style="width: 58px; height: 58px; transform: rotate(-12deg); filter: drop-shadow(0 3px 4px rgba(30,10,5,0.45))"></sc-if>
+<span style="{{rq.doneStyle}}">{{rq.doneText}}</span>
+<button onClick="{{rq.undo}}" style="margin-left: auto; min-height: 32px; border: none; background: transparent; font-family: Spectral, serif; font-size: 14px; color: #5E5042; text-decoration: underline; cursor: pointer">undo</button>
+</div>
+</sc-if>
+</article>
+</sc-for>
+</div>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = this.state || {};
+    var selId = s.sel || 'thetis';
+    var sealed = s.sealed || {};
+    var page = s.page || 0;
+    var flip = s.flip || null;   // { n, dir }
+
+    var navItem = function (label, active) {
+      return { label: label,
+        style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E9C982' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#E6D8BC') };
+    };
+    var F = { over: 'assets/68c827b5e74ae6bac441631cd7975afd.png', lucia: 'assets/825d687ad982397231b83bbd7a9f3b55.png', greek: 'assets/51cea2a5099cccbcd6674dbb671dee2d.png',
+              varro: 'assets/c1e421a40d1298e1f79fcc61708ffbb6.png', client: 'assets/054107f26dcd34ab67e0139fe33c08b3.png', tax: 'assets/0826644edfdf42a585c7e8d8765821bb.png',
+              fulvius: 'assets/225899a8700d3084ef954b85828dc4bd.png', rufus: 'assets/390e63fe4dd357ccba93a5e47e0acae4.png' };
+    var dots = function (n) { return '●'.repeat(n) + '○'.repeat(4 - n); };
+    var fmt = function (n) { return (n < 0 ? '−' : '+') + Math.abs(n).toLocaleString('en-US'); };
+
+    var B = [
+      { id: 'varenia', name: 'Varenia', short: 'Varenia', kind: 'Wheat estate', where: 'River valley, Vararia · 120 iugera', share: 100, inc: 1240, out: 820,
+        seasons: [310, 260, 140, 420], mgr: 'Quintus Atilius', face: F.over,
+        traits: [{ name: 'Honest', guess: 'I believe so', n: 3 }, { name: 'Skilled', guess: 'middling', n: 2 }, { name: 'Loyal', guess: 'wavering', n: 2 }],
+        report: '"A good harvest, master. But the Fulvii next door pay their men more, and two of ours have gone over."',
+        owners: 'All yours.', threat: 'House Fulvius bought the land beside you and is poaching your workers.' },
+      { id: 'ravacum', name: 'Ravacum vineyard', short: 'Ravacum', kind: 'Vineyard', where: 'Southern hills, Helerensia · 40 iugera', share: 100, inc: 560, out: 380,
+        seasons: [60, 120, 40, 180], mgr: 'Lucia, the foreman\'s widow', face: F.lucia,
+        traits: [{ name: 'Honest', guess: 'certainly', n: 4 }, { name: 'Skilled', guess: 'very', n: 3 }, { name: 'Loyal', guess: 'yes', n: 3 }],
+        report: '"We sell our grapes to the town press and they take a third. With a press of our own, the wine would be ours."',
+        owners: 'All yours. It sits in a foreign kingdom, so you pay their land tax too.', threat: '' },
+      { id: 'thetis', name: 'The Thetis', short: 'Thetis', kind: 'Merchant ship', where: 'At sea, bound for Rhodes · 2,000 jars', share: 60, inc: 1620, out: 600,
+        seasons: [480, 720, 0, 610], mgr: 'Demetrios of Rhodes', face: F.greek,
+        traits: [{ name: 'Honest', guess: 'I cannot tell', n: 1 }, { name: 'Skilled', guess: 'a fine captain', n: 4 }, { name: 'Loyal', guess: 'restless', n: 1 }],
+        report: '"A fair voyage. I have had an offer for my share of the ship. I would rather sell to you, partner, but I will not wait long."',
+        owners: 'You 60% · Demetrios 40%. If he sells to House Fulvius, your rival becomes your partner.', threat: 'A clerk says Demetrios keeps two sets of books in Rhodes. Unproven.' },
+      { id: 'shop', name: 'Wine shop on the forum', short: 'Wine shop', kind: 'Shop', where: 'Aquea · shared with your friend Varro', share: 50, inc: 820, out: 560,
+        seasons: [120, 150, 190, 130], mgr: 'Varro\'s nephew, Titus', face: F.varro,
+        traits: [{ name: 'Honest', guess: 'yes', n: 3 }, { name: 'Skilled', guess: 'young yet', n: 1 }, { name: 'Loyal', guess: 'to Varro', n: 3 }],
+        report: '"Rufus has started telling people our wine is watered. Takings are down a little."',
+        owners: 'You 50% · Varro 50%. Profits split, quarrels shared.', threat: 'Rufus\'s rumours are costing you customers.' },
+      { id: 'warehouse', name: 'Harbour warehouse', short: 'Warehouse', kind: 'Storage', where: 'Aquea harbour · 400 jars of space', share: 100, inc: 330, out: 180,
+        seasons: [140, 160, 150, 150], mgr: 'Sextus the younger', face: F.client,
+        traits: [{ name: 'Honest', guess: 'yes', n: 4 }, { name: 'Skilled', guess: 'learning', n: 2 }, { name: 'Loyal', guess: 'devoted', n: 4 }],
+        report: '"Full all season. The tax chief\'s men have been asking what we keep here."',
+        owners: 'All yours.', threat: '' },
+      { id: 'society', name: 'Grain Road Society', short: 'Grain Road', kind: 'Shares', where: 'A company of grain merchants · 2 of 40 parts', share: 5, inc: 350, out: 150,
+        seasons: [180, 240, 90, 200], mgr: 'The society\'s council', face: F.tax,
+        traits: [{ name: 'Honest', guess: 'probably', n: 2 }, { name: 'Skilled', guess: 'yes', n: 3 }, { name: 'Loyal', guess: 'to themselves', n: 1 }],
+        report: '"The autumn sailings went well. If war closes the northern road, next season\'s payout will suffer."',
+        owners: 'You hold 2 parts of 40. A vote, but a small one.', threat: '' }
+    ];
+    var byId = {}; B.forEach(function (b) { byId[b.id] = b; });
+    var total = 0; B.forEach(function (b) { total += Math.round((b.inc - b.out) * b.share / 100); });
+
+    // page turning
+    var go = function (to) {
+      if (to === page || to < 0 || to > 2) return;
+      var n = (flip ? flip.n : 0) + 1;
+      self.setState({ page: to, flip: { n: n, dir: to > page ? 'next' : 'prev' }, sel: to === 0 ? selId : selId });
+    };
+    if (page !== 0 && false) {}
+    var par = flip ? (flip.n % 2 ? 'A' : 'B') : '';
+    var late = flip ? 'animation: late' + par + ' 0.9s ease-out both; ' : '';
+    var pageBase = 'position: absolute; top: 76px; width: 352px; height: 640px; color: #2A1A0E; font-family: "IM Fell English", Georgia, serif; ';
+    var lp = { style: pageBase + 'left: 82px; ' + (flip && flip.dir === 'next' ? late : '') };
+    var rp = { style: pageBase + 'left: 506px; ' + (flip && flip.dir === 'prev' ? late : '') };
+    var leafStyle = 'display: none';
+    if (flip) {
+      leafStyle = flip.dir === 'next'
+        ? 'position: absolute; left: 470px; top: 46px; width: 424px; height: 700px; transform-origin: 0% 50%; transform-style: preserve-3d; animation: turnNext' + par + ' 0.9s ease-in-out forwards; pointer-events: none'
+        : 'position: absolute; left: 46px; top: 46px; width: 424px; height: 700px; transform-origin: 100% 50%; transform-style: preserve-3d; animation: turnPrev' + par + ' 0.9s ease-in-out forwards; pointer-events: none';
+    }
+    var tabNames = ['The books', 'Debts', 'Rivals'];
+    var tabs = tabNames.map(function (t, i) {
+      var on = i === page;
+      return { label: t, aria: 'Open the ledger at ' + t, go: function () { go(i); },
+        style: 'display: flex; align-items: center; justify-content: center; width: 38px; min-height: 104px; padding: 10px 0; border: none; border-radius: 0 4px 4px 0; font-family: "IM Fell English", serif; font-size: 15px; cursor: pointer; box-shadow: 3px 3px 6px rgba(0,0,0,0.35); ' +
+          (on ? 'background: #F1E5C8; color: #2A1A0E; transform: translateX(6px)' : 'background: #D2BD94; color: #4A3826') };
+    });
+
+    var stacks = B.map(function (b, i) {
+      var kept = Math.round((b.inc - b.out) * b.share / 100);
+      var n = Math.max(1, Math.min(13, Math.round(kept / 50)));
+      var COIN = ['assets/a34f33ecc2d15e9ab6da4e8d2e07a2d3.png', 'assets/cb7588feb2efdc041c55ed8f73c7d02a.png', 'assets/ac2ce337de167ae9c0d2364b8e352de6.png'];
+      var coins = [];
+      var topX = 2, topB = 6;
+      for (var c = 0; c < n; c++) {
+        var jx = 2 + ((c * 37 + i * 11) % 7) - 3;
+        topX = jx; topB = 6 + c * 9;
+        coins.push({ src: COIN[(c * 2 + i) % 3], style: 'position: absolute; left: ' + jx + 'px; bottom: ' + topB + 'px; width: 120px; height: 46px' });
+      }
+      var delay = (i * 1.7 + 0.6).toFixed(1);
+      var faceTop = 168 - topB - 46 + 2;
+      var glint = 'position: absolute; left: ' + (topX + 6) + 'px; top: ' + faceTop + 'px; width: 108px; height: 30px; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; ' +
+        'background-image: linear-gradient(105deg, rgba(255,236,190,0) 40%, rgba(255,236,190,0.7) 50%, rgba(255,236,190,0) 60%); background-size: 300% 100%; background-repeat: no-repeat; ' +
+        'animation: glint 9s ease-in-out ' + delay + 's infinite; background-position: 130% 0';
+      var spark = 'position: absolute; left: ' + (topX + 22) + 'px; top: ' + (faceTop + 2) + 'px; pointer-events: none; opacity: 0; filter: drop-shadow(0 0 4px rgba(255,230,170,0.9)); animation: sparkle 9s ease-out ' + (parseFloat(delay) + 0.5).toFixed(1) + 's infinite';
+      var on = selId === b.id && page === 0;
+      return {
+        label: b.short, amount: fmt(kept), coins: coins, glint: glint, spark: spark,
+        aria: b.name + ': your cut this season is ' + kept + ' . Open it in the ledger.',
+        pick: function () { if (page !== 0) { var n2 = (flip ? flip.n : 0) + 1; self.setState({ sel: b.id, page: 0, flip: { n: n2, dir: 'prev' } }); } else { self.setState({ sel: b.id }); } },
+        btn: 'display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: none; background: transparent; cursor: pointer; width: 124px',
+        tag: 'display: block; padding: 4px 10px; font-family: "IM Fell English", serif; font-size: 15px; color: #1F1710; text-align: center; box-shadow: 0 6px 12px rgba(0,0,0,0.45); transform: rotate(' + ((i % 3) - 1) * 1.5 + 'deg)' +
+          (on ? '; outline: 3px solid #F3D27E; outline-offset: 2px' : '')
+      };
+    });
+
+    var rows = B.map(function (b) {
+      var on = selId === b.id;
+      var kept = Math.round((b.inc - b.out) * b.share / 100);
+      return {
+        name: b.name, kind: b.kind, share: b.share + '%', inc: b.inc.toLocaleString('en-US'), out: b.out.toLocaleString('en-US'), kept: fmt(kept),
+        pick: function () { self.setState({ sel: b.id }); },
+        style: 'display: grid; grid-template-columns: minmax(0, 1fr) 40px 52px 52px 58px; gap: 0 6px; align-items: center; min-height: 50px; padding: 4px 6px; border: none; border-bottom: 1px solid rgba(58,37,22,0.12); text-align: left; cursor: pointer; font-family: "IM Fell English", Georgia, serif; ' +
+          (on ? 'background: rgba(214,170,90,0.28)' : 'background: transparent')
+      };
+    });
+
+    var b = byId[selId];
+    var max = Math.max.apply(null, b.seasons.concat([1]));
+    var seasonNames = ['Winter', 'Spring', 'Summer', 'Autumn'];
+    var bars = b.seasons.map(function (v, i) {
+      var h = Math.round((v / max) * 66);
+      return { x: 18 + i * 84, y: 88 - h, h: h, tx: 44 + i * 84, vy: 88 - h - 6, v: v === 0 ? 'lost at sea' : v.toLocaleString('en-US'), season: seasonNames[i],
+        style: 'fill: ' + (i === 3 ? 'rgba(138,90,18,0.45)' : 'rgba(90,58,34,0.16)') + '; stroke: rgba(58,37,22,0.7); stroke-width: 1px' };
+    });
+    var bView = {
+      name: b.name, kindUpper: b.kind.toUpperCase(), where: b.where, bars: bars,
+      chartLabel: b.name + ' kept, by season: ' + b.seasons.join(', ') + ' ',
+      mgr: b.mgr, mgrFace: b.face, report: b.report, owners: b.owners,
+      traits: b.traits.map(function (t) { return { name: t.name, guess: t.guess, dots: dots(t.n) }; }),
+      yourBar: 'width: ' + b.share + '%; background: rgba(138,90,18,0.75)',
+      hasThreat: !!b.threat, threat: b.threat
+    };
+
+    var R = [
+      { id: 'wages', from: 'QUINTUS, AT VARENIA', face: F.over, text: '"Let me raise the men\'s wages by a tenth, or I will lose more of them to the Fulvii."',
+        note: 'About 80  more each season.', yes: 'Approve the raise', no: 'Refuse: hold wages',
+        okText: 'Approved. The men stay, for now.', noText: 'Refused. Expect more to leave.' },
+      { id: 'press', from: 'LUCIA, AT RAVACUM', face: F.lucia, text: '"Build us a press. 2,600 , and our grapes become our own wine."',
+        note: 'Pays for itself in about four harvests, if prices hold.', yes: 'Approve the press', no: 'Refuse: keep selling grapes',
+        okText: 'Approved. Work begins next week.', noText: 'Refused. The town press keeps its third.' },
+      { id: 'share', from: 'DEMETRIOS, OF THE THETIS', face: F.greek, text: '"Buy my 40 parts for 1,400, or I sell them to House Fulvius by the next new moon."',
+        note: 'If you refuse, your rival becomes your partner on the ship.', yes: 'Buy him out', no: 'Let him sell to Fulvius',
+        okText: 'Bought. The Thetis is wholly yours.', noText: 'Refused. Fulvius now owns 40% of your ship.' }
+    ];
+    var reqs = R.map(function (r, i) {
+      var st = sealed[r.id];
+      var set = function (v) { return function () { var ns = Object.assign({}, sealed); ns[r.id] = v; self.setState({ sealed: ns }); }; };
+      return {
+        from: r.from, face: r.face, text: r.text, note: r.note, yes: r.yes, no: r.no,
+        approveLabel: r.yes + ': press your seal',
+        open: !st, done: !!st, approved: st === 'yes',
+        doneText: st === 'yes' ? r.okText : r.noText,
+        doneStyle: 'font-size: 15px; font-weight: 600; color: ' + (st === 'yes' ? '#2C5F50' : '#8E2C1C'),
+        approve: set('yes'), refuse: set('no'), undo: set(null),
+        card: 'padding: 16px 18px; color: #2A2119; box-shadow: 0 14px 28px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 10px; transform: rotate(' + [0.8, -0.6, 0.4][i] + 'deg)'
+      };
+    });
+
+    var loosePos = [[1240, 150, 84, -8], [1262, 172, 84, 6], [1250, 128, 84, 2], [1290, 206, 72, -14]];
+    var loose = loosePos.map(function (p) {
+      return { style: 'position: absolute; left: ' + p[0] + 'px; top: ' + p[1] + 'px; width: ' + p[2] + 'px; height: ' + Math.round(p[2] * 46 / 120) + 'px; transform: rotate(' + p[3] + 'deg); filter: drop-shadow(0 4px 4px rgba(0,0,0,0.45))' };
+    });
+
+    return {
+      nav: __NAV.top('Counting desk', navItem), subnav: __NAV.sub('Counting desk'), hasSub: __NAV.sub('Counting desk').length > 0,
+      stacks: stacks, rows: rows, b: bView, reqs: reqs, total: fmt(total), loose: loose,
+      tabs: tabs, lp: lp, rp: rp, leaf: { style: leafStyle },
+      sp: { p0: page === 0, p1: page === 1, p2: page === 2 },
+      nav2: { hasPrev: page > 0, hasNext: page < 2, prev: function () { go(page - 1); }, next: function () { go(page + 1); }, folio: ['I', 'II', 'III'][page] + ' of III' },
+      owed: [
+        { who: 'Lucius the butcher, Aquea', terms: 'At 8%, due in 20 days. Honest, you think.', amount: '1,200' },
+        { who: 'Demetrios of Rhodes', terms: 'At 10%, due in 35 days. Honesty unknown.', amount: '900' },
+        { who: 'Gnaeus Licinius, tax chief', terms: 'A favour between friends. Overdue.', amount: '300' }
+      ],
+      bankActs: [
+        { act: 'Deposit coin', note: 'Move coin from your tablet into the bank.' },
+        { act: 'Withdraw', note: 'Before a run on the bank, if it comes.' },
+        { act: 'Write a letter of credit', note: 'Send money to another city for a 2% fee.' }
+      ],
+      partners: [
+        { name: 'Varro', face: F.varro, loyal: dots(3), stake: 'Half of the wine shop on the forum', note: 'A friend first. He warned you about Rufus.' },
+        { name: 'Demetrios of Rhodes', face: F.greek, loyal: dots(1), stake: '40 parts of the Thetis', note: 'Wants out, and has a buyer: House Fulvius.' },
+        { name: 'The Grain Road Society', face: F.tax, loyal: dots(1), stake: 'You hold 2 parts of 40', note: 'They vote together, and rarely with you.' }
+      ],
+      rivals: [
+        { name: 'House Fulvius', face: F.fulvius, what: 'An old grain and shipping family', moves: 'Bought land beside Varenia, poaching your workers, bidding for your ship.', bar: 'width: 85%; height: 8px; border-radius: 4px; background: #8E2C1C' },
+        { name: 'Rufus', face: F.rufus, what: 'A wine merchant of Aquea', moves: 'Spreading word that your wine is watered. Courting the tax chief.', bar: 'width: 40%; height: 8px; border-radius: 4px; background: #8E2C1C' }
+      ],
+      box: [
+        { k: 'In hand', v: '4,820', style: 'font-size: 19px; color: #1F1710' },
+        { k: 'With the banker', v: '12,400', style: 'font-size: 19px; color: #1F1710' },
+        { k: 'Owed to me', v: '2,400', style: 'font-size: 19px; color: #2C5F50' },
+        { k: 'I owe', v: '3,000', style: 'font-size: 19px; color: #8E2C1C' }
+      ]
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>

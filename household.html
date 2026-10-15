@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Household — the servants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&amp;family=Spectral:wght@400;500;600&amp;family=IM+Fell+English&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cinzel';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Spectral';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IBM Plex Mono';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'IM Fell English';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'VT323';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Georgia';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}@font-face{font-family:'Sestertius';src:url(assets/2f5670a98fe7508178625142c756af03.woff2) format('woff2');unicode-range:U+E000;font-weight:100 900;font-style:normal}
+
+body{margin:0;background:#2A160E}
+html,body,*{scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+.floor{background-color:#5A2E1E;background-image:linear-gradient(180deg, rgba(20,8,4,0.55) 0%, rgba(20,8,4,0.25) 30%, rgba(20,8,4,0.5) 100%), radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%), url(assets/dedee3e29fac3b25372bf0c775cc758b.jpg);background-size:auto, auto, 384px 384px}
+.paper{background-color:#EFE3C8;background-image:linear-gradient(155deg, rgba(255,251,238,0.45) 0%, rgba(255,251,238,0) 38%, rgba(110,72,36,0.10) 100%), radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(104,66,30,0.22) 100%), url(assets/9c7efc059b51944b3cd05c0456c88232.jpg);background-size:auto, auto, 420px 420px;box-shadow:0 1px 1px rgba(0,0,0,0.4), 0 6px 12px rgba(0,0,0,0.35), 0 22px 44px rgba(0,0,0,0.5)}
+.kicker{font-family:Cinzel,serif;font-size:13px;font-weight:700;letter-spacing:0.14em;color:#7E2A1A}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<template id="dc-tpl">
+<div class="floor" style="min-height: 100vh; color: #F2E8D5; font-family: Spectral, Georgia, serif; font-size: 17px; line-height: 1.5">
+
+<header style="max-width: 1440px; margin: 0 auto; padding: 18px 32px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px">
+<span style="font-family: Cinzel, serif; font-size: 15px; letter-spacing: 0.14em; color: #E9C982">AQUEA · THE HOUSE ON THE VIA LATA</span>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 2px">
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="5"><a href="#" style="{{n.style}}">{{n.label}}</a></sc-for>
+</nav>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 17px; color: #F3D27E">4,820 </span>
+</header>
+<sc-if value="{{hasSub}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Section" style="max-width: 1440px; margin: -6px auto 0; padding: 0 32px 8px; box-sizing: border-box; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{subnav}}" as="sn" hint-placeholder-count="4"><a href="#" style="{{sn.style}}">{{sn.label}}</a></sc-for>
+</nav>
+</sc-if>
+
+<main style="max-width: 1440px; margin: 0 auto; padding: 4px 32px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column">
+<span style="font-family: Cinzel, serif; font-size: 14px; letter-spacing: 0.18em; color: #E6C9A8">THE PEOPLE WHO RUN YOUR HOUSE</span>
+<h1 style="margin: 0; font-family: Cinzel, serif; font-size: 34px; font-weight: 700; letter-spacing: 0.05em; color: #FFF6E4">Household</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="3"><span style="{{c.style}}">{{c.text}}</span></sc-for>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 860px 1fr; gap: 24px; align-items: start">
+<!-- the house plan -->
+<div class="paper" style="padding: 18px 20px 14px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(-0.3deg)">
+<div style="display: flex; justify-content: space-between; align-items: baseline"><span class="kicker" style="color: #3A2516">WHERE EVERYONE IS, THIS MORNING</span><span style="font-size: 13px; color: #6B5A48">Click anyone</span></div>
+<div style="position: relative; width: 820px; height: 560px">
+<svg width="820" height="560" viewBox="0 0 820 560" aria-hidden="true" style="position: absolute; left: 0; top: 0">
+<g style="fill: rgba(255,250,238,0.35); stroke: #3A2516; stroke-width: 3px; stroke-linejoin: round">
+<rect x="20" y="20" width="780" height="520"></rect>
+<!-- garden -->
+<rect x="200" y="20" width="420" height="150" style="fill: rgba(90,130,70,0.18)"></rect>
+<!-- study, rooms, kitchen, store -->
+<rect x="300" y="170" width="220" height="100"></rect>
+<rect x="20" y="20" width="180" height="250"></rect>
+<rect x="620" y="20" width="180" height="250"></rect>
+<rect x="20" y="270" width="180" height="270"></rect>
+<rect x="620" y="270" width="180" height="270"></rect>
+<!-- entry -->
+<rect x="360" y="440" width="100" height="100"></rect>
+</g>
+<!-- atrium pool -->
+<rect x="370" y="320" width="80" height="60" style="fill: rgba(80,130,160,0.35); stroke: #3A2516; stroke-width: 2px"></rect>
+<!-- garden columns -->
+<g style="fill: #EFE3C8; stroke: #3A2516; stroke-width: 2px">
+<circle cx="230" cy="50" r="7"></circle><circle cx="330" cy="50" r="7"></circle><circle cx="490" cy="50" r="7"></circle><circle cx="590" cy="50" r="7"></circle>
+<circle cx="230" cy="140" r="7"></circle><circle cx="590" cy="140" r="7"></circle>
+</g>
+<path d="M260,95 Q300,80 340,100 T420,95 T500,100 T560,92" style="fill: none; stroke: rgba(70,110,60,0.6); stroke-width: 10px; stroke-linecap: round"></path>
+<!-- door gaps -->
+<g style="stroke: rgba(255,250,238,1); stroke-width: 6px">
+<path d="M395,540 L425,540"></path><path d="M395,440 L425,440"></path><path d="M200,380 L200,420"></path><path d="M620,380 L620,420"></path><path d="M200,200 L200,240"></path><path d="M620,200 L620,240"></path><path d="M390,170 L430,170"></path><path d="M390,270 L430,270"></path>
+</g>
+<g style="font-family: Cinzel, serif; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; fill: #6B5A48; text-anchor: middle">
+<text x="410" y="40">GARDEN</text><text x="345" y="192">STUDY</text><text x="110" y="40">BEDROOMS</text><text x="710" y="40">KITCHEN</text>
+<text x="110" y="290">NURSERY</text><text x="710" y="290">STORES AND CELLAR</text><text x="410" y="300">ATRIUM</text><text x="410" y="460">DOOR</text>
+</g>
+</svg>
+<sc-for list="{{tokens}}" as="t" hint-placeholder-count="9">
+<button onClick="{{t.click}}" aria-label="{{t.aria}}" style="{{t.style}}">
+<img src="{{t.face}}" alt="" style="{{t.img}}">
+<span style="font-size: 13px; font-weight: 600; color: #1F1710; line-height: 1.1">{{t.name}}</span>
+<span style="font-size: 11px; color: #6B5A48; line-height: 1.1">{{t.job}}</span>
+<sc-if value="{{t.warn}}" hint-placeholder-val="{{ false }}"><span aria-label="needs attention" style="position: absolute; right: -6px; top: -6px; width: 18px; height: 18px; border-radius: 50%; background: #B23A24; color: #FFF6E4; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px #EFE3C8">!</span></sc-if>
+</button>
+</sc-for>
+<div style="position: absolute; left: 640px; top: 470px; width: 170px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: #3A2516; text-align: center">
+<span style="font-weight: 700">On the road</span>
+<span>{{roadNote}}</span>
+</div>
+</div>
+</div>
+
+<!-- the person -->
+<div class="paper" style="padding: 24px 26px; color: #2A2119; display: flex; flex-direction: column; gap: 14px; transform: rotate(0.4deg)">
+<div style="display: flex; gap: 14px; align-items: center">
+<img src="{{p.face}}" alt="" style="width: 80px; height: 80px; image-rendering: pixelated; box-shadow: 0 0 0 4px #F6EAD0, 0 6px 12px rgba(0,0,0,0.35)">
+<div style="display: flex; flex-direction: column">
+<span class="kicker">{{p.jobUpper}}</span>
+<span style="font-family: Cinzel, serif; font-size: 26px; font-weight: 700; line-height: 1.15; color: #2A1A0E">{{p.name}}</span>
+<span style="font-size: 14px; color: #4A3C30">{{p.from}}</span>
+</div>
+</div>
+<span style="font-family: 'IM Fell English', serif; font-size: 17px; line-height: 1.45; color: #1F1710">{{p.quote}}</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px">
+<sc-for list="{{p.bars}}" as="b" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 3px"><span style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #6B5A48">{{b.k}}</span><span style="{{b.wStyle}}">{{b.w}}</span></span><span style="display: block; height: 8px; border-radius: 4px; background: rgba(58,37,22,0.14)"><span style="{{b.bar}}"></span></span></div>
+</sc-for>
+<sc-for list="{{p.facts}}" as="f" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column"><span style="font-size: 13px; color: #6B5A48">{{f.k}}</span><span style="font-size: 15px; color: #1F1710">{{f.v}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; background: rgba(44,95,80,0.08); border-left: 4px solid #2C5F50">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #2C5F50">WHAT THEY DO FOR YOU</span>
+<span style="font-size: 15px; color: #1F1710">{{p.does}}</span>
+</div>
+<sc-if value="{{p.hasEvent}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; background: rgba(255,250,238,0.55); border: 1px solid rgba(58,37,22,0.25); border-top: 4px solid #8E2418; border-radius: 3px">
+<span style="font-family: Cinzel, serif; font-size: 17px; font-weight: 700; color: #2A1A0E">{{p.evTitle}}</span>
+<span style="font-size: 15px; line-height: 1.45; color: #1F1710">{{p.evText}}</span>
+<sc-if value="{{p.evOpen}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 6px"><sc-for list="{{p.evActs}}" as="a" hint-placeholder-count="3"><button onClick="{{a.click}}" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 44px; padding: 6px 12px; background: rgba(255,250,238,0.7); border: 1px solid rgba(58,37,22,0.35); border-radius: 3px; font-family: Spectral, serif; text-align: left; cursor: pointer"><span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600; color: #1F1710">{{a.label}}</span><span style="font-size: 13px; color: #6B5A48">{{a.hint}}</span></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A3A22; white-space: nowrap">{{a.cost}}</span></button></sc-for></div></sc-if>
+<sc-if value="{{p.evDone}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; background: rgba(44,95,80,0.1); border-left: 3px solid #2C5F50; animation: fadein 0.4s ease-out both"><span style="font-size: 15px; color: #1F1710">{{p.evOutcome}}</span><button onClick="{{p.undo}}" style="align-self: flex-start; min-height: 30px; padding: 0; border: none; background: transparent; color: #6B5A48; font-family: Spectral, serif; font-size: 13px; text-decoration: underline; cursor: pointer">Choose again</button></div></sc-if>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: start">
+<!-- what the house adds up to -->
+<div class="paper" style="padding: 20px 24px; color: #2A2119; display: flex; flex-direction: column; gap: 8px; transform: rotate(0.2deg)">
+<span class="kicker" style="color: #3A2516">WHAT YOUR HOUSEHOLD CHANGES ELSEWHERE</span>
+<sc-for list="{{effects}}" as="e" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 7px 0; border-top: 1px solid rgba(58,37,22,0.12)">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: #6B5A48">{{e.where}}</span>
+<span style="font-size: 15px; color: #1F1710">{{e.what}}</span>
+</div>
+</sc-for>
+</div>
+<!-- the hiring -->
+<div style="padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; background: rgba(30,16,10,0.82); color: #E8DCC4; box-shadow: 0 10px 24px rgba(0,0,0,0.5); border: 1px solid rgba(232,220,196,0.2); transform: rotate(-0.3deg)">
+<span style="font-family: Cinzel, serif; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #E6C9A8">LOOKING FOR WORK AT YOUR DOOR</span>
+<span style="font-size: 13px; color: #C9BBA0; margin-top: -4px">Bato sends them away unless you say otherwise.</span>
+<sc-for list="{{hire}}" as="h" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; padding: 8px 0; border-top: 1px solid rgba(232,220,196,0.14)">
+<span style="font-size: 15px; font-weight: 600">{{h.name}}</span>
+<button onClick="{{h.click}}" style="{{h.btn}}">{{h.label}}</button>
+<span style="font-size: 13px; color: #C9BBA0">{{h.text}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #F3D27E; text-align: right">{{h.wage}}</span>
+</div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid rgba(232,220,196,0.25); font-size: 14px"><span>Wages, every month</span><span style="font-family: 'IBM Plex Mono', monospace; color: #F3D27E">{{wageTotal}}</span></div>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script src="dc-runtime.js"></script>
+<script>
+
+var FACE = { felix: 'assets/68c827b5e74ae6bac441631cd7975afd.png', nikias: 'assets/a3dc5c3de123ac381ccfb225966f5604.png', afra: 'assets/23baf24c4ae6d9844d45d5852f0c38f1.png', dion: 'assets/926821d1ee198f2fb0402917484cc902.png',
+  thrand: 'assets/b6fd79bc84c6d5a4de009b01ee840203.png', myrto: 'assets/c59695ed71a60c081c019296ddfafb04.png', cleon: 'assets/b96eb48a239c7ea9fa93348b40e81876.png', syra: 'assets/b653fb87bd17eab35b28f472207ea339.png', bato: 'assets/225761544304c6952429089c94176922.png' };
+// id, name, job, room x, y, from, wage, loyalty 0-1, skill 0-1, years, quote, what they do, event
+var S = [
+  ['felix', 'Felix', 'Steward', 290, 360, 'Born in the house. Your father’s steward too.', 60, 0.95, 0.85, 22,
+    '“The house runs, master. It’s the rest of the world I can’t promise.”',
+    'Runs the house and the town businesses while you’re away. Writes your morning report. The higher you set his hand, the less waits for you.',
+    { t: 'Felix is getting old', x: 'He wants to train someone to take over before his eyes go. Whoever he trains will run your house for twenty years.',
+      a: [['Let him train Nikias', 'Clever, but a Greek. The old servants will grumble.', '', 'Nikias begins to learn the house. Felix says he’s quick, and too proud.'], ['Let him train his own nephew', 'Loyal. Not clever.', '', 'The nephew starts. He’s honest and slow, like a good mule.'], ['Buy in a trained steward', 'From a senator’s house that’s selling up.', '1,800', 'A polished steward arrives. Felix is hurt, but says nothing.']] }],
+  ['nikias', 'Nikias', 'Secretary', 450, 225, 'From Fidanum, Caleonia. Speaks Greek, Latin, Caleonian.', 70, 0.7, 0.9, 4,
+    '“A letter is a contract you haven’t signed yet. Let me read it twice.”',
+    'Writes and copies your letters, reads Greek contracts, keeps the archive. Without him, the By letter trades take twice as long.', null],
+  ['afra', 'Afra', 'Cook', 700, 140, 'From Mirene, across the sea. Came with a spice merchant.', 45, 0.85, 0.95, 7,
+    '“You want the old families at your table? Then they eat my lamb, and they come back.”',
+    'Her dinners are the best in Aquea. Every feast you give raises your standing in Politics, more than gifts do.',
+    { t: 'A feast for the old families', x: 'Your mother wants a dinner for the Claudii and the Fannii. Afra says she can make it the talk of the city, if you pay for it.',
+      a: [['A feast to remember', 'Peacocks, Mirenian spices, singers.', '600', 'The city talks about it for a month. Old Fannius asks for Afra’s recipes. Your standing rises.'], ['A good dinner', 'Respectable. Nobody complains.', '150', 'A pleasant evening. Nobody remembers it.'], ['Not this month', '', '', 'Your mother hosts at her own expense, and makes sure everyone knows it.']] }],
+  ['dion', 'Dion', 'Tutor', 330, 90, 'An old philosopher from Caleonia. Taught a senator’s sons.', 55, 0.8, 0.9, 3,
+    '“Your son has a quick mind and no patience. Your daughter has both.”',
+    'Teaches Gaius, Aelia and Titus. Each season with him raises their Speaking and Trade. Without him, they learn only what you show them.', null],
+  ['thrand', 'Thrand', 'Bodyguard', 530, 360, 'A northerner. Fought for the king of Helerensia, then for money.', 40, 0.9, 0.85, 5,
+    '“I don’t talk much. That’s why you pay me.”',
+    'Travels with you. Robbers on the road pick someone else. With him along, Travel is safer and your teleports skip the bandit checks.', null],
+  ['myrto', 'Myrto', 'Maid', 110, 140, 'Hired last spring. A Celt from Coria.', 20, 0.3, 0.6, 1,
+    '“I only dust the study, master. I never read what’s on the desk.”',
+    'Keeps the bedrooms and the study clean. She’s in every room of the house, every day.',
+    { t: 'Myrto was seen at Fulvius’s back door', x: 'Bato saw her twice, at night, at the kitchen door of House Fulvius. She has new shoes. Fulvius always seems to know where your ships are going.',
+      a: [['Feed her false letters', 'Leave a fake plan on the desk. Fulvius acts on it.', '', 'You leave a letter about buying iron in Sabino. Two weeks later, Fulvius’s agent is buying iron in Sabino at the top of the market.'], ['Dismiss her quietly', 'The leak stops. Fulvius knows you know.', '', 'Myrto leaves with a month’s wages. Fulvius stops guessing right.'], ['Have Thrand follow her', 'Find out who else she talks to.', '', 'Thrand follows her for a week. She also meets Gnaeus Licinius’s man. Two houses are paying her.']] }],
+  ['cleon', 'Cleon', 'Runner', 700, 400, 'Iberian. The fastest boy in Aquea, and he knows it.', 15, 0.8, 0.8, 2,
+    '“Durona in three days, master. Two if the road’s dry.”',
+    'Your couriers carry letters and bring back news. You have three: Cleon here, two on the road. More runners means fresher prices in Markets.', null],
+  ['syra', 'Syra', 'Nurse', 110, 400, 'Your own nurse when you were a baby. Now Titus’s.', 15, 1.0, 0.5, 41,
+    '“I wiped your nose, Lucius. Don’t you look at me like that.”',
+    'Looks after Titus. Knows every story about your family, including the ones you’d rather nobody knew.',
+    { t: 'Syra is too old for a five-year-old', x: 'She can’t keep up with Titus. She would never ask to stop, but Claudia thinks it’s time.',
+      a: [['Retire her, with a pension', 'A room in the house for life. She becomes a loyal client.', '10 a month', 'Syra retires. She sits in the garden and tells Titus stories. Everyone in the street knows you treat your people well.'], ['Find a young nurse to help her', 'Syra stays, with help.', '20 a month', 'A young nurse joins. Syra bosses her about and is perfectly happy.'], ['Leave it', '', '', 'Titus falls out of a fig tree. Nothing broken. Claudia is not pleased.']] }],
+  ['bato', 'Bato', 'Doorkeeper', 410, 505, 'A retired soldier with a bad knee. A Celt.', 25, 0.9, 0.7, 9,
+    '“Nobody gets past me without a name. Even the ones with money.”',
+    'Decides who gets in, and remembers who came. The better your doorkeeper, the harder it is for spies to get into your house.', null]
+];
+var HIRE = [['phys', 'Asclepiades, a physician', 'Your mother’s health is frail. He would keep her with you longer.', 80], ['runner', 'Two more runners', 'Fresher news from every town. Markets gets better.', 30], ['acct', 'Hermes, a bookkeeper', 'Checks every business’s accounts. Catches skimming, like Tertius at the tavern.', 50], ['groom', 'Brannoc, a groom', 'Keeps horses ready. Travel by road is a day faster.', 20]];
+
+var __NAV = (function () {
+  var G = [['Home', []], ['World', ['Map', 'Travel', 'Markets', 'Auctions']], ['Wealth', ['Business', 'Counting desk', 'Fleet', 'Ventures']], ['Power', ['Politics', 'War', 'Family', 'Household']], ['Letters', []]];
+  var groupOf = function (p) { for (var i = 0; i < G.length; i++) if (G[i][0] === p || G[i][1].indexOf(p) >= 0) return G[i]; return G[0]; };
+  return {
+    top: function (page, item) { var g = groupOf(page)[0]; return G.map(function (x) { return item(x[0], x[0] === g, x[0] === 'Letters'); }); },
+    sub: function (page) { return groupOf(page)[1].map(function (l) { var on = l === page;
+      return { label: l, style: 'display: inline-flex; align-items: center; min-height: 36px; padding: 4px 16px; border-radius: 999px; text-decoration: none; font-size: 15px; ' + (on ? 'background: rgba(242,232,213,0.16); color: #FFF6E4; box-shadow: inset 0 0 0 1px rgba(242,232,213,0.35)' : 'color: #CFC6B4') }; }); }
+  };
+})();
+
+class Component extends DCLogic {
+  renderVals() {
+    var self = this, st = this.state || {};
+    var put = function (o) { self.setState(Object.assign({}, self.state || {}, o)); };
+    var selId = st.sel || 'myrto', ev = st.ev || {}, hired = st.hired || {};
+    var byId = {}; S.forEach(function (s) { byId[s[0]] = s; });
+    var gone = ev.myrto === 1, retired = ev.syra === 0;
+    var tokens = S.map(function (s) { var on = s[0] === selId, open = s[12] && ev[s[0]] === undefined;
+      var dim = (s[0] === 'myrto' && gone) || (s[0] === 'syra' && retired);
+      return { name: s[1], job: s[0] === 'syra' && retired ? 'Retired' : s[0] === 'myrto' && gone ? 'Dismissed' : s[2], face: FACE[s[0]], warn: !!open, aria: 'Open ' + s[1] + ', ' + s[2],
+        click: function () { put({ sel: s[0] }); },
+        img: 'width: 40px; height: 40px; image-rendering: pixelated; box-shadow: 0 0 0 2px #F6EAD0' + (dim ? '; filter: grayscale(1); opacity: 0.6' : ''),
+        style: 'position: absolute; left: ' + (s[3] - 48) + 'px; top: ' + (s[4] - 40) + 'px; width: 96px; min-height: 84px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px; border-radius: 3px; font-family: Spectral, serif; cursor: pointer; ' +
+          (on ? 'background: #FFF8E6; border: none; box-shadow: 0 0 0 3px #9A6A12, 0 10px 20px rgba(0,0,0,0.35); z-index: 2' : 'background: rgba(246,236,212,0.92); border: 1px solid rgba(58,37,22,0.35); box-shadow: 0 4px 10px rgba(0,0,0,0.25)') };
+    });
+    var P = byId[selId], E = P[12], pick = E ? ev[selId] : undefined;
+    var bar = function (k, v, words) { var c = v >= 0.75 ? '#2C5F50' : v >= 0.5 ? '#9A6A12' : '#8E2418'; var w = v >= 0.75 ? words[0] : v >= 0.5 ? words[1] : words[2];
+      return { k: k, w: w, wStyle: 'font-weight: 700; color: ' + c, bar: 'display: block; height: 8px; border-radius: 4px; width: ' + Math.round(v * 100) + '%; background: ' + c }; };
+    var p = { face: FACE[selId], name: P[1], jobUpper: P[2].toUpperCase(), from: P[5], quote: P[10], does: P[11],
+      bars: [bar('Loyalty', selId === 'myrto' && pick === 0 ? 0.3 : P[7], ['Loyal', 'Unsure', 'Not to you']), bar('Skill', P[8], ['Excellent', 'Decent', 'Poor'])],
+      facts: [{ k: 'Wage', v: P[6] + '  a month' }, { k: 'With you', v: P[9] + (P[9] === 1 ? ' year' : ' years') }],
+      hasEvent: !!E, evTitle: E ? E.t : '', evText: E ? E.x : '', evOpen: pick === undefined, evDone: pick !== undefined, evOutcome: pick !== undefined ? E.a[pick][3] : '',
+      undo: function () { var m = Object.assign({}, (self.state || {}).ev || {}); delete m[selId]; put({ ev: m }); },
+      evActs: E ? E.a.map(function (a, k) { return { label: a[0], hint: a[1], cost: a[2] ? a[2] + ' ' : '', click: function () { var m = Object.assign({}, (self.state || {}).ev || {}); m[selId] = k; put({ ev: m }); } }; }) : [] };
+    var runners = 3 + (hired.runner ? 2 : 0);
+    var effects = [
+      ['Markets', runners + ' runners: news from Durona is about ' + (hired.runner ? 2 : 3) + ' days old instead of 6.'],
+      ['Politics', 'Afra’s feasts raise your standing. Bato keeps the wrong people out.'],
+      ['Family', 'Dion teaches the children. Syra knows the family’s secrets.'],
+      ['Trade by letter', 'Nikias writes in three languages. Letters to Caleonia need no translator.'],
+      ['Travel', 'Thrand rides with you. Bandit checks skipped' + (hired.groom ? ', and the groom saves a day on every road trip.' : '.')],
+      ['Spies', gone ? 'Myrto is gone. Fulvius has lost his eyes in your house.' : ev.myrto === 0 ? 'Myrto is carrying your lies to Fulvius. Keep feeding her.' : 'Somebody is telling Fulvius where your ships go.']
+    ].map(function (e) { return { where: e[0], what: e[1] }; });
+    var wages = 0; S.forEach(function (s) { if (!(s[0] === 'myrto' && gone)) wages += s[6]; });
+    if (ev.syra === 0) wages += 10 - 15; if (ev.syra === 1) wages += 20;
+    var hire = HIRE.map(function (h) { var on = !!hired[h[0]]; if (on) wages += h[3];
+      return { name: h[1], text: h[2], wage: h[3] + ' a month', label: on ? 'Hired ✓' : 'Hire',
+        click: function () { var m = Object.assign({}, (self.state || {}).hired || {}); m[h[0]] = !m[h[0]]; put({ hired: m }); },
+        btn: 'min-height: 34px; min-width: 80px; padding: 2px 12px; border-radius: 2px; font-family: Spectral, serif; font-size: 13px; cursor: pointer; ' + (on ? 'background: #2C5F50; color: #FFF6E4; border: none; font-weight: 600' : 'background: #E6C9A8; color: #1E1612; border: none; font-weight: 600') }; });
+    var open = S.filter(function (s) { return s[12] && ev[s[0]] === undefined; }).length;
+    var chip = function (text, kind) {
+      var c = { plain: ['rgba(242,232,213,0.1)', '#F2E8D5', 'rgba(242,232,213,0.28)'], gold: ['rgba(217,178,106,0.16)', '#F0D49A', 'rgba(217,178,106,0.45)'], bad: ['rgba(226,96,72,0.2)', '#F6B4A6', 'rgba(226,96,72,0.5)'] }[kind];
+      return { text: text, style: 'font-size: 15px; padding: 6px 14px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + '; border: 1px solid ' + c[2] };
+    };
+    var navItem = function (label, active) {
+      return { label: label, style: 'display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px; text-decoration: none; font-size: 16px; border-bottom: 2px solid ' + (active ? '#E6C9A8' : 'transparent') + '; color: ' + (active ? '#FFF6E4' : '#E6D8BC') };
+    };
+    return {
+      nav: __NAV.top('Household', navItem), subnav: __NAV.sub('Household'), hasSub: true,
+      chips: [chip((gone ? 8 : 9) + ' at home, 2 runners on the road', 'plain'), chip(wages + '  a month', 'gold'), chip(open + (open === 1 ? ' matter' : ' matters') + ' for you', open ? 'bad' : 'plain')],
+      tokens: tokens, p: p, effects: effects, hire: hire, wageTotal: wages + ' ',
+      roadNote: 'Two runners: one to Durona, one to Sabino' + (hired.runner ? ', and two more just hired' : '') + '.'
+    };
+  }
+}
+
+</script>
+<script>DC.boot(Component);</script>
+</body>
+</html>
